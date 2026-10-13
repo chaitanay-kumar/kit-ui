@@ -2,6 +2,12 @@
 
 ## Latest batch handoff - 2026-10-13
 
+LockInput and OriginDropdown are validated on `feat/angular-parity-batch-9`, stacked on batch 8 commit `a0abc14`. See [batch 9 evidence](parity/batch-9-integration.md). Their unrelated password-lock and collection-controller APIs are replaced by React-compatible native input and origin-aware menu contracts with controlled state, rich templates and cleanup.
+
+The focused batch passes its packaged contract, Angular package build, and 16 React/Angular browser cases across desktop/mobile. Unrelated suites remain deferred until integration. Progress is 21 merged plus twelve locally validated baselines, with 83 components awaiting review.
+
+## Previous batch handoff - 2026-10-13
+
 DrawCheckbox and Liquid Toggle are validated on `feat/angular-parity-batch-8`, stacked on batch 7 commit `414621d`. See [batch 8 evidence](parity/batch-8-integration.md). Their former shared two-way checkbox template is replaced by separate React-compatible controlled/uncontrolled contracts, native checkbox semantics, switch keyboard behavior, rich labels, dimensions and SVG state visuals.
 
 The focused batch passes its packaged contract, Angular package build, and 16 React/Angular browser cases across desktop/mobile. Unrelated suites remain deferred until integration. Progress is 21 merged plus ten locally validated baselines, with 85 components awaiting review.
