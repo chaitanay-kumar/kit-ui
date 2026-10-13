@@ -1,5 +1,14 @@
 # Implementation handoff — 2026-10-08
 
+## Latest parity handoff - 2026-10-13
+
+The [parity tracker](ANGULAR_REACT_PARITY.md) is the current queue/status source; the delivery notes below are historical. iOS Search Bar now has a locally validated native Angular implementation of React's controlled input contract on `feat/angular-ios-search-parity`, based on `e85d06d`. It replaces the former collection API and fixes native Escape synchronization, percentage-width resizing, caret preservation and animation disposal. See [migration, evidence, exact checks and limitations](parity/ios-search-bar.md).
+
+Validation: 30 focused browser cases, 26 catalog/framework-tab regression cases, 117 unit tests, production build/289 SEO checks, packaged API verification, and Angular 20.0/20.3/21/22 strict consumers pass. Lint retains 21 inherited warnings. Angular honors reduced motion; React's current search spring still animates under that preference. Progress is 20 merged baselines plus this local baseline, with 95 components awaiting review.
+
+Next: independently review and integrate the iOS Search Bar branch, then continue the simpler-component queue. No PR, merge, push or deployment was performed for this change. The earlier contribution-workflow edits remain separate uncommitted work. AI Response work remains deferred and untouched. Full user QA of the catalog is still pending.
+
+
 Work is on `feat/kit-ui-library`, based on the destination's original `main` history. The upstream working tree was imported without its history from commit `214cda979c52cb740856b0de029b8c956a3df5b9`. The destination license is unchanged; the upstream MIT notice is preserved verbatim in `licenses/UPSTREAM-MIT.txt`. See `ATTRIBUTION.md`.
 
 ## Delivered

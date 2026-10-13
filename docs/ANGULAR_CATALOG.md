@@ -88,3 +88,7 @@ Orbital Loading Ring follows React’s three variants, size/speed defaults, SVG 
 ## Morphing Icon parity baseline
 
 `KitMorphingIconComponent` follows React's controlled two-icon wrapper with required from/to TemplateRefs, active/size/duration defaults and whole-style override precedence. It replaces the old self-toggling menu button. See [contract and validation](parity/morphing-icon.md).
+
+## iOS Search Bar parity
+
+`KitIosSearchBarComponent` replaces the former filterable collection with React's controlled `value`/`onChange` search contract, optional submit/clear callbacks, configurable focus expansion and native search/form behavior. See [migration, motion differences and validation](parity/ios-search-bar.md).

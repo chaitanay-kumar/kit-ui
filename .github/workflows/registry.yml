@@ -98,3 +98,5 @@ jobs:
 
       - name: Verify Angular package in a separate consumer
         run: npm run test:angular-package
+      - name: Verify iOS Search Bar controlled contract
+        run: npm run test:ios-search

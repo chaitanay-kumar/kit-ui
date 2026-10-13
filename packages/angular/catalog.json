@@ -811,24 +811,20 @@
     "name": "iOS-style Search Bar",
     "exportName": "KitIosSearchBarComponent",
     "selector": "kit-ios-search-bar",
-    "description": "Live filtering with clear/cancel controls, keyboard navigation and selected-result output.",
+    "description": "Controlled React-matched search input with focus/value expansion, clear/refocus, optional Enter submission and configurable spring widths.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
+      "value: string (required)",
+      "onChange: (value: string) => void (required)",
+      "onSubmit: (value: string) => void",
+      "onClear: () => void",
+      "placeholder: string",
       "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "autoFocus: boolean",
+      "collapsedWidth: number | string",
+      "expandedWidth: number | string",
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "liquid-ripple-button",
