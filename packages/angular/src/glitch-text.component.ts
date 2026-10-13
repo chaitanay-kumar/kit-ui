@@ -4,7 +4,7 @@ import {ViewEncapsulation} from '@angular/core';
 export type GlitchVariant='rgb-split'|'slice'|'vhs'|'scramble'|'pulse';
 export type GlitchIntensity='low'|'medium'|'high';
 export type GlitchTrigger='continuous'|'hover'|'click';
-const GLYPHS='!<>-_\/[]{}—=+*^?#_0123456789ABCDEF';
+const GLYPHS='!<>-_/[]{}—=+*^?#_0123456789ABCDEF';
 let glitchId=0;
 @Component({
  selector:"kit-glitch-text", standalone:true,
