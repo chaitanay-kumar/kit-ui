@@ -802,11 +802,17 @@ export const ANGULAR_PORTS = [
     "name": "Intro Loader",
     "exportName": "KitIntroLoaderComponent",
     "selector": "kit-intro-loader",
-    "description": "A labeled loading indicator with a settled state and reduced-motion fallback.",
+    "description": "A multilingual welcome sequence with configurable timing, progress, language badges, skip/Escape, replay and cleanup.",
     "inputs": [
-      "label: string",
-      "loading: boolean",
-      "paused: boolean"
+      "greetings: IntroGreeting[]",
+      "onComplete: () => void",
+      "fullScreen: boolean",
+      "intervalMs: number",
+      "showProgress: boolean",
+      "showLangBadge: boolean",
+      "allowSkip: boolean",
+      "speedMultiplier: number",
+      "className: string"
     ],
     "outputs": []
   },
@@ -1083,11 +1089,18 @@ export const ANGULAR_PORTS = [
     "name": "Morphing Shape Loader",
     "exportName": "KitMorphingShapeLoaderComponent",
     "selector": "kit-morphing-shape-loader",
-    "description": "A labeled loading indicator with a settled state and reduced-motion fallback.",
+    "description": "A theme-aware SVG loader that cycles through matched-control-point shapes with configurable timing, loop, stroke and fill.",
     "inputs": [
+      "shapes: ShapeKind[]",
+      "duration: number",
+      "holdDuration: number",
+      "loop: boolean",
+      "size: number",
+      "color: string",
+      "strokeWidth: number",
+      "filled: boolean",
       "label: string",
-      "loading: boolean",
-      "paused: boolean"
+      "className: string"
     ],
     "outputs": []
   },

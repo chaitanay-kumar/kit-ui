@@ -2,14 +2,14 @@
 
 React is the source of truth for component appearance, interactions, data contracts, options and defaults. Angular implementations stay native; template projection and output events provide Angular equivalents for React nodes and callbacks. Catalog coverage does not establish parity.
 
-Current progress: 41 components have validated baselines (21 merged plus twenty validated on pending batch branches) and 75 await review. Batch 13 adds Notification Stack and Undo Toast. See [batch 13 evidence](parity/batch-13-integration.md).
+Current progress: 43 components have validated baselines (21 merged plus twenty-two validated on pending batch branches) and 73 await review. Batch 14 adds Intro Loader and Morphing Shape Loader. See [batch 14 evidence](parity/batch-14-integration.md).
 
 User priority: finish simpler components first. AI Response work is preserved on `feat/angular-ai-response-parity` and remains in progress. Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work proceeds in batches of two, with focused component checks during implementation and one full baseline before batch merge. Batch 2 merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); batch 3 merged through [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Batch 4 and its stacked batch 5 are locally validated and await integration. The original inventory order remains below for tracking, not execution priority.
 
 ## Pending work
 
-- Review and fix the remaining 75 components listed below: 74 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
-- Review and integrate batches 4 through 13 in order. Continue with two queued components at a time.
+- Review and fix the remaining 73 components listed below: 72 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
+- Review and integrate batches 4 through 14 in order. Continue with two queued components at a time.
 - Resume AI Response later from local `kit-ui-angular-response` on `feat/angular-ai-response-parity`. Its unfinished changes and audit at `docs/parity/ai-response-audit.md` remain preserved in that worktree and are not merged or validated.
 - After all 116 components have validated baselines, the user will perform the full QA run. Address the resulting feedback before calling the overall parity effort complete.
 
@@ -75,7 +75,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 44 | Hold-to-Confirm | `hold-to-confirm` | Validated locally; integration pending | [Report](parity/hold-to-confirm.md) |
 | 45 | Interactive Data Card | `interactive-data-card` | Validated locally; integration pending | [Report](parity/interactive-data-card.md) |
 | 46 | Interactive Timeline | `interactive-timeline` | Queued | — |
-| 47 | Intro Loader | `intro-loader` | Queued | — |
+| 47 | Intro Loader | `intro-loader` | Validated locally; integration pending | [Report](parity/intro-loader.md) |
 | 48 | iOS-style Search Bar | `ios-search-bar` | Validated baseline | [Report](parity/ios-search-bar.md) |
 | 49 | Liquid Command Palette | `liquid-command-palette` | Queued | — |
 | 50 | Liquid Ripple Button | `liquid-ripple-button` | Queued | — |
@@ -91,7 +91,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 60 | Morphing Button | `morphing-button` | Validated baseline | [Review](parity/morphing-button.md) |
 | 61 | Morphing Dialog | `morphing-dialog` | Queued | — |
 | 62 | Morphing Icon | `morphing-icon` | Validated baseline | [Review](parity/morphing-icon.md) |
-| 63 | Morphing Shape Loader | `morphing-shape-loader` | Queued | — |
+| 63 | Morphing Shape Loader | `morphing-shape-loader` | Validated locally; integration pending | [Report](parity/morphing-shape-loader.md) |
 | 64 | Neon Edge Button | `neon-edge-button` | Validated baseline | [Review](parity/neon-edge-button.md) |
 | 65 | Nimbu Mirchi | `nimbu-mirchi` | Queued | — |
 | 66 | Not Found | `not-found` | Validated locally; integration pending | [Report](parity/not-found.md) |

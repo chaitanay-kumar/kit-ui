@@ -37,6 +37,8 @@ import { focusModePort } from "./angular-focus-mode";
 import { avatarStackPort } from "./angular-avatar-stack";
 import { notificationStackPort } from "./angular-notification-stack";
 import { undoToastPort } from "./angular-undo-toast";
+import { introLoaderPort } from "./angular-intro-loader";
+import { morphingShapeLoaderPort } from "./angular-morphing-shape-loader";
 const root = process.cwd();
 type Kind = "action" | "collection" | "form" | "canvas" | "plain";
 interface Port {
@@ -433,8 +435,6 @@ add("loader","plain",loaderPort.description,loaderPort.template,loaderPort.body,
 // Loading indicators can be stopped and honor reduced motion in CSS.
 add("orbital-loading-ring","plain",orbitalLoadingRingPort.description,orbitalLoadingRingPort.template,orbitalLoadingRingPort.body,orbitalLoadingRingPort);
 for (const [id, shape] of [
-  ["morphing-shape-loader", "shape-loader"],
-  ["intro-loader", "intro-loader"],
 ]) {
   add(
     id,
@@ -445,6 +445,8 @@ for (const [id, shape] of [
     { inputs: ["label: string", "loading: boolean", "paused: boolean"] },
   );
 }
+add("intro-loader","plain",introLoaderPort.description,introLoaderPort.template,introLoaderPort.body,introLoaderPort);
+add("morphing-shape-loader","plain",morphingShapeLoaderPort.description,morphingShapeLoaderPort.template,morphingShapeLoaderPort.body,morphingShapeLoaderPort);
 /* Legacy not-found replaced by the authored React-contract port.
 add(
   "not-found",

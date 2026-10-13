@@ -2,6 +2,12 @@
 
 ## Latest batch handoff - 2026-10-13
 
+Intro Loader and Morphing Shape Loader are validated on `feat/angular-parity-batch-14`, stacked on batch 13 commit `1e98d35`. See [batch 14 evidence](parity/batch-14-integration.md). Their shared generic loader implementation is replaced by separate React-compatible welcome-sequence and matched-path SVG contracts, including reduced motion.
+
+The focused generated contract, Angular build and 16 React/Angular desktop/reduced-motion-mobile browser cases pass. Progress is 21 merged plus twenty-two locally validated baselines, with 73 components awaiting review.
+
+## Previous batch handoff - 2026-10-13
+
 Notification Stack and Undo Toast are validated on `feat/angular-parity-batch-13`, stacked on batch 12 commit `61cde6a`. See [batch 13 evidence](parity/batch-13-integration.md). Their shared collection-controller implementation is replaced by separate React-compatible local stack and timed undo-toast contracts.
 
 The focused package contract, Angular build and 16 React/Angular desktop/mobile browser cases pass. Progress is 21 merged plus twenty locally validated baselines, with 75 components awaiting review.
