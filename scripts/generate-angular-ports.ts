@@ -23,6 +23,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { CATALOG_INDEX } from "../src/components/registry/catalog-index";
 import { activityFeedPort } from "./angular-activity-feed";
+import { faqPort } from "./angular-faq";
+import { otpInputPort } from "./angular-otp-input";
 const root = process.cwd();
 type Kind = "action" | "collection" | "form" | "canvas" | "plain";
 interface Port {
@@ -202,22 +204,7 @@ add(
   `<div class="kit-control kit-stack"><label>{{label()||'Choose a workspace'}}<select [disabled]="disabled()||loading()" [value]="current()?.id" (change)="pick($event)">@for(item of items();track item.id){<option [value]="item.id" [disabled]="item.disabled">{{item.label}}</option>}</select></label><p>{{current()?.description}}</p>${collectionFeedback}</div>`,
   `pick(event:Event):void{const item=this.items().find(i=>i.id===(event.target as HTMLSelectElement).value);if(item)this.select(item);}`,
 );
-add(
-  "otp-input",
-  "plain",
-  "A one-time-code field with digit validation, paste, autofill and completion output.",
-  `<div class="kit-control kit-stack"><label>{{label()}}<input class="k-otp" type="text" inputmode="numeric" autocomplete="one-time-code" [attr.maxlength]="safeLength()" [value]="value()" [disabled]="disabled()" (input)="change($event)" /></label><div class="kit-row" aria-hidden="true">@for(index of slots();track index){<span class="k-otp-slot">{{value()[index]||'·'}}</span>}</div><p role="status">{{value().length===safeLength()?'Code complete.':value().length+' of '+safeLength()+' digits'}}</p></div>`,
-  `readonly label=input('Verification code');readonly length=input(6);readonly value=model('');readonly disabled=input(false);readonly completed=output<string>();readonly safeLength=computed(()=>Math.max(1,Math.min(12,Math.floor(this.length()))));readonly slots=computed(()=>Array.from({length:this.safeLength()},(_,i)=>i));change(event:Event):void{const input=event.target as HTMLInputElement;const value=input.value.replace(/[^0-9]/g,'').slice(0,this.safeLength());input.value=value;this.value.set(value);if(value.length===this.safeLength())this.completed.emit(value);}`,
-  {
-    inputs: [
-      "value: string (two-way)",
-      "length: number (1–12)",
-      "label: string",
-      "disabled: boolean",
-    ],
-    outputs: ["completed: string"],
-  },
-);
+add("otp-input", "plain", otpInputPort.description, otpInputPort.template, otpInputPort.body, otpInputPort);
 add(
   "lock-input",
   "plain",
@@ -348,10 +335,8 @@ add("activity-feed", "plain", activityFeedPort.description, activityFeedPort.tem
 add("smooth-accordion","plain",smoothAccordionPort.description,smoothAccordionPort.template,smoothAccordionPort.body,smoothAccordionPort);
 
 // Expandable information and selectable collections.
+add("faq", "plain", faqPort.description, faqPort.template, faqPort.body.replace("input.required<FAQItem[]>()", "input<FAQItem[]>([])") , faqPort);
 for (const [id, title] of [
-  ["faq", "Frequently asked questions"],
-
-
   ["stack-unfold-panel", "Your workspace"],
   ["expandable-data-row", "Data details"],
   ["recovery-ledger", "Recovery ledger"],
@@ -849,6 +834,9 @@ const entries = ports
       new RegExp(`(?<![.$\\w])${symbol}\\b`).test(body);
     const core = [
       "Component",
+      ...(port.stylesFile && !port.imports?.includes("ViewEncapsulation")
+        ? ["ViewEncapsulation"]
+        : []),
       ...[
         "DestroyRef",
         "ElementRef",

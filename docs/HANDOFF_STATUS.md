@@ -2,6 +2,12 @@
 
 ## Latest batch handoff - 2026-10-13
 
+FAQ and OTP Input are validated on `feat/angular-parity-batch-7`, stacked on batch 6 commit `f8aab96`. See [batch 7 evidence](parity/batch-7-integration.md). Their previous generated collection/single-field APIs are replaced by the React contracts: controlled and uncontrolled FAQ disclosure with filtering and rich templates, and separate OTP digit fields with focus, paste and callbacks.
+
+The focused batch passes its packaged contract, Angular package build, and 16 React/Angular browser cases across desktop/mobile. Unrelated suites remain deferred until integration. Progress is 21 merged plus eight locally validated baselines, with 87 components awaiting review.
+
+## Previous batch handoff - 2026-10-13
+
 Hold-to-Confirm and Swipe Action List are validated on `feat/angular-parity-batch-6`, stacked on batch 5 commit `99cb95d`. See [batch 6 evidence](parity/batch-6-integration.md). Angular now uses the React callback names and explicit-undefined defaults. Swipe rows preserve independent action disclosure, and completion copy uses the configured action label. Legacy callback inputs remain as deprecated aliases.
 
 The focused batch passes its packaged contract, focused lint, Angular package build, and 8 React/Angular browser cases across desktop/mobile. Unrelated suites remain deferred until batch integration. Progress is 21 merged plus six locally validated baselines, with 89 components awaiting review.
