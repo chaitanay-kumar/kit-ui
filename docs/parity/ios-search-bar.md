@@ -37,7 +37,7 @@ Angular intentionally disables width, clear and CSS transition motion for reduce
 
 ## Validation — 2026-10-13
 
-Validated locally on `feat/angular-ios-search-parity`, based on `e85d06d`, using Node 22.23.3 and Microsoft Edge/Chromium on Windows. This branch is not merged; independent maintainer review and full user QA remain pending.
+Validated locally on `feat/angular-ios-search-parity`, based on `e85d06d`, using Node 22.23.3 and Microsoft Edge/Chromium on Windows. Merged into `feat/kit-ui-library` at the user's request through commit `54caeaa`. The GitHub integration could not create a PR (403), so integration used Git directly. Independent maintainer review was not performed; full user QA remains pending.
 
 - All 30 focused desktop/mobile browser cases pass, including caret preservation and native Escape synchronization.
 - All 26 catalog/framework-tab regression cases pass, including 432 native port mounts across both themes and device profiles, source dependencies and source-request retry.
