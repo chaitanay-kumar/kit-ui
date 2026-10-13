@@ -1,25 +1,73 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component, input, model } from '@angular/core';
-import type { KitItem } from './port-types';
-
+import { Component, DestroyRef, computed, inject, input, signal } from '@angular/core';
+import {afterNextRender,ViewEncapsulation} from '@angular/core';
+export type ReceiptStatus='idle'|'printing'|'completed'|'success';
+export type PaperTheme='light'|'dark'|'cream';
+export interface ReceiptItem{name:string;price:string|number;quantity?:number;description?:string;tag?:string;}
 @Component({
  selector:"kit-payment-receipt-printer", standalone:true,
- host:{'data-kit':"payment-receipt-printer",style:'display:block;min-width:0'},
- template:`
-<section class="kit-control kit-surface kit-stack">
-<h3>{{label()}}</h3>
-<button type="button" [disabled]="disabled()" [attr.aria-expanded]="printed()" (click)="printed.set(!printed())">{{printed()?'Retract receipt':'Print receipt preview'}}</button>@if(printed()){<article class="k-receipt">
-<h3>{{merchant()}}</h3>
-<p>{{reference()}}</p>@for(item of items();track item.id){<div class="kit-row">
-<span>{{item.label}}</span>
-<span>{{currency()}} {{item.value}}</span>
-</div>}<hr />
-<strong>Total: {{currency()}} {{total()}}</strong>
-<ng-content>
-</ng-content>
-</article>}</section>
+ host:{style:'display:contents'},
+ encapsulation:ViewEncapsulation.None,styleUrls:["./payment-receipt-printer.css"],
+template:`
+<section [class]="'k-printer '+className()" role="region" aria-label="Payment Receipt Printer">@if(showStatusCard()){<header aria-live="polite">
+<div>
+<strong>{{statusTitle()}}</strong>
+<small>{{statusSubtitle()}}</small>
+</div>
+<span>{{isPrinting()?'Printing':isCompleted()?'Ready':'Idle'}}</span>
+</header>}<div [class]="'k-printer-body '+printerClassName()">
+<div>
+<b>▣ POS-8000</b>
+<span>{{isPrinting()?'FEED':isCompleted()?'ONLINE':'STANDBY'}}</span>
+</div>
+<i aria-hidden="true">
+</i>
+</div>
+<article [class]="'k-receipt k-'+paperTheme()+' '+receiptClassName()" [class.k-cut]="showCutEffect()">
+<div class="k-receipt-head">
+<ng-content select="[merchantLogo]">◇</ng-content>
+<h3>{{merchant()}}</h3>@if(merchantSubtext()){<p>{{merchantSubtext()}}</p>}</div>
+<dl>
+<div>
+<dt>ORDER NO:</dt>
+<dd>{{orderNumber()}}</dd>
+</div>
+<div>
+<dt>DATE:</dt>
+<dd>{{formattedDate()}}</dd>
+</div>
+<div>
+<dt>PAYMENT:</dt>
+<dd>{{paymentMethod()}}</dd>
+</div>
+</dl>
+<div class="k-receipt-items">
+<b>ITEM</b>
+<b>PRICE</b>@for(entry of receiptItems();track $index){<span>{{entry.quantity&&entry.quantity>1?entry.quantity+'x ':''}}{{entry.name}}@if(entry.description){<small>{{entry.description}}</small>}</span>
+<strong>{{money(entry.price)}}</strong>}</div>
+<dl>@if(subtotal()){<div>
+<dt>SUBTOTAL:</dt>
+<dd>{{money(subtotal()!)}}</dd>
+</div>}@if(discount()){<div>
+<dt>DISCOUNT:</dt>
+<dd>-{{money(discount()!)}}</dd>
+</div>}@if(tax()){<div>
+<dt>TAX (0%):</dt>
+<dd>{{money(tax()!)}}</dd>
+</div>}<div class="k-total">
+<dt>TOTAL:</dt>
+<dd>{{money(total())}}</dd>
+</div>
+</dl>@if(showBarcode()){<div class="k-barcode" aria-hidden="true">
+</div>
+<small>* {{barcodeNumber()}} *</small>}<footer>{{message()}}<small>AUTH #99824 · KIT_UI ECOSYSTEM</small>
+</footer>
+</article>@if(showActions()){<div class="k-printer-actions">
+<button type="button" title="Replay printing animation" [disabled]="isPrinting()" (click)="replay()">↻ Replay Print</button>
+<button type="button" title="Copy order number" (click)="copy()">{{copied()?'✓ Copied':'Copy Order'}}</button>
+</div>}</section>
 `
 })
 export class KitPaymentReceiptPrinterComponent {
-readonly label=input('Your receipt');readonly merchant=input('Kit workspace');readonly reference=input('Receipt preview');readonly currency=input('USD');readonly items=input<KitItem[]>([{id:'subscription',label:'Workspace plan',value:24}]);readonly total=input(24);readonly disabled=input(false);readonly printed=model(false);
+readonly status=input<ReceiptStatus>();readonly merchant=input<string,string|undefined>('Kit UI Store',{transform:v=>v??'Kit UI Store'});readonly merchantSubtext=input<string,string|undefined>('Source Component Registry',{transform:v=>v??'Source Component Registry'});readonly orderNumber=input<string,string|undefined>('#4821',{transform:v=>v??'#4821'});readonly date=input<string|Date>();readonly items=input<ReceiptItem[]>();readonly item=input<ReceiptItem>();readonly subtotal=input<string|number>();readonly tax=input<string|number>();readonly discount=input<string|number>();readonly total=input<string|number,string|number|undefined>('$200.00',{transform:v=>v??'$200.00'});readonly currency=input<string,string|undefined>('$',{transform:v=>v??'$'});readonly paymentMethod=input<string,string|undefined>('Apple Pay •••• 4242',{transform:v=>v??'Apple Pay •••• 4242'});readonly message=input<string,string|undefined>('Thank you for your order!',{transform:v=>v??'Thank you for your order!'});readonly autoPrint=input<boolean,boolean|undefined>(true,{transform:v=>v??true});readonly printDuration=input<number,number|undefined>(2.4,{transform:v=>v??2.4});readonly showStatusCard=input<boolean,boolean|undefined>(true,{transform:v=>v??true});readonly statusTitle=input<string,string|undefined>('Payment Complete',{transform:v=>v??'Payment Complete'});readonly statusSubtitle=input<string,string|undefined>('Receipt has been issued',{transform:v=>v??'Receipt has been issued'});readonly showActions=input<boolean,boolean|undefined>(true,{transform:v=>v??true});readonly showBarcode=input<boolean,boolean|undefined>(true,{transform:v=>v??true});readonly showCutEffect=input<boolean,boolean|undefined>(true,{transform:v=>v??true});readonly paperTheme=input<PaperTheme,PaperTheme|undefined>('light',{transform:v=>v??'light'});readonly onPrintStart=input<(()=>void)|undefined>();readonly onPrintComplete=input<(()=>void)|undefined>();readonly onReplay=input<(()=>void)|undefined>();readonly className=input<string,string|undefined>('',{transform:v=>v??''});readonly printerClassName=input<string,string|undefined>('',{transform:v=>v??''});readonly receiptClassName=input<string,string|undefined>('',{transform:v=>v??''});readonly internalStatus=signal<ReceiptStatus>('idle');readonly copied=signal(false);readonly currentStatus=computed(()=>this.status()||this.internalStatus());readonly isPrinting=computed(()=>this.currentStatus()==='printing');readonly isCompleted=computed(()=>this.currentStatus()==='completed'||this.currentStatus()==='success');readonly receiptItems=computed(()=>this.items()?.length?this.items()!:this.item()?[this.item()!]:[{name:'Kit UI Pro Subscription',price:'$200.00',quantity:1,tag:'Annual'}]);readonly formattedDate=computed(()=>{const d=this.date();return d?typeof d==='string'?d:d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'}):'Aug 20, 2026 · 10:42 AM';});readonly barcodeNumber=computed(()=>this.orderNumber().replace('#',''));private printTimer:ReturnType<typeof setTimeout>|undefined;private copyTimer:ReturnType<typeof setTimeout>|undefined;constructor(){afterNextRender(()=>{if(this.autoPrint()){this.printTimer=setTimeout(()=>this.startPrinting(),400);}});inject(DestroyRef).onDestroy(()=>{if(this.printTimer)clearTimeout(this.printTimer);if(this.copyTimer)clearTimeout(this.copyTimer);});}money(value:string|number):string{return typeof value==='number'?this.currency()+value.toFixed(2):value;}startPrinting():void{this.internalStatus.set('printing');this.onPrintStart()?.();if(this.printTimer)clearTimeout(this.printTimer);this.printTimer=setTimeout(()=>{this.internalStatus.set('completed');this.onPrintComplete()?.();},this.printDuration()*1000);}replay():void{this.internalStatus.set('idle');this.onReplay()?.();this.printTimer=setTimeout(()=>this.startPrinting(),150);}async copy():Promise<void>{try{await navigator.clipboard.writeText(this.orderNumber());}catch{const area=document.createElement('textarea');area.value=this.orderNumber();document.body.append(area);area.select();document.execCommand('copy');area.remove();}this.copied.set(true);if(this.copyTimer)clearTimeout(this.copyTimer);this.copyTimer=setTimeout(()=>this.copied.set(false),2000);}
 }
