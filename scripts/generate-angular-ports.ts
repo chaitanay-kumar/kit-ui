@@ -43,6 +43,8 @@ import { glitchTextPort } from "./angular-glitch-text";
 import { directionalTooltipPort } from "./angular-directional-tooltip";
 import { airportMatrixClockPort } from "./angular-airport-matrix-clock";
 import { metricHudPort } from "./angular-metric-hud";
+import { peekCardPort } from "./angular-peek-card";
+import { profileCardPort } from "./angular-profile-card";
 const root = process.cwd();
 type Kind = "action" | "collection" | "form" | "canvas" | "plain";
 interface Port {
@@ -386,9 +388,7 @@ add(
 
 // Data and account cards use actual inputs and local disclosure, not screenshots.
 for (const [id, title, layout] of [
-  ["profile-card", "Alex Morgan", "profile"],
   ["wallet-card", "Your wallet", "wallet"],
-  ["peek-card", "A closer look", "peek"],
   ["mac-os-folder-cards", "Project folders", "folders"],
   ["stacked-cards", "Your collection", "stacked"],
   ["story-card", "Your stories", "stories"],
@@ -401,6 +401,8 @@ for (const [id, title, layout] of [
     `spot(event:PointerEvent):void{if(this.disabled())return;const el=event.currentTarget as HTMLElement;const r=el.getBoundingClientRect();el.style.setProperty('--spot-x',(event.clientX-r.left)+'px');el.style.setProperty('--spot-y',(event.clientY-r.top)+'px');}clearSpot(event:PointerEvent):void{(event.currentTarget as HTMLElement).style.removeProperty('--spot-x');}`,
   );
 }
+add("peek-card","plain",peekCardPort.description,peekCardPort.template,peekCardPort.body,peekCardPort);
+add("profile-card","plain",profileCardPort.description,profileCardPort.template,profileCardPort.body,profileCardPort);
 add("reveal-card","plain",revealCardPort.description,revealCardPort.template,revealCardPort.body,revealCardPort);
 add("spotlight-card", "plain", spotlightCardPort.description, spotlightCardPort.template, spotlightCardPort.body, spotlightCardPort);
 /* Legacy avatar stack replaced by the authored React-contract port.
@@ -709,15 +711,6 @@ const cardDefaults: Record<
   string,
   Array<{ id: string; label: string; description: string; value?: string }>
 > = {
-  "profile-card": [
-    {
-      id: "alex",
-      label: "Alex Morgan",
-      value: "Product designer",
-      description:
-        "Building thoughtful interfaces, one small detail at a time.",
-    },
-  ],
   "wallet-card": [
     {
       id: "balance",
@@ -759,14 +752,6 @@ const cardDefaults: Record<
       label: "Ready to share",
       value: "Chapter 03",
       description: "Bring the finished pieces together.",
-    },
-  ],
-  "peek-card": [
-    {
-      id: "peek",
-      label: "A closer look",
-      description:
-        "A quiet hint of what is inside. Expand to explore the details.",
     },
   ],
 };

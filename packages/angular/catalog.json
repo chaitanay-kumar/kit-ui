@@ -1337,24 +1337,16 @@
     "name": "Peek Card",
     "exportName": "KitPeekCardComponent",
     "selector": "kit-peek-card",
-    "description": "A configurable content card collection with selection, disclosure, disabled items and projected details.",
+    "description": "A delayed hover, focus and tap preview with React-compatible structured data, loading state, placement and projected custom content.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "data: PeekCardData",
+      "renderContent: TemplateRef<unknown>",
+      "delay: number",
+      "placement: 'top' | 'bottom' | 'auto'",
+      "isLoading: boolean",
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "pill-navigation",
@@ -1420,24 +1412,20 @@
     "name": "Profile Card",
     "exportName": "KitProfileCardComponent",
     "selector": "kit-profile-card",
-    "description": "A configurable content card collection with selection, disclosure, disabled items and projected details.",
+    "description": "A responsive premium profile card matching React's identity, counts, outbound link and primary action contract.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "name: string",
+      "username: string",
+      "description: string",
+      "followers: string",
+      "posts: string",
+      "website: string",
+      "actionLabel: string",
+      "onAction: () => void",
+      "className: string",
+      "socialUrl: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "pull-to-refresh",

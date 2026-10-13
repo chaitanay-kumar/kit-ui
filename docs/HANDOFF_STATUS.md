@@ -2,6 +2,12 @@
 
 ## Latest batch handoff - 2026-10-13
 
+Peek Card and Profile Card are validated on `feat/angular-parity-batch-17`, stacked on batch 16 commit `210dd95`. See [batch 17 evidence](parity/batch-17-integration.md). Their generic collection ports are replaced by React-compatible contextual-preview and profile/action contracts.
+
+The focused generated contract, Angular build and 16 React/Angular desktop/mobile browser cases pass. Progress is 21 merged plus twenty-eight locally validated baselines, with 67 components awaiting review.
+
+## Previous batch handoff - 2026-10-13
+
 Airport Matrix Clock and Metric HUD are validated on `feat/angular-parity-batch-16`, stacked on batch 15 commit `e803245`. See [batch 16 evidence](parity/batch-16-integration.md). Their single-clock and scalar-progress placeholders are replaced by React-compatible multi-city and telemetry-series contracts.
 
 The focused generated contract, Angular build and 16 React/Angular desktop/mobile browser cases pass. Progress is 21 merged plus twenty-six locally validated baselines, with 69 components awaiting review.
