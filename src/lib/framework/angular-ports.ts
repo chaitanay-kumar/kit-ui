@@ -1152,24 +1152,17 @@ export const ANGULAR_PORTS = [
     "name": "Notification Bell",
     "exportName": "KitNotificationBellComponent",
     "selector": "kit-notification-bell",
-    "description": "Dismissible notifications with restore actions and restrained live announcements.",
+    "description": "A controlled or uncontrolled notification panel with unread counts, read actions and outside dismissal.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "notifications: Notification[]",
+      "onMarkAsRead: (id: string) => void",
+      "onMarkAllAsRead: () => void",
+      "isOpen: boolean",
+      "onOpenChange: (open: boolean) => void",
+      "showCount: boolean",
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "notification-stack",
@@ -1289,15 +1282,26 @@ export const ANGULAR_PORTS = [
     "name": "Payment Status",
     "exportName": "KitPaymentStatusComponent",
     "selector": "kit-payment-status",
-    "description": "A controlled payment-status display; it never simulates a real payment or charges a card.",
+    "description": "A five-state payment summary with receipt details, retry actions, copying and local receipt download.",
     "inputs": [
-      "state: 'idle' | 'pending' | 'success' | 'error'",
-      "label: string",
-      "disabled: boolean"
+      "status: PaymentLifecycleStatus",
+      "amount: string | number",
+      "currency: string",
+      "transactionId: string",
+      "date: string | Date",
+      "paymentMethod: string",
+      "last4: string",
+      "errorMessage: string",
+      "refundReason: string",
+      "items: PaymentReceiptItem[]",
+      "merchantName: string",
+      "onRetry: () => void",
+      "onChangePaymentMethod: () => void",
+      "onDownloadReceipt: () => void",
+      "onViewReceipt: () => void",
+      "className: string"
     ],
-    "outputs": [
-      "retry: void"
-    ]
+    "outputs": []
   },
   {
     "id": "peek-card",

@@ -29,6 +29,8 @@ import { drawCheckboxPort } from "./angular-draw-checkbox";
 import { liquidTogglePort } from "./angular-liquid-toggle";
 import { lockInputPort } from "./angular-lock-input";
 import { originDropdownPort } from "./angular-origin-dropdown";
+import { paymentStatusPort } from "./angular-payment-status";
+import { notificationBellPort } from "./angular-notification-bell";
 const root = process.cwd();
 type Kind = "action" | "collection" | "form" | "canvas" | "plain";
 interface Port {
@@ -346,7 +348,6 @@ for (const [id, title] of [
 }
 for (const [id, title] of [
   ["notification-stack", "Notifications"],
-  ["notification-bell", "Notifications"],
   ["undo-toast", "Item archived"],
   ["velocity-toast", "Update available"],
 ]) {
@@ -362,6 +363,7 @@ for (const [id, title] of [
       : "",
   );
 }
+add("notification-bell","plain",notificationBellPort.description,notificationBellPort.template,notificationBellPort.body,notificationBellPort);
 add(
   "pull-to-refresh",
   "action",
@@ -448,6 +450,7 @@ add(
     outputs: ["recover: void"],
   },
 );
+/* Legacy payment status replaced by the authored React-contract port.
 add(
   "payment-status",
   "plain",
@@ -463,6 +466,8 @@ add(
     outputs: ["retry: void"],
   },
 );
+*/
+add("payment-status","plain",paymentStatusPort.description,paymentStatusPort.template,paymentStatusPort.body,paymentStatusPort);
 add(
   "payment-receipt-printer",
   "plain",
