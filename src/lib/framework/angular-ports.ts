@@ -1164,24 +1164,13 @@ export const ANGULAR_PORTS = [
     "name": "Notification Stack",
     "exportName": "KitNotificationStackComponent",
     "selector": "kit-notification-stack",
-    "description": "Dismissible notifications with restore actions and restrained live announcements.",
+    "description": "A local notification stack with simulation, stacked or expanded layouts, explicit dismissal, swipe dismissal and empty state.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "initialNotifications: NotificationItem[]",
+      "className: string",
+      "maxVisible: number"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "orbital-loading-ring",
@@ -1996,24 +1985,23 @@ export const ANGULAR_PORTS = [
     "name": "Undo Toast",
     "exportName": "KitUndoToastComponent",
     "selector": "kit-undo-toast",
-    "description": "Dismissible notifications with restore actions and restrained live announcements.",
+    "description": "A positioned undo toast with synchronized visibility, variants, pausable countdown, restored state and dismissal cleanup.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "open: boolean",
+      "title: string",
+      "description: string",
+      "undoLabel: string",
+      "restoredMessage: string",
+      "duration: number",
+      "variant: UndoToastVariant",
+      "position: UndoToastPosition",
+      "onUndo: () => void",
+      "onDismiss: () => void",
+      "showProgress: boolean",
+      "icon: TemplateRef<unknown>",
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "unfold-accordion",

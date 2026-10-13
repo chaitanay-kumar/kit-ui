@@ -1,23 +1,34 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component } from '@angular/core';
-import { KitCollectionController } from './port-controllers';
-
+import { Component, computed, input, signal } from '@angular/core';
+import {ViewEncapsulation} from '@angular/core';
+export type NotificationType='success'|'info'|'warning';
+export interface NotificationItem{id:string;title:string;description:string;type?:NotificationType;time?:string;}
+const defaultNotifications:NotificationItem[]=[{id:'1',title:'Deployment Successful',description:'Production build v2.4.0 deployed to edge nodes.',type:'success',time:'Just now'},{id:'2',title:'Component Synced',description:'magnetic-button synced from Kit UI GitHub registry.',type:'info',time:'2m ago'},{id:'3',title:'API Limit Warning',description:'85% of monthly request quota utilized.',type:'warning',time:'10m ago'}];
 @Component({
  selector:"kit-notification-stack", standalone:true,
- host:{'data-kit':"notification-stack",style:'display:block;min-width:0'},
- template:`
-<section class="kit-control kit-stack">
-<div class="k-notification-stack">@for(item of visible();track item.id){<article class="kit-surface kit-stack">
-<strong>{{item.label}}</strong>
-<p>{{item.description}}</p>
-<div class="kit-row">
-<button type="button" [disabled]="loading()||disabled()" (click)="dismiss(item)">Dismiss <span class="sr-only">{{item.label}}</span>
-</button>
+ host:{style:'display:contents'},
+ encapsulation:ViewEncapsulation.None,styleUrls:["./notification-stack.css"],
+template:`
+<section [class]="'k-notification-stack '+className()">
+<header>
+<span>♧ Notifications ({{notifications().length}})</span>
+<div>
+<button type="button" (click)="simulate()">+ Simulate</button>
+<button type="button" (click)="toggleExpanded()">{{expanded()?'Stack':'Expand'}}</button>
 </div>
-</article>}@empty{<p>No notifications.</p>}</div>@if(dismissed().length){<button type="button" (click)="undo()" [disabled]="loading()||disabled()">Restore notifications</button>}@if(loading()){<p role="status">Loading…</p>}@if(error()){<p role="alert">{{error()}}</p>}@if(actionError()){<p role="alert">{{actionError()}}</p>}<p role="status" class="kit-status">{{busy()?'Working…':status()}}</p>
+</header>
+<div class="k-notification-list" [class.k-expanded]="expanded()">@for(item of visible();track item.id;let index=$index){<article [style.--index]="index" [style.z-index]="notifications().length-index" (pointerdown)="start($event)" (pointerup)="finish($event,item.id)" (pointercancel)="dragX=undefined">
+<span class="k-notification-icon" aria-hidden="true">{{icon(item.type)}}</span>
+<div>
+<div>
+<h4>{{item.title}}</h4>@if(item.time){<time>{{item.time}}</time>}</div>
+<p>{{item.description}}</p>
+</div>
+<button type="button" aria-label="Dismiss" (pointerdown)="$event.stopPropagation()" (click)="dismiss(item.id)">×</button>
+</article>}@empty{<p class="k-notification-empty">No pending notifications</p>}</div>
 </section>
 `
 })
-export class KitNotificationStackComponent extends KitCollectionController {
-
+export class KitNotificationStackComponent {
+readonly initialNotifications=input<NotificationItem[],NotificationItem[]|undefined>(defaultNotifications,{transform:value=>value??defaultNotifications});readonly className=input<string,string|undefined>('',{transform:value=>value??''});readonly maxVisible=input<number,number|undefined>(3,{transform:value=>value??3});readonly notifications=signal<NotificationItem[]>([]);readonly expanded=signal(false);readonly visible=computed(()=>this.notifications().slice(0,this.expanded()?this.notifications().length:this.maxVisible()));dragX:number|undefined;ngOnInit():void{this.notifications.set([...this.initialNotifications()]);}toggleExpanded():void{this.expanded.update(value=>!value);}dismiss(id:string):void{this.notifications.update(items=>items.filter(item=>item.id!==id));}simulate():void{const types:NotificationType[]=['success','info','warning'],type=types[Math.floor(Math.random()*types.length)];this.notifications.update(items=>[{id:Date.now().toString(),title:type==='success'?'Cache Invalidation Done':type==='warning'?'High Memory Usage':'New Webhook Triggered',description:'Triggered by automated pipeline workflow #841.',type,time:'Just now'},...items]);}icon(type?:NotificationType):string{return type==='success'?'✓':type==='warning'?'!':'i';}start(event:PointerEvent):void{this.dragX=event.clientX;(event.currentTarget as HTMLElement).setPointerCapture(event.pointerId);}finish(event:PointerEvent,id:string):void{if(this.dragX!==undefined&&event.clientX-this.dragX>60)this.dismiss(id);this.dragX=undefined;}
 }

@@ -2,6 +2,12 @@
 
 ## Latest batch handoff - 2026-10-13
 
+Notification Stack and Undo Toast are validated on `feat/angular-parity-batch-13`, stacked on batch 12 commit `61cde6a`. See [batch 13 evidence](parity/batch-13-integration.md). Their shared collection-controller implementation is replaced by separate React-compatible local stack and timed undo-toast contracts.
+
+The focused package contract, Angular build and 16 React/Angular desktop/mobile browser cases pass. Progress is 21 merged plus twenty locally validated baselines, with 75 components awaiting review.
+
+## Previous batch handoff - 2026-10-13
+
 Focus Mode and Avatar Stack are validated on `feat/angular-parity-batch-12`, stacked on batch 11 commit `ad22e15`. See [batch 12 evidence](parity/batch-12-integration.md). Their generic focus toggle and selectable collection APIs are replaced by React-compatible focus-card and avatar-stack contracts.
 
 The focused package contract, Angular build and 16 React/Angular desktop/mobile browser cases pass. Progress is 21 merged plus eighteen locally validated baselines, with 77 components awaiting review.
