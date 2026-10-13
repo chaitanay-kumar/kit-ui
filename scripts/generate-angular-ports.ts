@@ -47,6 +47,8 @@ import { peekCardPort } from "./angular-peek-card";
 import { profileCardPort } from "./angular-profile-card";
 import { pillNavigationPort } from "./angular-pill-navigation";
 import { slidePaginationPort } from "./angular-slide-pagination";
+import { bookCallButtonPort } from "./angular-book-call-button";
+import { splitButtonPort } from "./angular-split-button";
 const root = process.cwd();
 type Kind = "action" | "collection" | "form" | "canvas" | "plain";
 interface Port {
@@ -165,6 +167,7 @@ add(
   `<div class="kit-control kit-stack"><button type="button" class="k-action k-ripple" [disabled]="blocked()" (click)="ripple($event)">@for(point of [point()];track point.key){<span aria-hidden="true" class="k-ripple-dot" [style.left.px]="point.x" [style.top.px]="point.y"></span>}<span>{{label()||'Make a ripple'}}</span></button>${actionFeedback}</div>`,
   `readonly point=signal({x:0,y:0,key:0});ripple(event:MouseEvent):void{const r=(event.currentTarget as HTMLElement).getBoundingClientRect();this.point.set({x:event.detail?event.clientX-r.left:r.width/2,y:event.detail?event.clientY-r.top:r.height/2,key:this.point().key+1});void this.run();}`,
 );
+/* Legacy split and book-call actions replaced by authored React-contract ports.
 add(
   "split-button",
   "action",
@@ -181,6 +184,9 @@ add(
   `readonly dialog=viewChild.required<ElementRef<HTMLDialogElement>>('booking');readonly date=signal('');readonly time=signal('');readonly bookingRequested=output<{date:string;time:string}>();readonly today=new Date().toISOString().slice(0,10);book(event:SubmitEvent):void{event.preventDefault();if(!this.date()||!this.time()||this.blocked())return;this.bookingRequested.emit({date:this.date(),time:this.time()});this.dialog().nativeElement.close();this.status.set('Booking requested. Your application confirms availability.');}`,
   { outputs: ["bookingRequested: { date: string; time: string }"] },
 );
+*/
+add("split-button","plain",splitButtonPort.description,splitButtonPort.template,splitButtonPort.body,splitButtonPort);
+add("book-call-button","plain",bookCallButtonPort.description,bookCallButtonPort.template,bookCallButtonPort.body,bookCallButtonPort);
 add(
   "drag-to-confirm",
   "action",

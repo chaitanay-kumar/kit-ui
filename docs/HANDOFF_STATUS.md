@@ -2,6 +2,12 @@
 
 ## Latest batch handoff - 2026-10-13
 
+Book Call Button and Split Button are validated on `feat/angular-parity-batch-19`, stacked on batch 18 commit `03e8def`. See [batch 19 evidence](parity/batch-19-integration.md). Their scheduling-dialog and generic async-action ports are replaced by React-compatible link/button CTA and split-menu contracts.
+
+The focused generated contract, Angular build and 16 React/Angular desktop/mobile browser cases pass. Progress is 21 merged plus thirty-two locally validated baselines, with 63 components awaiting review.
+
+## Previous batch handoff - 2026-10-13
+
 Pill Navigation and SlidePagination are validated on `feat/angular-parity-batch-18`, stacked on batch 17 commit `467389b`. See [batch 18 evidence](parity/batch-18-integration.md). Their generic selection and pagination ports are replaced by React-compatible nested-navigation and controlled/uncontrolled pagination contracts.
 
 The focused generated contract, Angular build and 16 React/Angular desktop/mobile browser cases pass. Progress is 21 merged plus thirty locally validated baselines, with 65 components awaiting review.

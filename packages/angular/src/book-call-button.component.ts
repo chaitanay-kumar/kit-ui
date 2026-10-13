@@ -1,29 +1,32 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component, ElementRef, output, signal, viewChild } from '@angular/core';
-import { KitActionController } from './port-controllers';
-
+import { Component, input, signal } from '@angular/core';
+import {NgTemplateOutlet} from '@angular/common';import {ViewEncapsulation} from '@angular/core';
 @Component({
  selector:"kit-book-call-button", standalone:true,
- host:{'data-kit':"book-call-button",style:'display:block;min-width:0'},
- template:`
-<div class="kit-control kit-stack">
-<button type="button" [disabled]="blocked()" (click)="dialog().nativeElement.showModal()">{{label()||'Book a call'}}</button>
-<dialog #booking class="kit-dialog kit-control">
-<form class="kit-stack" (submit)="book($event)">
-<h3>Find a time</h3>
-<label>Date<input type="date" required [min]="today" (input)="date.set($any($event.target).value)" />
-</label>
-<label>Time<input type="time" required (input)="time.set($any($event.target).value)" />
-</label>
-<div class="kit-row">
-<button type="button" (click)="dialog().nativeElement.close()">Cancel</button>
-<button type="submit" [disabled]="blocked()">Request booking</button>
-</div>
-</form>
-</dialog>
-<p role="status" class="kit-status">{{loading() || busy() ? 'Working…' : status()}}</p>@if(error()){<p role="alert">{{error()}}</p>}@if(busy()){<button type="button" (click)="cancel()">Cancel</button>}</div>
+ host:{style:'display:contents'},
+ imports:[NgTemplateOutlet],
+encapsulation:ViewEncapsulation.None,styleUrls:["./book-call-button.css"],
+template:`
+@if(href()){<a [class]="'k-book-call '+className()" [href]="href()" rel="noreferrer" [attr.aria-label]="label()" (mouseenter)="hovered.set(true)" (mouseleave)="hovered.set(false)" (focus)="hovered.set(true)" (blur)="hovered.set(false)">
+<ng-container *ngTemplateOutlet="layers"/>
+</a>}@else{<button type="button" [class]="'k-book-call '+className()" [disabled]="disabled()" [attr.aria-label]="label()" (click)="onClick()?.()" (mouseenter)="hovered.set(true)" (mouseleave)="hovered.set(false)" (focus)="hovered.set(true)" (blur)="hovered.set(false)">
+<ng-container *ngTemplateOutlet="layers"/>
+</button>}<ng-template #layers>
+<span class="k-book-capsule" [class.expanded]="hovered()">
+</span>
+<span class="k-book-rest" [class.hidden]="hovered()">
+<svg viewBox="0 0 48 48" aria-hidden="true">@for(dot of dots;track $index){<circle [attr.cx]="dot[0]" [attr.cy]="dot[1]" r="3"/>}</svg>
+<b>{{label()}}</b>
+</span>
+<span class="k-book-phone" [class.visible]="hovered()" aria-hidden="true">
+<svg viewBox="0 0 52 52">
+<path d="M17.5 11.7C15.4 10.2 12.8 10.8 11.5 13L9.4 16.7C8.3 18.6 8.4 20.9 9.7 22.6C14.4 29.1 20.2 34.9 26.7 39.6C28.4 40.9 30.7 41 32.6 39.9L36.3 37.8C38.5 36.5 39.1 33.9 37.6 31.8L34.2 27C32.9 25.2 30.4 24.7 28.6 26L26.5 27.5C23.8 25.5 21.5 23.2 19.5 20.5L21 18.4C22.3 16.6 21.8 14.1 20 12.8L17.5 11.7Z"/>
+<path d="M32.7 11.4C36.5 12.5 39.5 15.5 40.6 19.3M36.4 7.2C42 8.8 46.4 13.2 48 18.8"/>
+</svg>
+</span>
+</ng-template>
 `
 })
-export class KitBookCallButtonComponent extends KitActionController {
-readonly dialog=viewChild.required<ElementRef<HTMLDialogElement>>('booking');readonly date=signal('');readonly time=signal('');readonly bookingRequested=output<{date:string;time:string}>();readonly today=new Date().toISOString().slice(0,10);book(event:SubmitEvent):void{event.preventDefault();if(!this.date()||!this.time()||this.blocked())return;this.bookingRequested.emit({date:this.date(),time:this.time()});this.dialog().nativeElement.close();this.status.set('Booking requested. Your application confirms availability.');}
+export class KitBookCallButtonComponent {
+readonly label=input<string,string|undefined>('Book a call',{alias:'children',transform:value=>value??'Book a call'});readonly onClick=input<(()=>void)|undefined>();readonly href=input<string|undefined>();readonly className=input<string,string|undefined>('',{transform:value=>value??''});readonly disabled=input<boolean,boolean|undefined>(false,{transform:value=>value??false});readonly hovered=signal(false);readonly dots:Array<[number,number]>=[[17,13],[28,13],[28,22],[38,29],[28,30],[38,37],[28,44],[17,47],[17,25],[17,36]];
 }
