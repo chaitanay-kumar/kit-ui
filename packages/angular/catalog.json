@@ -492,15 +492,22 @@
     "name": "DrawCheckbox",
     "exportName": "KitDrawCheckboxComponent",
     "selector": "kit-draw-checkbox",
-    "description": "A native toggle with two-way checked binding, visible focus and a disabled state.",
+    "description": "A native controlled or uncontrolled checkbox with rich labeling, description and indeterminate state.",
     "inputs": [
-      "checked: boolean (two-way)",
+      "checked: boolean",
+      "defaultChecked: boolean",
+      "onChange: (event: Event) => void",
       "disabled: boolean",
-      "label: string"
+      "indeterminate: boolean",
+      "label: DrawCheckboxContent",
+      "description: string",
+      "id: string",
+      "name: string",
+      "required: boolean",
+      "className: string",
+      "aria-label: string"
     ],
-    "outputs": [
-      "checkedChange: boolean"
-    ]
+    "outputs": []
   },
   {
     "id": "dynamic-island",
@@ -851,15 +858,21 @@
     "name": "Liquid Toggle",
     "exportName": "KitLiquidToggleComponent",
     "selector": "kit-liquid-toggle",
-    "description": "A native toggle with two-way checked binding, visible focus and a disabled state.",
+    "description": "A controlled or uncontrolled accessible switch with directional keyboard control, labels, sizing and a morphing SVG blob.",
     "inputs": [
-      "checked: boolean (two-way)",
+      "value: boolean",
+      "defaultValue: boolean",
+      "onChange: (value: boolean) => void",
       "disabled: boolean",
-      "label: string"
+      "offLabel: string",
+      "onLabel: string",
+      "accentColor: string",
+      "className: string",
+      "showLabels: boolean",
+      "width: number",
+      "height: number"
     ],
-    "outputs": [
-      "checkedChange: boolean"
-    ]
+    "outputs": []
   },
   {
     "id": "loader",
