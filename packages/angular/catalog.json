@@ -1353,24 +1353,15 @@
     "name": "Pill Navigation",
     "exportName": "KitPillNavigationComponent",
     "selector": "kit-pill-navigation",
-    "description": "Keyboard-navigable selection with active state, disabled items and application navigation output.",
+    "description": "A keyboard-navigable pill tab bar with nested submenu selection, repeated-click disclosure and React-compatible callbacks.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "items: PillNavigationItem[]",
+      "defaultValue: string",
+      "defaultSubValue: string",
+      "onChange: (id: string, subId?: string) => void",
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "press-button",
@@ -1639,15 +1630,17 @@
     "name": "SlidePagination",
     "exportName": "KitSlidePaginationComponent",
     "selector": "kit-slide-pagination",
-    "description": "Bounded page navigation with direct page buttons, arrow keys and two-way page binding.",
+    "description": "A controlled or uncontrolled pagination control with React-compatible page range, ellipses, siblings and callbacks.",
     "inputs": [
-      "page: number (two-way)",
-      "totalPages: number",
-      "disabled: boolean"
+      "pageCount: number",
+      "page: number",
+      "defaultPage: number",
+      "siblingCount: number",
+      "onChange: (page: number) => void",
+      "showControls: boolean",
+      "className: string"
     ],
-    "outputs": [
-      "pageChange: number"
-    ]
+    "outputs": []
   },
   {
     "id": "small-floating-dock",

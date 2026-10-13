@@ -1,16 +1,16 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component, computed, input, model } from '@angular/core';
-
+import { Component, computed, input, signal } from '@angular/core';
+import {ViewEncapsulation} from '@angular/core';
 @Component({
  selector:"kit-slide-pagination", standalone:true,
- host:{'data-kit':"slide-pagination",style:'display:block;min-width:0'},
- template:`
-<nav class="kit-control kit-row" aria-label="Pagination" (keydown)="keys($event)">
-<button type="button" [disabled]="disabled()||safePage()<=1" (click)="go(safePage()-1)">Previous</button>@for(p of visiblePages();track p){<button type="button" [disabled]="disabled()" [attr.aria-current]="p===safePage()?'page':null" (click)="go(p)">{{p}}</button>}<button type="button" [disabled]="disabled()||safePage()>=total()" (click)="go(safePage()+1)">Next</button>
-<span role="status">Page {{safePage()}} of {{total()}}</span>
-</nav>
+ host:{style:'display:contents'},
+ encapsulation:ViewEncapsulation.None,styleUrls:["./slide-pagination.css"],
+template:`
+<nav [class]="'k-slide-pagination '+className()" aria-label="Pagination">@if(showControls()){<button type="button" aria-label="Previous page" [disabled]="current()<=1" (click)="setCurrent(current()-1)">‹</button>}<ul>@for(item of pages();track $index){@if(item==='…'){<li aria-hidden="true">…</li>}@else{<li>
+<button type="button" [attr.aria-current]="item===current()?'page':null" [attr.aria-label]="'Page '+item" [class.active]="item===current()" (click)="setCurrent(item)">{{item}}</button>
+</li>}}</ul>@if(showControls()){<button type="button" aria-label="Next page" [disabled]="current()>=safeCount()" (click)="setCurrent(current()+1)">›</button>}</nav>
 `
 })
 export class KitSlidePaginationComponent {
-readonly page=model(1);readonly totalPages=input(10);readonly disabled=input(false);readonly total=computed(()=>Math.max(1,Math.floor(this.totalPages())));readonly safePage=computed(()=>Math.max(1,Math.min(this.total(),this.page())));readonly visiblePages=computed(()=>Array.from({length:Math.min(5,this.total())},(_,i)=>Math.max(1,Math.min(this.total()-4,this.safePage()-2))+i));go(page:number):void{if(!this.disabled())this.page.set(Math.max(1,Math.min(this.total(),page)));}keys(event:KeyboardEvent):void{if(['ArrowRight','ArrowLeft','Home','End'].includes(event.key)){event.preventDefault();this.go(event.key==='Home'?1:event.key==='End'?this.total():this.safePage()+(event.key==='ArrowRight'?1:-1));}}
+readonly pageCount=input.required<number>();readonly page=input<number|undefined>();readonly defaultPage=input<number,number|undefined>(1,{transform:value=>value??1});readonly siblingCount=input<number,number|undefined>(1,{transform:value=>value??1});readonly onChange=input<((page:number)=>void)|undefined>();readonly showControls=input<boolean,boolean|undefined>(true,{transform:value=>value??true});readonly className=input<string,string|undefined>('',{transform:value=>value??''});readonly internalPage=signal(1);readonly safeCount=computed(()=>Math.max(1,Math.floor(this.pageCount())));readonly current=computed(()=>this.clamp(this.page()??this.internalPage()));readonly pages=computed<Array<number|'…'>>(()=>{const count=this.safeCount(),siblings=Math.max(0,Math.floor(this.siblingCount())),current=this.current(),total=siblings*2+5;if(count<=total)return Array.from({length:count},(_,index)=>index+1);const left=Math.max(current-siblings,1),right=Math.min(current+siblings,count),leftDots=left>2,rightDots=right<count-1;if(!leftDots&&rightDots)return[...Array.from({length:3+siblings*2},(_,index)=>index+1),'…',count];if(leftDots&&!rightDots)return[1,'…',...Array.from({length:3+siblings*2},(_,index)=>count-(3+siblings*2)+index+1)];return[1,'…',...Array.from({length:siblings*2+1},(_,index)=>left+index),'…',count];});ngOnInit():void{this.internalPage.set(this.clamp(this.defaultPage()));}private clamp(value:number):number{return Math.min(Math.max(1,Math.floor(value)),this.safeCount());}setCurrent(value:number):void{const next=this.clamp(value);if(this.page()===undefined)this.internalPage.set(next);this.onChange()?.(next);}
 }

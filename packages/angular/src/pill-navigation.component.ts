@@ -1,21 +1,16 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component } from '@angular/core';
-import { KitCollectionController } from './port-controllers';
-
+import { Component, computed, effect, input, signal } from '@angular/core';
+import {ViewEncapsulation} from '@angular/core';export interface PillSubItem{id:string;label:string;badge?:string}export interface PillNavigationItem{id:string;label:string;children?:PillSubItem[]}const DEFAULT_PILL_ITEMS:PillNavigationItem[]=[{id:'overview',label:'Overview'},{id:'motion',label:'Motion',children:[{id:'springs',label:'Spring Physics'},{id:'caustics',label:'Liquid Caustics'},{id:'gestures',label:'Gesture Drag'}]},{id:'access',label:'Access'},{id:'code',label:'Code',children:[{id:'react',label:'React JSX'},{id:'tailwind',label:'Tailwind v3'}]}];
 @Component({
  selector:"kit-pill-navigation", standalone:true,
- host:{'data-kit':"pill-navigation",style:'display:block;min-width:0'},
- template:`
-<div class="kit-control kit-stack">
-<nav class="k-nav k-pills" aria-label="pill-navigation"  (keydown)="keys($event)">@for(item of items();track item.id){<button type="button" data-item [attr.aria-current]="current()?.id===item.id?'page':null" [disabled]="loading()||disabled()||item.disabled" (click)="select(item)">{{item.label}}</button>}</nav>
-<section >
-<ng-content>
-<p>{{current()?.description}}</p>
-</ng-content>
-</section>@if(loading()){<p role="status">Loading…</p>}@if(error()){<p role="alert">{{error()}}</p>}@if(actionError()){<p role="alert">{{actionError()}}</p>}<p role="status" class="kit-status">{{busy()?'Working…':status()}}</p>
-</div>
+ host:{style:'display:contents'},
+ encapsulation:ViewEncapsulation.None,styleUrls:["./pill-navigation.css"],
+template:`
+<div [class]="'k-pill-nav '+className()" role="navigation" aria-label="Pill navigation with submenu" tabindex="0" (keydown)="keys($event)">
+<div role="tablist" class="k-pill-main">@for(item of items();track item.id){<button type="button" role="tab" [attr.aria-selected]="activeId()===item.id" [attr.aria-expanded]="item.children?.length&&activeId()===item.id?submenuOpen():null" [tabIndex]="activeId()===item.id?0:-1" [class.active]="activeId()===item.id" (click)="selectMain(item.id)">
+<span>{{item.label}}</span>@if(item.children?.length){<i aria-hidden="true" [class.open]="activeId()===item.id&&submenuOpen()">⌄</i>}</button>}</div>@if(activeItem()?.children?.length&&submenuOpen()){<div role="menu" class="k-pill-sub" [attr.aria-label]="activeItem()!.label+' submenu'">@for(child of activeItem()!.children;track child.id){<button type="button" role="menuitem" [attr.aria-checked]="activeSubId()===child.id" [class.active]="activeSubId()===child.id" (click)="selectSub(child.id)">{{child.label}}@if(child.badge){<small>{{child.badge}}</small>}</button>}</div>}</div>
 `
 })
-export class KitPillNavigationComponent extends KitCollectionController {
-
+export class KitPillNavigationComponent {
+readonly items=input<PillNavigationItem[],PillNavigationItem[]|undefined>(DEFAULT_PILL_ITEMS,{transform:value=>value??DEFAULT_PILL_ITEMS});readonly defaultValue=input<string|undefined>();readonly defaultSubValue=input<string|undefined>();readonly onChange=input<((id:string,subId?:string)=>void)|undefined>();readonly className=input<string,string|undefined>('',{transform:value=>value??''});readonly activeId=signal('');readonly activeSubId=signal<string|undefined>(undefined);readonly submenuOpen=signal(true);readonly activeItem=computed(()=>this.items().find(item=>item.id===this.activeId())??this.items()[0]);constructor(){effect(()=>{if(!this.activeId()&&this.items()[0]){const id=this.defaultValue()??this.items()[0].id,item=this.items().find(value=>value.id===id)??this.items()[0];this.activeId.set(item.id);this.activeSubId.set(this.defaultSubValue());}},{allowSignalWrites:true});}selectMain(id:string):void{const item=this.items().find(value=>value.id===id);if(!item)return;if(id===this.activeId()&&item.children?.length){this.submenuOpen.update(value=>!value);return;}const child=item.children?.[0]?.id;this.activeId.set(id);this.activeSubId.set(child);this.submenuOpen.set(true);this.onChange()?.(id,child);}selectSub(id:string):void{this.activeSubId.set(id);this.onChange()?.(this.activeId(),id);}keys(event:KeyboardEvent):void{const items=this.items(),index=items.findIndex(item=>item.id===this.activeId()),active=this.activeItem();if(index<0)return;if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();this.selectMain(items[(index+(event.key==='ArrowRight'?1:-1)+items.length)%items.length].id);}else if((event.key==='ArrowDown'||event.key==='ArrowUp')&&active?.children?.length){event.preventDefault();const children=active.children,current=children.findIndex(item=>item.id===this.activeSubId()),step=event.key==='ArrowDown'?1:-1;this.selectSub(children[(current+step+children.length)%children.length].id);}else if(event.key==='Escape')this.submenuOpen.set(false);}
 }
