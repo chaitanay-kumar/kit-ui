@@ -124,7 +124,7 @@ import {RainbowButtonDemoComponent} from "./rainbow-button-demo";
         <kit-swipe-action-list [action]="action" />
       }
       @case ("interactive-data-card") {
-        <kit-interactive-data-card [action]="action" />
+        <kit-interactive-data-card [onAction]="action" />
       }
       @case ("timeline-scrubber") {
         <kit-timeline-scrubber />

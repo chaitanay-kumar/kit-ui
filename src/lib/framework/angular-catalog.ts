@@ -90,8 +90,10 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
       "Expandable summaries and projected details with asynchronous actions.",
     inputs: [
       "title: string",
-      "summary: string",
-      "action: () => void | Promise<void>",
+      "summary: InteractiveDataCardContent",
+      "children: InteractiveDataCardContent",
+      "onAction: InteractiveDataCardAction",
+      "action: InteractiveDataCardAction (deprecated alias)",
       "actionLabel: string",
       "loading: boolean",
       "error: string",
@@ -107,10 +109,11 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
       "Explore events with native range navigation and readable event announcements.",
     inputs: [
       "events: TimelineEvent[]",
+      "onChange: (event: TimelineEvent, index: number) => void",
       "loading: boolean",
       "disabled: boolean",
     ],
-    outputs: ["eventChange: { event: TimelineEvent; index: number }"],
+    outputs: ["eventChange: { event: TimelineEvent; index: number } (deprecated alias)"],
   },
   {
     id: "ai-prompt-composer",
@@ -142,6 +145,17 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if (entry.id === 'interactive-data-card') return `import {Component} from '@angular/core';
+import {KitInteractiveDataCardComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitInteractiveDataCardComponent],template:\`<kit-interactive-data-card [onAction]="refresh"><p>Eight features shipped.</p></kit-interactive-data-card>\`})
+export class ExampleComponent { readonly refresh = async () => { await Promise.resolve(); }; }`;
+  if (entry.id === 'timeline-scrubber') return `import {Component} from '@angular/core';
+import {KitTimelineScrubberComponent,type TimelineEvent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitTimelineScrubberComponent],template:\`<kit-timeline-scrubber [events]="events" [onChange]="change"/>\`})
+export class ExampleComponent {
+ readonly events:TimelineEvent[]=[{id:'draft',title:'Draft',time:'09:00'}];
+ readonly change = (event:TimelineEvent,index:number) => { console.log(event,index); };
+}`;
   if (entry.id === 'animated-number') return `import {Component} from '@angular/core';
 import {KitAnimatedNumberComponent} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitAnimatedNumberComponent],template:\`<kit-animated-number [value]="revenue" prefix="$" [decimals]="2"/>\`})

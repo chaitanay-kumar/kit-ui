@@ -28,14 +28,14 @@ Avoid reading all of `public/source/`, `registry.json`, generated Angular catalo
 
 ## Validation by scope
 
-| Scope | During iteration | Before handoff |
+| Scope | During iteration and component handoff | Before batch merge |
 | --- | --- | --- |
 | Documentation only | Verify paths, links, commands, and consistency | Review diff and `git diff --check`; no application rebuild required |
-| Component/library | Relevant unit test via `npm test -- <test-path>`; relevant Playwright spec via `npm run test:browser -- <spec-path>` | CONTRIBUTING baseline: `component:sync`, `angular:sync`, `lint`, `npm test`, `build`, `test:angular-package` |
-| Angular parity | Relevant browser spec; existing `test:<component>` package contract when available | Component/library baseline plus affected package contract checks after build; rendered evidence and differences in the component report |
+| Component/library | Relevant unit test via `npm test -- <test-path>`; relevant Playwright spec via `npm run test:browser -- <spec-path>` | CONTRIBUTING baseline once for the completed batch: `component:sync`, `angular:sync`, `lint`, `npm test`, `build`, `test:angular-package` |
+| Angular parity | Relevant browser spec and focused package contract after rebuilding Angular artifacts; rendered evidence and differences in the component report | Component/library baseline once for the completed batch |
 | Shared controllers, styles, generators, or framework routing | Tests for affected consumers and framework paths | Broader affected behavior coverage and component/library baseline; required CI checks still apply |
 
-Commands in the table are npm scripts unless written in full. Check `package.json` for exact contract script names: some use shorter aliases such as `test:data-table` or `test:prompt-composer`. Package contract checks need current build artifacts. Rebuild Angular previews before browser validation after Angular source changes; a reused development server can otherwise show stale bundles. Do not rerun passed checks unless later edits or unresolved concerns invalidate their results.
+Commands in the table are npm scripts unless written in full. Check `package.json` for exact contract script names: some use shorter aliases such as `test:data-table` or `test:prompt-composer`. Package contract checks need current build artifacts. Rebuild Angular previews before browser validation after Angular source changes; a reused development server can otherwise show stale bundles. Do not run the full baseline for every component in a batch, and do not rerun passed checks unless later edits or unresolved concerns invalidate their results.
 
 ## Resume without rediscovery
 
