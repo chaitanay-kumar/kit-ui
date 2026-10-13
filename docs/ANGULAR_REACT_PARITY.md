@@ -2,14 +2,14 @@
 
 React is the source of truth for component appearance, interactions, data contracts, options and defaults. Angular implementations stay native; template projection and output events provide Angular equivalents for React nodes and callbacks. Catalog coverage does not establish parity.
 
-Current progress: 43 components have validated baselines (21 merged plus twenty-two validated on pending batch branches) and 73 await review. Batch 14 adds Intro Loader and Morphing Shape Loader. See [batch 14 evidence](parity/batch-14-integration.md).
+Current progress: 45 components have validated baselines (21 merged plus twenty-four validated on pending batch branches) and 71 await review. Batch 15 adds Glitch Text and DirectionalTooltip. See [batch 15 evidence](parity/batch-15-integration.md).
 
 User priority: finish simpler components first. AI Response work is preserved on `feat/angular-ai-response-parity` and remains in progress. Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work proceeds in batches of two, with focused component checks during implementation and one full baseline before batch merge. Batch 2 merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); batch 3 merged through [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Batch 4 and its stacked batch 5 are locally validated and await integration. The original inventory order remains below for tracking, not execution priority.
 
 ## Pending work
 
-- Review and fix the remaining 73 components listed below: 72 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
-- Review and integrate batches 4 through 14 in order. Continue with two queued components at a time.
+- Review and fix the remaining 71 components listed below: 70 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
+- Review and integrate batches 4 through 15 in order. Continue with two queued components at a time.
 - Resume AI Response later from local `kit-ui-angular-response` on `feat/angular-ai-response-parity`. Its unfinished changes and audit at `docs/parity/ai-response-audit.md` remain preserved in that worktree and are not merged or validated.
 - After all 116 components have validated baselines, the user will perform the full QA run. Address the resulting feedback before calling the overall parity effort complete.
 
@@ -52,7 +52,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 21 | Density Lens | `density-lens` | Queued | — |
 | 22 | Dependency Trace | `dependency-trace` | Queued | — |
 | 23 | Depth Corridor | `depth-corridor` | Queued | — |
-| 24 | DirectionalTooltip | `directional-tooltip` | Queued | — |
+| 24 | DirectionalTooltip | `directional-tooltip` | Validated locally; integration pending | [Report](parity/directional-tooltip.md) |
 | 25 | Dot Field | `dot-field` | Queued | — |
 | 26 | Dot Shader | `dot-shader` | Queued | — |
 | 27 | Drag to Confirm | `drag-to-confirm` | Queued | — |
@@ -67,7 +67,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 36 | Focus Mode | `focus-mode` | Validated locally; integration pending | [Report](parity/focus-mode.md) |
 | 37 | Form | `form` | Queued | — |
 | 38 | Glass Navbar | `glass-navbar` | Queued | — |
-| 39 | Glitch Text | `glitch-text` | Queued | — |
+| 39 | Glitch Text | `glitch-text` | Validated locally; integration pending | [Report](parity/glitch-text.md) |
 | 40 | Glyph Matrix | `glyph-matrix` | Queued | — |
 | 41 | Gooey Menu | `gooey-menu` | Queued | — |
 | 42 | Gravity Particle Burst | `gravity-particle-burst` | Queued | — |

@@ -39,6 +39,8 @@ import { notificationStackPort } from "./angular-notification-stack";
 import { undoToastPort } from "./angular-undo-toast";
 import { introLoaderPort } from "./angular-intro-loader";
 import { morphingShapeLoaderPort } from "./angular-morphing-shape-loader";
+import { glitchTextPort } from "./angular-glitch-text";
+import { directionalTooltipPort } from "./angular-directional-tooltip";
 const root = process.cwd();
 type Kind = "action" | "collection" | "form" | "canvas" | "plain";
 interface Port {
@@ -572,7 +574,6 @@ add("morphing-icon","plain",morphingIconPort.description,morphingIconPort.templa
 
 // Text, counters and clocks use real values and tear down their own timers.
 for (const [id, variant] of [
-  ["glitch-text", "glitch"],
   ["scrollvelocitytext", "velocity"],
   ["text-scramble-decoder", "scramble"],
 ]) {
@@ -585,6 +586,7 @@ for (const [id, variant] of [
     { inputs: ["text: string", "paused: boolean", "disabled: boolean"] },
   );
 }
+add("glitch-text","plain",glitchTextPort.description,glitchTextPort.template,glitchTextPort.body,glitchTextPort);
 add("animated-number","plain",animatedNumberPort.description,animatedNumberPort.template,animatedNumberPort.body,animatedNumberPort);
 add("unfold-accordion","plain",unfoldAccordionPort.description,unfoldAccordionPort.template,unfoldAccordionPort.body,unfoldAccordionPort);
 add(
@@ -635,6 +637,7 @@ add(
   },
 );
 
+/* Legacy directional tooltip replaced by the authored React-contract port.
 add(
   "directional-tooltip",
   "plain",
@@ -650,6 +653,8 @@ add(
     ],
   },
 );
+*/
+add("directional-tooltip","plain",directionalTooltipPort.description,directionalTooltipPort.template,directionalTooltipPort.body,directionalTooltipPort);
 for (const [id, title] of [
   ["morphing-dialog", "A little more room"],
   ["settle-modal", "Settle the details"],
