@@ -6,6 +6,8 @@ The implementation currently lives on `feat/kit-ui-library`; `main` carries the 
 
 ## Set up a contribution
 
+For a focused feature or AI-assisted change, start with the [feature workflow and file map](docs/FEATURE_WORKFLOW.md). Coding agents should use [AGENTS.md](AGENTS.md) as their short entrypoint. Capture scope, acceptance criteria, relevant files, and validation using the optional [feature brief](docs/templates/FEATURE_BRIEF.md); read deeper reference guides only when the task needs them. The validation and review requirements below still apply.
+
 Use Node 22.22.3+ within Node 22, Node 24.15+ within Node 24, or Node 26+, and npm. CI uses Node 22. Clone your fork's implementation branch:
 
 ```sh
