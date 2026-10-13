@@ -1,3 +1,5 @@
+import {animatedNumberPort} from './angular-animated-number';
+import {unfoldAccordionPort} from './angular-unfold-accordion';
 import {iosSearchPort} from './angular-ios-search';
 import {stretchSwitchPort} from "./angular-stretch-switch";
 /** Authored native implementations. Generation keeps exports, demos and API docs aligned. */
@@ -349,7 +351,7 @@ add("smooth-accordion","plain",smoothAccordionPort.description,smoothAccordionPo
 for (const [id, title] of [
   ["faq", "Frequently asked questions"],
 
-  ["unfold-accordion", "Unfold the details"],
+
   ["stack-unfold-panel", "Your workspace"],
   ["expandable-data-row", "Data details"],
   ["recovery-ledger", "Recovery ledger"],
@@ -601,21 +603,8 @@ for (const [id, variant] of [
     { inputs: ["text: string", "paused: boolean", "disabled: boolean"] },
   );
 }
-add(
-  "animated-number",
-  "plain",
-  "Animate actual numeric input changes with locale formatting and immediate reduced-motion updates.",
-  `<output class="kit-control k-number" [attr.aria-label]="label()">{{formatted()}}</output>`,
-  `readonly value=input(1248);readonly duration=input(600);readonly locale=input('en');readonly label=input('Value');readonly displayed=signal(1248);readonly formatted=computed(()=>new Intl.NumberFormat(this.locale()).format(Math.round(this.displayed())));private timer:ReturnType<typeof setInterval>|undefined;constructor(){inject(DestroyRef).onDestroy(()=>clearInterval(this.timer));effect(()=>{const value=this.value();const duration=this.duration();clearInterval(this.timer);if(typeof matchMedia==='undefined'||matchMedia('(prefers-reduced-motion: reduce)').matches||duration<=0){this.displayed.set(value);return;}const from=this.displayed();const start=Date.now();this.timer=setInterval(()=>{const progress=Math.min(1,(Date.now()-start)/Math.max(1,duration));this.displayed.set(from+(value-from)*(1-(1-progress)**3));if(progress>=1)clearInterval(this.timer);},16);});}`,
-  {
-    inputs: [
-      "value: number",
-      "duration: number",
-      "locale: string",
-      "label: string",
-    ],
-  },
-);
+add("animated-number","plain",animatedNumberPort.description,animatedNumberPort.template,animatedNumberPort.body,animatedNumberPort);
+add("unfold-accordion","plain",unfoldAccordionPort.description,unfoldAccordionPort.template,unfoldAccordionPort.body,unfoldAccordionPort);
 add(
   "airport-matrix-clock",
   "plain",

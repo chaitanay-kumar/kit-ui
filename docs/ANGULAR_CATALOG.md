@@ -92,3 +92,7 @@ Orbital Loading Ring follows React’s three variants, size/speed defaults, SVG 
 ## iOS Search Bar parity
 
 `KitIosSearchBarComponent` replaces the former filterable collection with React's controlled `value`/`onChange` search contract, optional submit/clear callbacks, configurable focus expansion and native search/form behavior. See [migration, motion differences and validation](parity/ios-search-bar.md).
+
+## Batch 4 parity baselines
+
+`KitAnimatedNumberComponent` now uses React's formatting options and independently rolling digit columns; `duration`, `locale` and `label` are replaced by spring parameters and formatted accessible labels. `KitUnfoldAccordionComponent` accepts React-shaped typed items and native template content, initial `defaultOpen`, and single/multiple disclosure. Both baselines are validated locally; integration is pending. See [batch checks](parity/batch-4-integration.md), [number migration](parity/animated-number.md), and [accordion migration](parity/unfold-accordion.md).

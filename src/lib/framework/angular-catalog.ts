@@ -142,6 +142,14 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if (entry.id === 'animated-number') return `import {Component} from '@angular/core';
+import {KitAnimatedNumberComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitAnimatedNumberComponent],template:\`<kit-animated-number [value]="revenue" prefix="$" [decimals]="2"/>\`})
+export class ExampleComponent { revenue = 12450; }`;
+  if (entry.id === 'unfold-accordion') return `import {Component} from '@angular/core';
+import {KitUnfoldAccordionComponent,type UnfoldAccordionItem} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitUnfoldAccordionComponent],template:\`<kit-unfold-accordion [items]="items" [defaultOpen]="['details']"/>\`})
+export class ExampleComponent { readonly items:UnfoldAccordionItem[]=[{id:'details',title:'Details',content:'Native Angular content.'}]; }`;
   if (entry.id === 'ios-search-bar') return `import { Component, signal } from '@angular/core';
 import { KitIosSearchBarComponent } from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitIosSearchBarComponent],template:\`<kit-ios-search-bar [value]="query()" [onChange]="change" [onSubmit]="submit" placeholder="Search telemetry..."/>\`})

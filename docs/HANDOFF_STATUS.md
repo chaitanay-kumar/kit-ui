@@ -1,6 +1,15 @@
 # Implementation handoff — 2026-10-08
 
-## Latest parity handoff - 2026-10-13
+## Latest batch handoff - 2026-10-13
+
+UnfoldAccordion and Animated Number Morph are locally validated on `feat/angular-parity-batch-4`, based on `0004d43`. See [batch evidence, exact checks, migration and limits](parity/batch-4-integration.md). Their native implementations replace the prior generic details collection and interpolated text counter. React source behavior is unchanged. Both support reduced motion; the React references retain their motion under that preference.
+
+The batch passes 36 focused and 56 regression browser cases, 117 unit tests, the production build with 289 SEO checks, packaged contracts and Angular 20.0/20.3/21/22 strict consumers. Lint retains 21 inherited warnings. The batch is on its feature branch for review and has not been merged. Progress is 21 merged plus two local validated baselines, with 93 components awaiting review. Next: review/integrate this batch, then select the next two components. AI Response and full user QA remain deferred.
+
+The preceding iOS Search Bar and contribution-workflow changes were pushed to `feat/kit-ui-library`; GitHub Registry CI and Pages deployment succeeded. The completed iOS and contribution-workflow branches were removed. Older delivery notes below are historical.
+
+
+## Previous parity handoff - 2026-10-13
 
 The [parity tracker](ANGULAR_REACT_PARITY.md) is the current queue/status source; the delivery notes below are historical. iOS Search Bar now has a locally validated native Angular implementation of React's controlled input contract on `feat/angular-ios-search-parity`, based on `e85d06d`. It replaces the former collection API and fixes native Escape synchronization, percentage-width resizing, caret preservation and animation disposal. See [migration, evidence, exact checks and limitations](parity/ios-search-bar.md).
 

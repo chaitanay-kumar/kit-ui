@@ -26,7 +26,7 @@ for (const theme of ["light", "dark"]) {
           dispatchEvent(new PopStateEvent("popstate"));
         }, port.id);
         const roots = page.locator(`[data-kit="${port.id}"]`);
-        const demoCounts: Record<string, number> = {button:11, "morphing-icon":6, "morphing-button":4, "press-button":2, "typewriter-button":2, "rainbow-button":2, "stretch-switch":2};
+        const demoCounts: Record<string, number> = {"animated-number":2,button:11, "morphing-icon":6, "morphing-button":4, "press-button":2, "typewriter-button":2, "rainbow-button":2, "stretch-switch":2};
         const expectedCount = demoCounts[port.id] ?? 1;
         await expect(roots).toHaveCount(expectedCount);
         const component = roots.first();

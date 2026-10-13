@@ -117,12 +117,18 @@ export const ANGULAR_PORTS = [
     "name": "Animated Number Morph",
     "exportName": "KitAnimatedNumberComponent",
     "selector": "kit-animated-number",
-    "description": "Animate actual numeric input changes with locale formatting and immediate reduced-motion updates.",
+    "description": "React-matched formatted number with independent rolling digit columns, configurable springs, grouping, compact notation and prefix/suffix labels.",
     "inputs": [
-      "value: number",
-      "duration: number",
-      "locale: string",
-      "label: string"
+      "value: number (required)",
+      "decimals: number",
+      "prefix: string",
+      "suffix: string",
+      "stiffness: number",
+      "damping: number",
+      "mass: number",
+      "useGrouping: boolean",
+      "compact: boolean",
+      "className: string"
     ],
     "outputs": []
   },
@@ -1975,24 +1981,14 @@ export const ANGULAR_PORTS = [
     "name": "UnfoldAccordion",
     "exportName": "KitUnfoldAccordionComponent",
     "selector": "kit-unfold-accordion",
-    "description": "Expandable item details with keyboard-native disclosure and application-owned recovery actions.",
+    "description": "React-matched native accordion with initial defaultOpen, single/multiple disclosure, typed template content and coordinated height, opacity, spacing and chevron motion.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "items: UnfoldAccordionItem[] (required)",
+      "allowMultiple: boolean",
+      "defaultOpen: string[]",
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "velocity-toast",

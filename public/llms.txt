@@ -153,7 +153,7 @@ All 116 catalog components have native standalone Angular implementations. Use t
 - [AI Response for Angular](http://localhost:5173/components/ai-response?framework=angular): Application-provided response text with optional progressive reveal, reasoning disclosure, sources and clipboard feedback.
 - [Airport Matrix Clock for Angular](http://localhost:5173/components/airport-matrix-clock?framework=angular): A live timezone-aware split-flap-style clock with pause and accessible time text.
 - [Animated File Upload for Angular](http://localhost:5173/components/animated-file-upload?framework=angular): File previews, validation, progress, abort and retry using the native Angular upload engine.
-- [Animated Number Morph for Angular](http://localhost:5173/components/animated-number?framework=angular): Animate actual numeric input changes with locale formatting and immediate reduced-motion updates.
+- [Animated Number Morph for Angular](http://localhost:5173/components/animated-number?framework=angular): React-matched formatted number with independent rolling digit columns, configurable springs, grouping, compact notation and prefix/suffix labels.
 - [Animated Tabs for Angular](http://localhost:5173/components/animated-tabs?framework=angular): Keyboard-navigable selection with active state, disabled items and application navigation output.
 - [Avatar Stack for Angular](http://localhost:5173/components/avatar-stack?framework=angular): Overlapping avatar buttons with readable names, selection and overflow disclosure.
 - [Batch Gesture Tray for Angular](http://localhost:5173/components/batch-gesture-tray?framework=angular): Select individual items or all items, then run a cancellable application-owned batch action.
@@ -252,7 +252,7 @@ All 116 catalog components have native standalone Angular implementations. Use t
 - [Torque Dial for Angular](http://localhost:5173/components/torque-dial?framework=angular): A bounded rotary input with pointer dragging, a native range alternative and keyboard increments.
 - [Typewriter Button for Angular](http://localhost:5173/components/typewriter-button?framework=angular): React-matched character-by-character button with required text, typing duration, auto-start, completion callback and optional synthesized keystroke audio.
 - [Undo Toast for Angular](http://localhost:5173/components/undo-toast?framework=angular): Dismissible notifications with restore actions and restrained live announcements.
-- [UnfoldAccordion for Angular](http://localhost:5173/components/unfold-accordion?framework=angular): Expandable item details with keyboard-native disclosure and application-owned recovery actions.
+- [UnfoldAccordion for Angular](http://localhost:5173/components/unfold-accordion?framework=angular): React-matched native accordion with initial defaultOpen, single/multiple disclosure, typed template content and coordinated height, opacity, spacing and chevron motion.
 - [VelocityToast for Angular](http://localhost:5173/components/velocity-toast?framework=angular): Dismissible notifications with restore actions and restrained live announcements.
 - [Wallet Card for Angular](http://localhost:5173/components/wallet-card?framework=angular): A configurable content card collection with selection, disclosure, disabled items and projected details.
 
