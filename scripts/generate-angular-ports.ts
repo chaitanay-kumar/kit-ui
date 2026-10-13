@@ -33,6 +33,8 @@ import { paymentStatusPort } from "./angular-payment-status";
 import { notificationBellPort } from "./angular-notification-bell";
 import { notFoundPort } from "./angular-not-found";
 import { paymentReceiptPrinterPort } from "./angular-payment-receipt-printer";
+import { focusModePort } from "./angular-focus-mode";
+import { avatarStackPort } from "./angular-avatar-stack";
 const root = process.cwd();
 type Kind = "action" | "collection" | "form" | "canvas" | "plain";
 interface Port {
@@ -393,6 +395,7 @@ for (const [id, title, layout] of [
 }
 add("reveal-card","plain",revealCardPort.description,revealCardPort.template,revealCardPort.body,revealCardPort);
 add("spotlight-card", "plain", spotlightCardPort.description, spotlightCardPort.template, spotlightCardPort.body, spotlightCardPort);
+/* Legacy avatar stack replaced by the authored React-contract port.
 add(
   "avatar-stack",
   "collection",
@@ -401,12 +404,15 @@ add(
   `readonly maxVisible=input(4);readonly limit=computed(()=>Math.max(1,Math.floor(this.maxVisible())));`,
   { inputs: ["maxVisible: number"] },
 );
+*/
+add("avatar-stack","plain",avatarStackPort.description,avatarStackPort.template,avatarStackPort.body,avatarStackPort);
 add(
   "sticky-pages",
   "collection",
   "Scrollable page sections with contained sticky headers and readable long-content layout.",
   `<div class="kit-control k-scroll-page" tabindex="0" aria-label="Sticky pages">@for(item of items();track item.id){<section class="k-sticky-page"><h3>{{item.label}}</h3><p>{{item.description}}</p><ng-content></ng-content><button type="button" [disabled]="disabled()||item.disabled" (click)="select(item)">Open {{item.label}}</button></section>}</div>`,
 );
+/* Legacy focus mode replaced by the authored React-contract port.
 add(
   "focus-mode",
   "plain",
@@ -417,6 +423,8 @@ add(
     inputs: ["active: boolean (two-way)", "disabled: boolean", "label: string"],
   },
 );
+*/
+add("focus-mode","plain",focusModePort.description,focusModePort.template,focusModePort.body,focusModePort);
 
 add("loader","plain",loaderPort.description,loaderPort.template,loaderPort.body,loaderPort);
 
