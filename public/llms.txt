@@ -190,7 +190,7 @@ All 116 catalog components have native standalone Angular implementations. Use t
 - [Hamburger Menu for Angular](http://localhost:5173/components/hamburger-menu?framework=angular): Controlled three-line menu toggle with React-matched spring transforms, native button attributes and accessible open/close labels.
 - [Interactive Timeline for Angular](http://localhost:5173/components/interactive-timeline?framework=angular): Filter chronological events, inspect event payloads and select an event without simulated network activity.
 - [Intro Loader for Angular](http://localhost:5173/components/intro-loader?framework=angular): A labeled loading indicator with a settled state and reduced-motion fallback.
-- [iOS-style Search Bar for Angular](http://localhost:5173/components/ios-search-bar?framework=angular): Live filtering with clear/cancel controls, keyboard navigation and selected-result output.
+- [iOS-style Search Bar for Angular](http://localhost:5173/components/ios-search-bar?framework=angular): Controlled React-matched search input with focus/value expansion, clear/refocus, optional Enter submission and configurable spring widths.
 - [Liquid Ripple Button for Angular](http://localhost:5173/components/liquid-ripple-button?framework=angular): A native action button with a ripple originating at the pointer or keyboard activation.
 - [Liquid Toggle for Angular](http://localhost:5173/components/liquid-toggle?framework=angular): A native toggle with two-way checked binding, visible focus and a disabled state.
 - [Loader for Angular](http://localhost:5173/components/loader?framework=angular): Native React-matched arc, breathing dots, sliding line and expanding rings with size/color, accessible labeling and explicit reduced-motion keyframes.

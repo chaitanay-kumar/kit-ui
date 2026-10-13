@@ -1,3 +1,4 @@
+import {iosSearchPort} from './angular-ios-search';
 import {stretchSwitchPort} from "./angular-stretch-switch";
 /** Authored native implementations. Generation keeps exports, demos and API docs aligned. */
 import {smoothAccordionPort} from "./angular-smooth-accordion";
@@ -295,16 +296,7 @@ add(
   "Parent and child navigation with keyboard selection and independently disclosed branches.",
   `<nav class="kit-control kit-surface kit-stack" aria-label="Branching navigation" (keydown)="keys($event)">@for(item of items();track item.id){<details><summary>{{item.label}}</summary><div class="kit-stack">@for(child of item.children||[];track child.id){<button type="button" data-item [disabled]="disabled()||child.disabled" (click)="select(child)">{{child.label}}</button>}@if(!item.children?.length){${itemButton}}</div></details>}<p role="status">{{selected()?'Selected: '+selected():''}}</p></nav>`,
 );
-for (const [id, title] of [
-  ["ios-search-bar", "Search your workspace"],
-]) {
-  add(
-    id,
-    "collection",
-    "Live filtering with clear/cancel controls, keyboard navigation and selected-result output.",
-    `<section class="kit-control kit-surface kit-stack"><label>{{label()||'${title}'}}<input type="search" [value]="query()" [disabled]="disabled()" (input)="search($event)" /></label>@if(query()){<button type="button" (click)="query.set('')">Clear search</button>}<div class="kit-stack" (keydown)="keys($event)">@for(item of visible();track item.id){${itemButton}}@empty{<p role="status">No matching results.</p>}</div>${collectionFeedback}</section>`,
-  );
-}
+add("ios-search-bar","plain",iosSearchPort.description,iosSearchPort.template,iosSearchPort.body,iosSearchPort);
 for (const id of ["command-menu", "spotlight-search"]) {
   add(
     id,

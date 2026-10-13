@@ -1,3 +1,4 @@
+import {IOSSearchDemoComponent} from './ios-search-demo';
 import {HamburgerMenuDemoComponent} from "./hamburger-menu-demo";
 import {SmoothAccordionDemoComponent} from './smooth-accordion-demo';
 import {StretchSwitchDemoComponent} from "./stretch-switch-demo";
@@ -58,7 +59,7 @@ import {RainbowButtonDemoComponent} from "./rainbow-button-demo";
 @Component({
   selector: "kit-angular-demo",
   standalone: true,
-  imports: [RevealCardDemoComponent,StretchSwitchDemoComponent,SmoothAccordionDemoComponent,HamburgerMenuDemoComponent,ExpandableSearchDemoComponent,
+  imports: [IOSSearchDemoComponent,RevealCardDemoComponent,StretchSwitchDemoComponent,SmoothAccordionDemoComponent,HamburgerMenuDemoComponent,ExpandableSearchDemoComponent,
     PressButtonDemoComponent,ButtonDemoComponent,MagneticButtonDemoComponent,MorphingButtonDemoComponent,TypewriterButtonDemoComponent,RainbowButtonDemoComponent,
     NeonEdgeButtonDemoComponent,
     OrbitalLoadingRingDemoComponent,
@@ -79,6 +80,7 @@ import {RainbowButtonDemoComponent} from "./rainbow-button-demo";
   ],
   template: `<main class="kit-stack" aria-label="Native Angular demo">
     @switch (component) {
+      @case ("ios-search-bar") { <kit-ios-search-demo/> }
       @case ("advanced-data-table") { <kit-table-demo/> }
       @case ("ai-agent-activity") { <kit-agent-demo/> }
       @case("loader"){<kit-loader-demo/>}

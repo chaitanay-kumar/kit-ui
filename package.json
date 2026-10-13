@@ -23,6 +23,7 @@
     "angular:sync": "tsx scripts/generate-angular-ports.ts",
     "angular:build": "npm run angular:sync && node scripts/build-angular.mjs",
     "test:angular-package": "node scripts/verify-angular-package.mjs",
+    "test:ios-search": "node scripts/verify-ios-search.mjs",
     "test:activity-feed": "node scripts/verify-activity-feed.mjs",
     "predev": "npm run angular:build",
     "test:data-table": "node scripts/verify-data-table.mjs",

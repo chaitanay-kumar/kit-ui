@@ -142,6 +142,14 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if (entry.id === 'ios-search-bar') return `import { Component, signal } from '@angular/core';
+import { KitIosSearchBarComponent } from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitIosSearchBarComponent],template:\`<kit-ios-search-bar [value]="query()" [onChange]="change" [onSubmit]="submit" placeholder="Search telemetry..."/>\`})
+export class ExampleComponent {
+  readonly query = signal('');
+  readonly change = (value: string) => this.query.set(value);
+  readonly submit = (value: string) => { console.log(value); };
+}`;
   if (entry.id === 'reveal-card') return `import { Component } from '@angular/core';
 import { KitRevealCardComponent } from 'kit-ui-angular';
 @Component({
