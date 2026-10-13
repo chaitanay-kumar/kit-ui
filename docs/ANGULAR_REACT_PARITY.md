@@ -2,14 +2,14 @@
 
 React is the source of truth for component appearance, interactions, data contracts, options and defaults. Angular implementations stay native; template projection and output events provide Angular equivalents for React nodes and callbacks. Catalog coverage does not establish parity.
 
-Current progress: 25 components have validated baselines (21 merged plus four validated on pending batch branches) and 91 await review. Batch 4 contains UnfoldAccordion and Animated Number Morph; batch 5 contains Interactive Data Card and Timeline Scrubber and is stacked on batch 4. See [batch 4 evidence](parity/batch-4-integration.md) and [batch 5 evidence](parity/batch-5-integration.md). iOS Search Bar was merged at the user's request through commit `54caeaa`. See [its report](parity/ios-search-bar.md).
+Current progress: 27 components have validated baselines (21 merged plus six validated on pending batch branches) and 89 await review. Batch 4 contains UnfoldAccordion and Animated Number Morph; batch 5 contains Interactive Data Card and Timeline Scrubber; batch 6 contains Hold-to-Confirm and Swipe Action List. The pending batches are stacked in order. See [batch 4 evidence](parity/batch-4-integration.md), [batch 5 evidence](parity/batch-5-integration.md), and [batch 6 evidence](parity/batch-6-integration.md).
 
 User priority: finish simpler components first. AI Response work is preserved on `feat/angular-ai-response-parity` and remains in progress. Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work proceeds in batches of two, with focused component checks during implementation and one full baseline before batch merge. Batch 2 merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); batch 3 merged through [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Batch 4 and its stacked batch 5 are locally validated and await integration. The original inventory order remains below for tracking, not execution priority.
 
 ## Pending work
 
-- Review and fix the remaining 91 components listed below: 90 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
-- Review and integrate batches 4 and 5 in order. Continue with two queued components at a time after integration.
+- Review and fix the remaining 89 components listed below: 88 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
+- Review and integrate batches 4, 5 and 6 in order. Continue with two queued components at a time.
 - Resume AI Response later from local `kit-ui-angular-response` on `feat/angular-ai-response-parity`. Its unfinished changes and audit at `docs/parity/ai-response-audit.md` remain preserved in that worktree and are not merged or validated.
 - After all 116 components have validated baselines, the user will perform the full QA run. Address the resulting feedback before calling the overall parity effort complete.
 
@@ -72,7 +72,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 41 | Gooey Menu | `gooey-menu` | Queued | — |
 | 42 | Gravity Particle Burst | `gravity-particle-burst` | Queued | — |
 | 43 | Hamburger Menu | `hamburger-menu` | Validated baseline | [Report](parity/hamburger-menu.md) |
-| 44 | Hold-to-Confirm | `hold-to-confirm` | Queued | — |
+| 44 | Hold-to-Confirm | `hold-to-confirm` | Validated locally; integration pending | [Report](parity/hold-to-confirm.md) |
 | 45 | Interactive Data Card | `interactive-data-card` | Validated locally; integration pending | [Report](parity/interactive-data-card.md) |
 | 46 | Interactive Timeline | `interactive-timeline` | Queued | — |
 | 47 | Intro Loader | `intro-loader` | Queued | — |
@@ -135,7 +135,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 104 | Sticky Pages | `sticky-pages` | Queued | — |
 | 105 | Story Cards | `story-card` | Queued | — |
 | 106 | StretchSwitch | `stretch-switch` | Validated baseline | [Report](parity/stretch-switch.md) |
-| 107 | Swipe Action List | `swipe-action-list` | Queued | — |
+| 107 | Swipe Action List | `swipe-action-list` | Validated locally; integration pending | [Report](parity/swipe-action-list.md) |
 | 108 | Text Scramble Decoder | `text-scramble-decoder` | Queued | — |
 | 109 | Thinking Orb | `thinking-orb` | Queued | — |
 | 110 | Timeline Scrubber | `timeline-scrubber` | Validated locally; integration pending | [Report](parity/timeline-scrubber.md) |

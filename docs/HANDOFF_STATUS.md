@@ -2,6 +2,12 @@
 
 ## Latest batch handoff - 2026-10-13
 
+Hold-to-Confirm and Swipe Action List are validated on `feat/angular-parity-batch-6`, stacked on batch 5 commit `99cb95d`. See [batch 6 evidence](parity/batch-6-integration.md). Angular now uses the React callback names and explicit-undefined defaults. Swipe rows preserve independent action disclosure, and completion copy uses the configured action label. Legacy callback inputs remain as deprecated aliases.
+
+The focused batch passes its packaged contract, focused lint, Angular package build, and 8 React/Angular browser cases across desktop/mobile. Unrelated suites remain deferred until batch integration. Progress is 21 merged plus six locally validated baselines, with 89 components awaiting review.
+
+## Previous batch handoff - 2026-10-13
+
 Interactive Data Card and Timeline Scrubber are validated on `feat/angular-parity-batch-5`, stacked on batch 4 commit `bdec712`. See [batch 5 evidence](parity/batch-5-integration.md). Both native Angular contracts now follow React's defaults, content/callback APIs, accessibility relationships, controlled updates and edge states. Legacy `action` and `eventChange` bindings remain as deprecated aliases.
 
 The focused batch passes its packaged contract and 16 React/Angular browser cases across desktop/mobile. `npm run angular:build` passes to compile the package and preview consumed by those checks. Per the updated contribution workflow, unrelated unit, browser, production and four-version suites were not rerun for this component handoff; run the complete baseline once before merging the finished stacked batches. Progress is 21 merged plus four locally validated baselines, with 91 components awaiting review. AI Response and full user QA remain deferred.
