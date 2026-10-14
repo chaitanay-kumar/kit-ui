@@ -1,0 +1,4 @@
+import '@angular/compiler';import {Component,provideZonelessChangeDetection} from '@angular/core';import {bootstrapApplication} from '@angular/platform-browser';import {KitDensityLensComponent,KitGravityParticleBurstComponent} from '../../packages/angular/dist/fesm2022/kit-ui-angular.mjs';
+class Consumer{}
+Component({selector:'batch24-bare',standalone:true,imports:[KitDensityLensComponent,KitGravityParticleBurstComponent],template:`<div id="fixture"><ng-template #content><button>Inspect</button></ng-template><div kitDensityLens [children]="content" [style]="{width:'250px',height:'180px'}" aria-label="Native lens" data-native="lens"></div><form><div kitGravityParticleBurst label="Commit" data-native="burst" aria-label="Native burst"></div></form></div>`})(Consumer);
+document.body.append(document.createElement('batch24-bare'));void bootstrapApplication(Consumer,{providers:[provideZonelessChangeDetection()]});
