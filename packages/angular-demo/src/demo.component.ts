@@ -1,4 +1,5 @@
 import {CursorFollowerDemoComponent,LiquidRippleButtonDemoComponent} from './batch20-demos';
+import {MeteorsDemoComponent} from './batch21-demos';
 import {AnimatedNumberDemoComponent} from './animated-number-demo';
 import {UnfoldAccordionDemoComponent} from './unfold-accordion-demo';
 import {IOSSearchDemoComponent} from './ios-search-demo';
@@ -62,7 +63,7 @@ import {RainbowButtonDemoComponent} from "./rainbow-button-demo";
 @Component({
   selector: "kit-angular-demo",
   standalone: true,
-  imports: [CursorFollowerDemoComponent,LiquidRippleButtonDemoComponent,AnimatedNumberDemoComponent,UnfoldAccordionDemoComponent,IOSSearchDemoComponent,RevealCardDemoComponent,StretchSwitchDemoComponent,SmoothAccordionDemoComponent,HamburgerMenuDemoComponent,ExpandableSearchDemoComponent,
+  imports: [MeteorsDemoComponent,CursorFollowerDemoComponent,LiquidRippleButtonDemoComponent,AnimatedNumberDemoComponent,UnfoldAccordionDemoComponent,IOSSearchDemoComponent,RevealCardDemoComponent,StretchSwitchDemoComponent,SmoothAccordionDemoComponent,HamburgerMenuDemoComponent,ExpandableSearchDemoComponent,
     PressButtonDemoComponent,ButtonDemoComponent,MagneticButtonDemoComponent,MorphingButtonDemoComponent,TypewriterButtonDemoComponent,RainbowButtonDemoComponent,
     NeonEdgeButtonDemoComponent,
     OrbitalLoadingRingDemoComponent,
@@ -96,6 +97,7 @@ import {RainbowButtonDemoComponent} from "./rainbow-button-demo";
       @case("smooth-accordion"){<kit-smooth-accordion-demo/>}
       @case("morphing-button"){<kit-morphing-button-demo/>}
       @case("cursor-follower"){<kit-cursor-follower-demo/>}
+      @case("meteors"){<kit-meteors-demo/>}
       @case("liquid-ripple-button"){<kit-liquid-ripple-button-demo/>}
       @case("typewriter-button"){<kit-typewriter-button-demo/>}
       @case("rainbow-button"){<kit-rainbow-button-demo/>}
@@ -217,6 +219,7 @@ export class DemoComponent {
     return "Local demo reply: " + text;
   };
   get portInputs(): Record<string, unknown> {
+    if (this.component === 'text-scramble-decoder') return {text:'KIT_UI.REGISTRY.SYNCED',trigger:'manual',duration:1000};
     if (this.component === "activity-feed") return { events: this.activityEvents };
     if (this.component === "animated-file-upload")
       return { upload: this.upload };
