@@ -1,5 +1,6 @@
 import {CursorFollowerDemoComponent,LiquidRippleButtonDemoComponent} from './batch20-demos';
 import {MeteorsDemoComponent} from './batch21-demos';
+import {MorphingBlobDemoComponent,CircularOrbitDemoComponent} from './batch22-demos';
 import {AnimatedNumberDemoComponent} from './animated-number-demo';
 import {UnfoldAccordionDemoComponent} from './unfold-accordion-demo';
 import {IOSSearchDemoComponent} from './ios-search-demo';
@@ -63,7 +64,7 @@ import {RainbowButtonDemoComponent} from "./rainbow-button-demo";
 @Component({
   selector: "kit-angular-demo",
   standalone: true,
-  imports: [MeteorsDemoComponent,CursorFollowerDemoComponent,LiquidRippleButtonDemoComponent,AnimatedNumberDemoComponent,UnfoldAccordionDemoComponent,IOSSearchDemoComponent,RevealCardDemoComponent,StretchSwitchDemoComponent,SmoothAccordionDemoComponent,HamburgerMenuDemoComponent,ExpandableSearchDemoComponent,
+  imports: [MorphingBlobDemoComponent,CircularOrbitDemoComponent,MeteorsDemoComponent,CursorFollowerDemoComponent,LiquidRippleButtonDemoComponent,AnimatedNumberDemoComponent,UnfoldAccordionDemoComponent,IOSSearchDemoComponent,RevealCardDemoComponent,StretchSwitchDemoComponent,SmoothAccordionDemoComponent,HamburgerMenuDemoComponent,ExpandableSearchDemoComponent,
     PressButtonDemoComponent,ButtonDemoComponent,MagneticButtonDemoComponent,MorphingButtonDemoComponent,TypewriterButtonDemoComponent,RainbowButtonDemoComponent,
     NeonEdgeButtonDemoComponent,
     OrbitalLoadingRingDemoComponent,
@@ -98,6 +99,8 @@ import {RainbowButtonDemoComponent} from "./rainbow-button-demo";
       @case("morphing-button"){<kit-morphing-button-demo/>}
       @case("cursor-follower"){<kit-cursor-follower-demo/>}
       @case("meteors"){<kit-meteors-demo/>}
+      @case("morphing-blob"){<kit-morphing-blob-demo/>}
+      @case("circular-orbit"){<kit-circular-orbit-demo/>}
       @case("liquid-ripple-button"){<kit-liquid-ripple-button-demo/>}
       @case("typewriter-button"){<kit-typewriter-button-demo/>}
       @case("rainbow-button"){<kit-rainbow-button-demo/>}

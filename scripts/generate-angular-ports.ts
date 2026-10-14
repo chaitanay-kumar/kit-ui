@@ -1,4 +1,6 @@
 import {meteorsPort} from './angular-meteors';
+import {morphingBlobPort} from './angular-morphing-blob';
+import {circularOrbitPort} from './angular-circular-orbit';
 import {textScrambleDecoderPort} from './angular-text-scramble-decoder';
 import {animatedNumberPort} from './angular-animated-number';
 import {unfoldAccordionPort} from './angular-unfold-accordion';
@@ -533,13 +535,13 @@ const canvasModes: Record<string, string> = {
   "shooting-stars": "shooting",
   "sparkles-core": "sparkles",
   "speed-warp": "warp",
-  "circular-orbit": "orbit",
   "evil-eye": "eye",
   "nimbu-mirchi": "nimbu",
-  "morphing-blob": "blob",
   "thinking-orb": "orb",
 };
 add('meteors','plain',meteorsPort.description,meteorsPort.template,meteorsPort.body,meteorsPort);
+add('morphing-blob','plain',morphingBlobPort.description,morphingBlobPort.template,morphingBlobPort.body,morphingBlobPort);
+add('circular-orbit','plain',circularOrbitPort.description,circularOrbitPort.template,circularOrbitPort.body,circularOrbitPort);
 for (const [id, mode] of Object.entries(canvasModes)) {
   add(
     id,
