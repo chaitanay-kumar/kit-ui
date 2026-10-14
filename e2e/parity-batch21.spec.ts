@@ -1,5 +1,5 @@
 import {test,expect,type Page} from '@playwright/test';
-async function open(page:Page,framework:string){await page.route('**/batch21.html*',r=>r.fulfill({contentType:'text/html',body:'<script type="module">import R from "/@react-refresh";R.injectIntoGlobalHook(window);window.$RefreshReg$=()=>{};window.$RefreshSig$=()=>x=>x;window.__vite_plugin_react_preamble_installed__=true;</script><script type="module" src="/e2e/fixtures/parity-batch21-contract.tsx"></script>'}));await page.goto(`/batch21.html?framework=${framework}`);await expect(page.locator('#fixture')).toHaveAttribute('data-framework',framework);await page.waitForFunction(()=>typeof(window as any).update==='function')}
+async function open(page:Page,framework:string){await page.route('**/batch21.html*',r=>r.fulfill({contentType:'text/html',body:'<!doctype html><meta name="viewport" content="width=device-width,initial-scale=1"/><script type="module">import R from "/@react-refresh";R.injectIntoGlobalHook(window);window.$RefreshReg$=()=>{};window.$RefreshSig$=()=>x=>x;window.__vite_plugin_react_preamble_installed__=true;</script><script type="module" src="/e2e/fixtures/parity-batch21-contract.tsx"></script>'}));await page.goto(`/batch21.html?framework=${framework}`);await expect(page.locator('#fixture')).toHaveAttribute('data-framework',framework);await page.waitForFunction(()=>typeof(window as any).update==='function')}
 const update=(page:Page,patch:Record<string,unknown>)=>page.evaluate(p=>(window as any).update(p),patch);
 for(const framework of ['react','angular'])test.describe(framework,()=>{
  test.beforeEach(async({page})=>open(page,framework));
@@ -22,7 +22,7 @@ test('settled decoder and meteor geometry match source',async({page})=>{
  expect(samples[1]).toEqual(samples[0]);
 });
 test('Angular owns its visual styles without Tailwind',async({page})=>{
- await page.route('**/batch21-bare.html',r=>r.fulfill({contentType:'text/html',body:'<script type="module" src="/e2e/fixtures/parity-batch21-bare.ts"></script>'}));await page.goto('/batch21-bare.html');
+ await page.route('**/batch21-bare.html',r=>r.fulfill({contentType:'text/html',body:'<!doctype html><meta name="viewport" content="width=device-width,initial-scale=1"/><script type="module" src="/e2e/fixtures/parity-batch21-bare.ts"></script>'}));await page.goto('/batch21-bare.html');
  await expect(page.locator('#fixture')).toBeVisible();await expect(page.locator('.k-decoder')).toHaveCSS('font-size','14px');await expect(page.getByRole('button',{name:'Replay text decode'})).toHaveCSS('width','28px');await expect(page.locator('.k-meteor-item')).toHaveCount(3);await expect(page.locator('.k-meteor-tail').first()).toHaveCSS('width','60px');await page.emulateMedia({reducedMotion:'reduce'});await expect(page.locator('.k-meteor-item').first()).toHaveCSS('display','none');
 });
 test('decoder active styling, icon and keyboard focus match source',async({page})=>{
@@ -38,4 +38,13 @@ test('decoder active styling, icon and keyboard focus match source',async({page}
 test('Angular detail demos expose source controls',async({page})=>{
  await page.goto('/angular-demo/index.html?component=meteors');await expect(page.getByRole('heading',{name:'Meteor Stream Engine'})).toBeVisible();await expect(page.locator('.k-meteor-item')).toHaveCount(43);await page.getByRole('button',{name:'Sky Tint'}).click();await expect(page.locator('.k-meteor-item').first()).toHaveCSS('background-color','rgb(56, 189, 248)');await page.getByRole('slider').fill('40');await expect(page.locator('.k-meteor-item')).toHaveCount(68);
  await page.goto('/angular-demo/index.html?component=text-scramble-decoder');await expect(page.locator('.k-decoder')).toHaveText('KIT_UI.REGISTRY.SYNCED');await expect(page.getByRole('button',{name:'Replay text decode'})).toBeVisible();
+});
+test('multiple meteor instances share the source global angle rule',async({page})=>{
+ const samples=[];
+ for(const framework of ['react','angular']){
+  await open(page,framework);await page.emulateMedia({reducedMotion:'no-preference'});await update(page,{number:1,angle:215,second:true,secondAngle:90});await expect(page.locator('#secondary-meteors')).toHaveCount(1);
+  const transform=()=>page.locator('#meteor-stage span').filter({has:page.locator('span')}).first().evaluate(n=>(n.getAnimations()[0]?.effect as KeyframeEffect|undefined)?.getKeyframes()[0].transform??'');
+  await expect.poll(transform).toContain('rotate(90deg)');const values=[await transform()];await update(page,{angle:45});await page.waitForTimeout(50);values.push(await transform());expect(values[1]).toContain('rotate(90deg)');await update(page,{second:false});await expect(page.locator('#secondary-meteors')).toHaveCount(0);await expect.poll(transform).toContain('rotate(45deg)');values.push(await transform());samples.push(values);
+ }
+ expect(samples[1]).toEqual(samples[0]);
 });

@@ -450,14 +450,14 @@ export const ANGULAR_PORTS = [
     "name": "Dot Field",
     "exportName": "KitDotFieldComponent",
     "selector": "kit-dot-field",
-    "description": "A native Canvas 2D visual with pointer response, pause controls, offscreen suspension and reduced motion.",
+    "description": "A static gradient canvas dot grid with source-matching defaults, DPR scaling, centered spacing and resize/input redraw.",
     "inputs": [
-      "label: string",
-      "density: number (1–400)",
-      "speed: number (0–5)",
-      "color: string",
-      "paused: boolean",
-      "disabled: boolean"
+      "dotRadius: number",
+      "dotSpacing: number",
+      "gradientFrom: string",
+      "gradientTo: string",
+      "className: string",
+      "style: Record<string, string | number>"
     ],
     "outputs": []
   },
@@ -621,24 +621,13 @@ export const ANGULAR_PORTS = [
     "name": "Floating Action Dock",
     "exportName": "KitFloatingActionDockComponent",
     "selector": "kit-floating-action-dock",
-    "description": "Keyboard-navigable selection with active state, disabled items and application navigation output.",
+    "description": "A controlled floating action dock with templated icons, distance-driven spring magnification, tooltips and native button callbacks.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "items: DockItem[] (required)",
+      "activeId: string",
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "focus-mode",

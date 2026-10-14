@@ -1,4 +1,4 @@
-/** Exact damped-spring step, in seconds. Scoped to the two batch-20 ports. */
+/** Exact damped-spring step, in seconds, shared by native pointer effects. */
 export interface Batch20Spring { value: number; target: number; velocity: number; restDelta?: number; restSpeed?: number }
 export function stepBatch20Spring(axis: Batch20Spring, dt: number, stiffness: number, damping: number, mass: number): boolean {
   const x = axis.value - axis.target, v = axis.velocity;
