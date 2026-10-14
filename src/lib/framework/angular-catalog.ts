@@ -18,7 +18,7 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
     selector: "kit-elastic-sheet",
     description:
       "A draggable native modal sheet with keyboard resizing and snap positions.",
-    inputs: ["title: string", "snapPositions: number[]", "disabled: boolean"],
+    inputs: ["title: string", "snapPositions: number[]", "disabled: boolean", "children: ElasticSheetContent", "onSnapChange: (position: number) => void"],
     outputs: ["snapChange: number"],
     binding: '[snapPositions]="[35, 65, 90]"',
   },

@@ -1570,24 +1570,17 @@ export const ANGULAR_PORTS = [
     "name": "Selection Basket",
     "exportName": "KitSelectionBasketComponent",
     "selector": "kit-selection-basket",
-    "description": "Select individual items or all items, then run a cancellable application-owned batch action.",
+    "description": "A controlled bulk-action toolbar with default or template actions, three positioning modes, responsive scrolling and spring presence.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "selectedCount: number (required)",
+      "totalCount: number",
+      "mode: 'fixed' | 'contained' | 'inline'",
+      "actions: SelectionActionItem[]",
+      "onClearSelection: () => void",
+      "onSelectAll: () => void",
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "settle-modal",
