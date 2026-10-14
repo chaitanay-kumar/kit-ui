@@ -2,17 +2,17 @@ import { test, expect } from "@playwright/test";
 test("Angular action failure, cancellation and retry settle correctly", async ({
   page,
 }) => {
-  await page.goto("/angular-demo/index.html?component=liquid-ripple-button");
+  await page.goto("/angular-demo/index.html?component=pull-to-refresh");
   await page.getByLabel("Simulate request failure").check();
-  await page.getByRole("button", { name: "Make a ripple", exact: true }).click();
+  await page.getByRole("button", { name: "Refresh", exact: true }).click();
   await expect(page.getByRole("alert")).toHaveText(
     "Demo action failed. Try again.",
   );
   await page.getByLabel("Simulate request failure").uncheck();
-  await page.getByRole("button", { name: "Make a ripple", exact: true }).click();
+  await page.getByRole("button", { name: "Refresh", exact: true }).click();
   await page.getByRole("button", { name: "Cancel", exact: true }).click();
   await expect(page.getByRole("status")).toHaveText("Cancelled.");
-  await page.getByRole("button", { name: "Make a ripple", exact: true }).click();
+  await page.getByRole("button", { name: "Refresh", exact: true }).click();
   await expect(page.getByRole("status")).toHaveText("Completed.");
 });
 test("Angular batch failure preserves selection for retry", async ({

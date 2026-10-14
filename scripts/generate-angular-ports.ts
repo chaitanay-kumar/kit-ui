@@ -49,6 +49,8 @@ import { pillNavigationPort } from "./angular-pill-navigation";
 import { slidePaginationPort } from "./angular-slide-pagination";
 import { bookCallButtonPort } from "./angular-book-call-button";
 import { splitButtonPort } from "./angular-split-button";
+import { cursorFollowerPort } from "./angular-cursor-follower";
+import { liquidRippleButtonPort } from "./angular-liquid-ripple-button";
 const root = process.cwd();
 type Kind = "action" | "collection" | "form" | "canvas" | "plain";
 interface Port {
@@ -160,13 +162,7 @@ add("rainbow-button","plain",rainbowButtonPort.description,rainbowButtonPort.tem
 
 add("hamburger-menu","plain",hamburgerMenuPort.description,hamburgerMenuPort.template,hamburgerMenuPort.body,hamburgerMenuPort);
 add("magnetic-button","plain",magneticButtonPort.description,magneticButtonPort.template,magneticButtonPort.body,magneticButtonPort);
-add(
-  "liquid-ripple-button",
-  "action",
-  "A native action button with a ripple originating at the pointer or keyboard activation.",
-  `<div class="kit-control kit-stack"><button type="button" class="k-action k-ripple" [disabled]="blocked()" (click)="ripple($event)">@for(point of [point()];track point.key){<span aria-hidden="true" class="k-ripple-dot" [style.left.px]="point.x" [style.top.px]="point.y"></span>}<span>{{label()||'Make a ripple'}}</span></button>${actionFeedback}</div>`,
-  `readonly point=signal({x:0,y:0,key:0});ripple(event:MouseEvent):void{const r=(event.currentTarget as HTMLElement).getBoundingClientRect();this.point.set({x:event.detail?event.clientX-r.left:r.width/2,y:event.detail?event.clientY-r.top:r.height/2,key:this.point().key+1});void this.run();}`,
-);
+add("liquid-ripple-button","plain",liquidRippleButtonPort.description,liquidRippleButtonPort.template,liquidRippleButtonPort.body,liquidRippleButtonPort);
 /* Legacy split and book-call actions replaced by authored React-contract ports.
 add(
   "split-button",
@@ -564,14 +560,7 @@ for (const [id, label] of [
     { outputs: ["triggered: void"] },
   );
 }
-add(
-  "cursor-follower",
-  "plain",
-  "A pointer-following highlight contained within its own surface, with a non-pointer fallback.",
-  `<section class="kit-control k-cursor-surface" (pointermove)="move($event)" (pointerleave)="inside.set(false)"><span aria-hidden="true" class="k-cursor-dot" [style.left.px]="x()" [style.top.px]="y()" [style.opacity]="inside()&&!disabled()?1:0"></span><h3>{{label()}}</h3><ng-content><p>Move a pointer inside this surface.</p></ng-content></section>`,
-  `readonly label=input('Follow your curiosity');readonly disabled=input(false);readonly x=signal(0);readonly y=signal(0);readonly inside=signal(false);move(event:PointerEvent):void{if(this.disabled()||event.pointerType==='touch')return;const r=(event.currentTarget as HTMLElement).getBoundingClientRect();this.x.set(event.clientX-r.left);this.y.set(event.clientY-r.top);this.inside.set(true);}`,
-  { inputs: ["label: string", "disabled: boolean"] },
-);
+add("cursor-follower","plain",cursorFollowerPort.description,cursorFollowerPort.template,cursorFollowerPort.body,cursorFollowerPort);
 add(
   "particle-delete",
   "action",

@@ -2,14 +2,14 @@
 
 React is the source of truth for component appearance, interactions, data contracts, options and defaults. Angular implementations stay native; template projection and output events provide Angular equivalents for React nodes and callbacks. Catalog coverage does not establish parity.
 
-Current progress: 53 components have validated baselines (21 merged plus thirty-two validated on pending batch branches) and 63 await review. Batch 19 adds Book Call Button and Split Button. See [batch 19 evidence](parity/batch-19-integration.md).
+Current progress: 55 components have validated baselines (21 merged plus thirty-four validated on pending batch branches) and 61 await review. Batch 20 adds Cursor Follower and Liquid Ripple Button. See [batch 20 evidence](parity/batch-20-integration.md).
 
 User priority: finish simpler components first. AI Response work is preserved on `feat/angular-ai-response-parity` and remains in progress. Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work proceeds in batches of two, with focused component checks during implementation and one full baseline before batch merge. Batch 2 merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); batch 3 merged through [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Batch 4 and its stacked batch 5 are locally validated and await integration. The original inventory order remains below for tracking, not execution priority.
 
 ## Pending work
 
-- Review and fix the remaining 63 components listed below: 62 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
-- Review and integrate batches 4 through 19 in order. Continue with two queued components at a time.
+- Review and fix the remaining 61 components listed below: 60 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
+- Review and integrate batches 4 through 20 in order. Continue with two queued components at a time.
 - Resume AI Response later from local `kit-ui-angular-response` on `feat/angular-ai-response-parity`. Its unfinished changes and audit at `docs/parity/ai-response-audit.md` remain preserved in that worktree and are not merged or validated.
 - After all 116 components have validated baselines, the user will perform the full QA run. Address the resulting feedback before calling the overall parity effort complete.
 
@@ -48,7 +48,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 17 | Circular Orbit | `circular-orbit` | Queued | — |
 | 18 | Code Snippet Deck | `code-snippet-deck` | Queued | — |
 | 19 | Command Menu | `command-menu` | Queued | — |
-| 20 | Cursor Follower | `cursor-follower` | Queued | — |
+| 20 | Cursor Follower | `cursor-follower` | Validated locally; integration pending | [Report](parity/cursor-follower.md) |
 | 21 | Density Lens | `density-lens` | Queued | — |
 | 22 | Dependency Trace | `dependency-trace` | Queued | — |
 | 23 | Depth Corridor | `depth-corridor` | Queued | — |
@@ -78,7 +78,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 47 | Intro Loader | `intro-loader` | Validated locally; integration pending | [Report](parity/intro-loader.md) |
 | 48 | iOS-style Search Bar | `ios-search-bar` | Validated baseline | [Report](parity/ios-search-bar.md) |
 | 49 | Liquid Command Palette | `liquid-command-palette` | Queued | — |
-| 50 | Liquid Ripple Button | `liquid-ripple-button` | Queued | — |
+| 50 | Liquid Ripple Button | `liquid-ripple-button` | Validated locally; integration pending | [Report](parity/liquid-ripple-button.md) |
 | 51 | Liquid Toggle | `liquid-toggle` | Validated locally; integration pending | [Report](parity/liquid-toggle.md) |
 | 52 | Loader | `loader` | Validated baseline | [Review](parity/loader.md) |
 | 53 | LockInput | `lock-input` | Validated locally; integration pending | [Report](parity/lock-input.md) |

@@ -1,0 +1,1 @@
+import base from'./playwright.config';import{defineConfig}from'@playwright/test';export default defineConfig({...base,testMatch:['parity-batch20.spec.ts','angular-actions.spec.ts'],use:{...base.use,baseURL:'http://127.0.0.1:5245'},webServer:{command:'npx vite --host 127.0.0.1 --port 5245 --strictPort',url:'http://127.0.0.1:5245',reuseExistingServer:!process.env.CI}});
