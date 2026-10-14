@@ -43,7 +43,7 @@ const SettleModalDemo: React.FC = () => {
 const api=window as any;api.referenceRoot?.unmount();api.referenceRoot=createRoot(document.body.appendChild(document.createElement("div")));api.referenceRoot.render(<div id="reference" style={{padding:16}}>{location.search.includes("modal")?<div className="py-12 flex flex-col items-center justify-center"><SettleModalDemo/></div>:<>
           <div className="py-6 w-full max-w-lg mx-auto">
             <StackUnfoldPanel
-              
+
               cards={[
                 {
                   id: '1',
