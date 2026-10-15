@@ -147,6 +147,19 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if (entry.id === 'animated-tabs') return `import {Component,signal} from '@angular/core';
+import {KitAnimatedTabsComponent,type AnimatedTabItem} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitAnimatedTabsComponent],template:\`<kit-animated-tabs [tabs]="tabs" [activeTab]="active()" [onChange]="change"/>\`})
+export class ExampleComponent {
+  readonly active=signal('overview');
+  readonly change=(id:string)=>this.active.set(id);
+  readonly tabs:AnimatedTabItem[]=[{id:'overview',label:'Overview',content:'Metrics overview'},{id:'settings',label:'Settings',content:'Preferences',badge:2}];
+}`;
+  if (entry.id === 'scrollvelocitytext') return `import {Component} from '@angular/core';
+import {KitScrollvelocitytextComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitScrollvelocitytextComponent],template:\`<div #scroller style="height:240px;overflow:auto"><div style="min-height:800px"><h2 kitScrollVelocityText text="Build the future" [scrollContainerRef]="{current:scroller}" [expandDistance]="500" [maxScale]="1.6" [style]="{fontSize:32}"></h2></div></div>\`})
+export class ExampleComponent {}`;
+
   if (entry.id === 'interactive-data-card') return `import {Component} from '@angular/core';
 import {KitInteractiveDataCardComponent} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitInteractiveDataCardComponent],template:\`<kit-interactive-data-card [onAction]="refresh"><p>Eight features shipped.</p></kit-interactive-data-card>\`})

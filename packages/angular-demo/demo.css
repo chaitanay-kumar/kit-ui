@@ -60,3 +60,6 @@ body:has(kit-smart-upload) input[type=file]::file-selector-button{font:inherit;b
 body:has(kit-smart-upload) progress{vertical-align:baseline}
 body:has(kit-liquid-command-palette) input::placeholder{color:color-mix(in oklab,currentColor 50%,transparent);opacity:1}
 body:has(kit-liquid-command-palette) .kit-dialog{margin:0}
+
+/* The two batch 28 source demos inherit Tailwind's zero-border reset. */
+body:has(kit-animated-tabs-demo,kit-scroll-velocity-demo) *{border:0 solid var(--border)}

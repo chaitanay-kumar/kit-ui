@@ -1,3 +1,4 @@
+import {AnimatedTabsDemoComponent,ScrollVelocityDemoComponent} from './batch28-demos';
 import {StackUnfoldDemoComponent,SettleModalDemoComponent} from './batch26-demos';
 import {ElasticSheetDemoComponent,SelectionBasketDemoComponent} from './batch25-demos';
 import {DensityLensDemoComponent,GravityParticleBurstDemoComponent} from './batch24-demos';
@@ -67,7 +68,7 @@ import {RainbowButtonDemoComponent} from "./rainbow-button-demo";
 @Component({
   selector: "kit-angular-demo",
   standalone: true,
-  imports: [StackUnfoldDemoComponent,SettleModalDemoComponent,ElasticSheetDemoComponent,SelectionBasketDemoComponent,DensityLensDemoComponent,GravityParticleBurstDemoComponent,DotFieldDemoComponent,FloatingActionDockDemoComponent,MorphingBlobDemoComponent,CircularOrbitDemoComponent,MeteorsDemoComponent,CursorFollowerDemoComponent,LiquidRippleButtonDemoComponent,AnimatedNumberDemoComponent,UnfoldAccordionDemoComponent,IOSSearchDemoComponent,RevealCardDemoComponent,StretchSwitchDemoComponent,SmoothAccordionDemoComponent,HamburgerMenuDemoComponent,ExpandableSearchDemoComponent,
+  imports: [AnimatedTabsDemoComponent,ScrollVelocityDemoComponent,StackUnfoldDemoComponent,SettleModalDemoComponent,ElasticSheetDemoComponent,SelectionBasketDemoComponent,DensityLensDemoComponent,GravityParticleBurstDemoComponent,DotFieldDemoComponent,FloatingActionDockDemoComponent,MorphingBlobDemoComponent,CircularOrbitDemoComponent,MeteorsDemoComponent,CursorFollowerDemoComponent,LiquidRippleButtonDemoComponent,AnimatedNumberDemoComponent,UnfoldAccordionDemoComponent,IOSSearchDemoComponent,RevealCardDemoComponent,StretchSwitchDemoComponent,SmoothAccordionDemoComponent,HamburgerMenuDemoComponent,ExpandableSearchDemoComponent,
     PressButtonDemoComponent,ButtonDemoComponent,MagneticButtonDemoComponent,MorphingButtonDemoComponent,TypewriterButtonDemoComponent,RainbowButtonDemoComponent,
     NeonEdgeButtonDemoComponent,
     OrbitalLoadingRingDemoComponent,
@@ -118,6 +119,8 @@ import {RainbowButtonDemoComponent} from "./rainbow-button-demo";
       @case("reveal-card"){<kit-reveal-card-demo/>}
       @case("spotlight-card"){<kit-spotlight-card-demo/>}
       @case("morphing-icon"){<kit-morphing-icon-demo/>}
+      @case("animated-tabs"){<kit-animated-tabs-demo/>}
+      @case("scrollvelocitytext"){<kit-scroll-velocity-demo/>}
       @case("stack-unfold-panel"){<kit-stack-unfold-demo/>}
       @case("settle-modal"){<kit-settle-modal-demo/>}
       @case("selection-basket"){<kit-selection-basket-demo/>}

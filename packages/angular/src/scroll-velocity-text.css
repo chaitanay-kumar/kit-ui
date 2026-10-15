@@ -1,0 +1,14 @@
+.scroll-velocity-text-base {
+  display: inline-block;
+  will-change: letter-spacing, transform, opacity;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+[data-kit-scroll-velocity] { transform-origin: var(--kit-scroll-origin, center center); }
+@media (prefers-reduced-motion: reduce) {
+  [data-kit-scroll-velocity] {
+    letter-spacing: var(--kit-scroll-rest-spacing, 0em) !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

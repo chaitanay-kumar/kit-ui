@@ -1,3 +1,5 @@
+import {animatedTabsPort} from './angular-animated-tabs';
+import {scrollVelocityTextPort} from './angular-scroll-velocity-text';
 import {stackUnfoldPanelPort} from './angular-stack-unfold-panel';
 import {settleModalPort} from './angular-settle-modal';
 import {selectionBasketPort} from './angular-selection-basket';
@@ -255,9 +257,9 @@ add(
   },
 );
 
+add('animated-tabs','plain',animatedTabsPort.description,animatedTabsPort.template,animatedTabsPort.body,animatedTabsPort);
 // Navigation: distinct layouts use the same selection and keyboard contracts.
 for (const [id, layout] of [
-  ["animated-tabs", "tabs"],
   ["glass-navbar", "glass"],
   ["small-floating-dock", "small-dock"],
 ]) {
@@ -587,19 +589,8 @@ add(
 );
 add("morphing-icon","plain",morphingIconPort.description,morphingIconPort.template,morphingIconPort.body,morphingIconPort);
 
-// Text, counters and clocks use real values and tear down their own timers.
-for (const [id, variant] of [
-  ["scrollvelocitytext", "velocity"],
-]) {
-  add(
-    id,
-    "plain",
-    "Configurable readable text with a restrained visual treatment and reduced-motion fallback.",
-    `<section class="kit-control kit-stack"><div class="k-text k-${variant}" [class.k-paused]="paused()" [attr.data-text]="text()" [style.transform]="transform()" (wheel)="wheel($event)"><span class="sr-only">{{text()}}</span><span aria-hidden="true">{{display()}}</span></div>${id === "text-scramble-decoder" ? '<button type="button" [disabled]="disabled()" (click)="decode()">Decode text</button>' : ""}</section>`,
-    `readonly text=input('Nimble by nature. Precise by design.');readonly paused=input(false);readonly disabled=input(false);readonly decoded=signal<string|null>(null);readonly display=computed(()=>this.decoded()??this.text());readonly transform=signal('translateX(0)');private timer:ReturnType<typeof setInterval>|undefined;private settle:ReturnType<typeof setTimeout>|undefined;constructor(){inject(DestroyRef).onDestroy(()=>{clearInterval(this.timer);clearTimeout(this.settle);});}wheel(event:WheelEvent):void{if(this.disabled()||this.paused()||matchMedia('(prefers-reduced-motion: reduce)').matches)return;this.transform.set('translateX('+Math.max(-25,Math.min(25,event.deltaY*.15))+'px)');clearTimeout(this.settle);this.settle=setTimeout(()=>this.transform.set('translateX(0)'),180);}decode():void{clearInterval(this.timer);if(this.disabled()||this.paused()||matchMedia('(prefers-reduced-motion: reduce)').matches){this.decoded.set(this.text());return;}let step=0;this.timer=setInterval(()=>{const text=this.text();step+=2;this.decoded.set(Array.from(text).map((c,i)=>i<step||c===' '?c:'01<>/{}'[Math.floor(Math.random()*7)]).join(''));if(step>=text.length)clearInterval(this.timer);},45);}`,
-    { inputs: ["text: string", "paused: boolean", "disabled: boolean"] },
-  );
-}
+// Scroll-driven continuous text uses its authored source-contract implementation.
+add('scrollvelocitytext','plain',scrollVelocityTextPort.description,scrollVelocityTextPort.template,scrollVelocityTextPort.body,scrollVelocityTextPort);
 add('text-scramble-decoder','plain',textScrambleDecoderPort.description,textScrambleDecoderPort.template,textScrambleDecoderPort.body,textScrambleDecoderPort);
 add("glitch-text","plain",glitchTextPort.description,glitchTextPort.template,glitchTextPort.body,glitchTextPort);
 add("animated-number","plain",animatedNumberPort.description,animatedNumberPort.template,animatedNumberPort.body,animatedNumberPort);
@@ -771,7 +762,6 @@ for (const port of ports) {
     port.template=port.template.replace('(keydown.escape)="open.set(false)"','(keydown.escape)="closeMenu()"').replace('<button type="button" [disabled]','<button #trigger type="button" [disabled]').replace('(click)="select(item);open.set(false)"','(click)="pick(item)"');
     port.body+=`readonly trigger=viewChild<ElementRef<HTMLButtonElement>>('trigger');closeMenu():void{this.open.set(false);this.trigger()?.nativeElement.focus();}pick(item:KitItem):void{if(this.disabled()||this.loading()||item.disabled)return;this.select(item);this.closeMenu();}override keys(event:KeyboardEvent):void{if(!['ArrowDown','ArrowUp','Home','End'].includes(event.key)||this.disabled())return;const buttons=Array.from((event.currentTarget as HTMLElement).querySelectorAll<HTMLButtonElement>('button[data-item]:not(:disabled)'));if(!buttons.length)return;event.preventDefault();const index=buttons.indexOf(event.target as HTMLButtonElement);const next=event.key==='Home'?0:event.key==='End'?buttons.length-1:(index+(event.key==='ArrowUp'?-1:1)+buttons.length)%buttons.length;buttons[next].focus();}`;
   }
-  if(port.id==='animated-tabs')port.template=port.template.replace('role="tab"','role="tab" [tabIndex]="current()?.id===item.id?0:-1"');
   if (["action", "collection", "form"].includes(port.kind))
     port.template = port.template.replaceAll(
       "<summary>",
@@ -787,8 +777,6 @@ for (const port of ports) {
     );
   if (cardDefaults[port.id])
     port.body += `\noverride readonly items=input<KitItem[]>(${JSON.stringify(cardDefaults[port.id])});`;
-  if (port.id === "scrollvelocitytext")
-    port.body += `\nprivate lastScroll=0;@HostListener('window:scroll') scroll():void{if(this.disabled()||this.paused()||matchMedia('(prefers-reduced-motion: reduce)').matches)return;const delta=window.scrollY-this.lastScroll;this.lastScroll=window.scrollY;this.transform.set('translateX('+Math.max(-25,Math.min(25,delta*.15))+'px)');clearTimeout(this.settle);this.settle=setTimeout(()=>this.transform.set('translateX(0)'),180);}`;
   if (port.id === "rocket-party-popper")
     port.body = port.body.replace("mode='burst'", "mode='rocket'");
   if (port.id === "particle-delete")

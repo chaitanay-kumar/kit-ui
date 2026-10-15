@@ -1,6 +1,6 @@
 # Completed parity checks
 
-69 components have recorded validated baselines: 21 merged and 48 awaiting integration review. Validation scope and remaining limits are recorded in each linked report. This list reflects batch 27; the [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
+71 components have recorded validated baselines: 21 merged and 50 awaiting integration review. Validation scope and remaining limits are recorded in each linked report. This list reflects batch 28; the [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
 
 | Component | Status | Evidence |
 | --- | --- | --- |
@@ -10,6 +10,7 @@
 | AI Prompt Composer | Validated baseline | [Review](ai-prompt-composer.md) |
 | Airport Matrix Clock | Validated locally; integration pending | [Report](airport-matrix-clock.md) |
 | Animated Number Morph | Validated locally; integration pending | [Report](animated-number.md) |
+| Animated Tabs | Validated locally; integration pending | [Report](animated-tabs.md) |
 | Avatar Stack | Validated locally; integration pending | [Report](avatar-stack.md) |
 | Book Call Button | Validated locally; integration pending | [Report](book-call-button.md) |
 | Button | Validated baseline | [Review](button.md) |
@@ -58,6 +59,7 @@
 | Profile Card | Validated locally; integration pending | [Report](profile-card.md) |
 | Rainbow Button | Validated baseline | [Review](rainbow-button.md) |
 | Reveal Card | Validated baseline | [Report](reveal-card.md) |
+| Scroll Velocity Text | Validated locally; integration pending | [Report](scrollvelocitytext.md) |
 | Selection Basket | Validated locally; integration pending | [Evidence](selection-basket.md) |
 | SettleModal | Validated locally; integration pending | [Evidence](settle-modal.md) |
 | SlidePagination | Validated locally; integration pending | [Report](slide-pagination.md) |
