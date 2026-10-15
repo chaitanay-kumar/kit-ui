@@ -1,16 +1,18 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component, computed, input } from '@angular/core';
-import { KitCollectionController } from './port-controllers';
-
+import { Component, computed, input, signal } from '@angular/core';
+import {ViewEncapsulation} from '@angular/core';
+export interface AvatarStackItem{id:string|number;src?:string;alt?:string;name?:string;fallback?:string;}
+export type AvatarSize='sm'|'md'|'lg'|'xl';
+export type AvatarOverlap='sm'|'md'|'lg';
 @Component({
  selector:"kit-avatar-stack", standalone:true,
- host:{'data-kit':"avatar-stack",style:'display:block;min-width:0'},
- template:`
-<section class="kit-control kit-stack">
-<div class="k-avatars" (keydown)="keys($event)">@for(item of items().slice(0,limit());track item.id){<button type="button" data-item class="k-avatar" [attr.aria-label]="item.label" [title]="item.label" [disabled]="loading()||disabled()||item.disabled" (click)="select(item)">@if(item.image){<img [src]="item.image" alt="" />}@else{ {{item.label.slice(0,2)}} }</button>}@if(items().length>limit()){<button type="button" [attr.aria-expanded]="open()" [disabled]="loading()||disabled()" (click)="open.set(!open())">+{{items().length-limit()}}</button>}</div>@if(open()){@for(item of items().slice(limit());track item.id){<button type="button" data-item [disabled]="loading()||disabled() || item.disabled" [attr.aria-pressed]="current()?.id===item.id" (click)="select(item)">{{item.label}}</button>}}<p role="status">{{selected()?'Selected: '+current()?.label:''}}</p>
-</section>
+ host:{style:'display:contents'},
+ encapsulation:ViewEncapsulation.None,styleUrls:["./avatar-stack.css"],
+template:`
+<div [class]="'k-avatar-stack k-size-'+size()+' k-overlap-'+overlap()+' '+className()" role="group">@for(avatar of visibleAvatars();track avatar.id;let index=$index){<div class="k-avatar-item" [style.z-index]="hoveredIndex()===index?50:visibleAvatars().length-index" (mouseenter)="hoveredIndex.set(index)" (mouseleave)="hoveredIndex.set(null)">@if(showTooltip()&&hoveredIndex()===index&&displayName(avatar)){<div class="k-avatar-tooltip">{{displayName(avatar)}}</div>}<div class="k-avatar-circle">@if(avatar.src){<img [src]="avatar.src" [alt]="avatar.alt??''" loading="lazy"/>}@else{<span>{{avatar.fallback??initials(avatar.alt)}}</span>}</div>
+</div>}@if(showCount()&&remainingCount()>0){<div class="k-avatar-count" [attr.aria-label]="remainingCount()+' more users'">+{{remainingCount()}}</div>}</div>
 `
 })
-export class KitAvatarStackComponent extends KitCollectionController {
-readonly maxVisible=input(4);readonly limit=computed(()=>Math.max(1,Math.floor(this.maxVisible())));
+export class KitAvatarStackComponent {
+readonly avatars=input.required<AvatarStackItem[]>();readonly max=input<number,number|undefined>(5,{transform:v=>v??5});readonly size=input<AvatarSize,AvatarSize|undefined>('lg',{transform:v=>v??'lg'});readonly overlap=input<AvatarOverlap,AvatarOverlap|undefined>('md',{transform:v=>v??'md'});readonly showCount=input<boolean,boolean|undefined>(true,{transform:v=>v??true});readonly showTooltip=input<boolean,boolean|undefined>(true,{transform:v=>v??true});readonly className=input<string,string|undefined>('',{transform:v=>v??''});readonly hoveredIndex=signal<number|null>(null);readonly visibleAvatars=computed(()=>this.avatars().slice(0,this.max()));readonly remainingCount=computed(()=>Math.max(this.avatars().length-this.max(),0));displayName(avatar:AvatarStackItem):string|undefined{return avatar.name??avatar.alt;}initials(name?:string):string{if(!name)return'?';return name.trim().split(/\s+/).slice(0,2).map(part=>part.charAt(0).toUpperCase()).join('');}
 }

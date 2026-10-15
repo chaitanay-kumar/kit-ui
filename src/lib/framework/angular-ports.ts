@@ -161,25 +161,17 @@ export const ANGULAR_PORTS = [
     "name": "Avatar Stack",
     "exportName": "KitAvatarStackComponent",
     "selector": "kit-avatar-stack",
-    "description": "Overlapping avatar buttons with readable names, selection and overflow disclosure.",
+    "description": "A native avatar stack with image and initial fallbacks, configurable sizes and overlap, hover tooltips and overflow count.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction",
-      "maxVisible: number"
+      "avatars: AvatarStackItem[]",
+      "max: number",
+      "size: AvatarSize",
+      "overlap: AvatarOverlap",
+      "showCount: boolean",
+      "showTooltip: boolean",
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "batch-gesture-tray",
@@ -638,15 +630,15 @@ export const ANGULAR_PORTS = [
     "name": "Focus Mode",
     "exportName": "KitFocusModeComponent",
     "selector": "kit-focus-mode",
-    "description": "A focus region that dims surrounding content while preserving Escape and an explicit exit control.",
+    "description": "A native focusable card grid with controlled synchronization, rich template content, dimming, callbacks and Escape cleanup.",
     "inputs": [
-      "active: boolean (two-way)",
-      "disabled: boolean",
-      "label: string"
+      "items: FocusModeItem[]",
+      "focusedId: string | null",
+      "onFocusChange: (id: string | null) => void",
+      "dimOpacity: number",
+      "className: string"
     ],
-    "outputs": [
-      "activeChange: boolean"
-    ]
+    "outputs": []
   },
   {
     "id": "form",
