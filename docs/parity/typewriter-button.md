@@ -20,7 +20,7 @@ Optional Web Audio uses the same 30ms decaying noise, 1800Hz bandpass filter/Q=3
 - Updating any typing dependency during an active run clears its scheduled timer while retaining the active typing flag/cursor. Subsequent clicks remain suppressed. Angular reproduces this interruption behavior; React was unchanged.
 - Reduced-motion metadata suggests optional suppression, but the source implements no suppression; tests follow the implementation.
 
-The docs preview now matches the two React examples (`npx kit-ui add button`, `git push origin main`) with sound enabled and character durations 65/50ms. The old generic action failure/cancellation regression now targets the unchanged Liquid Ripple Button demo, which still exposes that generic async API. Batch regression remains unchanged. This avoids testing unrelated callback/status controls against a string-typing component.
+The docs preview now matches the two React examples (`npx kit-ui add button`, `git push origin main`) with sound enabled and character durations 65/50ms. The old generic action failure/cancellation regression now targets the unchanged Pull to Refresh demo, which exposes that generic async API after the batch-20 Liquid Ripple port. Batch regression remains unchanged. This avoids testing unrelated callback/status controls against a string-typing component.
 
 ## Validation
 
@@ -28,7 +28,7 @@ The docs preview now matches the two React examples (`npx kit-ui add button`, `g
 - Desktop/mobile actual React versus built native Angular comparisons, with light/dark themes and mobile reduced motion: all variants, disabled and utility overrides, undefined defaults, typing timeline/cursor/completion, suppressed repeat clicks, keyboard, auto-start, dynamic dependency interruption, unmount, hover/focus, exact color transition properties/duration/timing, forms and docs preview content.
 - Review fixes: 16 targeted callback/timeline/form checks pass after preserving native bubbling. Twenty final pointer/keyboard/bubbling checks pass after moving pointer ends to window capture and aligning the Motion primary-pointer filter; repeat-click callbacks remain guarded while form/parent/document each receive both clicks.
 - Synthesized audio spy checks buffer geometry, gain/ramp values, start and closed contexts; blocked-audio constructor checks graceful completion. No external audio assets.
-- Generic Liquid Ripple async failure/cancel/retry and batch selection regressions pass.
+- Generic Pull to Refresh async failure/cancel/retry and batch selection regressions pass.
 - Packaged contract covers required string text, defaults/undefined, native/custom selectors, arbitrary native HTML attributes, disabled/types, variants and initial-label prop-update behavior.
 - Installed-tarball strict templates pass Angular 20.0.0, 20.3.33, 21.2.25 and 22.2.1; all existing scenarios retained, plus optional Typewriter inputs and required text consumers.
 - TypeScript, lint and existing unit suite pass. Existing unrelated lint warnings remain.

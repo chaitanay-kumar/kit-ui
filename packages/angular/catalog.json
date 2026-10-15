@@ -358,10 +358,18 @@
     "name": "Cursor Follower",
     "exportName": "KitCursorFollowerComponent",
     "selector": "kit-cursor-follower",
-    "description": "A pointer-following highlight contained within its own surface, with a non-pointer fallback.",
+    "description": "A window-level pointer follower with React-compatible size, offsets, spring tuning, visibility, movement scaling and projected content.",
     "inputs": [
-      "label: string",
-      "disabled: boolean"
+      "size: number",
+      "offsetX: number",
+      "offsetY: number",
+      "stiffness: number",
+      "damping: number",
+      "mass: number",
+      "hideOnLeave: boolean",
+      "scaleOnMove: boolean",
+      "className: string",
+      "style: Record<string, string | number | undefined>"
     ],
     "outputs": []
   },
@@ -855,16 +863,18 @@
     "name": "Liquid Ripple Button",
     "exportName": "KitLiquidRippleButtonComponent",
     "selector": "kit-liquid-ripple-button",
-    "description": "A native action button with a ripple originating at the pointer or keyboard activation.",
+    "description": "A two-variant water button with React-compatible projected content, optional icon, pointer-origin ripples, native callbacks and reduced-motion fallback.",
     "inputs": [
-      "label: string",
+      "children: string",
+      "variant: LiquidRippleVariant",
+      "showIcon: boolean",
+      "className: string",
       "disabled: boolean",
-      "loading: boolean",
-      "action: KitAction"
+      "type: button | submit | reset",
+      "onClick: (event: MouseEvent) => void",
+      "onPointerDown: (event: PointerEvent) => void"
     ],
-    "outputs": [
-      "activated: void"
-    ]
+    "outputs": []
   },
   {
     "id": "liquid-toggle",
