@@ -1,22 +1,22 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component } from '@angular/core';
-import { KitCanvasController } from './port-canvas';
-
+import { Component, ViewEncapsulation, ElementRef, computed, inject, input, viewChild } from '@angular/core';
+import {NgZone} from '@angular/core';import {MorphingBlobMotion,staticBlobPath} from './morphing-blob-motion';let blobId=0;function nextBlobId(){return ++blobId;}
 @Component({
  selector:"kit-morphing-blob", standalone:true,
- host:{'data-kit':"morphing-blob",style:'display:block;min-width:0'},
- template:`
-<section class="kit-control kit-stack">
-<div class="k-canvas-wrap" (pointermove)="move($event)" (pointerleave)="reset()">
-<canvas #canvas [attr.aria-label]="label()" role="img">
-</canvas>
-<ng-content>
-</ng-content>
-</div>
-<button type="button" [disabled]="disabled()||paused()" [attr.aria-pressed]="!running()" (click)="running.set(!running())">{{running()?'Pause animation':'Resume animation'}}</button>
-</section>
+ host:{style:'display:contents'},
+ encapsulation:ViewEncapsulation.None,styleUrls:["./morphing-blob.css"],
+template:`
+<svg #svg [attr.viewBox]="'0 0 '+width()+' '+height()" [attr.width]="width()" [attr.height]="height()" [class]="'k-morphing-blob '+className()" aria-hidden="true" role="presentation">
+<defs>
+<linearGradient [attr.id]="gradientId" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" [attr.stop-color]="colors()[0]"/>
+<stop offset="100%" [attr.stop-color]="colors()[1]"/>
+</linearGradient>
+</defs>
+<path #path [attr.d]="staticPath()" [attr.fill]="'url(#'+gradientId+')'" fill-opacity="1" stroke="none" stroke-width="0" style="filter:blur(10px);transform-origin:center"/>
+</svg>
 `
 })
-export class KitMorphingBlobComponent extends KitCanvasController {
-override readonly mode='blob';
+export class KitMorphingBlobComponent {
+readonly width=input<number,number|undefined>(400,{transform:v=>v??400});readonly height=input<number,number|undefined>(400,{transform:v=>v??400});readonly points=input<number,number|undefined>(8,{transform:v=>v??8});readonly baseRadius=input<number,number|undefined>(120,{transform:v=>v??120});readonly variance=input<number,number|undefined>(28,{transform:v=>v??28});readonly speed=input<number,number|undefined>(.7,{transform:v=>v??.7});readonly stiffness=input<number,number|undefined>(45,{transform:v=>v??45});readonly damping=input<number,number|undefined>(9,{transform:v=>v??9});readonly cursorFollow=input<boolean,boolean|undefined>(true,{transform:v=>v??true});readonly cursorStrength=input<number,number|undefined>(.35,{transform:v=>v??.35});readonly cursorSmoothness=input<number,number|undefined>(.08,{transform:v=>v??.08});readonly colors=input<[string,string],[string,string]|undefined>(['#7C3AED','#06B6D4'],{transform:v=>v??['#7C3AED','#06B6D4']});readonly className=input<string,string|undefined>('',{transform:v=>v??''});readonly gradientId='kit-blob-'+nextBlobId();readonly svg=viewChild.required<ElementRef<SVGSVGElement>>('svg');readonly path=viewChild.required<ElementRef<SVGPathElement>>('path');readonly staticPath=computed(()=>staticBlobPath({width:this.width(),height:this.height(),points:this.points(),baseRadius:this.baseRadius()}));private motion:MorphingBlobMotion|undefined;private zone=inject(NgZone);private options(){return {width:this.width(),height:this.height(),points:this.points(),baseRadius:this.baseRadius(),variance:this.variance(),speed:this.speed(),stiffness:this.stiffness(),damping:this.damping(),cursorFollow:this.cursorFollow(),cursorStrength:this.cursorStrength(),cursorSmoothness:this.cursorSmoothness()};}ngAfterViewInit():void{this.zone.runOutsideAngular(()=>{this.motion=new MorphingBlobMotion(this.svg().nativeElement,this.path().nativeElement,this.options());});}ngOnChanges():void{this.zone.runOutsideAngular(()=>this.motion?.update(this.options()));}ngOnDestroy():void{this.motion?.destroy();}
 }

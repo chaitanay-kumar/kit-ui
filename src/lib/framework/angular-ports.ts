@@ -305,14 +305,16 @@ export const ANGULAR_PORTS = [
     "name": "Circular Orbit",
     "exportName": "KitCircularOrbitComponent",
     "selector": "kit-circular-orbit",
-    "description": "A native Canvas 2D visual with pointer response, pause controls, offscreen suspension and reduced motion.",
+    "description": "A responsive orbit of decorative image tiles with shared rotation, depth, eased hover pause and reduced-motion snapshot matching React.",
     "inputs": [
-      "label: string",
-      "density: number (1–400)",
-      "speed: number (0–5)",
-      "color: string",
-      "paused: boolean",
-      "disabled: boolean"
+      "items: OrbitItem[]",
+      "title: string",
+      "speed: number",
+      "radius: number",
+      "pauseOnHover: boolean",
+      "className: string",
+      "containerClassName: string",
+      "titleClassName: string"
     ],
     "outputs": []
   },
@@ -1041,14 +1043,21 @@ export const ANGULAR_PORTS = [
     "name": "Morphing Blob",
     "exportName": "KitMorphingBlobComponent",
     "selector": "kit-morphing-blob",
-    "description": "A native Canvas 2D visual with pointer response, pause controls, offscreen suspension and reduced motion.",
+    "description": "An SVG Catmull–Rom blob with spring retargeting, cursor smoothing, gradient and reduced-motion snapshot matching React.",
     "inputs": [
-      "label: string",
-      "density: number (1–400)",
-      "speed: number (0–5)",
-      "color: string",
-      "paused: boolean",
-      "disabled: boolean"
+      "width: number",
+      "height: number",
+      "points: number",
+      "baseRadius: number",
+      "variance: number",
+      "speed: number",
+      "stiffness: number",
+      "damping: number",
+      "cursorFollow: boolean",
+      "cursorStrength: number",
+      "cursorSmoothness: number",
+      "colors: [string, string]",
+      "className: string"
     ],
     "outputs": []
   },
