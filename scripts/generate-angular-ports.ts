@@ -35,6 +35,8 @@ import { notFoundPort } from "./angular-not-found";
 import { paymentReceiptPrinterPort } from "./angular-payment-receipt-printer";
 import { focusModePort } from "./angular-focus-mode";
 import { avatarStackPort } from "./angular-avatar-stack";
+import { notificationStackPort } from "./angular-notification-stack";
+import { undoToastPort } from "./angular-undo-toast";
 const root = process.cwd();
 type Kind = "action" | "collection" | "form" | "canvas" | "plain";
 interface Port {
@@ -351,8 +353,6 @@ for (const [id, title] of [
   );
 }
 for (const [id, title] of [
-  ["notification-stack", "Notifications"],
-  ["undo-toast", "Item archived"],
   ["velocity-toast", "Update available"],
 ]) {
   const bell = id === "notification-bell",
@@ -367,6 +367,8 @@ for (const [id, title] of [
       : "",
   );
 }
+add("notification-stack","plain",notificationStackPort.description,notificationStackPort.template,notificationStackPort.body,notificationStackPort);
+add("undo-toast","plain",undoToastPort.description,undoToastPort.template,undoToastPort.body,undoToastPort);
 add("notification-bell","plain",notificationBellPort.description,notificationBellPort.template,notificationBellPort.body,notificationBellPort);
 add(
   "pull-to-refresh",
