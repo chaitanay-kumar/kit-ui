@@ -2,18 +2,18 @@
 
 React is the source of truth for component appearance, interactions, data contracts, options and defaults. Angular implementations stay native; template projection and output events provide Angular equivalents for React nodes and callbacks. Catalog coverage does not establish parity.
 
-Current progress: 23 components have validated baselines (21 merged plus UnfoldAccordion and Animated Number Morph validated locally) and 93 await review. The two-component batch is on `feat/angular-parity-batch-4`; integration is pending. See [batch evidence](parity/batch-4-integration.md). iOS Search Bar was merged at the user's request through commit `54caeaa`. See [its report](parity/ios-search-bar.md). Activity Feed is in [PR #1](https://github.com/chaitanay-kumar/kit-ui/pull/1). Advanced Data Table is in [PR #2](https://github.com/chaitanay-kumar/kit-ui/pull/2). AI Agent Activity is in [PR #3](https://github.com/chaitanay-kumar/kit-ui/pull/3). AI Prompt Composer is in [PR #4](https://github.com/chaitanay-kumar/kit-ui/pull/4). Loader is in [PR #5](https://github.com/chaitanay-kumar/kit-ui/pull/5). Each component fix gets its own branch and pull request against `feat/kit-ui-library`.
+Current progress: 25 components have validated baselines (21 merged plus four validated on pending batch branches) and 91 await review. Batch 4 contains UnfoldAccordion and Animated Number Morph; batch 5 contains Interactive Data Card and Timeline Scrubber and is stacked on batch 4. See [batch 4 evidence](parity/batch-4-integration.md) and [batch 5 evidence](parity/batch-5-integration.md). iOS Search Bar was merged at the user's request through commit `54caeaa`. See [its report](parity/ios-search-bar.md).
 
-User priority: finish simpler components first. AI Response work is preserved on `feat/angular-ai-response-parity` and remains in progress. Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work now proceeds in batches of two, as requested by the user on 2026-10-13. Batch 2 (Press Button, Magnetic Button, Morphing Button, Typewriter Button and Rainbow Button) merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); evidence is in [the batch report](parity/batch-2-integration.md). Batch 3 validates Expandable Search, Hamburger Menu, Smooth Accordion, Stretch Switch and Reveal Card through dedicated PRs #20–24, merged together in [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Evidence is in [the batch report](parity/batch-3-integration.md). Batch 3 and iOS Search Bar are merged. Batch 4 contains the locally validated UnfoldAccordion and Animated Number Morph changes. The original inventory order remains below for tracking, not execution priority.
+User priority: finish simpler components first. AI Response work is preserved on `feat/angular-ai-response-parity` and remains in progress. Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work proceeds in batches of two, with focused component checks during implementation and one full baseline before batch merge. Batch 2 merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); batch 3 merged through [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Batch 4 and its stacked batch 5 are locally validated and await integration. The original inventory order remains below for tracking, not execution priority.
 
 ## Pending work
 
-- Review and fix the remaining 93 components listed below: 92 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
-- Review and integrate the validated UnfoldAccordion and Animated Number Morph batch. Continue with two queued components at a time; Interactive Data Card and Timeline Scrubber are candidates for the next batch and have not started.
+- Review and fix the remaining 91 components listed below: 90 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
+- Review and integrate batches 4 and 5 in order. Continue with two queued components at a time after integration.
 - Resume AI Response later from local `kit-ui-angular-response` on `feat/angular-ai-response-parity`. Its unfinished changes and audit at `docs/parity/ai-response-audit.md` remain preserved in that worktree and are not merged or validated.
 - After all 116 components have validated baselines, the user will perform the full QA run. Address the resulting feedback before calling the overall parity effort complete.
 
-No component PRs remained open after batch 3. Its completed feature branches/worktrees were removed. The implementation branch and unfinished AI Response work remain; the completed iOS Search Bar branch has been removed and the local batch 4 branch awaits integration.
+No component PRs remained open after batch 3. Its completed feature branches/worktrees were removed. The implementation branch and unfinished AI Response work remain; the completed iOS Search Bar branch has been removed and local batch 4 plus stacked batch 5 await integration.
 
 ## Review requirements
 
@@ -73,7 +73,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 42 | Gravity Particle Burst | `gravity-particle-burst` | Queued | — |
 | 43 | Hamburger Menu | `hamburger-menu` | Validated baseline | [Report](parity/hamburger-menu.md) |
 | 44 | Hold-to-Confirm | `hold-to-confirm` | Queued | — |
-| 45 | Interactive Data Card | `interactive-data-card` | Queued | — |
+| 45 | Interactive Data Card | `interactive-data-card` | Validated locally; integration pending | [Report](parity/interactive-data-card.md) |
 | 46 | Interactive Timeline | `interactive-timeline` | Queued | — |
 | 47 | Intro Loader | `intro-loader` | Queued | — |
 | 48 | iOS-style Search Bar | `ios-search-bar` | Validated baseline | [Report](parity/ios-search-bar.md) |
@@ -138,7 +138,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 107 | Swipe Action List | `swipe-action-list` | Queued | — |
 | 108 | Text Scramble Decoder | `text-scramble-decoder` | Queued | — |
 | 109 | Thinking Orb | `thinking-orb` | Queued | — |
-| 110 | Timeline Scrubber | `timeline-scrubber` | Queued | — |
+| 110 | Timeline Scrubber | `timeline-scrubber` | Validated locally; integration pending | [Report](parity/timeline-scrubber.md) |
 | 111 | Torque Dial | `torque-dial` | Queued | — |
 | 112 | Typewriter Button | `typewriter-button` | Validated baseline | [Review](parity/typewriter-button.md) |
 | 113 | Undo Toast | `undo-toast` | Queued | — |

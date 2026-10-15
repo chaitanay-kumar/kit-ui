@@ -2,6 +2,12 @@
 
 ## Latest batch handoff - 2026-10-13
 
+Interactive Data Card and Timeline Scrubber are validated on `feat/angular-parity-batch-5`, stacked on batch 4 commit `bdec712`. See [batch 5 evidence](parity/batch-5-integration.md). Both native Angular contracts now follow React's defaults, content/callback APIs, accessibility relationships, controlled updates and edge states. Legacy `action` and `eventChange` bindings remain as deprecated aliases.
+
+The focused batch passes its packaged contract and 16 React/Angular browser cases across desktop/mobile. `npm run angular:build` passes to compile the package and preview consumed by those checks. Per the updated contribution workflow, unrelated unit, browser, production and four-version suites were not rerun for this component handoff; run the complete baseline once before merging the finished stacked batches. Progress is 21 merged plus four locally validated baselines, with 91 components awaiting review. AI Response and full user QA remain deferred.
+
+## Previous batch handoff - 2026-10-13
+
 UnfoldAccordion and Animated Number Morph are locally validated on `feat/angular-parity-batch-4`, based on `0004d43`. See [batch evidence, exact checks, migration and limits](parity/batch-4-integration.md). Their native implementations replace the prior generic details collection and interpolated text counter. React source behavior is unchanged. Both support reduced motion; the React references retain their motion under that preference.
 
 The batch passes 36 focused and 56 regression browser cases, 117 unit tests, the production build with 289 SEO checks, packaged contracts and Angular 20.0/20.3/21/22 strict consumers. Lint retains 21 inherited warnings. The batch is on its feature branch for review and has not been merged. Progress is 21 merged plus two local validated baselines, with 93 components awaiting review. Next: review/integrate this batch, then select the next two components. AI Response and full user QA remain deferred.

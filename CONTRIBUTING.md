@@ -102,7 +102,7 @@ Use local defaults when committing generated SEO files. Public-site builds inten
 
 ## Validate your change
 
-Run checks appropriate to the change; for component/library changes, the baseline is:
+During component work, run the relevant unit, browser, and package contract checks only. Run the following component/library baseline once before merging the completed batch, or when a shared controller, style, generator, or framework route creates a concrete wider risk:
 
 ```sh
 npm run component:sync
