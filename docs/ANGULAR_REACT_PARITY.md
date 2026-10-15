@@ -2,14 +2,14 @@
 
 React is the source of truth for component appearance, interactions, data contracts, options and defaults. Angular implementations stay native; template projection and output events provide Angular equivalents for React nodes and callbacks. Catalog coverage does not establish parity.
 
-Current progress: 29 components have validated baselines (21 merged plus eight validated on pending batch branches) and 87 await review. Batch 7 adds FAQ and OTP Input to the stacked pending batches. See [batch 7 evidence](parity/batch-7-integration.md) and the preceding linked batch reports.
+Current progress: 31 components have validated baselines (21 merged plus ten validated on pending batch branches) and 85 await review. Batch 8 adds DrawCheckbox and Liquid Toggle to the stacked pending batches. See [batch 8 evidence](parity/batch-8-integration.md) and the preceding linked batch reports.
 
 User priority: finish simpler components first. AI Response work is preserved on `feat/angular-ai-response-parity` and remains in progress. Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work proceeds in batches of two, with focused component checks during implementation and one full baseline before batch merge. Batch 2 merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); batch 3 merged through [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Batch 4 and its stacked batch 5 are locally validated and await integration. The original inventory order remains below for tracking, not execution priority.
 
 ## Pending work
 
-- Review and fix the remaining 87 components listed below: 86 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
-- Review and integrate batches 4 through 7 in order. Continue with two queued components at a time.
+- Review and fix the remaining 85 components listed below: 84 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
+- Review and integrate batches 4 through 8 in order. Continue with two queued components at a time.
 - Resume AI Response later from local `kit-ui-angular-response` on `feat/angular-ai-response-parity`. Its unfinished changes and audit at `docs/parity/ai-response-audit.md` remain preserved in that worktree and are not merged or validated.
 - After all 116 components have validated baselines, the user will perform the full QA run. Address the resulting feedback before calling the overall parity effort complete.
 
@@ -56,7 +56,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 25 | Dot Field | `dot-field` | Queued | — |
 | 26 | Dot Shader | `dot-shader` | Queued | — |
 | 27 | Drag to Confirm | `drag-to-confirm` | Queued | — |
-| 28 | DrawCheckbox | `draw-checkbox` | Queued | — |
+| 28 | DrawCheckbox | `draw-checkbox` | Validated locally; integration pending | [Report](parity/draw-checkbox.md) |
 | 29 | Dynamic Island | `dynamic-island` | Queued | — |
 | 30 | Elastic Sheet | `elastic-sheet` | Queued | — |
 | 31 | Evil Eye | `evil-eye` | Queued | — |
@@ -79,7 +79,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 48 | iOS-style Search Bar | `ios-search-bar` | Validated baseline | [Report](parity/ios-search-bar.md) |
 | 49 | Liquid Command Palette | `liquid-command-palette` | Queued | — |
 | 50 | Liquid Ripple Button | `liquid-ripple-button` | Queued | — |
-| 51 | Liquid Toggle | `liquid-toggle` | Queued | — |
+| 51 | Liquid Toggle | `liquid-toggle` | Validated locally; integration pending | [Report](parity/liquid-toggle.md) |
 | 52 | Loader | `loader` | Validated baseline | [Review](parity/loader.md) |
 | 53 | LockInput | `lock-input` | Queued | — |
 | 54 | Login | `login` | Queued | — |

@@ -2,6 +2,12 @@
 
 ## Latest batch handoff - 2026-10-13
 
+DrawCheckbox and Liquid Toggle are validated on `feat/angular-parity-batch-8`, stacked on batch 7 commit `414621d`. See [batch 8 evidence](parity/batch-8-integration.md). Their former shared two-way checkbox template is replaced by separate React-compatible controlled/uncontrolled contracts, native checkbox semantics, switch keyboard behavior, rich labels, dimensions and SVG state visuals.
+
+The focused batch passes its packaged contract, Angular package build, and 16 React/Angular browser cases across desktop/mobile. Unrelated suites remain deferred until integration. Progress is 21 merged plus ten locally validated baselines, with 85 components awaiting review.
+
+## Previous batch handoff - 2026-10-13
+
 FAQ and OTP Input are validated on `feat/angular-parity-batch-7`, stacked on batch 6 commit `f8aab96`. See [batch 7 evidence](parity/batch-7-integration.md). Their previous generated collection/single-field APIs are replaced by the React contracts: controlled and uncontrolled FAQ disclosure with filtering and rich templates, and separate OTP digit fields with focus, paste and callbacks.
 
 The focused batch passes its packaged contract, Angular package build, and 16 React/Angular browser cases across desktop/mobile. Unrelated suites remain deferred until integration. Progress is 21 merged plus eight locally validated baselines, with 87 components awaiting review.

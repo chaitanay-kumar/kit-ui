@@ -25,6 +25,8 @@ import { CATALOG_INDEX } from "../src/components/registry/catalog-index";
 import { activityFeedPort } from "./angular-activity-feed";
 import { faqPort } from "./angular-faq";
 import { otpInputPort } from "./angular-otp-input";
+import { drawCheckboxPort } from "./angular-draw-checkbox";
+import { liquidTogglePort } from "./angular-liquid-toggle";
 const root = process.cwd();
 type Kind = "action" | "collection" | "form" | "canvas" | "plain";
 interface Port {
@@ -177,26 +179,8 @@ add(
 
 add("stretch-switch","plain",stretchSwitchPort.description,stretchSwitchPort.template,stretchSwitchPort.body,stretchSwitchPort);
 
-// Native toggles expose Angular two-way binding rather than React event props.
-for (const [id, label, role] of [
-  ["draw-checkbox", "Mark as complete", "checkbox"],
-  ["liquid-toggle", "Liquid toggle", "switch"],
-]) {
-  add(
-    id,
-    "plain",
-    "A native toggle with two-way checked binding, visible focus and a disabled state.",
-    `<label class="kit-control k-toggle"><input type="checkbox" role="${role}" [checked]="checked()" [disabled]="disabled()" (change)="checked.set($any($event.target).checked)" /><span class="k-toggle-track" aria-hidden="true"><span>✓</span></span><span>{{label()||'${label}'}}</span></label>`,
-    `readonly checked=model(false);readonly disabled=input(false);readonly label=input('');`,
-    {
-      inputs: [
-        "checked: boolean (two-way)",
-        "disabled: boolean",
-        "label: string",
-      ],
-    },
-  );
-}
+add("draw-checkbox", "plain", drawCheckboxPort.description, drawCheckboxPort.template, drawCheckboxPort.body.replace("readonly internal=signal(false);", "readonly internal=signal<boolean|undefined>(undefined);").replace("readonly current=computed(()=>this.checked()??this.internal());", "readonly current=computed(()=>this.checked()??this.internal()??this.defaultChecked());").replace("constructor(){effect(()=>{this.defaultChecked();untracked(()=>{if(this.checked()===undefined&&!this.initialized){this.initialized=true;this.internal.set(this.defaultChecked());}});});}private initialized=false;", "").replace("this.onChange()?.(event);}", "this.onChange()?.(event);if(this.checked()!==undefined)input.checked=this.checked()!;}").replace("this.host.nativeElement.querySelector<HTMLInputElement>('input')?.click()", "(this.host.nativeElement.querySelector('input') as HTMLInputElement|null)?.click()"), drawCheckboxPort);
+add("liquid-toggle", "plain", liquidTogglePort.description, liquidTogglePort.template.replace("isOn()?.7:0", "isOn() ? .7 : 0"), liquidTogglePort.body.replace("readonly internal=signal(false);", "readonly internal=signal<boolean|undefined>(undefined);").replace("readonly isOn=computed(()=>this.value()??this.internal());", "readonly isOn=computed(()=>this.value()??this.internal()??this.defaultValue());").replace("private initialized=false;constructor(){effect(()=>{this.defaultValue();untracked(()=>{if(this.value()===undefined&&!this.initialized){this.initialized=true;this.internal.set(this.defaultValue());}});});}", ""), liquidTogglePort);
 add(
   "spring-select",
   "collection",
