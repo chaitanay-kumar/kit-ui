@@ -228,7 +228,7 @@ All 116 catalog components have native standalone Angular implementations. Use t
 - [Rocket Party Popper for Angular](http://localhost:5173/components/rocket-party-popper?framework=angular): Trigger a local particle celebration with a keyboard button, visible motion controls and cleanup.
 - [Scroll Progress Navigation for Angular](http://localhost:5173/components/scroll-progress-nav?framework=angular): A contained section navigator with scroll progress and reduced-motion-aware anchor actions.
 - [Scroll Velocity Text for Angular](http://localhost:5173/components/scrollvelocitytext?framework=angular): Configurable readable text with a restrained visual treatment and reduced-motion fallback.
-- [Selection Basket for Angular](http://localhost:5173/components/selection-basket?framework=angular): Select individual items or all items, then run a cancellable application-owned batch action.
+- [Selection Basket for Angular](http://localhost:5173/components/selection-basket?framework=angular): A controlled bulk-action toolbar with default or template actions, three positioning modes, responsive scrolling and spring presence.
 - [SettleModal for Angular](http://localhost:5173/components/settle-modal?framework=angular): A native modal dialog with focus containment, Escape, projected content and asynchronous confirmation.
 - [Shooting Stars for Angular](http://localhost:5173/components/shooting-stars?framework=angular): A native Canvas 2D visual with pointer response, pause controls, offscreen suspension and reduced motion.
 - [Sign Up for Angular](http://localhost:5173/components/sign-up?framework=angular): Validated native fields, password visibility, cancellable application submission and preserved errors.

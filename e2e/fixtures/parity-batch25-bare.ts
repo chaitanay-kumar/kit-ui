@@ -1,0 +1,5 @@
+import '../../packages/angular/styles.css';
+import '@angular/compiler';import {Component,provideZonelessChangeDetection,signal} from '@angular/core';import {bootstrapApplication} from '@angular/platform-browser';import {KitElasticSheetComponent,KitSelectionBasketComponent} from '../../packages/angular/dist/fesm2022/kit-ui-angular.mjs';
+class Consumer{count=signal(0);clear=()=>this.count.set(0)}
+Component({selector:'batch25-bare',standalone:true,imports:[KitElasticSheetComponent,KitSelectionBasketComponent],template:`<div id="fixture"><ng-template #content><button (click)="count.set(count()+1)">Count {{count()}}</button></ng-template><kit-elastic-sheet [children]="content"/><ng-template #icon><b>A</b></ng-template><kit-selection-basket [selectedCount]="2" mode="inline" [actions]="[{id:'custom',label:'Action',icon:icon,onClick:clear}]"/></div>`})(Consumer);
+document.body.append(document.createElement('batch25-bare'));void bootstrapApplication(Consumer,{providers:[provideZonelessChangeDetection()]});

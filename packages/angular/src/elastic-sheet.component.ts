@@ -6,11 +6,18 @@ import {
   output,
   signal,
   viewChild,
+  TemplateRef,
 } from "@angular/core";
+import {NgTemplateOutlet} from '@angular/common';
+
+export type ElasticSheetContent=TemplateRef<unknown>|string|number|boolean|null|undefined;
+
+let sheetSequence = 0;
 
 @Component({
   selector: "kit-elastic-sheet",
   standalone: true,
+  imports: [NgTemplateOutlet],
   template: ` <div class="kit-control">
     <button type="button" [disabled]="disabled()" (click)="open()">
       Open elastic sheet ↗
@@ -19,7 +26,7 @@ import {
       #dialog
       class="kit-dialog kit-sheet kit-control"
       [style.height]="height() + 'dvh'"
-      aria-label="Elastic sheet"
+      [attr.aria-labelledby]="titleId"
       (close)="origin = null"
     >
       <div class="kit-stack">
@@ -36,7 +43,7 @@ import {
           Drag to resize
         </button>
         <div class="kit-row" style="justify-content:space-between">
-          <h3>{{ title() }}</h3>
+          <h3 [id]="titleId">{{ title() }}</h3>
           <button type="button" (click)="close()">Close</button>
         </div>
         <div class="kit-row" aria-label="Sheet size">
@@ -50,21 +57,30 @@ import {
             </button>
           }
         </div>
-        <ng-content
+        <ng-template #projected><ng-content
           ><p class="kit-muted">
-            Drag the handle, use its arrow keys, or choose a snap position.
-            Escape closes the sheet.
+            A little space to think. Drag the handle, use its arrow keys, or
+            choose a snap position. Escape closes the sheet.
           </p></ng-content
-        >
+        ></ng-template>
+        @if(children()!==undefined&&children()!==null){
+          @if(childTemplate(children());as content){<ng-container [ngTemplateOutlet]="content"/>}
+          @else{<ng-container>{{childText(children())}}</ng-container>}
+        }@else{<ng-container [ngTemplateOutlet]="projected"/>}
       </div>
     </dialog>
   </div>`,
   host: { style: "display:block" },
 })
 export class KitElasticSheetComponent {
-  readonly title = input("Make room for the details");
-  readonly disabled = input(false);
-  readonly snapPositions = input<number[]>([35, 65, 90]);
+  readonly titleId = `kit-elastic-sheet-title-${++sheetSequence}`;
+  readonly title = input<string,string|undefined>("Make room for the details",{transform:v=>v??"Make room for the details"});
+  readonly disabled = input<boolean,boolean|undefined>(false,{transform:v=>v??false});
+  readonly snapPositions = input<number[],number[]|undefined>([35, 65, 90],{transform:v=>v??[35,65,90]});
+  readonly onSnapChange = input<((position:number)=>void)|undefined>();
+  readonly children = input<ElasticSheetContent>();
+  childTemplate(value:ElasticSheetContent):TemplateRef<unknown>|null{return value instanceof TemplateRef?value:null;}
+  childText(value:ElasticSheetContent):string|number|null|undefined{return typeof value==='boolean'||value instanceof TemplateRef?'':value;}
   readonly snapChange = output<number>();
   readonly positions = computed(() => {
     const values = [
@@ -79,8 +95,10 @@ export class KitElasticSheetComponent {
   readonly height = signal(35);
   readonly dialog = viewChild.required<ElementRef<HTMLDialogElement>>("dialog");
   origin: { y: number; height: number } | null = null;
+  ngOnInit(): void {
+    this.height.set(this.positions()[0]);
+  }
   open(): void {
-    this.snap(this.positions()[0]);
     this.dialog().nativeElement.showModal();
   }
   close(): void {
@@ -92,10 +110,10 @@ export class KitElasticSheetComponent {
       Math.abs(b - value) < Math.abs(a - value) ? b : a,
     );
     this.height.set(next);
+    this.onSnapChange()?.(next);
     this.snapChange.emit(next);
   }
   start(event: PointerEvent): void {
-    if (event.button !== 0) return;
     this.origin = { y: event.clientY, height: this.height() };
     (event.currentTarget as HTMLElement).setPointerCapture(event.pointerId);
   }

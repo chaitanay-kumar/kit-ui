@@ -1,3 +1,4 @@
+import {selectionBasketPort} from './angular-selection-basket';
 import {meteorsPort} from './angular-meteors';
 import {gravityParticleBurstPort} from './angular-gravity-particle-burst';
 import {densityLensPort} from './angular-density-lens';
@@ -363,9 +364,9 @@ for (const [id, title] of [
     `<section class="kit-control kit-surface kit-stack"><h3>{{label()||'${title}'}}</h3><label>Filter events<input type="search" [value]="query()" (input)="search($event)" [disabled]="disabled()" /></label><ol class="k-timeline">@for(item of visible();track item.id){<li><details><summary><span class="k-event-dot" aria-hidden="true"></span>{{item.label}} <small>{{item.status||item.value}}</small></summary><p>{{item.description}}</p><button type="button" [disabled]="disabled()||item.disabled" (click)="select(item)">Inspect event</button></details></li>}@empty{<li>No matching events.</li>}</ol>${collectionFeedback}</section>`,
   );
 }
+add('selection-basket','plain',selectionBasketPort.description,selectionBasketPort.template,selectionBasketPort.body,selectionBasketPort);
 for (const [id, title] of [
   ["batch-gesture-tray", "Batch selection"],
-  ["selection-basket", "Selection basket"],
 ]) {
   add(
     id,
