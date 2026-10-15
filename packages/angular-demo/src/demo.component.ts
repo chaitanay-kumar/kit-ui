@@ -39,7 +39,6 @@ import {
   KitAIPromptComposerComponent,
 } from "kit-ui-angular";
 import type {
-  LiquidCommand,
   UploadHandler,
   SendHandler,
   ActivityEvent,
@@ -126,15 +125,16 @@ import {RainbowButtonDemoComponent} from "./rainbow-button-demo";
         <kit-elastic-sheet-demo/>
       }
       @case ("smart-upload") {
+        <div class="kit-stack">
         <p class="kit-muted">
           Local simulation. Files stay on your device. A filename containing
           “fail” demonstrates retry errors.
         </p>
-        <kit-smart-upload [upload]="upload" />
+        <kit-smart-upload [upload]="smartUpload" />
+        </div>
       }
       @case ("liquid-command-palette") {
-        <kit-liquid-command-palette [commands]="commands" />
-        <p role="status" class="kit-status">{{ commandStatus() }}</p>
+        <kit-liquid-command-palette />
       }
       @case ("hold-to-confirm") {
         <kit-hold-to-confirm [onConfirm]="confirm" />
@@ -285,36 +285,14 @@ export class DemoComponent {
                   payload: { model: 'example-model', promptTokens: 140, completionTokens: 420 },
                 },
               ];
-  readonly commandStatus = signal("");
-  readonly commands: LiquidCommand[] = [
-    {
-      id: "new",
-      label: "Create a new project",
-      keywords: "start",
-      onSelect: () => {
-        this.commandStatus.set("New project selected.");
-      },
-    },
-    {
-      id: "docs",
-      label: "Read documentation",
-      keywords: "help",
-      onSelect: () => {
-        this.commandStatus.set("Documentation selected.");
-      },
-    },
-    {
-      id: "locked",
-      label: "Locked workspace",
-      disabled: true,
-      onSelect: () => {},
-    },
-    {
-      id: "fail",
-      label: "Demonstrate command failure",
-      onSelect: () => Promise.reject(new Error("Demo error")),
-    },
-  ];
+  readonly smartUpload: UploadHandler = async (file, { signal, onProgress }) => {
+    for (let i = 10; i <= 100; i += 10) {
+      await wait(120, signal);
+      onProgress(i);
+    }
+    if (file.name.includes("fail"))
+      throw new Error("Demo upload rejected. Remove this file or retry.");
+  };
   readonly confirm = () => wait(600);
   readonly action = () => wait(500);
   readonly upload: UploadHandler = async (file, { signal, onProgress }) => {
