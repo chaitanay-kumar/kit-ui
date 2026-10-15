@@ -60,7 +60,8 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
     inputs: [
       "label: string",
       "duration: number",
-      "confirm: () => void | Promise<void>",
+      "onConfirm: () => void | Promise<void>",
+      "confirm: () => void | Promise<void> (deprecated alias)",
       "disabled: boolean",
     ],
     outputs: ["confirmed: void"],
@@ -75,7 +76,8 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
       "Swipe to reveal actions, with keyboard buttons, loading, and failure recovery.",
     inputs: [
       "items: SwipeItem[]",
-      "action: (item: SwipeItem) => void | Promise<void>",
+      "onAction: (item: SwipeItem) => void | Promise<void>",
+      "action: (item: SwipeItem) => void | Promise<void> (deprecated alias)",
       "actionLabel: string",
       "loading: boolean",
       "disabled: boolean",

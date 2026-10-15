@@ -118,10 +118,10 @@ import {RainbowButtonDemoComponent} from "./rainbow-button-demo";
         <p role="status" class="kit-status">{{ commandStatus() }}</p>
       }
       @case ("hold-to-confirm") {
-        <kit-hold-to-confirm [confirm]="confirm" />
+        <kit-hold-to-confirm [onConfirm]="confirm" />
       }
       @case ("swipe-action-list") {
-        <kit-swipe-action-list [action]="action" />
+        <kit-swipe-action-list [onAction]="action" />
       }
       @case ("interactive-data-card") {
         <kit-interactive-data-card [onAction]="action" />

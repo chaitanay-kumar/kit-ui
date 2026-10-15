@@ -11,7 +11,7 @@ import {
 @Component({
   selector: "kit-hold-to-confirm",
   standalone: true,
-  host: { style: "display:block" },
+  host: { style: "display:contents" },
   template: ` <div class="kit-control kit-stack">
     <button
       type="button"
@@ -59,9 +59,17 @@ import {
   </div>`,
 })
 export class KitHoldToConfirmComponent {
-  readonly label = input("Hold to confirm");
-  readonly duration = input(1200);
-  readonly disabled = input(false);
+  readonly label = input<string, string | undefined>("Hold to confirm", {
+    transform: (value) => value ?? "Hold to confirm",
+  });
+  readonly duration = input<number, number | undefined>(1200, {
+    transform: (value) => value ?? 1200,
+  });
+  readonly disabled = input<boolean, boolean | undefined>(false, {
+    transform: (value) => value ?? false,
+  });
+  readonly onConfirm = input<() => void | Promise<void>>();
+  /** @deprecated Use onConfirm. */
   readonly confirm = input<() => void | Promise<void>>();
   readonly confirmed = output<void>();
   readonly progress = signal(0);
@@ -117,7 +125,7 @@ export class KitHoldToConfirmComponent {
   private async finish(): Promise<void> {
     this.state.set("pending");
     try {
-      await this.confirm()?.();
+      await (this.onConfirm() ?? this.confirm())?.();
       if (!this.destroyed) {
         this.state.set("success");
         this.confirmed.emit();

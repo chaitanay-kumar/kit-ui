@@ -42,12 +42,12 @@ import type { SwipeItem } from "./types";
               <button
                 type="button"
                 [disabled]="disabled() || !!pending()"
-                [attr.aria-expanded]="revealed() === item.id"
+                [attr.aria-expanded]="revealed().includes(item.id)"
                 (click)="reveal(item.id)"
               >
-                {{ revealed() === item.id ? "Hide actions" : "Show actions" }}
+                {{ revealed().includes(item.id) ? "Hide actions" : "Show actions" }}
               </button>
-              @if (revealed() === item.id) {
+              @if (revealed().includes(item.id)) {
                 <button
                   type="button"
                   [disabled]="disabled() || !!pending()"
@@ -78,7 +78,7 @@ import type { SwipeItem } from "./types";
   </section>`,
 })
 export class KitSwipeActionListComponent {
-  readonly items = input<SwipeItem[]>([
+  private readonly defaultItems: SwipeItem[] = [
     {
       id: "one",
       title: "Review the small details",
@@ -89,15 +89,26 @@ export class KitSwipeActionListComponent {
       title: "Ship something thoughtful",
       description: "Engineering · Tomorrow",
     },
-  ]);
-  readonly actionLabel = input("Archive");
+  ];
+  readonly items = input<SwipeItem[], SwipeItem[] | undefined>(this.defaultItems, {
+    transform: (value) => value ?? this.defaultItems,
+  });
+  readonly actionLabel = input<string, string | undefined>("Archive", {
+    transform: (value) => value ?? "Archive",
+  });
+  readonly onAction = input<(item: SwipeItem) => void | Promise<void>>();
+  /** @deprecated Use onAction. */
   readonly action = input<(item: SwipeItem) => void | Promise<void>>();
-  readonly disabled = input(false);
-  readonly loading = input(false);
+  readonly disabled = input<boolean, boolean | undefined>(false, {
+    transform: (value) => value ?? false,
+  });
+  readonly loading = input<boolean, boolean | undefined>(false, {
+    transform: (value) => value ?? false,
+  });
   readonly done = signal<string[]>([]);
   readonly pending = signal<string | null>(null);
   readonly status = signal("");
-  readonly revealed = signal<string | null>(null);
+  readonly revealed = signal<string[]>([]);
   readonly dragId = signal<string | null>(null);
   readonly offset = signal(0);
   readonly visible = computed(() =>
@@ -111,7 +122,9 @@ export class KitSwipeActionListComponent {
     });
   }
   reveal(id: string): void {
-    this.revealed.set(this.revealed() === id ? null : id);
+    this.revealed.update((ids) =>
+      ids.includes(id) ? ids.filter((value) => value !== id) : [...ids, id],
+    );
   }
   start(event: PointerEvent, id: string): void {
     if (this.disabled() || this.pending() || event.button !== 0) return;
@@ -128,7 +141,13 @@ export class KitSwipeActionListComponent {
   }
   end(id: string): void {
     if (this.dragId() === id)
-      this.revealed.set(this.offset() < -40 ? id : null);
+      this.revealed.update((ids) =>
+        this.offset() < -40
+          ? ids.includes(id)
+            ? ids
+            : [...ids, id]
+          : ids.filter((value) => value !== id),
+      );
     this.cancel();
   }
   cancel(): void {
@@ -145,10 +164,12 @@ export class KitSwipeActionListComponent {
     this.pending.set(item.id);
     this.status.set(`${this.actionLabel()} in progress…`);
     try {
-      await this.action()?.(item);
+      await (this.onAction() ?? this.action())?.(item);
       if (!this.destroyed) {
         this.done.update((items) => [...items, item.id]);
-        this.status.set(`${item.title}: action complete.`);
+        this.status.set(
+          `${item.title}: ${this.actionLabel().toLowerCase()} complete.`,
+        );
       }
     } catch {
       if (!this.destroyed)
