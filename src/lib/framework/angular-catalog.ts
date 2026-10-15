@@ -147,6 +147,15 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if (entry.id === 'small-floating-dock') return `import {Component} from '@angular/core';
+import {KitSmallFloatingDockComponent,type SmallFloatingDockItem} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitSmallFloatingDockComponent],template:\`<kit-small-floating-dock [items]="items" position="bottom-center"/>\`})
+export class ExampleComponent {readonly items:SmallFloatingDockItem[]=[{id:'home',label:'Home',icon:'H',action:()=>console.log('Home')}]}`;
+  if (entry.id === 'branching-submenu') return `import {Component} from '@angular/core';
+import {KitBranchingSubmenuComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitBranchingSubmenuComponent],template:\`<kit-branching-submenu label="Project navigation"/>\`})
+export class ExampleComponent {}`;
+
   if (entry.id === 'animated-tabs') return `import {Component,signal} from '@angular/core';
 import {KitAnimatedTabsComponent,type AnimatedTabItem} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitAnimatedTabsComponent],template:\`<kit-animated-tabs [tabs]="tabs" [activeTab]="active()" [onChange]="change"/>\`})

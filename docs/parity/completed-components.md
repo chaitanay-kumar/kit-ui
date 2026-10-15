@@ -1,6 +1,6 @@
 # Completed parity checks
 
-71 components have recorded validated baselines: 21 merged and 50 awaiting integration review. Validation scope and remaining limits are recorded in each linked report. This list reflects batch 28; the [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
+73 components have recorded validated baselines: 21 merged and 52 awaiting integration review. Validation scope and remaining limits are recorded in each linked report. This list reflects batch 29; the [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
 
 | Component | Status | Evidence |
 | --- | --- | --- |
@@ -13,6 +13,7 @@
 | Animated Tabs | Validated locally; integration pending | [Report](animated-tabs.md) |
 | Avatar Stack | Validated locally; integration pending | [Report](avatar-stack.md) |
 | Book Call Button | Validated locally; integration pending | [Report](book-call-button.md) |
+| Branching Submenu | Validated locally; integration pending | [Report](branching-submenu.md) |
 | Button | Validated baseline | [Review](button.md) |
 | Circular Orbit | Validated locally; integration pending | [Evidence](circular-orbit.md) |
 | Cursor Follower | Validated locally; integration pending | [Report](cursor-follower.md) |
@@ -63,6 +64,7 @@
 | Selection Basket | Validated locally; integration pending | [Evidence](selection-basket.md) |
 | SettleModal | Validated locally; integration pending | [Evidence](settle-modal.md) |
 | SlidePagination | Validated locally; integration pending | [Report](slide-pagination.md) |
+| Small Floating Dock | Validated locally; integration pending | [Report](small-floating-dock.md) |
 | Smart Upload | Validated locally; integration pending | [Report](smart-upload.md) |
 | Smooth Accordion | Validated baseline | [Report](smooth-accordion.md) |
 | Split Button | Validated locally; integration pending | [Report](split-button.md) |

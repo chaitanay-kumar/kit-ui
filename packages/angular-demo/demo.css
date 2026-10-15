@@ -63,3 +63,6 @@ body:has(kit-liquid-command-palette) .kit-dialog{margin:0}
 
 /* The two batch 28 source demos inherit Tailwind's zero-border reset. */
 body:has(kit-animated-tabs-demo,kit-scroll-velocity-demo) *{border:0 solid var(--border)}
+
+/* Match source typography for the batch 29 native detail demos. */
+body:has(kit-small-floating-dock-demo,kit-branching-submenu-demo){font-family:var(--font-body);font-size:16px;line-height:1.5;letter-spacing:var(--tracking-body);font-feature-settings:"cv02","cv03","cv04","cv11";-webkit-font-smoothing:antialiased}

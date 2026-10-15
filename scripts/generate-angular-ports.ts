@@ -1,3 +1,5 @@
+import {branchingSubmenuPort} from './angular-branching-submenu';
+import {smallFloatingDockPort} from './angular-small-floating-dock';
 import {animatedTabsPort} from './angular-animated-tabs';
 import {scrollVelocityTextPort} from './angular-scroll-velocity-text';
 import {stackUnfoldPanelPort} from './angular-stack-unfold-panel';
@@ -261,7 +263,6 @@ add('animated-tabs','plain',animatedTabsPort.description,animatedTabsPort.templa
 // Navigation: distinct layouts use the same selection and keyboard contracts.
 for (const [id, layout] of [
   ["glass-navbar", "glass"],
-  ["small-floating-dock", "small-dock"],
 ]) {
   const tabs = id === "animated-tabs";
   add(
@@ -271,6 +272,7 @@ for (const [id, layout] of [
     `<div class="kit-control kit-stack"><nav class="k-nav k-${layout}" aria-label="${id}" ${tabs ? 'role="tablist"' : ""} (keydown)="keys($event)">@for(item of items();track item.id){<button type="button" data-item ${tabs ? 'role="tab" [attr.aria-selected]="current()?.id===item.id" [id]="uid+\'-tab-\'+item.id" [attr.aria-controls]="uid+\'-panel\'"' : "[attr.aria-current]=\"current()?.id===item.id?'page':null\""} [disabled]="disabled()||item.disabled" (click)="select(item)">{{item.label}}</button>}</nav><section ${tabs ? 'role="tabpanel" [id]="uid+\'-panel\'" [attr.aria-labelledby]="uid+\'-tab-\'+current()?.id"' : ""}><ng-content><p>{{current()?.description}}</p></ng-content></section>${collectionFeedback}</div>`,
   );
 }
+add('small-floating-dock','plain',smallFloatingDockPort.description,smallFloatingDockPort.template,smallFloatingDockPort.body,smallFloatingDockPort);
 add('floating-action-dock','plain',floatingActionDockPort.description,floatingActionDockPort.template,floatingActionDockPort.body,floatingActionDockPort);
 for (const [id, title] of [
   ["gooey-menu", "Explore"],
@@ -284,12 +286,7 @@ for (const [id, title] of [
 }
 add("pill-navigation","plain",pillNavigationPort.description,pillNavigationPort.template,pillNavigationPort.body,pillNavigationPort);
 add("origin-dropdown", "plain", originDropdownPort.description, originDropdownPort.template, originDropdownPort.body, originDropdownPort);
-add(
-  "branching-submenu",
-  "collection",
-  "Parent and child navigation with keyboard selection and independently disclosed branches.",
-  `<nav class="kit-control kit-surface kit-stack" aria-label="Branching navigation" (keydown)="keys($event)">@for(item of items();track item.id){<details><summary>{{item.label}}</summary><div class="kit-stack">@for(child of item.children||[];track child.id){<button type="button" data-item [disabled]="disabled()||child.disabled" (click)="select(child)">{{child.label}}</button>}@if(!item.children?.length){${itemButton}}</div></details>}<p role="status">{{selected()?'Selected: '+selected():''}}</p></nav>`,
-);
+add('branching-submenu','plain',branchingSubmenuPort.description,branchingSubmenuPort.template,branchingSubmenuPort.body,branchingSubmenuPort);
 add("ios-search-bar","plain",iosSearchPort.description,iosSearchPort.template,iosSearchPort.body,iosSearchPort);
 for (const id of ["command-menu", "spotlight-search"]) {
   add(

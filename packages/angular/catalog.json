@@ -214,24 +214,16 @@
     "name": "Branching Submenu",
     "exportName": "KitBranchingSubmenuComponent",
     "selector": "kit-branching-submenu",
-    "description": "Parent and child navigation with keyboard selection and independently disclosed branches.",
+    "description": "Two-column parent and child navigation with pointer selection, source keyboard focus and reduced-motion branches.",
     "inputs": [
-      "items: KitItem[]",
+      "items: BranchingSubmenuItem[]",
       "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "className: string",
+      "style: Record<string, string | number | null | undefined>",
+      "attributes: Record<string, string | number | boolean | null | undefined>",
+      "onKeyDown: (event: KeyboardEvent) => void"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "button",
@@ -1661,24 +1653,17 @@
     "name": "Small Floating Dock",
     "exportName": "KitSmallFloatingDockComponent",
     "selector": "kit-small-floating-dock",
-    "description": "Keyboard-navigable selection with active state, disabled items and application navigation output.",
+    "description": "Fixed action dock with source sizes, anchors, badges, focus tooltips and scroll visibility.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "items: SmallFloatingDockItem[] (required)",
+      "position: 'bottom-right' | 'bottom-center' | 'bottom-left'",
+      "size: 'sm' | 'md' | 'lg'",
+      "hideOnScroll: boolean",
+      "variant: 'icon-only' | 'icon-label'",
+      "activeId: string",
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "smart-comparison",
