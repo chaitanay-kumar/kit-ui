@@ -42,6 +42,9 @@ const mixRect = (from:IndicatorRect,to:IndicatorRect,p:number):IndicatorRect => 
  x:from.x+(to.x-from.x)*p,y:from.y+(to.y-from.y)*p,
  width:from.width+(to.width-from.width)*p,height:from.height+(to.height-from.height)*p,
 });
+export interface IndicatorProjection{sx:number;sy:number;tx:number;ty:number}
+export interface IndicatorSpring{stiffness:number;damping:number;mass:number}
+const defaultIndicatorSpring:Readonly<IndicatorSpring>={stiffness:220,damping:32,mass:1};
 class AnimatedTabsIndicatorGroup {
  readonly members=new Set<AnimatedTabsIndicatorMotion>();
  lead:AnimatedTabsIndicatorMotion|undefined;
@@ -75,7 +78,7 @@ class AnimatedTabsIndicatorGroup {
  }
  private tick=(now:number)=>{
   const dt=Math.max(0,now-this.last)/1000;this.last=now;
-  const active=stepBatch20Spring(this.progress,dt,220,32,1);this.paint();this.frame=active?requestAnimationFrame(this.tick):0;
+  const physics=this.lead?.spring??defaultIndicatorSpring;const active=stepBatch20Spring(this.progress,dt,physics.stiffness,physics.damping,physics.mass);this.paint();this.frame=active?requestAnimationFrame(this.tick):0;
  };
  remove(member:AnimatedTabsIndicatorMotion):void{
   const wasLead=this.lead===member,previous=this.snapshot();this.members.delete(member);
@@ -91,7 +94,7 @@ export class AnimatedTabsIndicatorMotion {
  private node:HTMLElement|undefined;
  private key:string|undefined;
  private group:AnimatedTabsIndicatorGroup|undefined;
- constructor(private root:HTMLElement,private selector='.k-tabs-indicator'){}
+ constructor(private root:HTMLElement,private selector='.k-tabs-indicator',readonly spring:Readonly<IndicatorSpring>=defaultIndicatorSpring,private projection?:()=>IndicatorProjection){}
  capture(refreshInitial=false):void{if(refreshInitial)this.group?.refreshInitialSnapshot();const value=this.visualRect();if(value)this.before=value}
  visualRect():IndicatorRect|undefined{const value=this.node?.getBoundingClientRect();return value?rect(value):undefined}
  rendered(key:string):void{
@@ -109,8 +112,10 @@ export class AnimatedTabsIndicatorMotion {
   }else if(previousNode!==node){this.group.promote(this,sharedSnapshot??current??base)}else if(changed){if(this.group.lead===this)this.group.promote(this,sharedSnapshot??current??base,false);else this.group.refresh()}
   this.before=undefined;
  }
+ projected():void{this.group?.refresh()}
  project(pose:IndicatorRect,opacity:number):void{
   if(!this.node||!this.base)return;
+  const projection=this.projection?.();if(projection)pose={x:(pose.x-projection.tx)/projection.sx,y:(pose.y-projection.ty)/projection.sy,width:pose.width/projection.sx,height:pose.height/projection.sy};
   const base=this.base,sx=base.width?pose.width/base.width:1,sy=base.height?pose.height/base.height:1;
   const x=pose.x-base.x+(pose.width-base.width)/2,y=pose.y-base.y+(pose.height-base.height)/2;
   this.node.style.transform=Math.abs(x)<.000001&&Math.abs(y)<.000001&&Math.abs(sx-1)<.000001&&Math.abs(sy-1)<.000001?'none':`translate(${x}px,${y}px) scale(${sx},${sy})`;

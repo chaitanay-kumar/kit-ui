@@ -1,3 +1,5 @@
+import {glassNavbarPort} from './angular-glass-navbar';
+import {scrollProgressNavPort} from './angular-scroll-progress-nav';
 import {branchingSubmenuPort} from './angular-branching-submenu';
 import {smallFloatingDockPort} from './angular-small-floating-dock';
 import {animatedTabsPort} from './angular-animated-tabs';
@@ -260,18 +262,7 @@ add(
 );
 
 add('animated-tabs','plain',animatedTabsPort.description,animatedTabsPort.template,animatedTabsPort.body,animatedTabsPort);
-// Navigation: distinct layouts use the same selection and keyboard contracts.
-for (const [id, layout] of [
-  ["glass-navbar", "glass"],
-]) {
-  const tabs = id === "animated-tabs";
-  add(
-    id,
-    "collection",
-    "Keyboard-navigable selection with active state, disabled items and application navigation output.",
-    `<div class="kit-control kit-stack"><nav class="k-nav k-${layout}" aria-label="${id}" ${tabs ? 'role="tablist"' : ""} (keydown)="keys($event)">@for(item of items();track item.id){<button type="button" data-item ${tabs ? 'role="tab" [attr.aria-selected]="current()?.id===item.id" [id]="uid+\'-tab-\'+item.id" [attr.aria-controls]="uid+\'-panel\'"' : "[attr.aria-current]=\"current()?.id===item.id?'page':null\""} [disabled]="disabled()||item.disabled" (click)="select(item)">{{item.label}}</button>}</nav><section ${tabs ? 'role="tabpanel" [id]="uid+\'-panel\'" [attr.aria-labelledby]="uid+\'-tab-\'+current()?.id"' : ""}><ng-content><p>{{current()?.description}}</p></ng-content></section>${collectionFeedback}</div>`,
-  );
-}
+add('glass-navbar','plain',glassNavbarPort.description,glassNavbarPort.template,glassNavbarPort.body,glassNavbarPort);
 add('small-floating-dock','plain',smallFloatingDockPort.description,smallFloatingDockPort.template,smallFloatingDockPort.body,smallFloatingDockPort);
 add('floating-action-dock','plain',floatingActionDockPort.description,floatingActionDockPort.template,floatingActionDockPort.body,floatingActionDockPort);
 for (const [id, title] of [
@@ -327,13 +318,7 @@ add(
 );
 */
 add("slide-pagination","plain",slidePaginationPort.description,slidePaginationPort.template,slidePaginationPort.body,slidePaginationPort);
-add(
-  "scroll-progress-nav",
-  "collection",
-  "A contained section navigator with scroll progress and reduced-motion-aware anchor actions.",
-  `<div class="kit-control kit-stack"><nav class="kit-row" aria-label="Section navigation" (keydown)="keys($event)">@for(item of items();track item.id){<button type="button" data-item [disabled]="disabled()||item.disabled" (click)="jump(item)">{{item.label}}</button>}</nav><progress aria-label="Reading progress" max="100" [value]="progress()"></progress><div #scroller class="k-scroll-page" (scroll)="track($event)">@for(item of items();track item.id){<section [id]="uid+'-'+item.id" class="k-scroll-section"><h3>{{item.label}}</h3><p>{{item.description}}</p></section>}</div></div>`,
-  `readonly progress=signal(0);readonly scroller=viewChild.required<ElementRef<HTMLElement>>('scroller');jump(item:KitItem):void{this.select(item);const node=Array.from(this.scroller().nativeElement.children).find(el=>el.id===this.uid+'-'+item.id) as HTMLElement|undefined;this.scroller().nativeElement.scrollTo({top:node?.offsetTop?node.offsetTop-this.scroller().nativeElement.offsetTop:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}track(event:Event):void{const el=event.target as HTMLElement;this.progress.set(el.scrollHeight<=el.clientHeight?100:el.scrollTop/(el.scrollHeight-el.clientHeight)*100);}`,
-);
+add('scroll-progress-nav','plain',scrollProgressNavPort.description,scrollProgressNavPort.template,scrollProgressNavPort.body,scrollProgressNavPort);
 
 add("activity-feed", "plain", activityFeedPort.description, activityFeedPort.template, "", activityFeedPort);
 

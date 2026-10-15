@@ -147,6 +147,17 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if (entry.id === 'glass-navbar') return `import {Component} from '@angular/core';
+import {KitGlassNavbarComponent,type GlassNavbarItem} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitGlassNavbarComponent],template:\`<ng-template #cta><button type="button">Deploy Now</button></ng-template><kit-glass-navbar [items]="items" [cta]="cta" [sticky]="false" [onItemSelect]="select"/>\`})
+export class ExampleComponent {
+  readonly items:GlassNavbarItem[]=[{id:'platform',label:'Platform',href:'#platform'},{id:'docs',label:'Docs',href:'https://example.com/docs',external:true}];
+  readonly select=(item:GlassNavbarItem)=>console.log(item.label);
+}`;
+  if (entry.id === 'scroll-progress-nav') return `import {Component} from '@angular/core';
+import {KitScrollProgressNavComponent,type NavSectionItem} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitScrollProgressNavComponent],template:\`<kit-scroll-progress-nav mode="inline" [sections]="sections" [containerRef]="{current:scroller}"/><div #scroller style="height:300px;overflow:auto"><section id="overview" style="min-height:400px">Overview</section><section id="features" style="min-height:400px">Features</section></div>\`})
+export class ExampleComponent {readonly sections:NavSectionItem[]=[{id:'overview',index:'01',label:'Overview'},{id:'features',index:'02',label:'Features'}]}`;
   if (entry.id === 'small-floating-dock') return `import {Component} from '@angular/core';
 import {KitSmallFloatingDockComponent,type SmallFloatingDockItem} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitSmallFloatingDockComponent],template:\`<kit-small-floating-dock [items]="items" position="bottom-center"/>\`})
