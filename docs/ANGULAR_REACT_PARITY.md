@@ -2,14 +2,14 @@
 
 React is the source of truth for component appearance, interactions, data contracts, options and defaults. Angular implementations stay native; template projection and output events provide Angular equivalents for React nodes and callbacks. Catalog coverage does not establish parity.
 
-Current progress: 73 components have validated baselines (21 merged plus 52 validated on pending batch branches); 43 remain unvalidated. Batch 29 adds Small Floating Dock and Branching Submenu. See [batch 29 evidence](parity/batch-29-integration.md) and the [completed component list](parity/completed-components.md).
+Current progress: 75 components have validated baselines (21 merged plus 54 validated on pending batch branches); 41 remain unvalidated. Batch 30 adds Glass Navbar and Scroll Progress Navigation. See [batch 30 evidence](parity/batch-30-integration.md) and the [completed component list](parity/completed-components.md).
 
 User priority: finish simpler components first. AI Response work is preserved on `feat/angular-ai-response-parity` and remains in progress. Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work proceeds in batches of two, with focused component checks during implementation and one full baseline before batch merge. Batch 2 merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); batch 3 merged through [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Batch 4 and its stacked batch 5 are locally validated and await integration. The original inventory order remains below for tracking, not execution priority.
 
 ## Pending work
 
-- Review and fix the remaining 43 components listed below: 42 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
-- Review and integrate batches 4 through 29 in order. Continue with two queued components at a time.
+- Review and fix the remaining 41 components listed below: 40 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
+- Review and integrate batches 4 through 30 in order. Continue with two queued components at a time.
 - Before integration, audit earlier parity fixture HTML for standard doctype and viewport metadata, including batches 11 through 19. Batch 23 corrects these headers and renews browser checks for batches 20 through 23. Earlier mobile input/reduced-motion checks alone do not prove narrow responsive layouts in standards mode.
 - Resume AI Response later from local `kit-ui-angular-response` on `feat/angular-ai-response-parity`. Its unfinished changes and audit at `docs/parity/ai-response-audit.md` remain preserved in that worktree and are not merged or validated.
 - After all 116 components have validated baselines, the user will perform the full QA run. Address the resulting feedback before calling the overall parity effort complete.
@@ -67,7 +67,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 35 | Floating Action Dock | `floating-action-dock` | Validated locally; integration pending | [Evidence](parity/floating-action-dock.md) |
 | 36 | Focus Mode | `focus-mode` | Validated locally; integration pending | [Report](parity/focus-mode.md) |
 | 37 | Form | `form` | Queued | — |
-| 38 | Glass Navbar | `glass-navbar` | Queued | — |
+| 38 | Glass Navbar | `glass-navbar` | Validated locally; integration pending | [Report](parity/glass-navbar.md) |
 | 39 | Glitch Text | `glitch-text` | Validated locally; integration pending | [Report](parity/glitch-text.md) |
 | 40 | Glyph Matrix | `glyph-matrix` | Queued | — |
 | 41 | Gooey Menu | `gooey-menu` | Queued | — |
@@ -114,7 +114,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 82 | Recovery Ledger | `recovery-ledger` | Queued | — |
 | 83 | Reveal Card | `reveal-card` | Validated baseline | [Report](parity/reveal-card.md) |
 | 84 | Rocket Party Popper | `rocket-party-popper` | Queued | — |
-| 85 | Scroll Progress Navigation | `scroll-progress-nav` | Queued | — |
+| 85 | Scroll Progress Navigation | `scroll-progress-nav` | Validated locally; integration pending | [Report](parity/scroll-progress-nav.md) |
 | 86 | Scroll Velocity Text | `scrollvelocitytext` | Validated locally; integration pending | [Report](parity/scrollvelocitytext.md) |
 | 87 | Selection Basket | `selection-basket` | Validated locally; integration pending | [Evidence](parity/selection-basket.md) |
 | 88 | SettleModal | `settle-modal` | Validated locally; integration pending | [Evidence](parity/settle-modal.md) |

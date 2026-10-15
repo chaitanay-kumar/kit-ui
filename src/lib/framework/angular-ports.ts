@@ -657,24 +657,20 @@ export const ANGULAR_PORTS = [
     "name": "Glass Navbar",
     "exportName": "KitGlassNavbarComponent",
     "selector": "kit-glass-navbar",
-    "description": "Keyboard-navigable selection with active state, disabled items and application navigation output.",
+    "description": "Source brand/CTA slots, actual anchors, local/manual selection and responsive mobile Escape/scroll-lock lifecycle.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "brand: GlassNavbarContent",
+      "brandHref: string",
+      "items: GlassNavbarItem[]",
+      "cta: GlassNavbarContent",
+      "activeId: string",
+      "variant: 'floating' | 'full-width'",
+      "sticky: boolean",
+      "glass: boolean",
+      "className: string",
+      "onItemSelect: (item: GlassNavbarItem) => void"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "glitch-text",
@@ -1520,24 +1516,18 @@ export const ANGULAR_PORTS = [
     "name": "Scroll Progress Navigation",
     "exportName": "KitScrollProgressNavComponent",
     "selector": "kit-scroll-progress-nav",
-    "description": "A contained section navigator with scroll progress and reduced-motion-aware anchor actions.",
+    "description": "Source section navigation with window/container progress, responsive menus, local/manual selection and native scroll actions.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "sections: NavSectionItem[]",
+      "scrollThreshold: number",
+      "activeId: string",
+      "mode: 'fixed' | 'inline' | 'sticky'",
+      "containerRef: ScrollProgressContainerRef",
+      "onSectionClick: (id: string) => void",
+      "position: 'top-center' | 'bottom-center' | 'top-right'",
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "scrollvelocitytext",

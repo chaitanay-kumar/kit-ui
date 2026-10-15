@@ -1,6 +1,6 @@
 # Completed parity checks
 
-73 components have recorded validated baselines: 21 merged and 52 awaiting integration review. Validation scope and remaining limits are recorded in each linked report. This list reflects batch 29; the [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
+75 components have recorded validated baselines: 21 merged and 54 awaiting integration review. Validation scope and remaining limits are recorded in each linked report. This list reflects batch 30; the [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
 
 | Component | Status | Evidence |
 | --- | --- | --- |
@@ -26,6 +26,7 @@
 | FAQ | Validated locally; integration pending | [Report](faq.md) |
 | Floating Action Dock | Validated locally; integration pending | [Evidence](floating-action-dock.md) |
 | Focus Mode | Validated locally; integration pending | [Report](focus-mode.md) |
+| Glass Navbar | Validated locally; integration pending | [Report](glass-navbar.md) |
 | Glitch Text | Validated locally; integration pending | [Report](glitch-text.md) |
 | Gravity Particle Burst | Validated locally; integration pending | [Evidence](gravity-particle-burst.md) |
 | Hamburger Menu | Validated baseline | [Report](hamburger-menu.md) |
@@ -60,6 +61,7 @@
 | Profile Card | Validated locally; integration pending | [Report](profile-card.md) |
 | Rainbow Button | Validated baseline | [Review](rainbow-button.md) |
 | Reveal Card | Validated baseline | [Report](reveal-card.md) |
+| Scroll Progress Navigation | Validated locally; integration pending | [Report](scroll-progress-nav.md) |
 | Scroll Velocity Text | Validated locally; integration pending | [Report](scrollvelocitytext.md) |
 | Selection Basket | Validated locally; integration pending | [Evidence](selection-basket.md) |
 | SettleModal | Validated locally; integration pending | [Evidence](settle-modal.md) |
