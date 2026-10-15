@@ -1,0 +1,21 @@
+.k-animated-tabs { display:flex;flex-direction:column;gap:16px; }
+.k-tabs-bar { display:flex;align-items:center;gap:4px;align-self:flex-start;user-select:none;padding:4px;border-radius:var(--radius,.875rem);background:var(--surface-raised);border:1px solid var(--border); }
+.k-tabs-bar button { position:relative;display:flex;align-items:center;gap:8px;user-select:none;cursor:pointer;font:inherit;font-size:12px;line-height:1.3333333333333333;font-weight:500;letter-spacing:inherit;padding:6px 14px;border:0 solid var(--border);margin:0;border-radius:calc(var(--radius,.875rem)*.8);background:transparent;color:var(--text-muted);transition:color .15s cubic-bezier(.4,0,.2,1);outline:none; }
+.k-tabs-bar button:hover { color:var(--text-secondary); }
+.k-tabs-bar button:focus-visible { outline:1px solid var(--accent-ring);outline-offset:1px; }
+.k-tabs-bar button.k-tab-active { color:var(--text-primary); }
+.k-tabs-label { position:relative;z-index:10;display:flex;align-items:center;gap:6px; }
+.k-tabs-indicator { position:absolute;inset:0;border-radius:calc(var(--radius,.875rem)*.8);background:var(--surface);border:1px solid var(--border-hover);box-shadow:0 1px 2px 0 rgb(0 0 0 / .05); }
+.k-tabs-glass .k-tabs-bar { backdrop-filter:blur(24px); }
+.k-tabs-glass .k-tabs-bar,.k-tabs-glass .k-tabs-bar button,.k-tabs-glass .k-tabs-indicator { border-radius:calc(infinity * 1px); }
+.k-tabs-glass .k-tabs-bar button { padding-inline:16px; }
+.k-tabs-badge { padding:2px 6px;font-size:10px;font-family:var(--font-mono);border-radius:.25rem;background:var(--surface-hover);border:1px solid var(--border);color:var(--text-secondary); }
+.k-tabs-content { position:relative;min-height:60px; }
+.k-tabs-panel { font-size:14px;line-height:20px;color:var(--text-secondary); }
+.dark .k-tabs-bar { background:#0e0e0e;border-color:#1f1f1f; }
+.dark .k-tabs-bar button { color:#6b6b6b; }
+.dark .k-tabs-bar button:hover { color:#a1a1a1; }
+.dark .k-tabs-bar button.k-tab-active { color:#fafafa; }
+.dark .k-tabs-indicator,.dark .k-tabs-badge { background:#141414;border-color:#1f1f1f; }
+.dark .k-tabs-badge,.dark .k-tabs-panel { color:#a1a1a1; }
+@media(min-width:640px) { .k-tabs-bar button { font-size:14px;line-height:1.4285714285714286; } }

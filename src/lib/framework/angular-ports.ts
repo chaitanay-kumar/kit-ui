@@ -140,24 +140,19 @@ export const ANGULAR_PORTS = [
     "name": "Animated Tabs",
     "exportName": "KitAnimatedTabsComponent",
     "selector": "kit-animated-tabs",
-    "description": "Keyboard-navigable selection with active state, disabled items and application navigation output.",
+    "description": "Source-controlled or internal tab selection, template icons/content, variants, spring indicator and retained wait-mode panels.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "tabs: AnimatedTabItem[] (required)",
+      "defaultTab: string",
+      "activeTab: string",
+      "onChange: (id: string) => void",
+      "className: string",
+      "tabsContainerClassName: string",
+      "renderContent: boolean",
+      "layoutId: string",
+      "variant: 'default' | 'glass' | 'pill'"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "avatar-stack",
@@ -1557,11 +1552,22 @@ export const ANGULAR_PORTS = [
     "name": "Scroll Velocity Text",
     "exportName": "KitScrollvelocitytextComponent",
     "selector": "kit-scrollvelocitytext",
-    "description": "Configurable readable text with a restrained visual treatment and reduced-motion fallback.",
+    "description": "Continuous readable kinetic text with accumulated directional scroll, exponential damping, idle hold and source reduced-motion lifecycle.",
     "inputs": [
-      "text: string",
-      "paused: boolean",
-      "disabled: boolean"
+      "text: string (required)",
+      "as: string",
+      "className: string",
+      "expandDistance: number",
+      "intensity: number",
+      "minLetterSpacing: number",
+      "maxLetterSpacing: number",
+      "maxScale: number",
+      "fadeStart: number",
+      "smoothingMs: number",
+      "transformOrigin: string",
+      "scrollContainerRef: ScrollVelocityContainerRef",
+      "style: ScrollVelocityStyle",
+      "attributes: Record<string, string | number | boolean | null | undefined>"
     ],
     "outputs": []
   },
