@@ -2,6 +2,12 @@
 
 ## Latest batch handoff - 2026-10-13
 
+Payment Status and Notification Bell are validated on `feat/angular-parity-batch-10`, stacked on batch 9 commit `74f8886`. See [batch 10 evidence](parity/batch-10-integration.md). Their generic payment and dismissible-collection APIs are replaced by React-compatible payment lifecycle, receipt, notification data, unread actions and controlled panel contracts.
+
+The focused batch passes its packaged contract, Angular package build, and 16 React/Angular browser cases across desktop/mobile. Unrelated suites remain deferred until integration. Progress is 21 merged plus fourteen locally validated baselines, with 81 components awaiting review.
+
+## Previous batch handoff - 2026-10-13
+
 LockInput and OriginDropdown are validated on `feat/angular-parity-batch-9`, stacked on batch 8 commit `a0abc14`. See [batch 9 evidence](parity/batch-9-integration.md). Their unrelated password-lock and collection-controller APIs are replaced by React-compatible native input and origin-aware menu contracts with controlled state, rich templates and cleanup.
 
 The focused batch passes its packaged contract, Angular package build, and 16 React/Angular browser cases across desktop/mobile. Unrelated suites remain deferred until integration. Progress is 21 merged plus twelve locally validated baselines, with 83 components awaiting review.
