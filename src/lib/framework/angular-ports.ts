@@ -205,17 +205,15 @@ export const ANGULAR_PORTS = [
     "name": "Book Call Button",
     "exportName": "KitBookCallButtonComponent",
     "selector": "kit-book-call-button",
-    "description": "A date/time booking dialog that emits a request for your scheduling application.",
+    "description": "A responsive expanding call-to-action that renders as a button or link and matches React's hover, focus and reduced-motion behavior.",
     "inputs": [
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "action: KitAction"
+      "children: string",
+      "onClick: () => void",
+      "href: string",
+      "className: string",
+      "disabled: boolean"
     ],
-    "outputs": [
-      "activated: void",
-      "bookingRequested: { date: string; time: string }"
-    ]
+    "outputs": []
   },
   {
     "id": "branching-submenu",
@@ -1736,18 +1734,17 @@ export const ANGULAR_PORTS = [
     "name": "Split Button",
     "exportName": "KitSplitButtonComponent",
     "selector": "kit-split-button",
-    "description": "A primary action with a separately accessible action chooser.",
+    "description": "A viewport-aware split action with React-compatible sizes, variants, disabled options, callbacks and full keyboard menu navigation.",
     "inputs": [
       "label: string",
+      "onClick: () => void",
+      "options: SplitButtonOption[]",
+      "size: SplitButtonSize",
+      "variant: SplitButtonVariant",
       "disabled: boolean",
-      "loading: boolean",
-      "action: KitAction",
-      "options: KitItem[]"
+      "className: string"
     ],
-    "outputs": [
-      "activated: void",
-      "optionSelect: KitItem"
-    ]
+    "outputs": []
   },
   {
     "id": "spotlight-card",
