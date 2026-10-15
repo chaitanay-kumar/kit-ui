@@ -27,6 +27,8 @@ import { faqPort } from "./angular-faq";
 import { otpInputPort } from "./angular-otp-input";
 import { drawCheckboxPort } from "./angular-draw-checkbox";
 import { liquidTogglePort } from "./angular-liquid-toggle";
+import { lockInputPort } from "./angular-lock-input";
+import { originDropdownPort } from "./angular-origin-dropdown";
 const root = process.cwd();
 type Kind = "action" | "collection" | "form" | "canvas" | "plain";
 interface Port {
@@ -189,21 +191,7 @@ add(
   `pick(event:Event):void{const item=this.items().find(i=>i.id===(event.target as HTMLSelectElement).value);if(item)this.select(item);}`,
 );
 add("otp-input", "plain", otpInputPort.description, otpInputPort.template, otpInputPort.body, otpInputPort);
-add(
-  "lock-input",
-  "plain",
-  "A password field with a deliberate edit lock and accessible visibility control.",
-  `<div class="kit-control kit-stack"><label>{{label()}}<input [type]="visible()?'text':'password'" [readOnly]="locked()" [disabled]="disabled()" [value]="value()" autocomplete="current-password" (input)="value.set($any($event.target).value)" /></label><div class="kit-row"><button type="button" [disabled]="disabled()" [attr.aria-pressed]="locked()" (click)="locked.set(!locked())">{{locked()?'Unlock editing':'Lock editing'}}</button><button type="button" [disabled]="disabled()" [attr.aria-pressed]="visible()" (click)="visible.set(!visible())">{{visible()?'Hide password':'Show password'}}</button></div><p class="kit-muted">Editing lock is a UI control, not encryption.</p></div>`,
-  `readonly label=input('Protected input');readonly value=model('');readonly disabled=input(false);readonly locked=model(true);readonly visible=signal(false);`,
-  {
-    inputs: [
-      "label: string",
-      "value: string (two-way)",
-      "locked: boolean (two-way)",
-      "disabled: boolean",
-    ],
-  },
-);
+add("lock-input", "plain", lockInputPort.description, lockInputPort.template, lockInputPort.body, lockInputPort);
 for (const [id, title, button] of [
   ["form", "Your details", "Submit"],
   ["login", "Welcome back", "Sign in"],
@@ -254,7 +242,6 @@ for (const [id, layout] of [
 }
 for (const [id, title] of [
   ["gooey-menu", "Explore"],
-  ["origin-dropdown", "Choose an action"],
 ]) {
   add(
     id,
@@ -263,6 +250,7 @@ for (const [id, title] of [
     `<div class="kit-control kit-stack" (keydown.escape)="open.set(false)"><div class="k-menu"><button type="button" [disabled]="disabled()" [attr.aria-expanded]="open()" [attr.aria-controls]="uid" (click)="open.set(!open())"><span aria-hidden="true">{{open()?'×':'☰'}}</span> {{label()||'${title}'}}</button>@if(open()){<div [id]="uid" class="k-menu-panel" (keydown)="keys($event)">@for(item of items();track item.id){<button type="button" data-item [disabled]="item.disabled||disabled()" (click)="select(item);open.set(false)">{{item.label}}</button>}</div>}</div>${collectionFeedback}</div>`,
   );
 }
+add("origin-dropdown", "plain", originDropdownPort.description, originDropdownPort.template, originDropdownPort.body, originDropdownPort);
 add(
   "branching-submenu",
   "collection",
@@ -747,7 +735,7 @@ const cardDefaults: Record<
   ],
 };
 for (const port of ports) {
-  if(['gooey-menu','origin-dropdown'].includes(port.id)){
+  if(port.id==='gooey-menu'){
     port.template=port.template.replace('(keydown.escape)="open.set(false)"','(keydown.escape)="closeMenu()"').replace('<button type="button" [disabled]','<button #trigger type="button" [disabled]').replace('(click)="select(item);open.set(false)"','(click)="pick(item)"');
     port.body+=`readonly trigger=viewChild<ElementRef<HTMLButtonElement>>('trigger');closeMenu():void{this.open.set(false);this.trigger()?.nativeElement.focus();}pick(item:KitItem):void{if(this.disabled()||this.loading()||item.disabled)return;this.select(item);this.closeMenu();}override keys(event:KeyboardEvent):void{if(!['ArrowDown','ArrowUp','Home','End'].includes(event.key)||this.disabled())return;const buttons=Array.from((event.currentTarget as HTMLElement).querySelectorAll<HTMLButtonElement>('button[data-item]:not(:disabled)'));if(!buttons.length)return;event.preventDefault();const index=buttons.indexOf(event.target as HTMLButtonElement);const next=event.key==='Home'?0:event.key==='End'?buttons.length-1:(index+(event.key==='ArrowUp'?-1:1)+buttons.length)%buttons.length;buttons[next].focus();}`;
   }

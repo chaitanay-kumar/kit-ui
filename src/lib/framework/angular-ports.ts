@@ -896,17 +896,30 @@ export const ANGULAR_PORTS = [
     "name": "LockInput",
     "exportName": "KitLockInputComponent",
     "selector": "kit-lock-input",
-    "description": "A password field with a deliberate edit lock and accessible visibility control.",
+    "description": "A native controlled or uncontrolled input with focus-lock visuals, icons, helper text and errors.",
     "inputs": [
       "label: string",
-      "value: string (two-way)",
-      "locked: boolean (two-way)",
-      "disabled: boolean"
+      "description: string",
+      "error: string",
+      "leftIcon: LockInputContent",
+      "rightIcon: LockInputContent",
+      "value: string",
+      "defaultValue: string",
+      "onChange: (event: Event) => void",
+      "onFocus: (event: FocusEvent) => void",
+      "onBlur: (event: FocusEvent) => void",
+      "disabled: boolean",
+      "readOnly: boolean",
+      "required: boolean",
+      "type: string",
+      "id: string",
+      "name: string",
+      "placeholder: string",
+      "autocomplete: string",
+      "aria-label: string",
+      "className: string"
     ],
-    "outputs": [
-      "valueChange: string",
-      "lockedChange: boolean"
-    ]
+    "outputs": []
   },
   {
     "id": "login",
@@ -1202,24 +1215,19 @@ export const ANGULAR_PORTS = [
     "name": "OriginDropdown",
     "exportName": "KitOriginDropdownComponent",
     "selector": "kit-origin-dropdown",
-    "description": "An expandable action menu with Escape, arrow keys and disabled-item handling.",
+    "description": "A controlled or uncontrolled origin-aware menu with template content, item callbacks and outside/Escape dismissal.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "trigger: OriginDropdownContent",
+      "items: OriginDropdownItem[]",
+      "children: OriginDropdownContent",
+      "side: DropdownSide",
+      "open: boolean",
+      "defaultOpen: boolean",
+      "onOpenChange: (open: boolean) => void",
+      "className: string",
+      "placeholder: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "otp-input",
