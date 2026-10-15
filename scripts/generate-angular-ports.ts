@@ -1,3 +1,5 @@
+import {stackUnfoldPanelPort} from './angular-stack-unfold-panel';
+import {settleModalPort} from './angular-settle-modal';
 import {selectionBasketPort} from './angular-selection-basket';
 import {meteorsPort} from './angular-meteors';
 import {gravityParticleBurstPort} from './angular-gravity-particle-burst';
@@ -339,9 +341,9 @@ add("activity-feed", "plain", activityFeedPort.description, activityFeedPort.tem
 add("smooth-accordion","plain",smoothAccordionPort.description,smoothAccordionPort.template,smoothAccordionPort.body,smoothAccordionPort);
 
 // Expandable information and selectable collections.
+add('stack-unfold-panel','plain',stackUnfoldPanelPort.description,stackUnfoldPanelPort.template,stackUnfoldPanelPort.body,stackUnfoldPanelPort);
 add("faq", "plain", faqPort.description, faqPort.template, faqPort.body.replace("input.required<FAQItem[]>()", "input<FAQItem[]>([])") , faqPort);
 for (const [id, title] of [
-  ["stack-unfold-panel", "Your workspace"],
   ["expandable-data-row", "Data details"],
   ["recovery-ledger", "Recovery ledger"],
 ]) {
@@ -672,9 +674,9 @@ add(
 );
 */
 add("directional-tooltip","plain",directionalTooltipPort.description,directionalTooltipPort.template,directionalTooltipPort.body,directionalTooltipPort);
+add('settle-modal','plain',settleModalPort.description,settleModalPort.template,settleModalPort.body,settleModalPort);
 for (const [id, title] of [
   ["morphing-dialog", "A little more room"],
-  ["settle-modal", "Settle the details"],
 ]) {
   add(
     id,

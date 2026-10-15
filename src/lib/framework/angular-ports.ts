@@ -1587,20 +1587,20 @@ export const ANGULAR_PORTS = [
     "name": "SettleModal",
     "exportName": "KitSettleModalComponent",
     "selector": "kit-settle-modal",
-    "description": "A native modal dialog with focus containment, Escape, projected content and asynchronous confirmation.",
+    "description": "A controlled modal overlay with source settle keyframes, template content slots, backdrop and Escape callbacks, body-overflow restoration and retained exit.",
     "inputs": [
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "action: KitAction",
-      "title: string",
-      "description: string",
-      "opened: boolean (two-way)"
+      "open: boolean (required)",
+      "onClose: () => void (required)",
+      "title: SettleModalContent",
+      "description: SettleModalContent",
+      "children: SettleModalContent",
+      "footer: SettleModalContent",
+      "hideCloseButton: boolean",
+      "closeOnBackdrop: boolean",
+      "size: 'sm' | 'md' | 'lg'",
+      "className: string"
     ],
-    "outputs": [
-      "activated: void",
-      "openedChange: boolean"
-    ]
+    "outputs": []
   },
   {
     "id": "shooting-stars",
@@ -1814,24 +1814,16 @@ export const ANGULAR_PORTS = [
     "name": "Stack Unfold Panel",
     "exportName": "KitStackUnfoldPanelComponent",
     "selector": "kit-stack-unfold-panel",
-    "description": "Expandable item details with keyboard-native disclosure and application-owned recovery actions.",
+    "description": "A keyed card stack with source-controlled expansion, callback-only or internal state, native disabled triggers, template content and spring unfolding/layout.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "cards: StackCard[] (required)",
+      "expandedIds: string[]",
+      "onExpandedChange: (ids: string[]) => void",
+      "allowMultiple: boolean",
+      "variant: 'default' | 'minimal'",
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "stacked-cards",

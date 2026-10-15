@@ -1,23 +1,15 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component } from '@angular/core';
-import { KitCollectionController } from './port-controllers';
-
+import { Component, ViewEncapsulation, ElementRef, computed, inject, input, signal, viewChild } from '@angular/core';
+import {NgZone} from '@angular/core';import type {StackCard} from './stack-unfold-types';export type {StackCard} from './stack-unfold-types';import {StackUnfoldRowComponent} from './stack-unfold-row';import {StackUnfoldLayout} from './stack-unfold-motion';
 @Component({
  selector:"kit-stack-unfold-panel", standalone:true,
- host:{'data-kit':"stack-unfold-panel",style:'display:block;min-width:0'},
- template:`
-<section class="kit-control kit-surface kit-stack">
-<h3>{{label()||'Your workspace'}}</h3>@for(item of items();track item.id){<details class="k-disclosure">
-<summary [attr.aria-disabled]="disabled()" [tabIndex]="disabled()?-1:0" (click)="disabled()&&$event.preventDefault()">{{item.label}} @if(item.value!==undefined){<span>{{item.value}}</span>}</summary>
-<div class="kit-stack">
-<p>{{item.description}}</p>
-<ng-content>
-</ng-content>
-</div>
-</details>}@empty{<p>No items yet.</p>}@if(loading()){<p role="status">Loading…</p>}@if(error()){<p role="alert">{{error()}}</p>}@if(actionError()){<p role="alert">{{actionError()}}</p>}<p role="status" class="kit-status">{{busy()?'Working…':status()}}</p>
-</section>
+ host:{'style':'display:contents'},
+ imports:[StackUnfoldRowComponent],
+encapsulation:ViewEncapsulation.None,styleUrls:["./stack-unfold-panel.css"],
+template:`
+<div #root [class]="'k-stack-unfold '+className()">@for(card of cards();track card.id;let index=$index){<kit-stack-unfold-row [card]="card" [index]="index" [expanded]="activeIds().includes(card.id)" [variant]="variant()" (toggleRequested)="toggle(card.id)"/>}</div>
 `
 })
-export class KitStackUnfoldPanelComponent extends KitCollectionController {
-
+export class KitStackUnfoldPanelComponent {
+readonly cards=input.required<StackCard[]>();readonly expandedIds=input<string[]>();readonly onExpandedChange=input<((ids:string[])=>void)|undefined>();readonly allowMultiple=input<boolean,boolean|undefined>(false,{transform:v=>v??false});readonly variant=input<'default'|'minimal','default'|'minimal'|undefined>('default',{transform:v=>v??'default'});readonly className=input<string,string|undefined>('',{transform:v=>v??''});readonly root=viewChild<ElementRef<HTMLElement>>('root');private internal=signal<string[]>([]);readonly activeIds=computed(()=>this.expandedIds()!==undefined?this.expandedIds()!:this.internal());private layout:StackUnfoldLayout|undefined;private zone=inject(NgZone);ngOnInit():void{this.internal.set([this.cards()[0]?.id||''])}ngOnChanges():void{this.layout?.capture()}toggle(id:string):void{const current=this.activeIds(),next=current.includes(id)?current.filter(value=>value!==id):this.allowMultiple()?[...current,id]:[id];this.layout?.capture();const change=this.onExpandedChange();if(change)change(next);else this.internal.set(next)}ngAfterViewChecked():void{this.zone.runOutsideAngular(()=>{const node=this.root()?.nativeElement;if(!node)return;if(!this.layout)this.layout=new StackUnfoldLayout(node);this.layout.rendered()})}ngOnDestroy():void{this.layout?.destroy();this.layout=undefined}
 }

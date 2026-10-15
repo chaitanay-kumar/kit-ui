@@ -1,28 +1,32 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component, ElementRef, effect, input, model, viewChild } from '@angular/core';
-import { portId, KitActionController } from './port-controllers';
-
+import { Component, ViewEncapsulation, ElementRef, computed, effect, inject, input, signal, viewChild } from '@angular/core';
+import {NgZone,TemplateRef} from '@angular/core';import {DOCUMENT,NgTemplateOutlet} from '@angular/common';import {SettleModalMotion} from './settle-modal-motion';export type SettleModalContent=TemplateRef<unknown>|string|number|boolean|null|undefined;interface SettleModalData{title:SettleModalContent;description:SettleModalContent;children:SettleModalContent;footer:SettleModalContent;hideCloseButton:boolean;closeOnBackdrop:boolean;size:'sm'|'md'|'lg';className:string;onClose:()=>void}let settleSequence=0;
 @Component({
  selector:"kit-settle-modal", standalone:true,
- host:{'data-kit':"settle-modal",style:'display:block;min-width:0'},
- template:`
-<div class="kit-control kit-stack">
-<button type="button" [disabled]="blocked()" (click)="opened.set(true)">{{label()||'Open dialog'}}</button>
-<dialog #dialog class="kit-dialog kit-control k-port-dialog" [attr.aria-labelledby]="uid" (close)="opened.set(false)" (cancel)="opened.set(false)">
-<div class="kit-stack">
-<h3 [id]="uid">{{title()}}</h3>
-<ng-content>
-<p>{{description()}}</p>
-</ng-content>
-<div class="kit-row">
-<button type="button" [disabled]="busy()" (click)="opened.set(false)">Close</button>
-<button type="button" [disabled]="blocked()" (click)="confirm()">{{busy()?'Working…':'Confirm'}}</button>
+ host:{'style':'display:contents'},
+ imports:[NgTemplateOutlet],
+encapsulation:ViewEncapsulation.None,styleUrls:["./settle-modal.css"],
+template:`
+<ng-template #content let-value>@if(contentTemplate(value);as tpl){<ng-container [ngTemplateOutlet]="tpl"/>}@else{<ng-container>{{contentText(value)}}</ng-container>}</ng-template>@if(present()){<div #root class="k-settle-root" role="dialog" aria-modal="true" [attr.aria-labelledby]="data().title?titleId:null">
+<div class="k-settle-backdrop" (click)="backdrop()">
 </div>
-<p role="status" class="kit-status">{{loading() || busy() ? 'Working…' : status()}}</p>@if(error()){<p role="alert">{{error()}}</p>}@if(busy()){<button type="button" (click)="cancel()">Cancel</button>}</div>
-</dialog>
+<div [class]="'k-settle-panel '+data().size+' '+data().className">@if(!data().hideCloseButton){<button type="button" class="k-settle-close" aria-label="Close" (click)="requestClose()">
+<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="m18 6-12 12M6 6l12 12"/>
+</svg>
+</button>}<div class="k-settle-inner">@if(data().title){<h2 [id]="titleId">
+<ng-container [ngTemplateOutlet]="content" [ngTemplateOutletContext]="{$implicit:data().title}"/>
+</h2>}@else if(data().title===0){<ng-container>0</ng-container>}@if(data().description){<p class="k-settle-description">
+<ng-container [ngTemplateOutlet]="content" [ngTemplateOutletContext]="{$implicit:data().description}"/>
+</p>}@else if(data().description===0){<ng-container>0</ng-container>}@if(data().children){<div class="k-settle-content">
+<ng-container [ngTemplateOutlet]="content" [ngTemplateOutletContext]="{$implicit:data().children}"/>
+</div>}@else if(data().children===0){<ng-container>0</ng-container>}@if(data().footer){<div class="k-settle-footer">
+<ng-container [ngTemplateOutlet]="content" [ngTemplateOutletContext]="{$implicit:data().footer}"/>
+</div>}@else if(data().footer===0){<ng-container>0</ng-container>}</div>
 </div>
+</div>}
 `
 })
-export class KitSettleModalComponent extends KitActionController {
-readonly uid=portId('dialog');readonly title=input('Settle the details');readonly description=input('Your application content belongs here.');readonly opened=model(false);readonly dialog=viewChild<ElementRef<HTMLDialogElement>>('dialog');constructor(){super();effect(()=>{const dialog=this.dialog()?.nativeElement;const opened=this.opened();if(!dialog)return;if(opened&&!dialog.open)dialog.showModal();else if(!opened&&dialog.open)dialog.close();});}async confirm():Promise<void>{const request=this.run();const controller=this.controller;await request;if(controller?.signal.aborted)return;if(!this.error()&&!this.destroyed)this.opened.set(false);}
+export class KitSettleModalComponent {
+readonly open=input.required<boolean>();readonly onClose=input.required<()=>void>();readonly title=input<SettleModalContent>();readonly description=input<SettleModalContent>();readonly children=input<SettleModalContent>();readonly footer=input<SettleModalContent>();readonly hideCloseButton=input<boolean,boolean|undefined>(false,{transform:v=>v??false});readonly closeOnBackdrop=input<boolean,boolean|undefined>(true,{transform:v=>v??true});readonly size=input<'sm'|'md'|'lg','sm'|'md'|'lg'|undefined>('md',{transform:v=>v??'md'});readonly className=input<string,string|undefined>('',{transform:v=>v??''});readonly titleId='kit-settle-title-'+(++settleSequence);readonly present=signal(false);readonly root=viewChild<ElementRef<HTMLElement>>('root');private snapshot=signal<SettleModalData|undefined>(undefined);readonly live=computed<SettleModalData>(()=>({title:this.title(),description:this.description(),children:this.children(),footer:this.footer(),hideCloseButton:this.hideCloseButton(),closeOnBackdrop:this.closeOnBackdrop(),size:this.size(),className:this.className(),onClose:this.onClose()}));readonly data=computed(()=>this.open()?this.live():this.snapshot()!);private motion:SettleModalMotion|undefined;private zone=inject(NgZone);private document=inject(DOCUMENT);constructor(){effect(cleanup=>{if(!this.open())return;const close=this.onClose(),doc=this.document,previous=doc.body.style.overflow;const key=(event:KeyboardEvent)=>{if(event.key==='Escape')close()};doc.addEventListener('keydown',key);doc.body.style.overflow='hidden';cleanup(()=>{doc.removeEventListener('keydown',key);doc.body.style.overflow=previous})})}ngOnChanges():void{if(this.open()){this.snapshot.set(this.live());this.present.set(true)}}contentTemplate(value:SettleModalContent):TemplateRef<unknown>|null{return value instanceof TemplateRef?value:null}contentText(value:SettleModalContent):string|number|null|undefined{return typeof value==='boolean'||value instanceof TemplateRef?'':value}requestClose():void{this.data().onClose()}backdrop():void{if(this.data().closeOnBackdrop)this.requestClose()}ngAfterViewChecked():void{const node=this.root()?.nativeElement;if(!node){this.motion?.destroy();this.motion=undefined;return}this.zone.runOutsideAngular(()=>{if(this.motion?.root!==node){this.motion?.destroy();this.motion=new SettleModalMotion(node,()=>{if(!this.open()){this.present.set(false);this.snapshot.set(undefined)}})}this.motion.set(this.open())})}ngOnDestroy():void{this.motion?.destroy();this.motion=undefined;this.snapshot.set(undefined)}
 }

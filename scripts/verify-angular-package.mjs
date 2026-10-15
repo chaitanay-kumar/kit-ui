@@ -11,6 +11,8 @@ const ports = JSON.parse(
 const portImports = ports.map((port) => port.exportName).join(", ");
 // Keep every selector in the strict consumer, supplying newly required contracts.
 const requiredPortTemplates = {
+  'stack-unfold-panel': '<kit-stack-unfold-panel [cards]="[]"/>',
+  'settle-modal': '<kit-settle-modal [open]="false" [onClose]="noopClose"/>',
   'selection-basket': '<kit-selection-basket [selectedCount]="2"/>',
   'density-lens': '<kit-density-lens children="Content"/>',
   'floating-action-dock': '<kit-floating-action-dock [items]="[]"/>',
@@ -100,7 +102,7 @@ import { ${portImports}, KitElasticSheetComponent, KitSmartUploadComponent, KitL
   <kit-timeline-scrubber [events]="[]" (eventChange)="height = $event.index" />
   <kit-ai-prompt-composer [sendHandler]="send" />
 \`})
-export class ConsumerApp0 { readonly noopSearch=(_value:string)=>{}; readonly events:ActivityEvent[]=[{id:'one',type:'deploy',status:'success',title:'Release',timestamp:'Now',payload:{version:1}}];lastEvent:ActivityEvent|undefined;readonly replay=(event:ActivityEvent)=>{this.lastEvent=event;};height=0;done=false;readonly upload:UploadHandler=async(_file,{onProgress})=>{onProgress(100);};readonly send:SendHandler=async()=>{}; }
+export class ConsumerApp0 { readonly noopClose=()=>{};readonly noopSearch=(_value:string)=>{}; readonly events:ActivityEvent[]=[{id:'one',type:'deploy',status:'success',title:'Release',timestamp:'Now',payload:{version:1}}];lastEvent:ActivityEvent|undefined;readonly replay=(event:ActivityEvent)=>{this.lastEvent=event;};height=0;done=false;readonly upload:UploadHandler=async(_file,{onProgress})=>{onProgress(100);};readonly send:SendHandler=async()=>{}; }
 `,
 `import { Component } from '@angular/core';
 import { ${portImports}, KitElasticSheetComponent, KitSmartUploadComponent, KitLiquidCommandPaletteComponent, KitHoldToConfirmComponent, KitSwipeActionListComponent, KitInteractiveDataCardComponent, KitTimelineScrubberComponent, KitAIPromptComposerComponent, type UploadHandler, type SendHandler, type ColumnDef, KitDataTableComponent, KitDataTableToolbarComponent, KitDataTableContentComponent, KitDataTablePaginationComponent } from 'kit-ui-angular';
@@ -120,7 +122,7 @@ interface Row {id:string;name:string;}
   <kit-timeline-scrubber [events]="[]" (eventChange)="height = $event.index" />
   <kit-ai-prompt-composer [sendHandler]="send" />
 \`})
-export class ConsumerApp1 { readonly noopSearch=(_value:string)=>{};readonly rows:Row[]=[{id:'1',name:'Kit UI'}];readonly columns:ColumnDef<Row>[]=[{id:'name',header:'Name',accessorKey:'name',sortable:true}];readonly rowId=(row:Row)=>row.id;readonly bulk=(ids:string[])=>{this.ids=ids;};ids:string[]=[]; height=0;done=false;readonly upload:UploadHandler=async(_file,{onProgress})=>{onProgress(100);};readonly send:SendHandler=async()=>{}; }
+export class ConsumerApp1 { readonly noopClose=()=>{};readonly noopSearch=(_value:string)=>{};readonly rows:Row[]=[{id:'1',name:'Kit UI'}];readonly columns:ColumnDef<Row>[]=[{id:'name',header:'Name',accessorKey:'name',sortable:true}];readonly rowId=(row:Row)=>row.id;readonly bulk=(ids:string[])=>{this.ids=ids;};ids:string[]=[]; height=0;done=false;readonly upload:UploadHandler=async(_file,{onProgress})=>{onProgress(100);};readonly send:SendHandler=async()=>{}; }
 `,
 `import { Component } from '@angular/core';
 import { ${portImports}, KitElasticSheetComponent, KitSmartUploadComponent, KitLiquidCommandPaletteComponent, KitHoldToConfirmComponent, KitSwipeActionListComponent, KitInteractiveDataCardComponent, KitTimelineScrubberComponent, KitAIPromptComposerComponent, type UploadHandler, type SendHandler, type AgentActivityItemData, KitAgentActivityHeaderComponent, KitAgentActivityTimelineComponent, KitAgentActivityItemComponent } from 'kit-ui-angular';
@@ -138,7 +140,7 @@ import { ${portImports}, KitElasticSheetComponent, KitSmartUploadComponent, KitL
   <kit-timeline-scrubber [events]="[]" (eventChange)="height = $event.index" />
   <kit-ai-prompt-composer [sendHandler]="send" />
 \`})
-export class ConsumerApp2 { readonly noopSearch=(_value:string)=>{};readonly activities:AgentActivityItemData[]=[{id:'trace',type:'thinking',title:'Analyze',status:'success',details:{input:{query:'hello'},output:'Ready',codeSnippet:'const ready = true;',language:'typescript'},metadata:{score:2}}]; height=0;done=false;readonly upload:UploadHandler=async(_file,{onProgress})=>{onProgress(100);};readonly send:SendHandler=async()=>{}; }
+export class ConsumerApp2 { readonly noopClose=()=>{};readonly noopSearch=(_value:string)=>{};readonly activities:AgentActivityItemData[]=[{id:'trace',type:'thinking',title:'Analyze',status:'success',details:{input:{query:'hello'},output:'Ready',codeSnippet:'const ready = true;',language:'typescript'},metadata:{score:2}}]; height=0;done=false;readonly upload:UploadHandler=async(_file,{onProgress})=>{onProgress(100);};readonly send:SendHandler=async()=>{}; }
 `,
 `import { Component } from '@angular/core';
 import { ${portImports}, KitElasticSheetComponent, KitSmartUploadComponent, KitLiquidCommandPaletteComponent, KitHoldToConfirmComponent, KitSwipeActionListComponent, KitInteractiveDataCardComponent, KitTimelineScrubberComponent, KitAIPromptComposerComponent, type UploadHandler, type SendHandler } from 'kit-ui-angular';
@@ -153,7 +155,7 @@ import { ${portImports}, KitElasticSheetComponent, KitSmartUploadComponent, KitL
   <kit-timeline-scrubber [events]="[]" (eventChange)="height = $event.index" />
   <kit-ai-prompt-composer [onSend]="send" />
 \`})
-export class ConsumerApp3 { readonly noopSearch=(_value:string)=>{}; height=0;done=false;readonly upload:UploadHandler=async(_file,{onProgress})=>{onProgress(100);};readonly send:SendHandler=async()=>{}; }
+export class ConsumerApp3 { readonly noopClose=()=>{};readonly noopSearch=(_value:string)=>{}; height=0;done=false;readonly upload:UploadHandler=async(_file,{onProgress})=>{onProgress(100);};readonly send:SendHandler=async()=>{}; }
 `,
 `import { Component } from '@angular/core';
 import { ${portImports}, KitElasticSheetComponent, KitSmartUploadComponent, KitLiquidCommandPaletteComponent, KitHoldToConfirmComponent, KitSwipeActionListComponent, KitInteractiveDataCardComponent, KitTimelineScrubberComponent, KitAIPromptComposerComponent, type UploadHandler, type SendHandler } from 'kit-ui-angular';
@@ -169,7 +171,7 @@ import { ${portImports}, KitElasticSheetComponent, KitSmartUploadComponent, KitL
   <kit-loader [size]="48" variant="rings" color="#ff8800" label="Working" [reduceMotion]="true" className="consumer-loader" aria-label="Override" />
   <kit-ai-prompt-composer [sendHandler]="send" />
 \`})
-export class ConsumerApp4 { readonly noopSearch=(_value:string)=>{}; height=0;done=false;readonly upload:UploadHandler=async(_file,{onProgress})=>{onProgress(100);};readonly send:SendHandler=async()=>{}; }
+export class ConsumerApp4 { readonly noopClose=()=>{};readonly noopSearch=(_value:string)=>{}; height=0;done=false;readonly upload:UploadHandler=async(_file,{onProgress})=>{onProgress(100);};readonly send:SendHandler=async()=>{}; }
 `,
 `import { Component } from '@angular/core';
 import { ${portImports}, KitElasticSheetComponent, KitSmartUploadComponent, KitLiquidCommandPaletteComponent, KitHoldToConfirmComponent, KitSwipeActionListComponent, KitInteractiveDataCardComponent, KitTimelineScrubberComponent, KitAIPromptComposerComponent, type UploadHandler, type SendHandler, type ButtonVariant, type ButtonSize } from 'kit-ui-angular';
@@ -186,7 +188,7 @@ import { ${portImports}, KitElasticSheetComponent, KitSmartUploadComponent, KitL
   <kit-timeline-scrubber [events]="[]" (eventChange)="height = $event.index" />
   <kit-ai-prompt-composer [sendHandler]="send" />
 \`})
-export class ConsumerApp5 { readonly noopSearch=(_value:string)=>{}; readonly optionalVariant:ButtonVariant|undefined=undefined;readonly optionalSize:ButtonSize|undefined=undefined;readonly optionalType:'button'|'submit'|'reset'|undefined=undefined;readonly optionalClass:string|undefined=undefined;height=0;done=false;readonly upload:UploadHandler=async(_file,{onProgress})=>{onProgress(100);};readonly send:SendHandler=async()=>{}; }
+export class ConsumerApp5 { readonly noopClose=()=>{};readonly noopSearch=(_value:string)=>{}; readonly optionalVariant:ButtonVariant|undefined=undefined;readonly optionalSize:ButtonSize|undefined=undefined;readonly optionalType:'button'|'submit'|'reset'|undefined=undefined;readonly optionalClass:string|undefined=undefined;height=0;done=false;readonly upload:UploadHandler=async(_file,{onProgress})=>{onProgress(100);};readonly send:SendHandler=async()=>{}; }
 `,
 `import { Component } from '@angular/core';
 import { ${portImports}, KitElasticSheetComponent, KitSmartUploadComponent, KitLiquidCommandPaletteComponent, KitHoldToConfirmComponent, KitSwipeActionListComponent, KitInteractiveDataCardComponent, KitTimelineScrubberComponent, KitAIPromptComposerComponent, type UploadHandler, type SendHandler } from 'kit-ui-angular';
@@ -203,7 +205,7 @@ import { ${portImports}, KitElasticSheetComponent, KitSmartUploadComponent, KitL
   <kit-timeline-scrubber [events]="[]" (eventChange)="height = $event.index" />
   <kit-ai-prompt-composer [sendHandler]="send" />
 \`})
-export class ConsumerApp6 { readonly noopSearch=(_value:string)=>{}; readonly optionalSpeed:number|undefined=undefined;readonly optionalGlow:boolean|undefined=undefined;readonly optionalType:'button'|'submit'|'reset'|undefined=undefined;readonly optionalClass:string|undefined=undefined;height=0;done=false;readonly upload:UploadHandler=async(_file,{onProgress})=>{onProgress(100);};readonly send:SendHandler=async()=>{}; }
+export class ConsumerApp6 { readonly noopClose=()=>{};readonly noopSearch=(_value:string)=>{}; readonly optionalSpeed:number|undefined=undefined;readonly optionalGlow:boolean|undefined=undefined;readonly optionalType:'button'|'submit'|'reset'|undefined=undefined;readonly optionalClass:string|undefined=undefined;height=0;done=false;readonly upload:UploadHandler=async(_file,{onProgress})=>{onProgress(100);};readonly send:SendHandler=async()=>{}; }
 `,
 `import { Component } from '@angular/core';
 import { ${portImports}, KitElasticSheetComponent, KitSmartUploadComponent, KitLiquidCommandPaletteComponent, KitHoldToConfirmComponent, KitSwipeActionListComponent, KitInteractiveDataCardComponent, KitTimelineScrubberComponent, KitAIPromptComposerComponent, type UploadHandler, type SendHandler, type OrbitalLoadingRingVariant } from 'kit-ui-angular';
@@ -220,7 +222,7 @@ import { ${portImports}, KitElasticSheetComponent, KitSmartUploadComponent, KitL
   <kit-timeline-scrubber [events]="[]" (eventChange)="height = $event.index" />
   <kit-ai-prompt-composer [sendHandler]="send" />
 \`})
-export class ConsumerApp7 { readonly noopSearch=(_value:string)=>{}; readonly optionalSize:number|undefined=undefined;readonly optionalSpeed:number|undefined=undefined;readonly optionalVariant:OrbitalLoadingRingVariant|undefined=undefined;readonly optionalLabel:string|undefined=undefined;readonly optionalClass:string|undefined=undefined;height=0;done=false;readonly upload:UploadHandler=async(_file,{onProgress})=>{onProgress(100);};readonly send:SendHandler=async()=>{}; }
+export class ConsumerApp7 { readonly noopClose=()=>{};readonly noopSearch=(_value:string)=>{}; readonly optionalSize:number|undefined=undefined;readonly optionalSpeed:number|undefined=undefined;readonly optionalVariant:OrbitalLoadingRingVariant|undefined=undefined;readonly optionalLabel:string|undefined=undefined;readonly optionalClass:string|undefined=undefined;height=0;done=false;readonly upload:UploadHandler=async(_file,{onProgress})=>{onProgress(100);};readonly send:SendHandler=async()=>{}; }
 `,
 `import { Component } from '@angular/core';
 import { ${portImports}, KitElasticSheetComponent, KitSmartUploadComponent, KitLiquidCommandPaletteComponent, KitHoldToConfirmComponent, KitSwipeActionListComponent, KitInteractiveDataCardComponent, KitTimelineScrubberComponent, KitAIPromptComposerComponent, type UploadHandler, type SendHandler, type SpotlightCardMouseHandler } from 'kit-ui-angular';
@@ -237,7 +239,7 @@ import { ${portImports}, KitElasticSheetComponent, KitSmartUploadComponent, KitL
   <kit-timeline-scrubber [events]="[]" (eventChange)="height = $event.index" />
   <kit-ai-prompt-composer [sendHandler]="send" />
 \`})
-export class ConsumerApp8 { readonly noopSearch=(_value:string)=>{}; readonly optionalColor:string|undefined=undefined;readonly optionalSize:number|undefined=undefined;readonly optionalClass:string|undefined=undefined;readonly optionalHandler:SpotlightCardMouseHandler|undefined=undefined;readonly moved:SpotlightCardMouseHandler=event=>{this.height=event.clientX;}; height=0;done=false;readonly upload:UploadHandler=async(_file,{onProgress})=>{onProgress(100);};readonly send:SendHandler=async()=>{}; }
+export class ConsumerApp8 { readonly noopClose=()=>{};readonly noopSearch=(_value:string)=>{}; readonly optionalColor:string|undefined=undefined;readonly optionalSize:number|undefined=undefined;readonly optionalClass:string|undefined=undefined;readonly optionalHandler:SpotlightCardMouseHandler|undefined=undefined;readonly moved:SpotlightCardMouseHandler=event=>{this.height=event.clientX;}; height=0;done=false;readonly upload:UploadHandler=async(_file,{onProgress})=>{onProgress(100);};readonly send:SendHandler=async()=>{}; }
 `,
 `import { Component } from '@angular/core';
 import { ${portImports}, KitElasticSheetComponent, KitSmartUploadComponent, KitLiquidCommandPaletteComponent, KitHoldToConfirmComponent, KitSwipeActionListComponent, KitInteractiveDataCardComponent, KitTimelineScrubberComponent, KitAIPromptComposerComponent, type UploadHandler, type SendHandler, type MorphingIconStyle } from 'kit-ui-angular';
@@ -253,7 +255,7 @@ import { ${portImports}, KitElasticSheetComponent, KitSmartUploadComponent, KitL
   <kit-timeline-scrubber [events]="[]" (eventChange)="height = $event.index" />
   <kit-ai-prompt-composer [sendHandler]="send" />
 \`})
-export class ConsumerApp9 { readonly noopSearch=(_value:string)=>{}; readonly optionalActive:boolean|undefined=undefined;readonly optionalSize:number|undefined=undefined;readonly optionalDuration:number|undefined=undefined;readonly optionalClass:string|undefined=undefined;readonly optionalStyle:MorphingIconStyle|undefined=undefined;height=0;done=false;readonly upload:UploadHandler=async(_file,{onProgress})=>{onProgress(100);};readonly send:SendHandler=async()=>{}; }
+export class ConsumerApp9 { readonly noopClose=()=>{};readonly noopSearch=(_value:string)=>{}; readonly optionalActive:boolean|undefined=undefined;readonly optionalSize:number|undefined=undefined;readonly optionalDuration:number|undefined=undefined;readonly optionalClass:string|undefined=undefined;readonly optionalStyle:MorphingIconStyle|undefined=undefined;height=0;done=false;readonly upload:UploadHandler=async(_file,{onProgress})=>{onProgress(100);};readonly send:SendHandler=async()=>{}; }
 `
   ];
   consumerSources.push(`import {Component} from '@angular/core';
@@ -283,6 +285,7 @@ export class IOSConsumer{value='';readonly change=(value:string)=>{this.value=va
   consumerSources.push(`import {Component,TemplateRef} from '@angular/core';import {KitDotFieldComponent,KitFloatingActionDockComponent,type DockItem} from 'kit-ui-angular';@Component({selector:'batch-twenty-three-consumer',imports:[KitDotFieldComponent,KitFloatingActionDockComponent],template:\`<kit-dot-field [dotRadius]="number" [dotSpacing]="number" [gradientFrom]="text" [gradientTo]="text" [className]="text" [style]="styles"/><div kitDotField [dotRadius]="number" [dotSpacing]="number" [style]="styles" [attr.aria-hidden]="false" data-native="dots"></div><ng-template #icon>Icon</ng-template><kit-floating-action-dock [items]="items(icon)" [activeId]="text" [className]="text"/>\`})export class BatchTwentyThreeConsumer{number:number|undefined;text:string|undefined;styles:Record<string,string|number>|undefined;items(icon:TemplateRef<unknown>):DockItem[]{return [{id:'a',label:'Action',icon,badge:true,onClick:()=>{}}]}}`);
   consumerSources.push(`import {Component} from '@angular/core';import {KitDensityLensComponent,KitGravityParticleBurstComponent} from 'kit-ui-angular';@Component({selector:'batch-twenty-four-consumer',imports:[KitDensityLensComponent,KitGravityParticleBurstComponent],template:\`<ng-template #content>Content</ng-template><ng-template #lens let-x="x" let-scale="scale">{{x}} {{scale}}</ng-template><kit-density-lens [children]="content" [renderLensContent]="lens" [lensSize]="number" [lensShape]="shape" [zoomScale]="number" [showBorder]="flag" [onMouseEnter]="mouse" [onMouseLeave]="mouse" [onMouseMove]="mouse"/><div kitDensityLens [children]="text" [className]="text" [style]="styles" aria-label="Inspect"></div><kit-gravity-particle-burst [label]="text" [particleCount]="number" [children]="content" [className]="text" [onPointerDown]="pointer" [onClick]="mouse"/><div kitGravityParticleBurst [label]="text" [style]="styles" data-consumer="burst"></div>\`})export class BatchTwentyFourConsumer{number:number|undefined;text:string|undefined;flag:boolean|undefined;shape:'circle'|'oval'|'square'|undefined;styles:Record<string,string|number>|undefined;mouse:((event:MouseEvent)=>void)|undefined;pointer:((event:PointerEvent)=>void)|undefined;}`);
   consumerSources.push(`import {Component,TemplateRef} from '@angular/core';import {KitElasticSheetComponent,KitSelectionBasketComponent,type SelectionActionItem} from 'kit-ui-angular';@Component({selector:'batch-twenty-five-consumer',imports:[KitElasticSheetComponent,KitSelectionBasketComponent],template:\`<ng-template #sheetContent><button>Details</button></ng-template><kit-elastic-sheet [children]="sheetContent" [title]="text" [disabled]="flag" [snapPositions]="snaps" [onSnapChange]="snap" (snapChange)="changed($event)"><button>Details</button></kit-elastic-sheet><ng-template #icon><b>Icon</b></ng-template><kit-selection-basket [selectedCount]="2" [totalCount]="total" [mode]="mode" [actions]="items(icon)" [onClearSelection]="clear" [onSelectAll]="clear" [className]="text"/>\`})export class BatchTwentyFiveConsumer{text:string|undefined;flag:boolean|undefined;snaps:number[]|undefined;total:number|undefined;mode:'fixed'|'contained'|'inline'|undefined;snap:((value:number)=>void)|undefined;clear:(()=>void)|undefined;changed(value:number):void{}items(icon:TemplateRef<unknown>):SelectionActionItem[]{return [{id:'a',label:'Action',icon,variant:'primary',onClick:()=>{}}]}}`);
+  consumerSources.push(`import {Component,TemplateRef} from '@angular/core';import {KitSettleModalComponent,KitStackUnfoldPanelComponent,type SettleModalContent,type StackCard} from 'kit-ui-angular';@Component({selector:'batch-twenty-six-consumer',imports:[KitSettleModalComponent,KitStackUnfoldPanelComponent],template:\`<ng-template #content><button>Content</button></ng-template><kit-settle-modal [open]="open" [onClose]="close" [title]="text" [description]="content" [children]="content" [footer]="content" [hideCloseButton]="flag" [closeOnBackdrop]="flag" [size]="size" [className]="text"/><kit-stack-unfold-panel [cards]="cards(content)" [expandedIds]="expanded" [onExpandedChange]="change" [allowMultiple]="flag" [variant]="variant" [className]="text"/>\`})export class BatchTwentySixConsumer{open=false;readonly close=()=>{};text:string|undefined;flag:boolean|undefined;size:'sm'|'md'|'lg'|undefined;variant:'default'|'minimal'|undefined;expanded:string[]|undefined;change:((ids:string[])=>void)|undefined;content:SettleModalContent;cards(content:TemplateRef<unknown>):StackCard[]{return [{id:'a',title:'Card',content,subtitle:'Details',badge:'READY',disabled:false}]}}`);
   consumerSources.forEach((source, index) => fs.writeFileSync(path.join(target, `app${index}.ts`), source));
   fs.writeFileSync(
     path.join(target, "tsconfig.json"),
