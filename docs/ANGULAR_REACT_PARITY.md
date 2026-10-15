@@ -2,14 +2,14 @@
 
 React is the source of truth for component appearance, interactions, data contracts, options and defaults. Angular implementations stay native; template projection and output events provide Angular equivalents for React nodes and callbacks. Catalog coverage does not establish parity.
 
-Current progress: 71 components have validated baselines (21 merged plus fifty validated on pending batch branches); 45 remain unvalidated. Batch 28 adds Animated Tabs and Scroll Velocity Text. See [batch 28 evidence](parity/batch-28-integration.md) and the [completed component list](parity/completed-components.md).
+Current progress: 73 components have validated baselines (21 merged plus 52 validated on pending batch branches); 43 remain unvalidated. Batch 29 adds Small Floating Dock and Branching Submenu. See [batch 29 evidence](parity/batch-29-integration.md) and the [completed component list](parity/completed-components.md).
 
 User priority: finish simpler components first. AI Response work is preserved on `feat/angular-ai-response-parity` and remains in progress. Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work proceeds in batches of two, with focused component checks during implementation and one full baseline before batch merge. Batch 2 merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); batch 3 merged through [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Batch 4 and its stacked batch 5 are locally validated and await integration. The original inventory order remains below for tracking, not execution priority.
 
 ## Pending work
 
-- Review and fix the remaining 45 components listed below: 44 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
-- Review and integrate batches 4 through 28 in order. Continue with two queued components at a time.
+- Review and fix the remaining 43 components listed below: 42 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
+- Review and integrate batches 4 through 29 in order. Continue with two queued components at a time.
 - Before integration, audit earlier parity fixture HTML for standard doctype and viewport metadata, including batches 11 through 19. Batch 23 corrects these headers and renews browser checks for batches 20 through 23. Earlier mobile input/reduced-motion checks alone do not prove narrow responsive layouts in standards mode.
 - Resume AI Response later from local `kit-ui-angular-response` on `feat/angular-ai-response-parity`. Its unfinished changes and audit at `docs/parity/ai-response-audit.md` remain preserved in that worktree and are not merged or validated.
 - After all 116 components have validated baselines, the user will perform the full QA run. Address the resulting feedback before calling the overall parity effort complete.
@@ -42,7 +42,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 10 | Avatar Stack | `avatar-stack` | Validated locally; integration pending | [Report](parity/avatar-stack.md) |
 | 11 | Batch Gesture Tray | `batch-gesture-tray` | Queued | — |
 | 12 | Book Call Button | `book-call-button` | Validated locally; integration pending | [Report](parity/book-call-button.md) |
-| 13 | Branching Submenu | `branching-submenu` | Queued | — |
+| 13 | Branching Submenu | `branching-submenu` | Validated locally; integration pending | [Report](parity/branching-submenu.md) |
 | 14 | Button | `button` | Validated baseline | [Review](parity/button.md) |
 | 15 | Car Smoke Page Transition | `car-smoke-page-transition` | Queued | — |
 | 16 | Chat | `chat` | Queued | — |
@@ -121,7 +121,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 89 | Shooting Stars | `shooting-stars` | Queued | — |
 | 90 | Sign Up | `sign-up` | Queued | — |
 | 91 | SlidePagination | `slide-pagination` | Validated locally; integration pending | [Report](parity/slide-pagination.md) |
-| 92 | Small Floating Dock | `small-floating-dock` | Queued | — |
+| 92 | Small Floating Dock | `small-floating-dock` | Validated locally; integration pending | [Report](parity/small-floating-dock.md) |
 | 93 | Smart Comparison | `smart-comparison` | Queued | — |
 | 94 | Smart Upload | `smart-upload` | Validated locally; integration pending | [Report](parity/smart-upload.md) |
 | 95 | Smooth Accordion | `smooth-accordion` | Validated baseline | [Report](parity/smooth-accordion.md) |

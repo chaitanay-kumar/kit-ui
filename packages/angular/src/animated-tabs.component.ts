@@ -30,7 +30,7 @@ private internal=signal('');readonly activeId=computed(()=>this.activeTab()!==un
 readonly root=viewChild.required<ElementRef<HTMLElement>>('root');readonly displayed=signal<AnimatedTabItem|undefined>(undefined);
 private initialized=false;private phase:'enter'|'exit'='enter';private pending:AnimatedTabItem|undefined;private contentMotion:AnimatedTabsContentMotion|undefined;private indicatorMotion:AnimatedTabsIndicatorMotion|undefined;private zone=inject(NgZone);
 ngOnInit():void{this.internal.set(this.defaultTab()||this.tabs()[0]?.id||'');this.initialized=true;this.syncContent()}
-ngOnChanges(changes:SimpleChanges):void{this.indicatorMotion?.capture();if(!this.initialized)return;if((changes['defaultTab']||changes['activeTab'])&&this.defaultTab()&&this.activeTab()===undefined)this.internal.set(this.defaultTab()!);this.syncContent()}
+ngOnChanges(changes:SimpleChanges):void{this.indicatorMotion?.capture(true);if(!this.initialized)return;if((changes['defaultTab']||changes['activeTab'])&&this.defaultTab()&&this.activeTab()===undefined)this.internal.set(this.defaultTab()!);this.syncContent()}
 choose(id:string):void{this.indicatorMotion?.capture();if(this.activeTab()===undefined)this.internal.set(id);this.syncContent();this.onChange()?.(id)}
 private syncContent():void{
  if(!this.renderContent()){this.contentMotion?.destroy();this.contentMotion=undefined;this.displayed.set(undefined);this.pending=undefined;this.phase='enter';return}

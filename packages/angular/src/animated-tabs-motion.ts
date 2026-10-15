@@ -45,20 +45,21 @@ const mixRect = (from:IndicatorRect,to:IndicatorRect,p:number):IndicatorRect => 
 class AnimatedTabsIndicatorGroup {
  readonly members=new Set<AnimatedTabsIndicatorMotion>();
  lead:AnimatedTabsIndicatorMotion|undefined;
- private from:IndicatorRect|undefined;
+ private from:IndicatorRect|undefined;private initialSnapshot:IndicatorRect|undefined;
  private to:IndicatorRect|undefined;
  private progress:Batch20Spring={value:1,target:1,velocity:0,restDelta:.0005,restSpeed:.01};
  private frame=0;private last=0;private ready=false;private readyFrame:number;
  private active=false;private crossfade=false;private onlyMember=true;private fromOpacity=1;private leadOpacity=1;
  constructor(private dispose:()=>void){this.readyFrame=requestAnimationFrame(()=>{this.ready=true;this.readyFrame=0})}
  add(member:AnimatedTabsIndicatorMotion):void{
-  const old=this.snapshot();this.members.add(member);
+  const old=this.snapshot(true);if(!this.members.size&&member.base)this.initialSnapshot={...member.base};this.members.add(member);
   if(this.ready&&old&&this.lead)this.promote(member,old);else this.lead=member;
  }
- snapshot():IndicatorRect|undefined{return this.active&&this.from&&this.to?mixRect(this.from,this.to,this.progress.value):this.lead?.base?{...this.lead.base}:undefined}
+ snapshot(initialOrigin=false):IndicatorRect|undefined{return this.active&&this.from&&this.to?mixRect(this.from,this.to,this.progress.value):initialOrigin&&this.initialSnapshot?{...this.initialSnapshot}:this.lead?.base?{...this.lead.base}:undefined}
+ refreshInitialSnapshot():void{this.initialSnapshot=undefined}
  refresh():void{this.paint()}
  promote(member:AnimatedTabsIndicatorMotion,from:IndicatorRect,shared=true):void{
-  if(!member.base)return;this.fromOpacity=this.active?this.leadOpacity:1;this.lead=member;this.from=from;this.to=member.base;this.active=true;this.onlyMember=this.members.size<=1;this.crossfade=shared&&!this.onlyMember;
+  if(!member.base)return;this.initialSnapshot=undefined;this.fromOpacity=this.active?this.leadOpacity:1;this.lead=member;this.from=from;this.to=member.base;this.active=true;this.onlyMember=this.members.size<=1;this.crossfade=shared&&!this.onlyMember;
   this.progress={value:0,target:1,velocity:0,restDelta:.0005,restSpeed:.01};
   cancelAnimationFrame(this.frame);this.frame=0;this.paint();
   // Source flushes pending projection updates during the layout commit.
@@ -90,13 +91,13 @@ export class AnimatedTabsIndicatorMotion {
  private node:HTMLElement|undefined;
  private key:string|undefined;
  private group:AnimatedTabsIndicatorGroup|undefined;
- constructor(private root:HTMLElement){}
- capture():void{const value=this.visualRect();if(value)this.before=value}
+ constructor(private root:HTMLElement,private selector='.k-tabs-indicator'){}
+ capture(refreshInitial=false):void{if(refreshInitial)this.group?.refreshInitialSnapshot();const value=this.visualRect();if(value)this.before=value}
  visualRect():IndicatorRect|undefined{const value=this.node?.getBoundingClientRect();return value?rect(value):undefined}
  rendered(key:string):void{
-  const node=this.root.querySelector<HTMLElement>('.k-tabs-indicator')??undefined;
+  const node=this.root.querySelector<HTMLElement>(this.selector)??undefined;
   if(!node){this.leave();this.base=undefined;this.before=undefined;this.node=undefined;return}
-  const previousNode=this.node,current=this.before??this.visualRect(),sharedSnapshot=this.group?.snapshot();
+  const previousNode=this.node,current=this.before??this.visualRect(),sharedSnapshot=this.group?.snapshot(previousNode!==node);
   const transform=node.style.transform;node.style.transform='none';const base=rect(node.getBoundingClientRect());node.style.transform=transform;
   const changed=!this.base||(['x','y','width','height'] as const).some(k=>base[k]!==this.base![k]);
   if(this.key!==key)this.leave();
