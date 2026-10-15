@@ -2,14 +2,14 @@
 
 React is the source of truth for component appearance, interactions, data contracts, options and defaults. Angular implementations stay native; template projection and output events provide Angular equivalents for React nodes and callbacks. Catalog coverage does not establish parity.
 
-Current progress: 45 components have validated baselines (21 merged plus twenty-four validated on pending batch branches) and 71 await review. Batch 15 adds Glitch Text and DirectionalTooltip. See [batch 15 evidence](parity/batch-15-integration.md).
+Current progress: 47 components have validated baselines (21 merged plus twenty-six validated on pending batch branches) and 69 await review. Batch 16 adds Airport Matrix Clock and Metric HUD. See [batch 16 evidence](parity/batch-16-integration.md).
 
 User priority: finish simpler components first. AI Response work is preserved on `feat/angular-ai-response-parity` and remains in progress. Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work proceeds in batches of two, with focused component checks during implementation and one full baseline before batch merge. Batch 2 merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); batch 3 merged through [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Batch 4 and its stacked batch 5 are locally validated and await integration. The original inventory order remains below for tracking, not execution priority.
 
 ## Pending work
 
-- Review and fix the remaining 71 components listed below: 70 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
-- Review and integrate batches 4 through 15 in order. Continue with two queued components at a time.
+- Review and fix the remaining 69 components listed below: 68 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
+- Review and integrate batches 4 through 16 in order. Continue with two queued components at a time.
 - Resume AI Response later from local `kit-ui-angular-response` on `feat/angular-ai-response-parity`. Its unfinished changes and audit at `docs/parity/ai-response-audit.md` remain preserved in that worktree and are not merged or validated.
 - After all 116 components have validated baselines, the user will perform the full QA run. Address the resulting feedback before calling the overall parity effort complete.
 
@@ -34,7 +34,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 3 | AI Agent Activity | `ai-agent-activity` | Validated baseline | [Review](parity/ai-agent-activity.md) |
 | 4 | AI Prompt Composer | `ai-prompt-composer` | Validated baseline | [Review](parity/ai-prompt-composer.md) |
 | 5 | AI Response | `ai-response` | In progress, deferred for simpler controls | Local audit on deferred branch |
-| 6 | Airport Matrix Clock | `airport-matrix-clock` | Queued | — |
+| 6 | Airport Matrix Clock | `airport-matrix-clock` | Validated locally; integration pending | [Report](parity/airport-matrix-clock.md) |
 | 7 | Animated File Upload | `animated-file-upload` | Queued | — |
 | 8 | Animated Number Morph | `animated-number` | Validated locally; integration pending | [Report](parity/animated-number.md) |
 | 9 | Animated Tabs | `animated-tabs` | Queued | — |
@@ -86,7 +86,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 55 | macOS Folder Cards | `mac-os-folder-cards` | Queued | — |
 | 56 | Magnetic Button | `magnetic-button` | Validated baseline | [Review](parity/magnetic-button.md) |
 | 57 | Meteors | `meteors` | Queued | — |
-| 58 | Metric HUD | `metric-hud` | Queued | — |
+| 58 | Metric HUD | `metric-hud` | Validated locally; integration pending | [Report](parity/metric-hud.md) |
 | 59 | Morphing Blob | `morphing-blob` | Queued | — |
 | 60 | Morphing Button | `morphing-button` | Validated baseline | [Review](parity/morphing-button.md) |
 | 61 | Morphing Dialog | `morphing-dialog` | Queued | — |

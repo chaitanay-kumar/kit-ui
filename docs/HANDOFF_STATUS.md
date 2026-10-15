@@ -2,6 +2,12 @@
 
 ## Latest batch handoff - 2026-10-13
 
+Airport Matrix Clock and Metric HUD are validated on `feat/angular-parity-batch-16`, stacked on batch 15 commit `e803245`. See [batch 16 evidence](parity/batch-16-integration.md). Their single-clock and scalar-progress placeholders are replaced by React-compatible multi-city and telemetry-series contracts.
+
+The focused generated contract, Angular build and 16 React/Angular desktop/mobile browser cases pass. Progress is 21 merged plus twenty-six locally validated baselines, with 69 components awaiting review.
+
+## Previous batch handoff - 2026-10-13
+
 Glitch Text and DirectionalTooltip are validated on `feat/angular-parity-batch-15`, stacked on batch 14 commit `a91cccb`. See [batch 15 evidence](parity/batch-15-integration.md). Their generic text and tooltip ports are replaced by React-compatible glitch variants/triggers and delayed projected-tooltip contracts.
 
 The focused generated contract, Angular build and 16 React/Angular desktop/reduced-motion-mobile browser cases pass. Progress is 21 merged plus twenty-four locally validated baselines, with 71 components awaiting review.

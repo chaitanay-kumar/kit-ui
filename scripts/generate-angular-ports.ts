@@ -41,6 +41,8 @@ import { introLoaderPort } from "./angular-intro-loader";
 import { morphingShapeLoaderPort } from "./angular-morphing-shape-loader";
 import { glitchTextPort } from "./angular-glitch-text";
 import { directionalTooltipPort } from "./angular-directional-tooltip";
+import { airportMatrixClockPort } from "./angular-airport-matrix-clock";
+import { metricHudPort } from "./angular-metric-hud";
 const root = process.cwd();
 type Kind = "action" | "collection" | "form" | "canvas" | "plain";
 interface Port {
@@ -589,6 +591,7 @@ for (const [id, variant] of [
 add("glitch-text","plain",glitchTextPort.description,glitchTextPort.template,glitchTextPort.body,glitchTextPort);
 add("animated-number","plain",animatedNumberPort.description,animatedNumberPort.template,animatedNumberPort.body,animatedNumberPort);
 add("unfold-accordion","plain",unfoldAccordionPort.description,unfoldAccordionPort.template,unfoldAccordionPort.body,unfoldAccordionPort);
+/* Legacy airport clock and metric HUD replaced by authored React-contract ports.
 add(
   "airport-matrix-clock",
   "plain",
@@ -617,6 +620,9 @@ add(
     ],
   },
 );
+*/
+add("airport-matrix-clock","plain",airportMatrixClockPort.description,airportMatrixClockPort.template,airportMatrixClockPort.body,airportMatrixClockPort);
+add("metric-hud","plain",metricHudPort.description,metricHudPort.template,metricHudPort.body,metricHudPort);
 add(
   "torque-dial",
   "plain",

@@ -87,15 +87,18 @@ export const ANGULAR_PORTS = [
     "name": "Airport Matrix Clock",
     "exportName": "KitAirportMatrixClockComponent",
     "selector": "kit-airport-matrix-clock",
-    "description": "A live timezone-aware split-flap-style clock with pause and accessible time text.",
+    "description": "A live multi-city airport-board clock with React-compatible city selection, formatting, controls and change callbacks.",
     "inputs": [
-      "label: string",
-      "timeZone: string",
-      "paused: boolean (two-way)"
+      "cities: AirportMatrixCityId[]",
+      "format: '12h' | '24h'",
+      "showSeconds: boolean",
+      "updateInterval: number",
+      "showCountry: boolean",
+      "showControls: boolean",
+      "onCitiesChange: (cities: AirportMatrixCityId[]) => void",
+      "className: string"
     ],
-    "outputs": [
-      "pausedChange: boolean"
-    ]
+    "outputs": []
   },
   {
     "id": "animated-file-upload",
@@ -1011,15 +1014,12 @@ export const ANGULAR_PORTS = [
     "name": "Metric HUD",
     "exportName": "KitMetricHudComponent",
     "selector": "kit-metric-hud",
-    "description": "A metric readout with bounded progress, signed trend and application-controlled loading/error states.",
+    "description": "An interactive telemetry HUD with selectable metrics and ranges, trend/status semantics, copy feedback and an inspectable SVG series.",
     "inputs": [
-      "label: string",
-      "value: number",
-      "max: number",
-      "unit: string",
-      "trend: number",
-      "loading: boolean",
-      "error: string"
+      "metrics: MetricItem[]",
+      "timeRanges: string[]",
+      "defaultTimeRange: string",
+      "className: string"
     ],
     "outputs": []
   },
