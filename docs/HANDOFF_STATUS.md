@@ -2,6 +2,12 @@
 
 ## Latest batch handoff - 2026-10-13
 
+Glitch Text and DirectionalTooltip are validated on `feat/angular-parity-batch-15`, stacked on batch 14 commit `a91cccb`. See [batch 15 evidence](parity/batch-15-integration.md). Their generic text and tooltip ports are replaced by React-compatible glitch variants/triggers and delayed projected-tooltip contracts.
+
+The focused generated contract, Angular build and 16 React/Angular desktop/reduced-motion-mobile browser cases pass. Progress is 21 merged plus twenty-four locally validated baselines, with 71 components awaiting review.
+
+## Previous batch handoff - 2026-10-13
+
 Intro Loader and Morphing Shape Loader are validated on `feat/angular-parity-batch-14`, stacked on batch 13 commit `1e98d35`. See [batch 14 evidence](parity/batch-14-integration.md). Their shared generic loader implementation is replaced by separate React-compatible welcome-sequence and matched-path SVG contracts, including reduced motion.
 
 The focused generated contract, Angular build and 16 React/Angular desktop/reduced-motion-mobile browser cases pass. Progress is 21 merged plus twenty-two locally validated baselines, with 73 components awaiting review.

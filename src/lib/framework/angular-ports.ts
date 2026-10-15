@@ -421,12 +421,16 @@ export const ANGULAR_PORTS = [
     "name": "DirectionalTooltip",
     "exportName": "KitDirectionalTooltipComponent",
     "selector": "kit-directional-tooltip",
-    "description": "A directional tooltip available on hover, keyboard focus and touch, dismissible with Escape.",
+    "description": "A projected directional tooltip with hover and focus delay, rich content, alignment, arrow, force-open state and timer cleanup.",
     "inputs": [
-      "label: string",
-      "text: string",
-      "placement: 'top' | 'bottom' | 'left' | 'right'",
-      "disabled: boolean"
+      "content: TooltipContent",
+      "side: TooltipSide",
+      "align: TooltipAlign",
+      "delayDuration: number",
+      "showArrow: boolean",
+      "offset: number",
+      "className: string",
+      "forceOpen: boolean"
     ],
     "outputs": []
   },
@@ -685,11 +689,21 @@ export const ANGULAR_PORTS = [
     "name": "Glitch Text",
     "exportName": "KitGlitchTextComponent",
     "selector": "kit-glitch-text",
-    "description": "Configurable readable text with a restrained visual treatment and reduced-motion fallback.",
+    "description": "A five-variant glitch text effect with continuous, hover and click triggers, color aliases, intensity and reduced-motion cleanup.",
     "inputs": [
       "text: string",
-      "paused: boolean",
-      "disabled: boolean"
+      "variant: GlitchVariant",
+      "trigger: GlitchTrigger",
+      "color1: string",
+      "greenColor: string",
+      "color2: string",
+      "purpleColor: string",
+      "intensity: GlitchIntensity",
+      "duration: number",
+      "repeatDelay: number",
+      "as: string",
+      "className: string",
+      "onClick: (event: MouseEvent) => void"
     ],
     "outputs": []
   },
