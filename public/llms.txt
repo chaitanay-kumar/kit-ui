@@ -244,7 +244,7 @@ All 116 catalog components have native standalone Angular implementations. Use t
 - [SpringSelect for Angular](http://localhost:5173/components/spring-select?framework=angular): A native accessible select with keyboard typeahead and selected-item output.
 - [Stack Unfold Panel for Angular](http://localhost:5173/components/stack-unfold-panel?framework=angular): A keyed card stack with source-controlled expansion, callback-only or internal state, native disabled triggers, template content and spring unfolding/layout.
 - [Stacked Cards for Angular](http://localhost:5173/components/stacked-cards?framework=angular): A configurable content card collection with selection, disclosure, disabled items and projected details.
-- [Sticky Pages for Angular](http://localhost:5173/components/sticky-pages?framework=angular): Scrollable page sections with contained sticky headers and readable long-content layout.
+- [Sticky Pages for Angular](http://localhost:5173/components/sticky-pages?framework=angular): Native CSS sticky page stacking with configurable height/offsets, data content and projected page templates.
 - [Story Cards for Angular](http://localhost:5173/components/story-card?framework=angular): A configurable content card collection with selection, disclosure, disabled items and projected details.
 - [StretchSwitch for Angular](http://localhost:5173/components/stretch-switch?framework=angular): React-matched controlled or uncontrolled switch with initial defaultChecked, text or template label, description, change callback and spring thumb motion.
 - [Text Scramble Decoder for Angular](http://localhost:5173/components/text-scramble-decoder?framework=angular): Readable text decoded through staged glyphs with mount, hover and manual triggers, live reduced motion and cancellation.
@@ -254,7 +254,7 @@ All 116 catalog components have native standalone Angular implementations. Use t
 - [Undo Toast for Angular](http://localhost:5173/components/undo-toast?framework=angular): A positioned undo toast with synchronized visibility, variants, pausable countdown, restored state and dismissal cleanup.
 - [UnfoldAccordion for Angular](http://localhost:5173/components/unfold-accordion?framework=angular): React-matched native accordion with initial defaultOpen, single/multiple disclosure, typed template content and coordinated height, opacity, spacing and chevron motion.
 - [VelocityToast for Angular](http://localhost:5173/components/velocity-toast?framework=angular): Dismissible notifications with restore actions and restrained live announcements.
-- [Wallet Card for Angular](http://localhost:5173/components/wallet-card?framework=angular): A configurable content card collection with selection, disclosure, disabled items and projected details.
+- [Wallet Card for Angular](http://localhost:5173/components/wallet-card?framework=angular): A native wallet balance card with configurable labels, disabled action and pointer-following cyan shine.
 
 ## Resources
 

@@ -33,7 +33,7 @@ const portTemplates = ports.map((port) => requiredPortTemplates[port.id] ?? (por
 // Each consumer installs and runs its own compiler. Reusing the repository's
 // compiler would miss incompatibilities with older Angular versions.
 const {angularUsage,ANGULAR_COMPONENTS}=await tsImport('../src/lib/framework/angular-catalog.ts',import.meta.url);
-const parityUsageSources=['animated-tabs','scrollvelocitytext','small-floating-dock','branching-submenu','glass-navbar','scroll-progress-nav'].map(id=>angularUsage(ANGULAR_COMPONENTS.find(entry=>entry.id===id)));
+const parityUsageSources=['animated-tabs','scrollvelocitytext','small-floating-dock','branching-submenu','glass-navbar','scroll-progress-nav','wallet-card','sticky-pages'].map(id=>angularUsage(ANGULAR_COMPONENTS.find(entry=>entry.id===id)));
 const matrix = [
   { angularVersion: "20.0.0", typescript: "5.8.3" },
   { angularVersion: "20.3.33", typescript: "5.9.3" },

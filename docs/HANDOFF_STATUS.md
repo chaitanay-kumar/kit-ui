@@ -1,5 +1,11 @@
 # Implementation handoff — 2026-10-08
 
+## Latest batch handoff — 2026-10-16
+
+Batch 31 implements Wallet Card and Sticky Pages on `feat/angular-parity-batch-31` from `cfcfc68`. See [batch 31 evidence](parity/batch-31-integration.md) for changed files, API migration, recorded checks and coverage limits. Sixteen distinct desktop/mobile browser cases, packaged contracts, 117 unit tests, production build/289 SEO checks and four Angular compiler consumers pass. Review this batch for integration next; 77/116 baselines are recorded, with 39 components remaining (including deferred AI Response).
+
+Batches 4–30 have already been merged and deployed at `cfcfc68`; the older handoffs below retain historical branch status. The earlier standards-mode fixture audit and final user QA are still outstanding.
+
 ## Latest batch handoff - 2026-10-13
 
 Book Call Button and Split Button are validated on `feat/angular-parity-batch-19`, stacked on batch 18 commit `03e8def`. See [batch 19 evidence](parity/batch-19-integration.md). Their scheduling-dialog and generic async-action ports are replaced by React-compatible link/button CTA and split-menu contracts.

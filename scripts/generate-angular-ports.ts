@@ -1,3 +1,5 @@
+import {walletCardPort} from './angular-wallet-card';
+import {stickyPagesPort} from './angular-sticky-pages';
 import {glassNavbarPort} from './angular-glass-navbar';
 import {scrollProgressNavPort} from './angular-scroll-progress-nav';
 import {branchingSubmenuPort} from './angular-branching-submenu';
@@ -390,7 +392,6 @@ add(
 
 // Data and account cards use actual inputs and local disclosure, not screenshots.
 for (const [id, title, layout] of [
-  ["wallet-card", "Your wallet", "wallet"],
   ["mac-os-folder-cards", "Project folders", "folders"],
   ["stacked-cards", "Your collection", "stacked"],
   ["story-card", "Your stories", "stories"],
@@ -418,12 +419,8 @@ add(
 );
 */
 add("avatar-stack","plain",avatarStackPort.description,avatarStackPort.template,avatarStackPort.body,avatarStackPort);
-add(
-  "sticky-pages",
-  "collection",
-  "Scrollable page sections with contained sticky headers and readable long-content layout.",
-  `<div class="kit-control k-scroll-page" tabindex="0" aria-label="Sticky pages">@for(item of items();track item.id){<section class="k-sticky-page"><h3>{{item.label}}</h3><p>{{item.description}}</p><ng-content></ng-content><button type="button" [disabled]="disabled()||item.disabled" (click)="select(item)">Open {{item.label}}</button></section>}</div>`,
-);
+add('wallet-card','plain',walletCardPort.description,walletCardPort.template,walletCardPort.body,walletCardPort);
+add('sticky-pages','plain',stickyPagesPort.description,stickyPagesPort.template,stickyPagesPort.body,stickyPagesPort);
 /* Legacy focus mode replaced by the authored React-contract port.
 add(
   "focus-mode",
@@ -757,7 +754,7 @@ for (const port of ports) {
           ? match
           : `[disabled]="loading()||${expression}"`,
     );
-  if (cardDefaults[port.id])
+  if (port.kind === 'collection' && cardDefaults[port.id])
     port.body += `\noverride readonly items=input<KitItem[]>(${JSON.stringify(cardDefaults[port.id])});`;
   if (port.id === "rocket-party-popper")
     port.body = port.body.replace("mode='burst'", "mode='rocket'");

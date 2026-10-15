@@ -1835,24 +1835,18 @@ export const ANGULAR_PORTS = [
     "name": "Sticky Pages",
     "exportName": "KitStickyPagesComponent",
     "selector": "kit-sticky-pages",
-    "description": "Scrollable page sections with contained sticky headers and readable long-content layout.",
+    "description": "Native CSS sticky page stacking with configurable height/offsets, data content and projected page templates.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "pages: StickyPageItem[]",
+      "pageHeight: string",
+      "topOffset: number",
+      "stackOffset: number",
+      "rounded: boolean",
+      "shadow: boolean",
+      "border: boolean",
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "story-card",
@@ -2038,23 +2032,19 @@ export const ANGULAR_PORTS = [
     "name": "Wallet Card",
     "exportName": "KitWalletCardComponent",
     "selector": "kit-wallet-card",
-    "description": "A configurable content card collection with selection, disclosure, disabled items and projected details.",
+    "description": "A native wallet balance card with configurable labels, disabled action and pointer-following cyan shine.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
+      "balance: string",
+      "cardType: string",
+      "cardLastFour: string",
+      "buttonLabel: string",
+      "balanceLabel: string",
       "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "className: string",
+      "onUseWallet: () => void",
+      "onPointerMove: (event: PointerEvent) => void",
+      "onPointerLeave: (event: PointerEvent) => void"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   }
 ];

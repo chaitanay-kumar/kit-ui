@@ -1,3 +1,4 @@
+import {WalletCardDemoComponent,StickyPagesDemoComponent} from './batch31-demos';
 import {GlassNavbarDemoComponent,ScrollProgressNavDemoComponent} from './batch30-demos';
 import {SmallFloatingDockDemoComponent,BranchingSubmenuDemoComponent} from './batch29-demos';
 import {AnimatedTabsDemoComponent,ScrollVelocityDemoComponent} from './batch28-demos';
@@ -72,6 +73,7 @@ import {RainbowButtonDemoComponent} from "./rainbow-button-demo";
   standalone: true,
   imports: [GlassNavbarDemoComponent,ScrollProgressNavDemoComponent,SmallFloatingDockDemoComponent,BranchingSubmenuDemoComponent,AnimatedTabsDemoComponent,ScrollVelocityDemoComponent,StackUnfoldDemoComponent,SettleModalDemoComponent,ElasticSheetDemoComponent,SelectionBasketDemoComponent,DensityLensDemoComponent,GravityParticleBurstDemoComponent,DotFieldDemoComponent,FloatingActionDockDemoComponent,MorphingBlobDemoComponent,CircularOrbitDemoComponent,MeteorsDemoComponent,CursorFollowerDemoComponent,LiquidRippleButtonDemoComponent,AnimatedNumberDemoComponent,UnfoldAccordionDemoComponent,IOSSearchDemoComponent,RevealCardDemoComponent,StretchSwitchDemoComponent,SmoothAccordionDemoComponent,HamburgerMenuDemoComponent,ExpandableSearchDemoComponent,
     PressButtonDemoComponent,ButtonDemoComponent,MagneticButtonDemoComponent,MorphingButtonDemoComponent,TypewriterButtonDemoComponent,RainbowButtonDemoComponent,
+    WalletCardDemoComponent,StickyPagesDemoComponent,
     NeonEdgeButtonDemoComponent,
     OrbitalLoadingRingDemoComponent,
     SpotlightCardDemoComponent,
@@ -121,6 +123,8 @@ import {RainbowButtonDemoComponent} from "./rainbow-button-demo";
       @case("reveal-card"){<kit-reveal-card-demo/>}
       @case("spotlight-card"){<kit-spotlight-card-demo/>}
       @case("morphing-icon"){<kit-morphing-icon-demo/>}
+      @case("wallet-card"){<kit-wallet-card-demo/>}
+      @case("sticky-pages"){<kit-sticky-pages-demo/>}
       @case("glass-navbar"){<kit-glass-navbar-demo/>}
       @case("scroll-progress-nav"){<kit-scroll-progress-nav-demo/>}
       @case("small-floating-dock"){<kit-small-floating-dock-demo/>}

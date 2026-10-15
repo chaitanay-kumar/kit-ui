@@ -147,6 +147,14 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if (entry.id === 'wallet-card') return `import {Component} from '@angular/core';
+import {KitWalletCardComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitWalletCardComponent],template:\`<kit-wallet-card balance="$4,566.00" cardType="Mastercard" cardLastFour="3040" [onUseWallet]="useWallet"/>\`})
+export class ExampleComponent { readonly useWallet=()=>console.log('Wallet requested'); }`;
+  if (entry.id === 'sticky-pages') return `import {Component} from '@angular/core';
+import {KitStickyPagesComponent,type StickyPageItem} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitStickyPagesComponent],template:\`<kit-sticky-pages [pages]="pages" pageHeight="60vh" [stackOffset]="24"/>\`})
+export class ExampleComponent { readonly pages:StickyPageItem[]=[{id:'one',title:'First page',subtitle:'Introduction'},{id:'two',title:'Second page',description:'Keep scrolling.'}]; }`;
   if (entry.id === 'glass-navbar') return `import {Component} from '@angular/core';
 import {KitGlassNavbarComponent,type GlassNavbarItem} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitGlassNavbarComponent],template:\`<ng-template #cta><button type="button">Deploy Now</button></ng-template><kit-glass-navbar [items]="items" [cta]="cta" [sticky]="false" [onItemSelect]="select"/>\`})

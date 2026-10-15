@@ -1,6 +1,6 @@
 # Completed parity checks
 
-75 components have recorded validated baselines: 21 merged and 54 awaiting integration review. Validation scope and remaining limits are recorded in each linked report. This list reflects batch 30; the [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
+77 components have recorded validated baselines: 75 merged through batch 30 and two awaiting integration from batch 31. Validation scope and remaining limits are recorded in each linked report. Older integration-pending labels for batches 4–30 predate their merge at `cfcfc68`. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
 
 | Component | Status | Evidence |
 | --- | --- | --- |
@@ -79,3 +79,5 @@
 | Typewriter Button | Validated baseline | [Review](typewriter-button.md) |
 | Undo Toast | Validated locally; integration pending | [Report](undo-toast.md) |
 | UnfoldAccordion | Validated locally; integration pending | [Report](unfold-accordion.md) |
+| Sticky Pages | Validated locally; integration pending | [Report](sticky-pages.md) |
+| Wallet Card | Validated locally; integration pending | [Report](wallet-card.md) |
