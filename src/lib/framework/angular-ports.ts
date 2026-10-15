@@ -585,24 +585,22 @@ export const ANGULAR_PORTS = [
     "name": "FAQ",
     "exportName": "KitFaqComponent",
     "selector": "kit-faq",
-    "description": "Expandable item details with keyboard-native disclosure and application-owned recovery actions.",
+    "description": "Controlled or uncontrolled FAQ disclosure with search, categories, rich answers and accessibility relationships.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "items: FAQItem[]",
+      "allowMultiple: boolean",
+      "defaultOpen: string[] | string",
+      "openIds: string[]",
+      "onOpenChange: (ids: string[]) => void",
+      "iconStyle: FAQIconStyle",
+      "renderIcon: TemplateRef",
+      "searchable: boolean",
+      "searchPlaceholder: string",
+      "showCategories: boolean",
+      "variant: FAQVariant",
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "floating-action-dock",
@@ -1215,17 +1213,19 @@ export const ANGULAR_PORTS = [
     "name": "OTP Input",
     "exportName": "KitOtpInputComponent",
     "selector": "kit-otp-input",
-    "description": "A one-time-code field with digit validation, paste, autofill and completion output.",
+    "description": "Separate native digit fields with controlled state, paste distribution, focus navigation and completion callbacks.",
     "inputs": [
-      "value: string (two-way)",
-      "length: number (1–12)",
-      "label: string",
-      "disabled: boolean"
+      "length: number",
+      "value: string",
+      "onChange: (value: string) => void",
+      "onComplete: (value: string) => void",
+      "autoFocus: boolean",
+      "disabled: boolean",
+      "className: string",
+      "boxClassName: string",
+      "aria-label: string"
     ],
-    "outputs": [
-      "completed: string",
-      "valueChange: string"
-    ]
+    "outputs": []
   },
   {
     "id": "particle-delete",

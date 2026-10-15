@@ -2,14 +2,14 @@
 
 React is the source of truth for component appearance, interactions, data contracts, options and defaults. Angular implementations stay native; template projection and output events provide Angular equivalents for React nodes and callbacks. Catalog coverage does not establish parity.
 
-Current progress: 27 components have validated baselines (21 merged plus six validated on pending batch branches) and 89 await review. Batch 4 contains UnfoldAccordion and Animated Number Morph; batch 5 contains Interactive Data Card and Timeline Scrubber; batch 6 contains Hold-to-Confirm and Swipe Action List. The pending batches are stacked in order. See [batch 4 evidence](parity/batch-4-integration.md), [batch 5 evidence](parity/batch-5-integration.md), and [batch 6 evidence](parity/batch-6-integration.md).
+Current progress: 29 components have validated baselines (21 merged plus eight validated on pending batch branches) and 87 await review. Batch 7 adds FAQ and OTP Input to the stacked pending batches. See [batch 7 evidence](parity/batch-7-integration.md) and the preceding linked batch reports.
 
 User priority: finish simpler components first. AI Response work is preserved on `feat/angular-ai-response-parity` and remains in progress. Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work proceeds in batches of two, with focused component checks during implementation and one full baseline before batch merge. Batch 2 merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); batch 3 merged through [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Batch 4 and its stacked batch 5 are locally validated and await integration. The original inventory order remains below for tracking, not execution priority.
 
 ## Pending work
 
-- Review and fix the remaining 89 components listed below: 88 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
-- Review and integrate batches 4, 5 and 6 in order. Continue with two queued components at a time.
+- Review and fix the remaining 87 components listed below: 86 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
+- Review and integrate batches 4 through 7 in order. Continue with two queued components at a time.
 - Resume AI Response later from local `kit-ui-angular-response` on `feat/angular-ai-response-parity`. Its unfinished changes and audit at `docs/parity/ai-response-audit.md` remain preserved in that worktree and are not merged or validated.
 - After all 116 components have validated baselines, the user will perform the full QA run. Address the resulting feedback before calling the overall parity effort complete.
 
@@ -62,7 +62,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 31 | Evil Eye | `evil-eye` | Queued | — |
 | 32 | Expandable Data Row | `expandable-data-row` | Queued | — |
 | 33 | Expandable Search | `expandable-search` | Validated baseline | [Report](parity/expandable-search.md) |
-| 34 | FAQ | `faq` | Queued | — |
+| 34 | FAQ | `faq` | Validated locally; integration pending | [Report](parity/faq.md) |
 | 35 | Floating Action Dock | `floating-action-dock` | Queued | — |
 | 36 | Focus Mode | `focus-mode` | Queued | — |
 | 37 | Form | `form` | Queued | — |
@@ -99,7 +99,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 68 | Notification Stack | `notification-stack` | Queued | — |
 | 69 | Orbital Loading Ring | `orbital-loading-ring` | Validated baseline | [Review](parity/orbital-loading-ring.md) |
 | 70 | OriginDropdown | `origin-dropdown` | Queued | — |
-| 71 | OTP Input | `otp-input` | Queued | — |
+| 71 | OTP Input | `otp-input` | Validated locally; integration pending | [Report](parity/otp-input.md) |
 | 72 | Particle Delete | `particle-delete` | Queued | — |
 | 73 | Payment Receipt Printer | `payment-receipt-printer` | Queued | — |
 | 74 | Payment Status | `payment-status` | Queued | — |
