@@ -2,6 +2,12 @@
 
 ## Latest batch handoff - 2026-10-13
 
+Pill Navigation and SlidePagination are validated on `feat/angular-parity-batch-18`, stacked on batch 17 commit `467389b`. See [batch 18 evidence](parity/batch-18-integration.md). Their generic selection and pagination ports are replaced by React-compatible nested-navigation and controlled/uncontrolled pagination contracts.
+
+The focused generated contract, Angular build and 16 React/Angular desktop/mobile browser cases pass. Progress is 21 merged plus thirty locally validated baselines, with 65 components awaiting review.
+
+## Previous batch handoff - 2026-10-13
+
 Peek Card and Profile Card are validated on `feat/angular-parity-batch-17`, stacked on batch 16 commit `210dd95`. See [batch 17 evidence](parity/batch-17-integration.md). Their generic collection ports are replaced by React-compatible contextual-preview and profile/action contracts.
 
 The focused generated contract, Angular build and 16 React/Angular desktop/mobile browser cases pass. Progress is 21 merged plus twenty-eight locally validated baselines, with 67 components awaiting review.

@@ -45,6 +45,8 @@ import { airportMatrixClockPort } from "./angular-airport-matrix-clock";
 import { metricHudPort } from "./angular-metric-hud";
 import { peekCardPort } from "./angular-peek-card";
 import { profileCardPort } from "./angular-profile-card";
+import { pillNavigationPort } from "./angular-pill-navigation";
+import { slidePaginationPort } from "./angular-slide-pagination";
 const root = process.cwd();
 type Kind = "action" | "collection" | "form" | "canvas" | "plain";
 interface Port {
@@ -243,7 +245,6 @@ add(
 // Navigation: distinct layouts use the same selection and keyboard contracts.
 for (const [id, layout] of [
   ["animated-tabs", "tabs"],
-  ["pill-navigation", "pills"],
   ["glass-navbar", "glass"],
   ["floating-action-dock", "dock"],
   ["small-floating-dock", "small-dock"],
@@ -266,6 +267,7 @@ for (const [id, title] of [
     `<div class="kit-control kit-stack" (keydown.escape)="open.set(false)"><div class="k-menu"><button type="button" [disabled]="disabled()" [attr.aria-expanded]="open()" [attr.aria-controls]="uid" (click)="open.set(!open())"><span aria-hidden="true">{{open()?'×':'☰'}}</span> {{label()||'${title}'}}</button>@if(open()){<div [id]="uid" class="k-menu-panel" (keydown)="keys($event)">@for(item of items();track item.id){<button type="button" data-item [disabled]="item.disabled||disabled()" (click)="select(item);open.set(false)">{{item.label}}</button>}</div>}</div>${collectionFeedback}</div>`,
   );
 }
+add("pill-navigation","plain",pillNavigationPort.description,pillNavigationPort.template,pillNavigationPort.body,pillNavigationPort);
 add("origin-dropdown", "plain", originDropdownPort.description, originDropdownPort.template, originDropdownPort.body, originDropdownPort);
 add(
   "branching-submenu",
@@ -296,6 +298,7 @@ add(
   "A compact status island that expands to reveal actions and their current state.",
   `<section class="kit-control kit-stack"><div class="k-island"><button type="button" [disabled]="disabled()" [attr.aria-expanded]="open()" [attr.aria-controls]="uid" (click)="open.set(!open())">● {{label()||'Workspace activity'}} {{loading()?'· Working':''}}</button>@if(open()){<div class="kit-stack" [id]="uid" (keydown)="keys($event)">@for(item of items();track item.id){${itemButton}}</div>}</div>${collectionFeedback}</section>`,
 );
+/* Legacy pagination replaced by the authored React-contract port.
 add(
   "slide-pagination",
   "plain",
@@ -310,6 +313,8 @@ add(
     ],
   },
 );
+*/
+add("slide-pagination","plain",slidePaginationPort.description,slidePaginationPort.template,slidePaginationPort.body,slidePaginationPort);
 add(
   "scroll-progress-nav",
   "collection",
