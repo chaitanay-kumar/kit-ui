@@ -48,3 +48,15 @@ body:has(kit-stretch-switch-demo){padding:0;background:#f1f1f2;font-family:"Inte
 .dark body:has(kit-stretch-switch-demo){background:#18181b}
 body:has(kit-reveal-card-demo){padding:0;background:#f1f1f2;font-family:"Inter Variable",sans-serif;font-size:16px;line-height:24px;letter-spacing:-.011em;font-feature-settings:'cv02','cv03','cv04','cv11';-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 .dark body:has(kit-reveal-card-demo){background:#18181b}
+
+/* These original controls inherit the same typography and native-control reset as their React detail demos. */
+body:has(kit-smart-upload,kit-liquid-command-palette){font-family:var(--font-body);font-size:16px;line-height:1.5;letter-spacing:var(--tracking-body);font-feature-settings:'cv02','cv03','cv04','cv11';-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body:has(kit-smart-upload,kit-liquid-command-palette) p{font-family:var(--font-body);font-weight:400;letter-spacing:var(--tracking-body);margin:0}
+body:has(kit-smart-upload,kit-liquid-command-palette) h3{font-family:var(--font-heading);font-size:inherit;letter-spacing:var(--tracking-snug)}
+body:has(kit-smart-upload,kit-liquid-command-palette) kbd{font-family:var(--font-mono);font-size:1em}
+body:has(kit-smart-upload,kit-liquid-command-palette) :is(button,input){font:inherit;letter-spacing:inherit}
+body:has(kit-smart-upload) .kit-control label{display:block;gap:normal}
+body:has(kit-smart-upload) input[type=file]::file-selector-button{font:inherit;border:0 solid;padding:0;margin:0 4px 0 0;background:transparent;color:inherit}
+body:has(kit-smart-upload) progress{vertical-align:baseline}
+body:has(kit-liquid-command-palette) input::placeholder{color:color-mix(in oklab,currentColor 50%,transparent);opacity:1}
+body:has(kit-liquid-command-palette) .kit-dialog{margin:0}

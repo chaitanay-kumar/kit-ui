@@ -20,16 +20,17 @@ interface UploadEntry {
     (dragover)="$event.preventDefault()"
     (drop)="drop($event)"
   >
-    <label
-      >Choose files or drop them here<input
+    <label [attr.for]="inputId">Choose files or drop them here</label>
+    <input
+        [id]="inputId"
         type="file"
         multiple
         [accept]="accept()"
         [disabled]="disabled()"
         (change)="choose($event)"
-    /></label>
+    />
     <p class="kit-muted">
-      Up to {{ maxFiles() }} files · {{ maxSize() / 1024 / 1024 }} MB each ·
+      Up to {{ maxFiles() }} files · {{ round(maxSize() / 1024 / 1024) }} MB each ·
       {{ accept() || "Any file type" }}
     </p>
     <ul class="kit-list">
@@ -49,8 +50,8 @@ interface UploadEntry {
             [attr.aria-label]="entry.file.name + ' upload progress'"
           ></progress>
           <p class="kit-status" role="status">
-            {{ entry.error || entry.state }}
-            {{ entry.state === "pending" ? entry.progress + "%" : "" }}
+            {{ entry.error ?? entry.state }}
+            {{ entry.state === "pending" ? round(entry.progress) + "%" : "" }}
           </p>
           <div class="kit-row">
             @if (entry.state === "pending") {
@@ -79,10 +80,12 @@ interface UploadEntry {
   </section>`,
 })
 export class KitSmartUploadComponent {
-  readonly accept = input("image/*,.pdf");
-  readonly maxSize = input(10 * 1024 * 1024);
-  readonly maxFiles = input(5);
-  readonly disabled = input(false);
+  readonly inputId = "kit-upload-" + nextUploadId++;
+  readonly round = Math.round;
+  readonly accept = input<string, string | undefined>("image/*,.pdf", { transform: value => value === undefined ? "image/*,.pdf" : value });
+  readonly maxSize = input<number, number | undefined>(10 * 1024 * 1024, { transform: value => value === undefined ? 10 * 1024 * 1024 : value });
+  readonly maxFiles = input<number, number | undefined>(5, { transform: value => value === undefined ? 5 : value });
+  readonly disabled = input<boolean, boolean | undefined>(false, { transform: value => value === undefined ? false : value });
   readonly upload = input<UploadHandler>();
   readonly entries = signal<UploadEntry[]>([]);
   readonly message = signal("");
@@ -124,7 +127,7 @@ export class KitSmartUploadComponent {
         break;
       }
       if (file.size > this.maxSize()) {
-        errors.push(`${file.name} exceeds the size limit.`);
+        errors.push(`${file.name} exceeds ${Math.round(this.maxSize() / 1024 / 1024)} MB.`);
         continue;
       }
       if (!acceptsFile(file, this.accept())) {
@@ -149,7 +152,11 @@ export class KitSmartUploadComponent {
   }
   async send(entry: UploadEntry): Promise<void> {
     const handler = this.upload();
-    if (this.disabled() || this.controllers.has(entry.id) || !handler) return;
+    if (this.disabled() || this.controllers.has(entry.id)) return;
+    if (!handler) {
+      this.message.set("Connect an upload handler before sending files.");
+      return;
+    }
     const controller = new AbortController();
     this.controllers.set(entry.id, controller);
     this.update(entry.id, { state: "pending", progress: 0, error: undefined });
@@ -195,3 +202,5 @@ export class KitSmartUploadComponent {
     this.entries.update((entries) => entries.filter((e) => e.id !== entry.id));
   }
 }
+
+let nextUploadId = 0;

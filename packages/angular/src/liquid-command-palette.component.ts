@@ -2,7 +2,8 @@ import {
   Component,
   DestroyRef,
   ElementRef,
-  HostListener,
+  afterRenderEffect,
+  effect,
   computed,
   inject,
   input,
@@ -21,6 +22,7 @@ import type { LiquidCommand } from "./types";
     </button>
     <dialog
       #dialog
+      (close)="opened.set(false)"
       class="kit-dialog kit-control"
       aria-label="Command palette"
     >
@@ -56,11 +58,13 @@ import type { LiquidCommand } from "./types";
               role="option"
               [id]="listId + '-' + command.id"
               [attr.aria-selected]="current()?.id === command.id"
-              [attr.aria-disabled]="command.disabled || false"
+              [attr.aria-disabled]="command.disabled"
               (mousedown)="$event.preventDefault()"
               (click)="run(command)"
               [style.opacity]="command.disabled ? 0.5 : 1"
-              style="padding:.75rem;border-radius:.75rem;cursor:pointer"
+              [style.cursor]="command.disabled ? 'not-allowed' : 'pointer'"
+              [style.background]="current()?.id === command.id ? '#8883' : null"
+              style="padding:.75rem;border-radius:.75rem"
             >
               {{ command.label }}
             </li>
@@ -75,8 +79,9 @@ import type { LiquidCommand } from "./types";
   </div>`,
 })
 export class KitLiquidCommandPaletteComponent {
-  readonly commands = input<LiquidCommand[]>([]);
-  readonly disabled = input(false);
+  readonly commands = input<LiquidCommand[], LiquidCommand[] | undefined>(sampleCommands, { transform: value => value === undefined ? sampleCommands : value });
+  readonly disabled = input<boolean, boolean | undefined>(false, { transform: value => value === undefined ? false : value });
+  readonly opened = signal(false);
   readonly query = signal("");
   readonly active = signal(0);
   readonly status = signal("");
@@ -106,25 +111,39 @@ export class KitLiquidCommandPaletteComponent {
   );
   private destroyed = false;
   constructor() {
+    effect(onCleanup => {
+      this.disabled();
+      const listener = (event: KeyboardEvent) => this.shortcut(event);
+      window.addEventListener("keydown", listener, true);
+      onCleanup(() => window.removeEventListener("keydown", listener, true));
+    });
+    afterRenderEffect(() => {
+      if (this.opened()) {
+        this.dialog().nativeElement.showModal();
+        this.search().nativeElement.focus();
+      } else this.dialog().nativeElement.close();
+    });
+    afterRenderEffect(() => {
+      const current = this.current();
+      if (this.opened() && current)
+        document.getElementById(`${this.listId}-${current.id}`)?.scrollIntoView?.({ block: "nearest" });
+    });
     inject(DestroyRef).onDestroy(() => {
       this.destroyed = true;
     });
   }
   open(): void {
     if (this.disabled()) return;
-    this.dialog().nativeElement.showModal();
-    this.search().nativeElement.focus();
+    this.opened.set(true);
   }
   close(): void {
-    this.dialog().nativeElement.close();
+    this.opened.set(false);
   }
-  @HostListener("window:keydown", ["$event"]) shortcut(
-    event: KeyboardEvent,
-  ): void {
+  shortcut(event: KeyboardEvent): void {
     if (event.defaultPrevented || this.disabled()) return;
     if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
       event.preventDefault();
-      if (this.dialog().nativeElement.open) {
+      if (this.opened()) {
         this.close();
       } else {
         this.open();
@@ -147,13 +166,7 @@ export class KitLiquidCommandPaletteComponent {
             : (this.active() + (event.key === "ArrowDown" ? 1 : -1) + count) %
               count,
       );
-      const id = this.current()?.id;
-      if (id)
-        this.dialog()
-          .nativeElement.querySelector(
-            `[id="${this.listId}-${CSS.escape(id)}"]`,
-          )
-          ?.scrollIntoView({ block: "nearest" });
+
     }
     if (event.key === "Enter" && this.current()) {
       event.preventDefault();
@@ -178,3 +191,9 @@ export class KitLiquidCommandPaletteComponent {
   }
 }
 let nextId = 0;
+
+const sampleCommands: LiquidCommand[] = [
+  { id: "home", label: "Go to home", onSelect: () => window.location.assign("/") },
+  { id: "components", label: "Browse components", keywords: "library catalog", onSelect: () => window.location.assign("/components") },
+  { id: "docs", label: "Read the documentation", onSelect: () => window.location.assign("/docs/introduction") },
+];
