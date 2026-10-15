@@ -1,4 +1,6 @@
 import {meteorsPort} from './angular-meteors';
+import {dotFieldPort} from './angular-dot-field';
+import {floatingActionDockPort} from './angular-floating-action-dock';
 import {morphingBlobPort} from './angular-morphing-blob';
 import {circularOrbitPort} from './angular-circular-orbit';
 import {textScrambleDecoderPort} from './angular-text-scramble-decoder';
@@ -252,7 +254,6 @@ add(
 for (const [id, layout] of [
   ["animated-tabs", "tabs"],
   ["glass-navbar", "glass"],
-  ["floating-action-dock", "dock"],
   ["small-floating-dock", "small-dock"],
 ]) {
   const tabs = id === "animated-tabs";
@@ -263,6 +264,7 @@ for (const [id, layout] of [
     `<div class="kit-control kit-stack"><nav class="k-nav k-${layout}" aria-label="${id}" ${tabs ? 'role="tablist"' : ""} (keydown)="keys($event)">@for(item of items();track item.id){<button type="button" data-item ${tabs ? 'role="tab" [attr.aria-selected]="current()?.id===item.id" [id]="uid+\'-tab-\'+item.id" [attr.aria-controls]="uid+\'-panel\'"' : "[attr.aria-current]=\"current()?.id===item.id?'page':null\""} [disabled]="disabled()||item.disabled" (click)="select(item)">{{item.label}}</button>}</nav><section ${tabs ? 'role="tabpanel" [id]="uid+\'-panel\'" [attr.aria-labelledby]="uid+\'-tab-\'+current()?.id"' : ""}><ng-content><p>{{current()?.description}}</p></ng-content></section>${collectionFeedback}</div>`,
   );
 }
+add('floating-action-dock','plain',floatingActionDockPort.description,floatingActionDockPort.template,floatingActionDockPort.body,floatingActionDockPort);
 for (const [id, title] of [
   ["gooey-menu", "Explore"],
 ]) {
@@ -527,7 +529,6 @@ add("payment-receipt-printer","plain",paymentReceiptPrinterPort.description,paym
 
 // Canvas effects use distinct algorithms, pause off screen and clean up observers.
 const canvasModes: Record<string, string> = {
-  "dot-field": "dots",
   "dot-shader": "shader",
   "density-lens": "density",
   "depth-corridor": "corridor",
@@ -540,6 +541,7 @@ const canvasModes: Record<string, string> = {
   "thinking-orb": "orb",
 };
 add('meteors','plain',meteorsPort.description,meteorsPort.template,meteorsPort.body,meteorsPort);
+add('dot-field','plain',dotFieldPort.description,dotFieldPort.template,dotFieldPort.body,dotFieldPort);
 add('morphing-blob','plain',morphingBlobPort.description,morphingBlobPort.template,morphingBlobPort.body,morphingBlobPort);
 add('circular-orbit','plain',circularOrbitPort.description,circularOrbitPort.template,circularOrbitPort.body,circularOrbitPort);
 for (const [id, mode] of Object.entries(canvasModes)) {

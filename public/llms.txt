@@ -170,7 +170,7 @@ All 116 catalog components have native standalone Angular implementations. Use t
 - [Dependency Trace for Angular](http://localhost:5173/components/dependency-trace?framework=angular): An SVG dependency graph with selectable nodes, highlighted connections and keyboard-accessible node buttons.
 - [Depth Corridor for Angular](http://localhost:5173/components/depth-corridor?framework=angular): A native Canvas 2D visual with pointer response, pause controls, offscreen suspension and reduced motion.
 - [DirectionalTooltip for Angular](http://localhost:5173/components/directional-tooltip?framework=angular): A projected directional tooltip with hover and focus delay, rich content, alignment, arrow, force-open state and timer cleanup.
-- [Dot Field for Angular](http://localhost:5173/components/dot-field?framework=angular): A native Canvas 2D visual with pointer response, pause controls, offscreen suspension and reduced motion.
+- [Dot Field for Angular](http://localhost:5173/components/dot-field?framework=angular): A static gradient canvas dot grid with source-matching defaults, DPR scaling, centered spacing and resize/input redraw.
 - [Dot Shader for Angular](http://localhost:5173/components/dot-shader?framework=angular): A native Canvas 2D visual with pointer response, pause controls, offscreen suspension and reduced motion.
 - [Drag to Confirm for Angular](http://localhost:5173/components/drag-to-confirm?framework=angular): Slide to the end to request confirmation, with arrow-key and explicit button alternatives.
 - [DrawCheckbox for Angular](http://localhost:5173/components/draw-checkbox?framework=angular): A native controlled or uncontrolled checkbox with rich labeling, description and indeterminate state.
@@ -179,7 +179,7 @@ All 116 catalog components have native standalone Angular implementations. Use t
 - [Expandable Data Row for Angular](http://localhost:5173/components/expandable-data-row?framework=angular): Expandable item details with keyboard-native disclosure and application-owned recovery actions.
 - [Expandable Search for Angular](http://localhost:5173/components/expandable-search?framework=angular): React-matched compact text search with spring expansion, delayed click focus, live query callback, clear control and responsive shortcut hint.
 - [FAQ for Angular](http://localhost:5173/components/faq?framework=angular): Controlled or uncontrolled FAQ disclosure with search, categories, rich answers and accessibility relationships.
-- [Floating Action Dock for Angular](http://localhost:5173/components/floating-action-dock?framework=angular): Keyboard-navigable selection with active state, disabled items and application navigation output.
+- [Floating Action Dock for Angular](http://localhost:5173/components/floating-action-dock?framework=angular): A controlled floating action dock with templated icons, distance-driven spring magnification, tooltips and native button callbacks.
 - [Focus Mode for Angular](http://localhost:5173/components/focus-mode?framework=angular): A native focusable card grid with controlled synchronization, rich template content, dimming, callbacks and Escape cleanup.
 - [Form for Angular](http://localhost:5173/components/form?framework=angular): Validated native fields, password visibility, cancellable application submission and preserved errors.
 - [Glass Navbar for Angular](http://localhost:5173/components/glass-navbar?framework=angular): Keyboard-navigable selection with active state, disabled items and application navigation output.

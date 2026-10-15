@@ -13,7 +13,7 @@
 ## Relevant files
 
 - Authored definitions: scripts/angular-cursor-follower.ts, scripts/angular-liquid-ripple-button.ts; registration in scripts/generate-angular-ports.ts.
-- Native styles/motion: packages/angular/src/cursor-follower.css, liquid-ripple-button.css, liquid-ripple-button-motion.ts, batch20-spring.ts. The spring helper is scoped to these two ports.
+- Native styles/motion: packages/angular/src/cursor-follower.css, liquid-ripple-button.css, liquid-ripple-button-motion.ts, batch20-spring.ts. Batch 23 also reuses this spring helper for Floating Action Dock without changing its math.
 - Demos: packages/angular-demo/src/batch20-demos.ts and demo.component.ts.
 - Evidence: e2e/fixtures/parity-batch20-contract.tsx, e2e/fixtures/parity-batch20-bare.ts, e2e/parity-batch20.spec.ts, playwright.batch20.config.ts, scripts/verify-parity-batch20.mjs, scripts/verify-angular-package.mjs, e2e/angular-actions.spec.ts, and the component reports linked below.
 - Generated: the two component files, packages/angular/catalog.json, src/lib/framework/angular-ports.ts and demo ports.ts through angular:sync. Full component:sync refreshes public/llms.txt and sitemap.xml; llms also catches previously stale descriptions from stacked batches, and sitemap changes are generated dates. Ignored bundles, downloads, source copies, logs and screenshots remain untracked.

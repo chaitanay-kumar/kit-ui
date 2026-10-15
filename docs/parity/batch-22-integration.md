@@ -17,6 +17,7 @@
 - Angular: `scripts/angular-morphing-blob.ts`, `scripts/angular-circular-orbit.ts`, registered in `scripts/generate-angular-ports.ts`.
 - Native geometry/motion/styles: `packages/angular/src/morphing-blob-motion.ts`, `morphing-blob.css`, `circular-orbit-motion.ts`, `circular-orbit.css`, and the two-port `batch22-frame.ts` scheduler helper.
 - Demos: `packages/angular-demo/src/batch22-demos.ts`, `demo.component.ts`.
+- Follow-up in [batch 23](batch-23-integration.md): Blob/Orbit wrappers use native scoped layout CSS; fixture doctype/viewport metadata and visible pointer coordinates enable actual standards-mode narrow responsive checks.
 - Evidence: `e2e/parity-batch22.spec.ts`, contract/bare fixtures, `playwright.batch22.config.ts`, `scripts/verify-parity-batch22.mjs`, `scripts/verify-angular-package.mjs`.
 - Generated: component source, catalog, framework/demo metadata via `angular:sync`.
 

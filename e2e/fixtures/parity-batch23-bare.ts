@@ -1,0 +1,4 @@
+import '../../packages/angular/styles.css';import '@angular/compiler';import {Component,provideZonelessChangeDetection} from '@angular/core';import {bootstrapApplication} from '@angular/platform-browser';import {KitDotFieldComponent,KitFloatingActionDockComponent} from '../../packages/angular/dist/fesm2022/kit-ui-angular.mjs';
+class Consumer{}
+Component({selector:'bare-batch23',standalone:true,imports:[KitDotFieldComponent,KitFloatingActionDockComponent],template:'<div id="fixture"><div kitDotField style="width:200px;height:100px" [attr.aria-hidden]="false" data-native-field="true"></div><ng-template #icon><svg viewBox="0 0 24 24"><path d="M4 12h16"/></svg></ng-template><kit-floating-action-dock [items]="[{id:\'a\',label:\'Action\',icon:icon}]"/></div>'})(Consumer);
+document.body.append(document.createElement('bare-batch23'));void bootstrapApplication(Consumer,{providers:[provideZonelessChangeDetection()]});

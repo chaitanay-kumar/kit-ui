@@ -15,6 +15,7 @@
 - React sources: `src/components/ui/Meteors.tsx`, `src/components/ui/TextScrambleDecoder.tsx`, unchanged.
 - Authored Angular: `scripts/angular-meteors.ts`, `scripts/angular-text-scramble-decoder.ts`, both registered in `scripts/generate-angular-ports.ts`; component CSS in `packages/angular/src/`.
 - Demos: `packages/angular-demo/src/batch21-demos.ts`, `demo.component.ts`.
+- Follow-up in [batch 23](batch-23-integration.md): Meteors showcase wrappers use native scoped CSS; shared global angle precedence/removal matches React; fixture doctype and viewport metadata enable actual standards-mode narrow responsive checks.
 - Generated: Angular components, catalog and framework/demo port metadata through `angular:sync`.
 - Evidence: `e2e/parity-batch21.spec.ts`, `e2e/fixtures/parity-batch21-contract.tsx`, `e2e/fixtures/parity-batch21-bare.ts`, `playwright.batch21.config.ts`, `scripts/verify-parity-batch21.mjs`, `scripts/verify-angular-package.mjs`.
 
