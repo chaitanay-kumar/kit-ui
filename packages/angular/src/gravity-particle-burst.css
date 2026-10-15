@@ -1,0 +1,7 @@
+@layer components{
+.k-gravity-burst{position:relative;display:inline-flex;border-radius:calc(var(--radius-lg,14px)*1.4)}
+.k-gravity-canvas{pointer-events:none;position:absolute;inset:-80px;z-index:20;height:calc(100% + 160px);width:calc(100% + 160px)}
+.k-gravity-button{position:relative;display:inline-flex;align-items:center;gap:.5rem;box-sizing:border-box;border-radius:calc(var(--radius-lg,14px)*1.4);border:1px solid #1f1f1f;background:#0e0e0e;padding:.75rem 1.25rem;font:inherit;font-feature-settings:inherit;font-variation-settings:inherit;letter-spacing:inherit;font-size:.875rem;line-height:calc(1.25/.875);font-weight:500;color:#fafafa;cursor:pointer;outline:none;transition-property:color,background-color,border-color,outline-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,translate,scale,rotate,filter,backdrop-filter;transition-duration:150ms;transition-timing-function:cubic-bezier(.4,0,.2,1)}
+.k-gravity-button>svg{display:block;width:1rem;height:1rem;color:var(--color-amber-300,oklch(87.9% .169 91.605))}.k-gravity-label{user-select:none}.k-gravity-button:active{scale:.97}.k-gravity-button:focus-visible{outline:1px solid var(--accent-ring,rgba(10,10,10,.15));outline-offset:1px}
+@media(hover:hover){.k-gravity-button:hover{border-color:#4a4a4a;background:#141414}}
+}

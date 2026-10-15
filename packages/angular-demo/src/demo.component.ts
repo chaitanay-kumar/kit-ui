@@ -1,3 +1,4 @@
+import {DensityLensDemoComponent,GravityParticleBurstDemoComponent} from './batch24-demos';
 import {CursorFollowerDemoComponent,LiquidRippleButtonDemoComponent} from './batch20-demos';
 import {MeteorsDemoComponent} from './batch21-demos';
 import {MorphingBlobDemoComponent,CircularOrbitDemoComponent} from './batch22-demos';
@@ -65,7 +66,7 @@ import {RainbowButtonDemoComponent} from "./rainbow-button-demo";
 @Component({
   selector: "kit-angular-demo",
   standalone: true,
-  imports: [DotFieldDemoComponent,FloatingActionDockDemoComponent,MorphingBlobDemoComponent,CircularOrbitDemoComponent,MeteorsDemoComponent,CursorFollowerDemoComponent,LiquidRippleButtonDemoComponent,AnimatedNumberDemoComponent,UnfoldAccordionDemoComponent,IOSSearchDemoComponent,RevealCardDemoComponent,StretchSwitchDemoComponent,SmoothAccordionDemoComponent,HamburgerMenuDemoComponent,ExpandableSearchDemoComponent,
+  imports: [DensityLensDemoComponent,GravityParticleBurstDemoComponent,DotFieldDemoComponent,FloatingActionDockDemoComponent,MorphingBlobDemoComponent,CircularOrbitDemoComponent,MeteorsDemoComponent,CursorFollowerDemoComponent,LiquidRippleButtonDemoComponent,AnimatedNumberDemoComponent,UnfoldAccordionDemoComponent,IOSSearchDemoComponent,RevealCardDemoComponent,StretchSwitchDemoComponent,SmoothAccordionDemoComponent,HamburgerMenuDemoComponent,ExpandableSearchDemoComponent,
     PressButtonDemoComponent,ButtonDemoComponent,MagneticButtonDemoComponent,MorphingButtonDemoComponent,TypewriterButtonDemoComponent,RainbowButtonDemoComponent,
     NeonEdgeButtonDemoComponent,
     OrbitalLoadingRingDemoComponent,
@@ -102,6 +103,8 @@ import {RainbowButtonDemoComponent} from "./rainbow-button-demo";
       @case("meteors"){<kit-meteors-demo/>}
       @case("morphing-blob"){<kit-morphing-blob-demo/>}
       @case("circular-orbit"){<kit-circular-orbit-demo/>}
+      @case("density-lens"){<kit-density-lens-demo/>}
+      @case("gravity-particle-burst"){<kit-gravity-particle-burst-demo/>}
       @case("dot-field"){<kit-dot-field-demo/>}
       @case("floating-action-dock"){<kit-floating-action-dock-demo/>}
       @case("liquid-ripple-button"){<kit-liquid-ripple-button-demo/>}

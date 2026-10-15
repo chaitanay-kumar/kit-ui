@@ -1,24 +1,32 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component, DestroyRef, inject, output, signal } from '@angular/core';
-import { KitCanvasController } from './port-canvas';
-
+import { Component, ViewEncapsulation, ElementRef, computed, inject, input, viewChild } from '@angular/core';
+import {NgZone,TemplateRef,type SimpleChanges} from '@angular/core';import {NgTemplateOutlet} from '@angular/common';import {GravityParticleBurstMotion} from './gravity-particle-burst-motion';export type GravityBurstContent=TemplateRef<unknown>|string|number|boolean|null|undefined;
 @Component({
- selector:"kit-gravity-particle-burst", standalone:true,
- host:{'data-kit':"gravity-particle-burst",style:'display:block;min-width:0'},
- template:`
-<section class="kit-control kit-stack">
-<div class="k-canvas-wrap" (pointermove)="move($event)">
-<canvas #canvas role="img" [attr.aria-label]="label()" [style.opacity]="active()?1:.15">
+ selector:"kit-gravity-particle-burst,div[kitGravityParticleBurst]", standalone:true,
+ host:{'[style.display]':'native ? null : "contents"','[class]':'native ? rootClass() : ""','[style]':'native ? styles() : null','(pointerdown)':'native ? pointerDown($event) : null','(click)':'native ? click($event) : null'},
+ imports:[NgTemplateOutlet],
+encapsulation:ViewEncapsulation.None,styleUrls:["./gravity-particle-burst.css"],
+template:`
+<ng-template #projected>
+<ng-content>{{label()}}</ng-content>
+</ng-template>
+<ng-template #body>
+<canvas class="k-gravity-canvas" aria-hidden="true">
 </canvas>
-</div>
-<div class="kit-row">
-<button type="button" [disabled]="disabled()" (click)="launch()">Release particles</button>
-<button type="button" [disabled]="disabled()" (click)="running.set(!running())">{{running()?'Pause':'Resume'}}</button>
-</div>
-<p role="status">{{active()?'Celebration launched.':''}}</p>
-</section>
+<button class="k-gravity-button" type="button">
+<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/>
+<path d="M20 2v4"/>
+<path d="M22 4h-4"/>
+<circle cx="4" cy="20" r="2"/>
+</svg>
+<span class="k-gravity-label">@if(children()!==undefined){@if(children()){@if(childTemplate(children());as content){<ng-container [ngTemplateOutlet]="content"/>}@else{<ng-container>{{childText(children())}}</ng-container>}}@else{<ng-container>{{label()}}</ng-container>}}@else{<ng-container [ngTemplateOutlet]="projected"/>}</span>
+</button>
+</ng-template>@if(native){<ng-container [ngTemplateOutlet]="body"/>}@else{<div #root [class]="rootClass()" [style]="styles()" (pointerdown)="pointerDown($event)" (click)="click($event)">
+<ng-container [ngTemplateOutlet]="body"/>
+</div>}
 `
 })
-export class KitGravityParticleBurstComponent extends KitCanvasController {
-override readonly mode='burst';readonly active=signal(false);readonly triggered=output<void>();private stopTimer:ReturnType<typeof setTimeout>|undefined;constructor(){super();this.running.set(false);inject(DestroyRef).onDestroy(()=>clearTimeout(this.stopTimer));}launch():void{if(this.disabled())return;clearTimeout(this.stopTimer);this.active.set(true);this.running.set(true);this.triggered.emit();this.stopTimer=setTimeout(()=>{this.active.set(false);this.running.set(false);},3000);}
+export class KitGravityParticleBurstComponent {
+readonly host=inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;readonly native=this.host.tagName==='DIV';readonly root=viewChild<ElementRef<HTMLElement>>('root');readonly rootClass=computed(()=>'k-gravity-burst '+this.className());readonly label=input<string,string|undefined>('Create particle burst',{transform:v=>v??'Create particle burst'});readonly particleCount=input<number,number|undefined>(36,{transform:v=>v??36});readonly children=input<GravityBurstContent>();readonly className=input<string,string|undefined>('',{transform:v=>v??''});readonly styles=input<Record<string,string|number>|undefined>(undefined,{alias:'style'});readonly onPointerDown=input<((event:PointerEvent)=>void)|undefined>();readonly onClick=input<((event:MouseEvent)=>void)|undefined>();private motion:GravityParticleBurstMotion|undefined;private pointerOverrideBound=false;ngOnChanges(changes:SimpleChanges):void{if(changes['onPointerDown'])this.pointerOverrideBound=true;}private zone=inject(NgZone);childTemplate(value:GravityBurstContent):TemplateRef<unknown>|null{return value instanceof TemplateRef?value:null;}childText(value:GravityBurstContent):string|number|null|undefined{return typeof value==='boolean'||value instanceof TemplateRef?'':value;}pointerDown(event:PointerEvent):void{if(this.pointerOverrideBound){this.onPointerDown()?.(event);return;}this.motion?.burst(event.clientX,event.clientY,this.particleCount());}click(event:MouseEvent):void{this.onClick()?.(event);}ngAfterViewInit():void{const root=this.native?this.host:this.root()!.nativeElement;this.zone.runOutsideAngular(()=>{this.motion=new GravityParticleBurstMotion(root.querySelector<HTMLCanvasElement>('.k-gravity-canvas')!);});}ngOnDestroy():void{this.motion?.destroy();this.motion=undefined;}
 }

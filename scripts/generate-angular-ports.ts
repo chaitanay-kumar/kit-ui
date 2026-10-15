@@ -1,4 +1,6 @@
 import {meteorsPort} from './angular-meteors';
+import {gravityParticleBurstPort} from './angular-gravity-particle-burst';
+import {densityLensPort} from './angular-density-lens';
 import {dotFieldPort} from './angular-dot-field';
 import {floatingActionDockPort} from './angular-floating-action-dock';
 import {morphingBlobPort} from './angular-morphing-blob';
@@ -530,7 +532,6 @@ add("payment-receipt-printer","plain",paymentReceiptPrinterPort.description,paym
 // Canvas effects use distinct algorithms, pause off screen and clean up observers.
 const canvasModes: Record<string, string> = {
   "dot-shader": "shader",
-  "density-lens": "density",
   "depth-corridor": "corridor",
   "glyph-matrix": "glyph",
   "shooting-stars": "shooting",
@@ -553,8 +554,9 @@ for (const [id, mode] of Object.entries(canvasModes)) {
     `override readonly mode='${mode}';`,
   );
 }
+add('density-lens','plain',densityLensPort.description,densityLensPort.template,densityLensPort.body,densityLensPort);
+add('gravity-particle-burst','plain',gravityParticleBurstPort.description,gravityParticleBurstPort.template,gravityParticleBurstPort.body,gravityParticleBurstPort);
 for (const [id, label] of [
-  ["gravity-particle-burst", "Release particles"],
   ["rocket-party-popper", "Launch celebration"],
 ]) {
   add(

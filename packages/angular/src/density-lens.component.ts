@@ -1,22 +1,20 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component } from '@angular/core';
-import { KitCanvasController } from './port-canvas';
-
+import { Component, ViewEncapsulation, ElementRef, computed, inject, input, signal, viewChild } from '@angular/core';
+import {NgZone,TemplateRef,type SimpleChanges} from '@angular/core';import {NgTemplateOutlet} from '@angular/common';import {DensityLensMotion} from './density-lens-motion';export interface LensPosition{x:number;y:number;scale:number}export interface LensContentContext extends LensPosition{$implicit:LensPosition}export type DensityLensContent=TemplateRef<unknown>|string|number|boolean|null|undefined;interface LensRenderData{children:DensityLensContent;renderLensContent:TemplateRef<LensContentContext>|undefined;lensSize:number;lensShape:'circle'|'oval'|'square';showBorder:boolean;zoomScale:number;x:number;y:number}
 @Component({
- selector:"kit-density-lens", standalone:true,
- host:{'data-kit':"density-lens",style:'display:block;min-width:0'},
- template:`
-<section class="kit-control kit-stack">
-<div class="k-canvas-wrap" (pointermove)="move($event)" (pointerleave)="reset()">
-<canvas #canvas [attr.aria-label]="label()" role="img">
-</canvas>
-<ng-content>
-</ng-content>
+ selector:"kit-density-lens,div[kitDensityLens]", standalone:true,
+ host:{'[style.display]':'native ? null : "contents"','[class]':'native ? rootClass() : ""','[style]':'native ? styles() : null','(mouseenter)':'native ? enter($event) : null','(mouseleave)':'native ? leave($event) : null','(mousemove)':'native ? move($event) : null'},
+ imports:[NgTemplateOutlet],
+encapsulation:ViewEncapsulation.None,styleUrls:["./density-lens.css"],
+template:`
+<ng-template #body>
+<div class="k-density-base">@if(contentTemplate(children());as content){<ng-container [ngTemplateOutlet]="content"/>}@else{<ng-container>{{contentText(children())}}</ng-container>}</div>@if(present()){<div [class]="'k-density-surface '+viewData().lensShape+(viewData().showBorder?' bordered':'')" [style.width.px]="viewData().lensSize" [style.height.px]="viewData().lensSize">@if(viewData().renderLensContent;as renderer){<ng-container [ngTemplateOutlet]="renderer" [ngTemplateOutletContext]="context()"/>}@else{<div class="k-density-zoom" [style.left.px]="-viewData().x*viewData().zoomScale+viewData().lensSize/2" [style.top.px]="-viewData().y*viewData().zoomScale+viewData().lensSize/2" [style.transform]="'scale('+viewData().zoomScale+')'">@if(contentTemplate(viewData().children);as content){<ng-container [ngTemplateOutlet]="content"/>}@else{<ng-container>{{contentText(viewData().children)}}</ng-container>}</div>}<div class="k-density-reflection">
 </div>
-<button type="button" [disabled]="disabled()||paused()" [attr.aria-pressed]="!running()" (click)="running.set(!running())">{{running()?'Pause animation':'Resume animation'}}</button>
-</section>
+</div>}</ng-template>@if(native){<ng-container [ngTemplateOutlet]="body"/>}@else{<div #root [class]="rootClass()" [style]="styles()" (mouseenter)="enter($event)" (mouseleave)="leave($event)" (mousemove)="move($event)">
+<ng-container [ngTemplateOutlet]="body"/>
+</div>}
 `
 })
-export class KitDensityLensComponent extends KitCanvasController {
-override readonly mode='density';
+export class KitDensityLensComponent {
+readonly host=inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;readonly native=this.host.tagName==='DIV';readonly root=viewChild<ElementRef<HTMLElement>>('root');readonly children=input.required<DensityLensContent>();readonly renderLensContent=input<TemplateRef<LensContentContext>|undefined>();readonly lensSize=input<number,number|undefined>(150,{transform:v=>v??150});readonly lensShape=input<'circle'|'oval'|'square','circle'|'oval'|'square'|undefined>('circle',{transform:v=>v??'circle'});readonly showBorder=input<boolean,boolean|undefined>(true,{transform:v=>v??true});readonly zoomScale=input<number,number|undefined>(2,{transform:v=>v??2});readonly className=input<string,string|undefined>('',{transform:v=>v??''});readonly styles=input<Record<string,string|number>|undefined>(undefined,{alias:'style'});readonly onMouseEnter=input<((event:MouseEvent)=>void)|undefined>();readonly onMouseLeave=input<((event:MouseEvent)=>void)|undefined>();readonly onMouseMove=input<((event:MouseEvent)=>void)|undefined>();readonly rootClass=computed(()=>'k-density-lens '+this.className());readonly hovered=signal(false);readonly present=signal(false);readonly x=signal(0);readonly y=signal(0);private exitData=signal<LensRenderData|undefined>(undefined);readonly liveData=computed<LensRenderData>(()=>({children:this.children(),renderLensContent:this.renderLensContent(),lensSize:this.lensSize(),lensShape:this.lensShape(),showBorder:this.showBorder(),zoomScale:this.zoomScale(),x:this.x(),y:this.y()}));readonly viewData=computed(()=>this.hovered()?this.liveData():this.exitData()??this.liveData());readonly context=computed<LensContentContext>(()=>{const d=this.viewData(),position={x:d.x,y:d.y,scale:d.zoomScale};return {$implicit:position,...position};});private motion:DensityLensMotion|undefined;private overrides={enter:false,leave:false,move:false};ngOnChanges(changes:SimpleChanges):void{if(changes['onMouseEnter'])this.overrides.enter=true;if(changes['onMouseLeave'])this.overrides.leave=true;if(changes['onMouseMove'])this.overrides.move=true;}private zone=inject(NgZone);contentTemplate(value:DensityLensContent):TemplateRef<unknown>|null{return value instanceof TemplateRef?value:null;}contentText(value:DensityLensContent):string|number|null|undefined{return typeof value==='boolean'||value instanceof TemplateRef?'':value;}private element():HTMLElement{return this.native?this.host:this.root()!.nativeElement;}enter(event:MouseEvent):void{if(this.overrides.enter){this.onMouseEnter()?.(event);return;}this.hovered.set(true);this.present.set(true);}leave(event:MouseEvent):void{if(this.overrides.leave){this.onMouseLeave()?.(event);return;}this.exitData.set(this.liveData());this.hovered.set(false);if(!this.motion)this.present.set(false);}move(event:MouseEvent):void{if(this.overrides.move){this.onMouseMove()?.(event);return;}const rect=this.element().getBoundingClientRect();this.x.set(event.clientX-rect.left);this.y.set(event.clientY-rect.top);}ngAfterViewChecked():void{const root=this.element(),node=Array.from(root.children).find(child=>child.classList.contains('k-density-surface')) as HTMLElement|undefined;if(!node){this.motion?.destroy();this.motion=undefined;return;}this.zone.runOutsideAngular(()=>{if(this.motion?.node!==node){this.motion?.destroy();this.motion=new DensityLensMotion(node,()=>{if(!this.hovered()){this.present.set(false);this.exitData.set(undefined);this.viewData();}});}const d=this.viewData();this.motion.update(d.x-d.lensSize/2,d.y-d.lensSize/2,this.hovered());});}ngOnDestroy():void{this.motion?.destroy();this.motion=undefined;this.exitData.set(undefined);}
 }

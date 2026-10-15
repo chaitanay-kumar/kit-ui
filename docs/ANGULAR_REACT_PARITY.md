@@ -2,14 +2,14 @@
 
 React is the source of truth for component appearance, interactions, data contracts, options and defaults. Angular implementations stay native; template projection and output events provide Angular equivalents for React nodes and callbacks. Catalog coverage does not establish parity.
 
-Current progress: 61 components have validated baselines (21 merged plus forty validated on pending batch branches); 55 remain unvalidated. Batch 23 adds Dot Field and Floating Action Dock, and repairs recent demo/fixture fidelity. See [batch 23 evidence](parity/batch-23-integration.md).
+Current progress: 63 components have validated baselines (21 merged plus forty-two validated on pending batch branches); 53 remain unvalidated. Batch 24 adds Density Lens and Gravity Particle Burst. See [batch 24 evidence](parity/batch-24-integration.md).
 
 User priority: finish simpler components first. AI Response work is preserved on `feat/angular-ai-response-parity` and remains in progress. Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work proceeds in batches of two, with focused component checks during implementation and one full baseline before batch merge. Batch 2 merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); batch 3 merged through [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Batch 4 and its stacked batch 5 are locally validated and await integration. The original inventory order remains below for tracking, not execution priority.
 
 ## Pending work
 
-- Review and fix the remaining 55 components listed below: 54 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
-- Review and integrate batches 4 through 23 in order. Continue with two queued components at a time.
+- Review and fix the remaining 53 components listed below: 52 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
+- Review and integrate batches 4 through 24 in order. Continue with two queued components at a time.
 - Before integration, audit earlier parity fixture HTML for standard doctype and viewport metadata, including batches 11 through 19. Batch 23 corrects these headers and renews browser checks for batches 20 through 23. Earlier mobile input/reduced-motion checks alone do not prove narrow responsive layouts in standards mode.
 - Resume AI Response later from local `kit-ui-angular-response` on `feat/angular-ai-response-parity`. Its unfinished changes and audit at `docs/parity/ai-response-audit.md` remain preserved in that worktree and are not merged or validated.
 - After all 116 components have validated baselines, the user will perform the full QA run. Address the resulting feedback before calling the overall parity effort complete.
@@ -50,7 +50,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 18 | Code Snippet Deck | `code-snippet-deck` | Queued | — |
 | 19 | Command Menu | `command-menu` | Queued | — |
 | 20 | Cursor Follower | `cursor-follower` | Validated locally; integration pending | [Report](parity/cursor-follower.md) |
-| 21 | Density Lens | `density-lens` | Queued | — |
+| 21 | Density Lens | `density-lens` | Validated locally; integration pending | [Evidence](parity/density-lens.md) |
 | 22 | Dependency Trace | `dependency-trace` | Queued | — |
 | 23 | Depth Corridor | `depth-corridor` | Queued | — |
 | 24 | DirectionalTooltip | `directional-tooltip` | Validated locally; integration pending | [Report](parity/directional-tooltip.md) |
@@ -71,7 +71,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 39 | Glitch Text | `glitch-text` | Validated locally; integration pending | [Report](parity/glitch-text.md) |
 | 40 | Glyph Matrix | `glyph-matrix` | Queued | — |
 | 41 | Gooey Menu | `gooey-menu` | Queued | — |
-| 42 | Gravity Particle Burst | `gravity-particle-burst` | Queued | — |
+| 42 | Gravity Particle Burst | `gravity-particle-burst` | Validated locally; integration pending | [Evidence](parity/gravity-particle-burst.md) |
 | 43 | Hamburger Menu | `hamburger-menu` | Validated baseline | [Report](parity/hamburger-menu.md) |
 | 44 | Hold-to-Confirm | `hold-to-confirm` | Validated locally; integration pending | [Report](parity/hold-to-confirm.md) |
 | 45 | Interactive Data Card | `interactive-data-card` | Validated locally; integration pending | [Report](parity/interactive-data-card.md) |

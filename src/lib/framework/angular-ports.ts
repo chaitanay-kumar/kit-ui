@@ -381,14 +381,19 @@ export const ANGULAR_PORTS = [
     "name": "Density Lens",
     "exportName": "KitDensityLensComponent",
     "selector": "kit-density-lens",
-    "description": "A native Canvas 2D visual with pointer response, pause controls, offscreen suspension and reduced motion.",
+    "description": "A spring-tracked inspection lens with reusable base content, magnified or custom template content, source shapes, border, zoom and exit behavior.",
     "inputs": [
-      "label: string",
-      "density: number (1–400)",
-      "speed: number (0–5)",
-      "color: string",
-      "paused: boolean",
-      "disabled: boolean"
+      "children: DensityLensContent (required)",
+      "renderLensContent: TemplateRef<LensContentContext>",
+      "lensSize: number",
+      "lensShape: 'circle' | 'oval' | 'square'",
+      "showBorder: boolean",
+      "zoomScale: number",
+      "className: string",
+      "style: Record<string, string | number>",
+      "onMouseEnter: (event: MouseEvent) => void",
+      "onMouseLeave: (event: MouseEvent) => void",
+      "onMouseMove: (event: MouseEvent) => void"
     ],
     "outputs": []
   },
@@ -752,18 +757,17 @@ export const ANGULAR_PORTS = [
     "name": "Gravity Particle Burst",
     "exportName": "KitGravityParticleBurstComponent",
     "selector": "kit-gravity-particle-burst",
-    "description": "Trigger a local particle celebration with a keyboard button, visible motion controls and cleanup.",
+    "description": "A pointer-triggered canvas burst with source-matching gravity, friction, palette, DPR scaling, live reduced motion and custom button content.",
     "inputs": [
       "label: string",
-      "density: number (1–400)",
-      "speed: number (0–5)",
-      "color: string",
-      "paused: boolean",
-      "disabled: boolean"
+      "particleCount: number",
+      "children: GravityBurstContent",
+      "className: string",
+      "style: Record<string, string | number>",
+      "onPointerDown: (event: PointerEvent) => void",
+      "onClick: (event: MouseEvent) => void"
     ],
-    "outputs": [
-      "triggered: void"
-    ]
+    "outputs": []
   },
   {
     "id": "hamburger-menu",
