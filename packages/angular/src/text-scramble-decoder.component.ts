@@ -1,19 +1,29 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component, DestroyRef, computed, inject, input, signal } from '@angular/core';
-
+import { Component, ViewEncapsulation, DestroyRef, effect, inject, input, signal, untracked } from '@angular/core';
+import {NgTemplateOutlet} from '@angular/common';
 @Component({
  selector:"kit-text-scramble-decoder", standalone:true,
- host:{'data-kit':"text-scramble-decoder",style:'display:block;min-width:0'},
- template:`
-<section class="kit-control kit-stack">
-<div class="k-text k-scramble" [class.k-paused]="paused()" [attr.data-text]="text()" [style.transform]="transform()" (wheel)="wheel($event)">
-<span class="sr-only">{{text()}}</span>
-<span aria-hidden="true">{{display()}}</span>
-</div>
-<button type="button" [disabled]="disabled()" (click)="decode()">Decode text</button>
-</section>
+ host:{style:'display:contents'},
+ imports:[NgTemplateOutlet],
+encapsulation:ViewEncapsulation.None,styleUrls:["./text-scramble-decoder.css"],
+template:`
+<ng-template #content>
+<span [class]="'k-decoder '+className()" [class.k-decoding]="isDecoding()" [attr.aria-label]="text()" (mouseenter)="enter($event)">
+<span aria-hidden="true">{{displayText()}}</span>
+</span>
+</ng-template>@if(trigger()==='manual'){<span class="k-decoder-manual">
+<ng-container [ngTemplateOutlet]="content"/>
+<button class="k-decoder-replay" type="button" [disabled]="isDecoding()" [attr.aria-label]="replayLabel()" (click)="decode()">
+<svg aria-hidden="true" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" [class.k-decoder-spin]="isDecoding()">
+<path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+<path d="M21 3v5h-5"/>
+<path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+<path d="M8 16H3v5"/>
+</svg>
+</button>
+</span>}@else{<ng-container [ngTemplateOutlet]="content"/>}
 `
 })
 export class KitTextScrambleDecoderComponent {
-readonly text=input('Nimble by nature. Precise by design.');readonly paused=input(false);readonly disabled=input(false);readonly decoded=signal<string|null>(null);readonly display=computed(()=>this.decoded()??this.text());readonly transform=signal('translateX(0)');private timer:ReturnType<typeof setInterval>|undefined;private settle:ReturnType<typeof setTimeout>|undefined;constructor(){inject(DestroyRef).onDestroy(()=>{clearInterval(this.timer);clearTimeout(this.settle);});}wheel(event:WheelEvent):void{if(this.disabled()||this.paused()||matchMedia('(prefers-reduced-motion: reduce)').matches)return;this.transform.set('translateX('+Math.max(-25,Math.min(25,event.deltaY*.15))+'px)');clearTimeout(this.settle);this.settle=setTimeout(()=>this.transform.set('translateX(0)'),180);}decode():void{clearInterval(this.timer);if(this.disabled()||this.paused()||matchMedia('(prefers-reduced-motion: reduce)').matches){this.decoded.set(this.text());return;}let step=0;this.timer=setInterval(()=>{const text=this.text();step+=2;this.decoded.set(Array.from(text).map((c,i)=>i<step||c===' '?c:'01<>/{}'[Math.floor(Math.random()*7)]).join(''));if(step>=text.length)clearInterval(this.timer);},45);}
+readonly text=input.required<string>();readonly characters=input<string,string|undefined>('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_#@$%&',{transform:v=>v??'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_#@$%&'});readonly duration=input<number,number|undefined>(800,{transform:v=>v??800});readonly trigger=input<'mount'|'hover'|'manual', 'mount'|'hover'|'manual'|undefined>('mount',{transform:v=>v??'mount'});readonly replayLabel=input<string,string|undefined>('Replay text decode',{transform:v=>v??'Replay text decode'});readonly className=input<string,string|undefined>('',{transform:v=>v??''});readonly onMouseEnter=input<((event:MouseEvent)=>void)|undefined>();readonly displayText=signal('');readonly isDecoding=signal(false);readonly reduced=signal(false);private frame=0;private media:MediaQueryList|undefined;private change=()=>this.reduced.set(this.media?.matches??false);private stop():void{cancelAnimationFrame(this.frame);this.frame=0;}decode():void{this.stop();const text=this.text();if(this.reduced()){this.displayText.set(text);this.isDecoding.set(false);return;}const start=performance.now(),duration=this.duration(),glyphs=this.characters().split(''),resolved=text.split('').map((char,index)=>char.trim()===''?0:.15+(index/Math.max(text.length-1,1))*.7+Math.random()*.08);this.isDecoding.set(true);const tick=(now:number)=>{const progress=Math.min((now-start)/duration,1);this.displayText.set(text.split('').map((char,index)=>{if(char.trim()===' ')return char;if(progress>=resolved[index])return char;const cadence=Math.floor((now+index*19)/36);return glyphs[(cadence+index*7)%glyphs.length]||char;}).join(''));if(progress<1){this.frame=requestAnimationFrame(tick);}else{this.displayText.set(text);this.isDecoding.set(false);this.frame=0;}};this.frame=requestAnimationFrame(tick);}enter(event:MouseEvent):void{if(this.trigger()==='hover')this.decode();this.onMouseEnter()?.(event);}constructor(){effect(cleanup=>{const text=this.text(),trigger=this.trigger();this.duration();this.characters();this.reduced();untracked(()=>{this.displayText.set(text);if(trigger==='mount')this.decode();});cleanup(()=>this.stop());});inject(DestroyRef).onDestroy(()=>{this.stop();this.media?.removeEventListener('change',this.change);});}ngOnInit():void{this.media=matchMedia('(prefers-reduced-motion: reduce)');this.change();this.media.addEventListener('change',this.change);}
 }

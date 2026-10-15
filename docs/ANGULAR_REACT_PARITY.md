@@ -2,14 +2,14 @@
 
 React is the source of truth for component appearance, interactions, data contracts, options and defaults. Angular implementations stay native; template projection and output events provide Angular equivalents for React nodes and callbacks. Catalog coverage does not establish parity.
 
-Current progress: 55 components have validated baselines (21 merged plus thirty-four validated on pending batch branches) and 61 await review. Batch 20 adds Cursor Follower and Liquid Ripple Button. See [batch 20 evidence](parity/batch-20-integration.md).
+Current progress: 57 components have validated baselines (21 merged plus thirty-six validated on pending batch branches) and 59 await review. Batch 21 adds Meteors and Text Scramble Decoder. See [batch 21 evidence](parity/batch-21-integration.md).
 
 User priority: finish simpler components first. AI Response work is preserved on `feat/angular-ai-response-parity` and remains in progress. Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work proceeds in batches of two, with focused component checks during implementation and one full baseline before batch merge. Batch 2 merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); batch 3 merged through [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Batch 4 and its stacked batch 5 are locally validated and await integration. The original inventory order remains below for tracking, not execution priority.
 
 ## Pending work
 
 - Review and fix the remaining 61 components listed below: 60 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
-- Review and integrate batches 4 through 20 in order. Continue with two queued components at a time.
+- Review and integrate batches 4 through 21 in order. Continue with two queued components at a time.
 - Resume AI Response later from local `kit-ui-angular-response` on `feat/angular-ai-response-parity`. Its unfinished changes and audit at `docs/parity/ai-response-audit.md` remain preserved in that worktree and are not merged or validated.
 - After all 116 components have validated baselines, the user will perform the full QA run. Address the resulting feedback before calling the overall parity effort complete.
 

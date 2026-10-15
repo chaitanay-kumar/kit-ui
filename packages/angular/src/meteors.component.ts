@@ -1,22 +1,20 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component } from '@angular/core';
-import { KitCanvasController } from './port-canvas';
+import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 
 @Component({
  selector:"kit-meteors", standalone:true,
- host:{'data-kit':"meteors",style:'display:block;min-width:0'},
- template:`
-<section class="kit-control kit-stack">
-<div class="k-canvas-wrap" (pointermove)="move($event)" (pointerleave)="reset()">
-<canvas #canvas [attr.aria-label]="label()" role="img">
-</canvas>
-<ng-content>
-</ng-content>
+ host:{style:'display:contents'},
+ encapsulation:ViewEncapsulation.None,styleUrls:["./meteors.css"],
+template:`
+<div class="k-meteors" [class]="'k-meteors '+className()" [style]="styles()" [style.--meteor-angle]="angle()+'deg'" aria-hidden="true">@for(item of distribution();track $index){<span class="k-meteor-item" [style.top]="item.top" [style.left]="item.left" [style.animation-delay]="item.delay" [style.animation-duration]="item.duration" [style.background-color]="color()" [style.box-shadow]="'0 0 0 1px rgba(255, 255, 255, 0.12), 0 0 8px 1px '+color()">
+<span class="k-meteor-tail" [style.width.px]="tailLength()" [style.background]="'linear-gradient(to right, '+trailColor()+', transparent)'">
+</span>
+</span>}<div class="k-meteor-content">
+<ng-content/>
 </div>
-<button type="button" [disabled]="disabled()||paused()" [attr.aria-pressed]="!running()" (click)="running.set(!running())">{{running()?'Pause animation':'Resume animation'}}</button>
-</section>
+</div>
 `
 })
-export class KitMeteorsComponent extends KitCanvasController {
-override readonly mode='meteors';
+export class KitMeteorsComponent {
+readonly number=input<number,number|undefined>(20,{transform:v=>v??20});readonly color=input<string,string|undefined>('#94A3B8',{transform:v=>v??'#94A3B8'});readonly trailColor=input<string,string|undefined>('#64748B',{transform:v=>v??'#64748B'});readonly tailLength=input<number,number|undefined>(60,{transform:v=>v??60});readonly angle=input<number,number|undefined>(215,{transform:v=>v??215});readonly minDelay=input<number,number|undefined>(.2,{transform:v=>v??.2});readonly maxDelay=input<number,number|undefined>(1.2,{transform:v=>v??1.2});readonly minDuration=input<number,number|undefined>(2,{transform:v=>v??2});readonly maxDuration=input<number,number|undefined>(8,{transform:v=>v??8});readonly className=input<string,string|undefined>('',{transform:v=>v??''});readonly styles=input<Record<string,string|number>|undefined>(undefined,{alias:'style'});readonly distribution=computed(()=>Array.from({length:this.number()},()=>({top:'0px',left:(Math.floor(Math.random()*800)-200)+'px',delay:(Math.random()*(this.maxDelay()-this.minDelay())+this.minDelay()).toFixed(2)+'s',duration:Math.floor(Math.random()*(this.maxDuration()-this.minDuration())+this.minDuration())+'s'})));
 }

@@ -1,3 +1,5 @@
+import {meteorsPort} from './angular-meteors';
+import {textScrambleDecoderPort} from './angular-text-scramble-decoder';
 import {animatedNumberPort} from './angular-animated-number';
 import {unfoldAccordionPort} from './angular-unfold-accordion';
 import {iosSearchPort} from './angular-ios-search';
@@ -528,7 +530,6 @@ const canvasModes: Record<string, string> = {
   "density-lens": "density",
   "depth-corridor": "corridor",
   "glyph-matrix": "glyph",
-  meteors: "meteors",
   "shooting-stars": "shooting",
   "sparkles-core": "sparkles",
   "speed-warp": "warp",
@@ -538,6 +539,7 @@ const canvasModes: Record<string, string> = {
   "morphing-blob": "blob",
   "thinking-orb": "orb",
 };
+add('meteors','plain',meteorsPort.description,meteorsPort.template,meteorsPort.body,meteorsPort);
 for (const [id, mode] of Object.entries(canvasModes)) {
   add(
     id,
@@ -579,7 +581,6 @@ add("morphing-icon","plain",morphingIconPort.description,morphingIconPort.templa
 // Text, counters and clocks use real values and tear down their own timers.
 for (const [id, variant] of [
   ["scrollvelocitytext", "velocity"],
-  ["text-scramble-decoder", "scramble"],
 ]) {
   add(
     id,
@@ -590,6 +591,7 @@ for (const [id, variant] of [
     { inputs: ["text: string", "paused: boolean", "disabled: boolean"] },
   );
 }
+add('text-scramble-decoder','plain',textScrambleDecoderPort.description,textScrambleDecoderPort.template,textScrambleDecoderPort.body,textScrambleDecoderPort);
 add("glitch-text","plain",glitchTextPort.description,glitchTextPort.template,glitchTextPort.body,glitchTextPort);
 add("animated-number","plain",animatedNumberPort.description,animatedNumberPort.template,animatedNumberPort.body,animatedNumberPort);
 add("unfold-accordion","plain",unfoldAccordionPort.description,unfoldAccordionPort.template,unfoldAccordionPort.body,unfoldAccordionPort);

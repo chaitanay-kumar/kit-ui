@@ -1006,14 +1006,19 @@ export const ANGULAR_PORTS = [
     "name": "Meteors",
     "exportName": "KitMeteorsComponent",
     "selector": "kit-meteors",
-    "description": "A native Canvas 2D visual with pointer response, pause controls, offscreen suspension and reduced motion.",
+    "description": "CSS meteor streaks with randomized timing, configurable trails and projected content, matching React.",
     "inputs": [
-      "label: string",
-      "density: number (1–400)",
-      "speed: number (0–5)",
+      "number: number",
       "color: string",
-      "paused: boolean",
-      "disabled: boolean"
+      "trailColor: string",
+      "tailLength: number",
+      "angle: number",
+      "minDelay: number",
+      "maxDelay: number",
+      "minDuration: number",
+      "maxDuration: number",
+      "className: string",
+      "style: Record<string, string | number>"
     ],
     "outputs": []
   },
@@ -1929,11 +1934,15 @@ export const ANGULAR_PORTS = [
     "name": "Text Scramble Decoder",
     "exportName": "KitTextScrambleDecoderComponent",
     "selector": "kit-text-scramble-decoder",
-    "description": "Configurable readable text with a restrained visual treatment and reduced-motion fallback.",
+    "description": "Readable text decoded through staged glyphs with mount, hover and manual triggers, live reduced motion and cancellation.",
     "inputs": [
-      "text: string",
-      "paused: boolean",
-      "disabled: boolean"
+      "text: string (required)",
+      "characters: string",
+      "duration: number",
+      "trigger: 'mount' | 'hover' | 'manual'",
+      "replayLabel: string",
+      "className: string",
+      "onMouseEnter: (event: MouseEvent) => void"
     ],
     "outputs": []
   },
