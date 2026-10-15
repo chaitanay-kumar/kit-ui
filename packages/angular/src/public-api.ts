@@ -32,6 +32,8 @@ export * from './expandable-search-types';
 export * from './smooth-accordion-types';
 export * from './stretch-switch-types';
 
+export type {UnfoldAccordionItem} from './unfold-accordion-types';
+
 // Generated catalog exports.
 export * from "./port-types";
 export * from './activity-feed.component';

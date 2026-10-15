@@ -1,0 +1,4 @@
+import {Component} from '@angular/core';
+import {KitUnfoldAccordionComponent,type UnfoldAccordionItem} from 'kit-ui-angular';
+@Component({selector:'kit-unfold-demo',standalone:true,imports:[KitUnfoldAccordionComponent],styles:':host{display:block}.uf-demo{padding-block:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;max-width:448px;margin-inline:auto}',template:'<div class="uf-demo"><kit-unfold-accordion [items]="items"/></div>'})
+export class UnfoldAccordionDemoComponent {readonly items:UnfoldAccordionItem[]=[{id:'1',title:'What is spring physics?',content:'Spring tokens drive motion across the system so the chevron, height, and content move together.'},{id:'2',title:'How does it feel different?',content:'Each interaction has a specific motion character, not a generic transition.'},{id:'3',title:'Is it accessible?',content:'Yes — full keyboard support, ARIA roles, and focus management are built in.'}];}

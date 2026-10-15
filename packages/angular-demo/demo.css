@@ -1,5 +1,7 @@
 html { font-family: 'Geist', system-ui, sans-serif; background: var(--bg); color: var(--text-primary); }
 body { margin: 0; padding: 16px; }
+body:has(kit-number-demo,kit-unfold-demo){padding:0;background:#f1f1f2;font-family:"Inter Variable",sans-serif;font-size:16px;line-height:24px;letter-spacing:-.011em;font-feature-settings:'cv02','cv03','cv04','cv11';-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;--radius:.875rem}
+.dark body:has(kit-number-demo,kit-unfold-demo){background:#18181b}
 body:has(kit-ios-search-demo){padding:0;background:#f1f1f2;font-family:"Inter Variable",sans-serif;font-size:16px;line-height:24px;letter-spacing:-.011em;font-feature-settings:'cv02','cv03','cv04','cv11';-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 .dark body:has(kit-ios-search-demo){background:#18181b}
 * { box-sizing: border-box; }

@@ -1,11 +1,11 @@
 /* Native Angular ports; theme tokens are optional and have light defaults. */
-[data-kit]:where(:not(.k-ios-host,.k-reveal-host,.k-stretch-parity,.k-sa-host,.k-es-host,.k-morphing-parity,.k-loader-parity,.k-button-parity,.k-button-host,.k-press-parity,.k-press-host,.k-neon-parity,.k-neon-host,.k-orbital-parity,.k-spotlight-parity,.k-magnetic-parity,.k-magnetic-host,.k-mb-parity,.k-mb-host,.k-typewriter-parity,.k-typewriter-host,.k-rainbow-parity,.k-rainbow-host,.k-hamburger-parity,.k-hamburger-host)) {
+[data-kit]:where(:not(.k-an-host,.k-uf-host,.k-ios-host,.k-reveal-host,.k-stretch-parity,.k-sa-host,.k-es-host,.k-morphing-parity,.k-loader-parity,.k-button-parity,.k-button-host,.k-press-parity,.k-press-host,.k-neon-parity,.k-neon-host,.k-orbital-parity,.k-spotlight-parity,.k-magnetic-parity,.k-magnetic-host,.k-mb-parity,.k-mb-host,.k-typewriter-parity,.k-typewriter-host,.k-rainbow-parity,.k-rainbow-host,.k-hamburger-parity,.k-hamburger-host)) {
   min-width: 0;
 }
 [data-kit] [hidden] {
   display: none !important;
 }
-[data-kit]:where(:not(.k-ios-host,.k-reveal-host,.k-stretch-parity,.k-sa-host,.k-es-host,.k-morphing-parity,.k-button-parity,.k-button-host,.k-press-parity,.k-press-host,.k-neon-parity,.k-neon-host,.k-spotlight-parity,.k-magnetic-parity,.k-magnetic-host,.k-mb-parity,.k-mb-host,.k-typewriter-parity,.k-typewriter-host,.k-rainbow-parity,.k-rainbow-host,.k-hamburger-parity,.k-hamburger-host))
+[data-kit]:where(:not(.k-an-host,.k-uf-host,.k-ios-host,.k-reveal-host,.k-stretch-parity,.k-sa-host,.k-es-host,.k-morphing-parity,.k-button-parity,.k-button-host,.k-press-parity,.k-press-host,.k-neon-parity,.k-neon-host,.k-spotlight-parity,.k-magnetic-parity,.k-magnetic-host,.k-mb-parity,.k-mb-host,.k-typewriter-parity,.k-typewriter-host,.k-rainbow-parity,.k-rainbow-host,.k-hamburger-parity,.k-hamburger-host))
   :is(button, input, textarea, select, summary, a, [tabindex]):focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 4px;
@@ -916,9 +916,9 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  [data-kit]:where(:not(.k-ios-host,.k-reveal-host,.k-stretch-parity,.k-sa-host,.k-es-host,.k-spotlight-parity,.k-loader-parity,.k-button-parity,.k-button-host,.k-press-parity,.k-press-host,.k-neon-parity,.k-neon-host,.k-morphing-parity,.k-magnetic-parity,.k-magnetic-host,.k-mb-parity,.k-mb-host,.k-typewriter-parity,.k-typewriter-host,.k-rainbow-parity,.k-rainbow-host,.k-hamburger-parity,.k-hamburger-host)) *,
-  [data-kit]:where(:not(.k-ios-host,.k-reveal-host,.k-stretch-parity,.k-sa-host,.k-es-host,.k-spotlight-parity,.k-loader-parity,.k-button-parity,.k-button-host,.k-press-parity,.k-press-host,.k-neon-parity,.k-neon-host,.k-morphing-parity,.k-magnetic-parity,.k-magnetic-host,.k-mb-parity,.k-mb-host,.k-typewriter-parity,.k-typewriter-host,.k-rainbow-parity,.k-rainbow-host,.k-hamburger-parity,.k-hamburger-host)) *::before,
-  [data-kit]:where(:not(.k-ios-host,.k-reveal-host,.k-stretch-parity,.k-sa-host,.k-es-host,.k-spotlight-parity,.k-loader-parity,.k-button-parity,.k-button-host,.k-press-parity,.k-press-host,.k-neon-parity,.k-neon-host,.k-morphing-parity,.k-magnetic-parity,.k-magnetic-host,.k-mb-parity,.k-mb-host,.k-typewriter-parity,.k-typewriter-host,.k-rainbow-parity,.k-rainbow-host,.k-hamburger-parity,.k-hamburger-host)) *::after {
+  [data-kit]:where(:not(.k-an-host,.k-uf-host,.k-ios-host,.k-reveal-host,.k-stretch-parity,.k-sa-host,.k-es-host,.k-spotlight-parity,.k-loader-parity,.k-button-parity,.k-button-host,.k-press-parity,.k-press-host,.k-neon-parity,.k-neon-host,.k-morphing-parity,.k-magnetic-parity,.k-magnetic-host,.k-mb-parity,.k-mb-host,.k-typewriter-parity,.k-typewriter-host,.k-rainbow-parity,.k-rainbow-host,.k-hamburger-parity,.k-hamburger-host)) *,
+  [data-kit]:where(:not(.k-an-host,.k-uf-host,.k-ios-host,.k-reveal-host,.k-stretch-parity,.k-sa-host,.k-es-host,.k-spotlight-parity,.k-loader-parity,.k-button-parity,.k-button-host,.k-press-parity,.k-press-host,.k-neon-parity,.k-neon-host,.k-morphing-parity,.k-magnetic-parity,.k-magnetic-host,.k-mb-parity,.k-mb-host,.k-typewriter-parity,.k-typewriter-host,.k-rainbow-parity,.k-rainbow-host,.k-hamburger-parity,.k-hamburger-host)) *::before,
+  [data-kit]:where(:not(.k-an-host,.k-uf-host,.k-ios-host,.k-reveal-host,.k-stretch-parity,.k-sa-host,.k-es-host,.k-spotlight-parity,.k-loader-parity,.k-button-parity,.k-button-host,.k-press-parity,.k-press-host,.k-neon-parity,.k-neon-host,.k-morphing-parity,.k-magnetic-parity,.k-magnetic-host,.k-mb-parity,.k-mb-host,.k-typewriter-parity,.k-typewriter-host,.k-rainbow-parity,.k-rainbow-host,.k-hamburger-parity,.k-hamburger-host)) *::after {
     animation: none !important;
     transition: none !important;
     scroll-behavior: auto !important;

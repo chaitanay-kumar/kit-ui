@@ -100,3 +100,5 @@ jobs:
         run: npm run test:angular-package
       - name: Verify iOS Search Bar controlled contract
         run: npm run test:ios-search
+      - name: Verify UnfoldAccordion and Animated Number contracts
+        run: npm run test:parity-batch4
