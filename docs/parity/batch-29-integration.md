@@ -1,4 +1,4 @@
-﻿# Feature: Angular parity batch 29
+# Feature: Angular parity batch 29
 
 - Outcome: Small Floating Dock and Branching Submenu have validated native Angular baselines; integration pending.
 - Scope: `small-floating-dock`, `branching-submenu`; React unchanged. Deferred AI Response is untouched.
@@ -33,4 +33,5 @@
 - Tracker/completed list now record 73/116 validated: 21 merged and 52 pending integration; 42 queued plus deferred AI Response remain unvalidated.
 - Physical devices, non-Chromium engines, SSR, exhaustive arbitrary/invalid HTML/style/data combinations and every motion frame are outside recorded coverage. Angular templates/native bindings/CSS/query APIs provide framework equivalents.
 - Earlier standards-mode fixture audit remains required before integration. Maintainer integration review and eventual user QA remain outstanding; the overall goal stays active.
-- Next action: push this completed batch, then continue two queued components on a new stacked branch. Preserve integration review and deferred AI Response.
+- Delivery: implementation commit `6885e54` is pushed to `origin/feat/angular-parity-batch-29`; remote commit equality and clean worktree verified.
+- Next action: continue two queued components on a new stacked branch. Preserve integration review and deferred AI Response.
