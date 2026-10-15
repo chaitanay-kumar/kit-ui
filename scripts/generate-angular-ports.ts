@@ -31,6 +31,8 @@ import { lockInputPort } from "./angular-lock-input";
 import { originDropdownPort } from "./angular-origin-dropdown";
 import { paymentStatusPort } from "./angular-payment-status";
 import { notificationBellPort } from "./angular-notification-bell";
+import { notFoundPort } from "./angular-not-found";
+import { paymentReceiptPrinterPort } from "./angular-payment-receipt-printer";
 const root = process.cwd();
 type Kind = "action" | "collection" | "form" | "canvas" | "plain";
 interface Port {
@@ -433,6 +435,7 @@ for (const [id, shape] of [
     { inputs: ["label: string", "loading: boolean", "paused: boolean"] },
   );
 }
+/* Legacy not-found replaced by the authored React-contract port.
 add(
   "not-found",
   "plain",
@@ -450,6 +453,8 @@ add(
     outputs: ["recover: void"],
   },
 );
+*/
+add("not-found","plain",notFoundPort.description,notFoundPort.template,notFoundPort.body,notFoundPort);
 /* Legacy payment status replaced by the authored React-contract port.
 add(
   "payment-status",
@@ -468,6 +473,7 @@ add(
 );
 */
 add("payment-status","plain",paymentStatusPort.description,paymentStatusPort.template,paymentStatusPort.body,paymentStatusPort);
+/* Legacy receipt printer replaced by the authored React-contract port.
 add(
   "payment-receipt-printer",
   "plain",
@@ -487,6 +493,8 @@ add(
     ],
   },
 );
+*/
+add("payment-receipt-printer","plain",paymentReceiptPrinterPort.description,paymentReceiptPrinterPort.template,paymentReceiptPrinterPort.body,paymentReceiptPrinterPort);
 
 // Canvas effects use distinct algorithms, pause off screen and clean up observers.
 const canvasModes: Record<string, string> = {

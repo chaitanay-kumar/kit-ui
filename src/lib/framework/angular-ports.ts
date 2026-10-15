@@ -1135,17 +1135,20 @@ export const ANGULAR_PORTS = [
     "name": "Not Found",
     "exportName": "KitNotFoundComponent",
     "selector": "kit-not-found",
-    "description": "A configurable empty/not-found state with an application-owned recovery action.",
+    "description": "A native not-found state with physical error glyphs, configurable copy, projected actions and navigation callbacks.",
     "inputs": [
-      "code: string",
+      "errorCode: string",
+      "badgeLabel: string",
       "title: string",
       "description: string",
       "actionLabel: string",
-      "disabled: boolean"
+      "onAction: () => void",
+      "secondaryActionLabel: string",
+      "onSecondaryAction: () => void",
+      "showCoordinates: boolean",
+      "className: string"
     ],
-    "outputs": [
-      "recover: void"
-    ]
+    "outputs": []
   },
   {
     "id": "notification-bell",
@@ -1262,20 +1265,39 @@ export const ANGULAR_PORTS = [
     "name": "Payment Receipt Printer",
     "exportName": "KitPaymentReceiptPrinterComponent",
     "selector": "kit-payment-receipt-printer",
-    "description": "A printable, expandable receipt from application-provided line items and totals.",
+    "description": "A configurable thermal receipt with controlled or timed printing state, item totals, themes and receipt actions.",
     "inputs": [
-      "label: string",
+      "status: ReceiptStatus",
       "merchant: string",
-      "reference: string",
+      "merchantSubtext: string",
+      "orderNumber: string",
+      "date: string | Date",
+      "items: ReceiptItem[]",
+      "item: ReceiptItem",
+      "subtotal: string | number",
+      "tax: string | number",
+      "discount: string | number",
+      "total: string | number",
       "currency: string",
-      "items: KitItem[]",
-      "total: number",
-      "disabled: boolean",
-      "printed: boolean (two-way)"
+      "paymentMethod: string",
+      "message: string",
+      "autoPrint: boolean",
+      "printDuration: number",
+      "showStatusCard: boolean",
+      "statusTitle: string",
+      "statusSubtitle: string",
+      "showActions: boolean",
+      "showBarcode: boolean",
+      "showCutEffect: boolean",
+      "paperTheme: PaperTheme",
+      "onPrintStart: () => void",
+      "onPrintComplete: () => void",
+      "onReplay: () => void",
+      "className: string",
+      "printerClassName: string",
+      "receiptClassName: string"
     ],
-    "outputs": [
-      "printedChange: boolean"
-    ]
+    "outputs": []
   },
   {
     "id": "payment-status",
