@@ -2,14 +2,14 @@
 
 React is the source of truth for component appearance, interactions, data contracts, options and defaults. Angular implementations stay native; template projection and output events provide Angular equivalents for React nodes and callbacks. Catalog coverage does not establish parity.
 
-Current progress: 79 components have recorded validated baselines (75 merged through batch 30, four on batches 31/32); 37 remain unvalidated. Batch 32 adds SpringSelect and Gooey Menu. See [batch 32 evidence](parity/batch-32-integration.md) and the [completed component list](parity/completed-components.md). Batches 4–30 were merged into `feat/kit-ui-library` at `cfcfc68`; Registry CI and Pages deployment passed. Older rows saying integration pending for those batches are historical labels.
+Current progress: 81 components have recorded validated baselines (75 merged through batch 30, six on batches 31-33); 35 remain unvalidated. Batch 33 adds Morphing Dialog and VelocityToast. See [batch 33 evidence](parity/batch-33-integration.md) and the [completed component list](parity/completed-components.md). Batches 4–30 were merged into `feat/kit-ui-library` at `cfcfc68`; Registry CI and Pages deployment passed. Older rows saying integration pending for those batches are historical labels.
 
 User priority: finish simpler components first. AI Response work is preserved on `feat/angular-ai-response-parity` and remains in progress. Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work proceeds in batches of two, with focused component checks during implementation and one full baseline before batch merge. Batch 2 merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); batch 3 merged through [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Batch 4 and its stacked batch 5 are locally validated and await integration. The original inventory order remains below for tracking, not execution priority.
 
 ## Pending work
 
-- Review and fix the remaining 37 components listed below: 36 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
-- Review batches 31/32 for integration. Continue with Morphing Dialog and VelocityToast in batch 33.
+- Review and fix the remaining 35 components listed below: 34 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
+- Review batches 31-33 for integration. Continue with Dependency Trace and Recovery Ledger in batch 34.
 - Before integration, audit earlier parity fixture HTML for standard doctype and viewport metadata, including batches 11 through 19. Batch 23 corrects these headers and renews browser checks for batches 20 through 23. Earlier mobile input/reduced-motion checks alone do not prove narrow responsive layouts in standards mode.
 - Resume AI Response later from local `kit-ui-angular-response` on `feat/angular-ai-response-parity`. Its unfinished changes and audit at `docs/parity/ai-response-audit.md` remain preserved in that worktree and are not merged or validated.
 - After all 116 components have validated baselines, the user will perform the full QA run. Address the resulting feedback before calling the overall parity effort complete.
@@ -90,7 +90,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 58 | Metric HUD | `metric-hud` | Validated locally; integration pending | [Report](parity/metric-hud.md) |
 | 59 | Morphing Blob | `morphing-blob` | Validated locally; integration pending | [Evidence](parity/morphing-blob.md) |
 | 60 | Morphing Button | `morphing-button` | Validated baseline | [Review](parity/morphing-button.md) |
-| 61 | Morphing Dialog | `morphing-dialog` | Queued | — |
+| 61 | Morphing Dialog | `morphing-dialog` | Validated locally; integration pending | [Report](parity/morphing-dialog.md) |
 | 62 | Morphing Icon | `morphing-icon` | Validated baseline | [Review](parity/morphing-icon.md) |
 | 63 | Morphing Shape Loader | `morphing-shape-loader` | Validated locally; integration pending | [Report](parity/morphing-shape-loader.md) |
 | 64 | Neon Edge Button | `neon-edge-button` | Validated baseline | [Review](parity/neon-edge-button.md) |
@@ -144,7 +144,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 112 | Typewriter Button | `typewriter-button` | Validated baseline | [Review](parity/typewriter-button.md) |
 | 113 | Undo Toast | `undo-toast` | Validated locally; integration pending | [Report](parity/undo-toast.md) |
 | 114 | UnfoldAccordion | `unfold-accordion` | Validated locally; integration pending | [Report](parity/unfold-accordion.md) |
-| 115 | VelocityToast | `velocity-toast` | Queued | — |
+| 115 | VelocityToast | `velocity-toast` | Validated locally; integration pending | [Report](parity/velocity-toast.md) |
 | 116 | Wallet Card | `wallet-card` | Validated locally; integration pending | [Report](parity/wallet-card.md) |
 
 ## Validation baseline

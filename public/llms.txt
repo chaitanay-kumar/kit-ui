@@ -202,7 +202,7 @@ All 116 catalog components have native standalone Angular implementations. Use t
 - [Metric HUD for Angular](http://localhost:5173/components/metric-hud?framework=angular): An interactive telemetry HUD with selectable metrics and ranges, trend/status semantics, copy feedback and an inspectable SVG series.
 - [Morphing Blob for Angular](http://localhost:5173/components/morphing-blob?framework=angular): An SVG Catmull–Rom blob with spring retargeting, cursor smoothing, gradient and reduced-motion snapshot matching React.
 - [Morphing Button for Angular](http://localhost:5173/components/morphing-button?framework=angular): Controlled React-matched status button with four variants, default Lucide or template icons, spring presence transitions and native form events.
-- [Morphing Dialog for Angular](http://localhost:5173/components/morphing-dialog?framework=angular): A native modal dialog with focus containment, Escape, projected content and asynchronous confirmation.
+- [Morphing Dialog for Angular](http://localhost:5173/components/morphing-dialog?framework=angular): Source-contract overlay with lazy native trigger/content templates, Escape/backdrop dismissal, body overflow lifecycle and delayed entries.
 - [Morphing Icon for Angular](http://localhost:5173/components/morphing-icon?framework=angular): React-matched controlled two-template icon wrapper with opacity, scale and rotation morphs, size/duration controls, native attributes and style override precedence.
 - [Morphing Shape Loader for Angular](http://localhost:5173/components/morphing-shape-loader?framework=angular): A theme-aware SVG loader that cycles through matched-control-point shapes with configurable timing, loop, stroke and fill.
 - [Neon Edge Button for Angular](http://localhost:5173/components/neon-edge-button?framework=angular): React-matched travelling edge light with speed/glow controls, projected button content, native HTML form behavior and a static reduced-motion highlight.
@@ -253,7 +253,7 @@ All 116 catalog components have native standalone Angular implementations. Use t
 - [Typewriter Button for Angular](http://localhost:5173/components/typewriter-button?framework=angular): React-matched character-by-character button with required text, typing duration, auto-start, completion callback and optional synthesized keystroke audio.
 - [Undo Toast for Angular](http://localhost:5173/components/undo-toast?framework=angular): A positioned undo toast with synchronized visibility, variants, pausable countdown, restored state and dismissal cleanup.
 - [UnfoldAccordion for Angular](http://localhost:5173/components/unfold-accordion?framework=angular): React-matched native accordion with initial defaultOpen, single/multiple disclosure, typed template content and coordinated height, opacity, spacing and chevron motion.
-- [VelocityToast for Angular](http://localhost:5173/components/velocity-toast?framework=angular): Dismissible notifications with restore actions and restrained live announcements.
+- [VelocityToast for Angular](http://localhost:5173/components/velocity-toast?framework=angular): Source-contract single toast with local visibility, hover-paused countdown, six placements, variants and retained spring exits.
 - [Wallet Card for Angular](http://localhost:5173/components/wallet-card?framework=angular): A native wallet balance card with configurable labels, disabled action and pointer-following cyan shine.
 
 ## Resources

@@ -1,6 +1,6 @@
 # Completed parity checks
 
-79 components have recorded validated baselines: 75 merged through batch 30 and four awaiting integration from batches 31/32. Validation scope and remaining limits are recorded in each linked report. Older integration-pending labels for batches 4–30 predate their merge at `cfcfc68`. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
+81 components have recorded validated baselines: 75 merged through batch 30 and six awaiting integration from batches 31-33. Validation scope and remaining limits are recorded in each linked report. Older integration-pending labels for batches 4–30 predate their merge at `cfcfc68`. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
 
 | Component | Status | Evidence |
 | --- | --- | --- |
@@ -45,6 +45,7 @@
 | Metric HUD | Validated locally; integration pending | [Report](metric-hud.md) |
 | Morphing Blob | Validated locally; integration pending | [Evidence](morphing-blob.md) |
 | Morphing Button | Validated baseline | [Review](morphing-button.md) |
+| Morphing Dialog | Validated locally; integration pending | [Report](morphing-dialog.md) |
 | Morphing Icon | Validated baseline | [Review](morphing-icon.md) |
 | Morphing Shape Loader | Validated locally; integration pending | [Report](morphing-shape-loader.md) |
 | Neon Edge Button | Validated baseline | [Review](neon-edge-button.md) |
@@ -82,4 +83,5 @@
 | Undo Toast | Validated locally; integration pending | [Report](undo-toast.md) |
 | UnfoldAccordion | Validated locally; integration pending | [Report](unfold-accordion.md) |
 | Sticky Pages | Validated locally; integration pending | [Report](sticky-pages.md) |
+| VelocityToast | Validated locally; integration pending | [Report](velocity-toast.md) |
 | Wallet Card | Validated locally; integration pending | [Report](wallet-card.md) |

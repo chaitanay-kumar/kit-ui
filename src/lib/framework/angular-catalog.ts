@@ -147,6 +147,15 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if(entry.id==='velocity-toast')return `import {Component,signal} from '@angular/core';
+import {KitVelocityToastComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitVelocityToastComponent],template:\`<button type="button" (click)="open.set(true)">Show toast</button><kit-velocity-toast [open]="open()" title="File uploaded" description="Ready to use." variant="success" position="bottom-right" [onDismiss]="dismiss"/>\`})
+export class ExampleComponent{readonly open=signal(false);readonly dismiss=()=>this.open.set(false);}`;
+  if(entry.id==='morphing-dialog')return `import {Component} from '@angular/core';
+import {KitMorphingDialogComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitMorphingDialogComponent],template:\`<ng-template #trigger let-open><button type="button" (click)="open()">Configure keys</button></ng-template><ng-template #body><p>Manage access permissions.</p></ng-template><kit-morphing-dialog title="API Key Configuration" subtitle="Access settings" [trigger]="trigger" [content]="body"/>\`})
+export class ExampleComponent{}`;
+
   if(entry.id==='spring-select')return `import {Component,signal} from '@angular/core';
 import {KitSpringSelectComponent,type SpringSelectOption} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitSpringSelectComponent],template:\`<kit-spring-select [options]="options" label="Workspace" [value]="selected()" [onChange]="change"/>\`})

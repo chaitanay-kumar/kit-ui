@@ -1,3 +1,5 @@
+import {morphingDialogPort} from './angular-morphing-dialog';
+import {velocityToastPort} from './angular-velocity-toast';
 import {gooeyMenuPort} from './angular-gooey-menu';
 import {springSelectPort} from './angular-spring-select';
 import {walletCardPort} from './angular-wallet-card';
@@ -352,21 +354,7 @@ for (const [id, title] of [
     `readonly enabled=(item:KitItem)=>!item.disabled;readonly itemId=(item:KitItem)=>item.id;`,
   );
 }
-for (const [id, title] of [
-  ["velocity-toast", "Update available"],
-]) {
-  const bell = id === "notification-bell",
-    toast = id.endsWith("toast");
-  add(
-    id,
-    "collection",
-    "Dismissible notifications with restore actions and restrained live announcements.",
-    `<section class="kit-control kit-stack">${bell ? '<button type="button" [disabled]="disabled()" [attr.aria-expanded]="open()" (click)="open.set(!open())">♧ {{label()||\'Notifications\'}} ({{visible().length}})</button>@if(open()){' : ""}<div class="k-notification-stack">@for(item of visible();track item.id){<article class="kit-surface kit-stack"><strong>{{${toast ? "label()||'" + title + "'" : "item.label"}}}</strong><p>{{item.description}}</p><div class="kit-row"><button type="button" [disabled]="disabled()" (click)="dismiss(item)">Dismiss <span class="sr-only">{{item.label}}</span></button>${id === "undo-toast" ? '<button type="button" [disabled]="disabled()||busy()" (click)="execute([item])">Undo action</button>' : ""}</div></article>}@empty{<p>No notifications.</p>}</div>${bell ? "}" : ""}@if(dismissed().length){<button type="button" (click)="undo()" [disabled]="disabled()">Restore notifications</button>}${collectionFeedback}</section>`,
-    toast
-      ? `override readonly items=input<KitItem[]>([{id:'notice',label:'${title}',description:'A local notification. Connect actions to your application.'}]);`
-      : "",
-  );
-}
+add('velocity-toast','plain',velocityToastPort.description,velocityToastPort.template,velocityToastPort.body,velocityToastPort);
 add("notification-stack","plain",notificationStackPort.description,notificationStackPort.template,notificationStackPort.body,notificationStackPort);
 add("undo-toast","plain",undoToastPort.description,undoToastPort.template,undoToastPort.body,undoToastPort);
 add("notification-bell","plain",notificationBellPort.description,notificationBellPort.template,notificationBellPort.body,notificationBellPort);
@@ -633,24 +621,7 @@ add(
 */
 add("directional-tooltip","plain",directionalTooltipPort.description,directionalTooltipPort.template,directionalTooltipPort.body,directionalTooltipPort);
 add('settle-modal','plain',settleModalPort.description,settleModalPort.template,settleModalPort.body,settleModalPort);
-for (const [id, title] of [
-  ["morphing-dialog", "A little more room"],
-]) {
-  add(
-    id,
-    "action",
-    "A native modal dialog with focus containment, Escape, projected content and asynchronous confirmation.",
-    `<div class="kit-control kit-stack"><button type="button" [disabled]="blocked()" (click)="opened.set(true)">{{label()||'Open dialog'}}</button><dialog #dialog class="kit-dialog kit-control k-port-dialog" [attr.aria-labelledby]="uid" (close)="opened.set(false)" (cancel)="opened.set(false)"><div class="kit-stack"><h3 [id]="uid">{{title()}}</h3><ng-content><p>{{description()}}</p></ng-content><div class="kit-row"><button type="button" [disabled]="busy()" (click)="opened.set(false)">Close</button><button type="button" [disabled]="blocked()" (click)="confirm()">{{busy()?'Working…':'Confirm'}}</button></div>${actionFeedback}</div></dialog></div>`,
-    `readonly uid=portId('dialog');readonly title=input('${title}');readonly description=input('Your application content belongs here.');readonly opened=model(false);readonly dialog=viewChild<ElementRef<HTMLDialogElement>>('dialog');constructor(){super();effect(()=>{const dialog=this.dialog()?.nativeElement;const opened=this.opened();if(!dialog)return;if(opened&&!dialog.open)dialog.showModal();else if(!opened&&dialog.open)dialog.close();});}async confirm():Promise<void>{await this.run();if(!this.error()&&!this.destroyed)this.opened.set(false);}`,
-    {
-      inputs: [
-        "title: string",
-        "description: string",
-        "opened: boolean (two-way)",
-      ],
-    },
-  );
-}
+add('morphing-dialog','plain',morphingDialogPort.description,morphingDialogPort.template,morphingDialogPort.body,morphingDialogPort);
 
 // The larger data, comparison, chat and graph ports are authored separately.
 import { COMPLEX_PORTS } from "./angular-complex-ports";
@@ -747,7 +718,7 @@ for (const port of ports) {
       "await this.run();",
       "const request=this.run();const controller=this.controller;await request;if(controller?.signal.aborted)return;",
     );
-  if (port.id === "morphing-dialog" || port.id === "settle-modal")
+  if (port.id === "settle-modal")
     port.body = port.body.replace(
       "await this.run();",
       "const request=this.run();const controller=this.controller;await request;if(controller?.signal.aborted)return;",

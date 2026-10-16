@@ -1066,20 +1066,16 @@
     "name": "Morphing Dialog",
     "exportName": "KitMorphingDialogComponent",
     "selector": "kit-morphing-dialog",
-    "description": "A native modal dialog with focus containment, Escape, projected content and asynchronous confirmation.",
+    "description": "Source-contract overlay with lazy native trigger/content templates, Escape/backdrop dismissal, body overflow lifecycle and delayed entries.",
     "inputs": [
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "action: KitAction",
+      "trigger: TemplateRef<MorphingDialogTriggerContext>",
+      "content: TemplateRef<unknown>",
       "title: string",
-      "description: string",
-      "opened: boolean (two-way)"
+      "subtitle: string",
+      "id: string",
+      "className: string"
     ],
-    "outputs": [
-      "activated: void",
-      "openedChange: boolean"
-    ]
+    "outputs": []
   },
   {
     "id": "morphing-icon",
@@ -2005,24 +2001,20 @@
     "name": "VelocityToast",
     "exportName": "KitVelocityToastComponent",
     "selector": "kit-velocity-toast",
-    "description": "Dismissible notifications with restore actions and restrained live announcements.",
+    "description": "Source-contract single toast with local visibility, hover-paused countdown, six placements, variants and retained spring exits.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "open: boolean",
+      "title: string",
+      "description: string",
+      "onDismiss: () => void",
+      "duration: number",
+      "variant: VelocityToastVariant",
+      "position: VelocityToastPosition",
+      "showProgress: boolean",
+      "icon: TemplateRef<unknown> | string | number",
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "wallet-card",
