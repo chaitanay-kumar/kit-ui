@@ -1,3 +1,4 @@
+import {stackedCardsPort} from './angular-stacked-cards';
 import {recoveryLedgerPort} from './angular-recovery-ledger';
 import {morphingDialogPort} from './angular-morphing-dialog';
 import {velocityToastPort} from './angular-velocity-toast';
@@ -370,7 +371,6 @@ add(
 // Data and account cards use actual inputs and local disclosure, not screenshots.
 for (const [id, title, layout] of [
   ["mac-os-folder-cards", "Project folders", "folders"],
-  ["stacked-cards", "Your collection", "stacked"],
   ["story-card", "Your stories", "stories"],
 ]) {
   add(
@@ -624,6 +624,8 @@ add("directional-tooltip","plain",directionalTooltipPort.description,directional
 add('settle-modal','plain',settleModalPort.description,settleModalPort.template,settleModalPort.body,settleModalPort);
 add('morphing-dialog','plain',morphingDialogPort.description,morphingDialogPort.template,morphingDialogPort.body,morphingDialogPort);
 
+add('stacked-cards','plain',stackedCardsPort.description,stackedCardsPort.template,stackedCardsPort.body,stackedCardsPort);
+
 // The larger data, comparison, chat and graph ports are authored separately.
 import { COMPLEX_PORTS } from "./angular-complex-ports";
 for (const port of COMPLEX_PORTS)
@@ -726,11 +728,7 @@ for (const port of ports) {
     );
   if (port.id === "sign-up")
     port.body = `override readonly fields=input<KitField[]>([{key:'name',label:'Name',type:'text',required:true},{key:'email',label:'Email',type:'email',required:true},{key:'password',label:'Password',type:'password',required:true,minLength:8},{key:'confirmPassword',label:'Confirm password',type:'password',required:true,minLength:8}]);override async submit(event:SubmitEvent):Promise<void>{if(this.values()['password']!==this.values()['confirmPassword']){event.preventDefault();this.error.set('Passwords do not match.');return;}await super.submit(event);}`;
-  if (port.id === "stacked-cards")
-    port.template = port.template.replace(
-      '<div class="k-cards',
-      `<nav class="kit-row" aria-label="Choose a card" (keydown)="keys($event)">@for(item of items();track item.id){${itemButton}}</nav><div class="k-cards`,
-    );
+
 
 }
 const directory = path.join(root, "packages/angular/src");

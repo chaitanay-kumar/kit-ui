@@ -1,24 +1,21 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component, input, model, output } from '@angular/core';
-import type { KitPlan } from './port-types';
-
+import { Component, ViewEncapsulation, ElementRef, input, signal, viewChild } from '@angular/core';
+import {afterRenderEffect} from '@angular/core';import {PricingCardComponent} from './pricing-card';import {DEFAULT_FREE_TIER,DEFAULT_PRO_TIER,type PricingTier} from './pricing-types';import {NativeRootBindings,type NativeAttributes,type NativeStyle} from './native-root-bindings';export type {PricingFeature,PricingTier} from './pricing-types';export type {NativeAttributes as PricingAttributes,NativeStyle as PricingStyle} from './native-root-bindings';
 @Component({
  selector:"kit-pricing", standalone:true,
- host:{'data-kit':"pricing",style:'display:block;min-width:0'},
- template:`
-<section class="kit-control kit-stack">
-<label class="kit-row">
-<input type="checkbox" [checked]="yearly()" [disabled]="disabled()" (change)="yearly.set($any($event.target).checked)" />Yearly billing · {{yearlyDiscount()}}% discount</label>
-<div class="k-pricing">@for(plan of plans();track plan.id){<article class="kit-surface kit-stack" [class.k-featured]="plan.featured">
-<h3>{{plan.label}}</h3>
-<p class="k-price">{{price(plan)}} <small>/{{yearly()?'year':'month'}}</small>
-</p>
-<ul>@for(feature of plan.features;track $index){<li>{{feature}}</li>}</ul>
-<button type="button" [disabled]="disabled()" (click)="planSelect.emit({plan,yearly:yearly()})">Choose {{plan.label}}</button>
-</article>}</div>
+ host:{style:'display:contents'},
+ imports:[PricingCardComponent],
+encapsulation:ViewEncapsulation.None,styleUrls:["./pricing.css"],
+template:`
+<section #root aria-label="Pricing" [class]="'k-native-pricing '+className()" (click)="rootClick($event)" (keydown)="rootKey($event)">@if(eyebrow()||heading()||subheading()){<div class="k-pricing-heading">@if(eyebrow()){<p class="k-pricing-eyebrow">{{eyebrow()}}</p>}@if(heading()){<h2>{{heading()}}</h2>}@if(subheading()){<p class="k-pricing-subheading">{{subheading()}}</p>}</div>}<div [class]="'k-pricing-grid '+(columns()===2?'two':columns()===1?'one':'auto')">
+<div kitPricingCard [tier]="reverse()?proTier():freeTier()" [featured]="reverse()" [reduceMotion]="reduced()">
+</div>
+<div kitPricingCard [tier]="reverse()?freeTier():proTier()" [featured]="!reverse()" [reduceMotion]="reduced()">
+</div>
+</div>
 </section>
 `
 })
 export class KitPricingComponent {
-readonly plans=input<KitPlan[]>([{id:'starter',label:'Starter',price:12,features:['Core components','One workspace']},{id:'team',label:'Team',price:24,features:['Shared workspace','Team controls'],featured:true}]);readonly yearly=model(false);readonly yearlyDiscount=input(20);readonly currency=input('USD');readonly disabled=input(false);readonly planSelect=output<{plan:KitPlan;yearly:boolean}>();price(plan:KitPlan):string{const value=this.yearly()?plan.price*12*(1-Math.max(0,Math.min(100,this.yearlyDiscount()))/100):plan.price;try{return new Intl.NumberFormat('en',{style:'currency',currency:this.currency()}).format(value);}catch{return value.toFixed(2)+' '+this.currency();}}
+readonly freeTier=input<PricingTier,PricingTier|undefined>(DEFAULT_FREE_TIER,{transform:v=>v===undefined?DEFAULT_FREE_TIER:v});readonly proTier=input<PricingTier,PricingTier|undefined>(DEFAULT_PRO_TIER,{transform:v=>v===undefined?DEFAULT_PRO_TIER:v});readonly reverse=input<boolean,boolean|undefined>(false,{transform:v=>v===undefined?false:v});readonly columns=input<1|2|'auto',1|2|'auto'|undefined>('auto',{transform:v=>v===undefined?'auto':v});readonly eyebrow=input<string|undefined>();readonly heading=input<string|undefined>();readonly subheading=input<string|undefined>();readonly className=input<string,string|undefined>('',{transform:v=>v===undefined?'':v});readonly styles=input<NativeStyle|undefined>(undefined,{alias:'style'});readonly attributes=input<NativeAttributes|undefined>();readonly onClick=input<((event:MouseEvent)=>void)|undefined>();readonly onKeyDown=input<((event:KeyboardEvent)=>void)|undefined>();readonly root=viewChild<ElementRef<HTMLElement>>('root');readonly reduced=signal(false);private bindings:NativeRootBindings|undefined;rootClick(event:MouseEvent):void{this.onClick()?.(event)}rootKey(event:KeyboardEvent):void{this.onKeyDown()?.(event)}ngOnInit():void{if(typeof window!=='undefined')this.reduced.set(window.matchMedia('(prefers-reduced-motion: reduce)').matches)}constructor(){afterRenderEffect(()=>{const root=this.root()?.nativeElement,styles=this.styles(),attributes=this.attributes();if(root){this.bindings??=new NativeRootBindings(root);this.bindings.apply(styles,attributes,{'aria-label':'Pricing'})}})}
 }

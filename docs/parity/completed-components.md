@@ -1,6 +1,6 @@
 # Completed parity checks
 
-83 components have recorded validated baselines: 75 merged through batch 30 and eight awaiting integration from batches 31-34. Validation scope and remaining limits are recorded in each linked report. Older integration-pending labels for batches 4–30 predate their merge at `cfcfc68`. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
+85 components have recorded validated baselines: 75 merged through batch 30 and ten awaiting integration from batches 31-35. Validation scope and remaining limits are recorded in each linked report. Older integration-pending labels for batches 4–30 predate their merge at `cfcfc68`. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
 
 | Component | Status | Evidence |
 | --- | --- | --- |
@@ -61,6 +61,7 @@
 | Peek Card | Validated locally; integration pending | [Report](peek-card.md) |
 | Pill Navigation | Validated locally; integration pending | [Report](pill-navigation.md) |
 | PressButton | Validated baseline | [Review](press-button.md) |
+| Pricing | Validated locally; integration pending | [Report](pricing.md) |
 | Profile Card | Validated locally; integration pending | [Report](profile-card.md) |
 | Rainbow Button | Validated baseline | [Review](rainbow-button.md) |
 | Recovery Ledger | Validated locally; integration pending | [Report](recovery-ledger.md) |
@@ -84,6 +85,7 @@
 | Typewriter Button | Validated baseline | [Review](typewriter-button.md) |
 | Undo Toast | Validated locally; integration pending | [Report](undo-toast.md) |
 | UnfoldAccordion | Validated locally; integration pending | [Report](unfold-accordion.md) |
+| Stacked Cards | Validated locally; integration pending | [Report](stacked-cards.md) |
 | Sticky Pages | Validated locally; integration pending | [Report](sticky-pages.md) |
 | VelocityToast | Validated locally; integration pending | [Report](velocity-toast.md) |
 | Wallet Card | Validated locally; integration pending | [Report](wallet-card.md) |

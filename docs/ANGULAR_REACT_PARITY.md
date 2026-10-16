@@ -2,14 +2,14 @@
 
 React is the source of truth for component appearance, interactions, data contracts, options and defaults. Angular implementations stay native; template projection and output events provide Angular equivalents for React nodes and callbacks. Catalog coverage does not establish parity.
 
-Current progress: 83 components have recorded validated baselines (75 merged through batch 30, eight on batches 31-34); 33 remain unvalidated. Batch 34 adds Dependency Trace and Recovery Ledger. See [batch 34 evidence](parity/batch-34-integration.md) and the [completed component list](parity/completed-components.md). Batches 4–30 were merged into `feat/kit-ui-library` at `cfcfc68`; Registry CI and Pages deployment passed. Older rows saying integration pending for those batches are historical labels.
+Current progress: 85 components have recorded validated baselines (75 merged through batch 30, ten on batches 31-35); 31 remain unvalidated. Batch 35 adds Pricing and Stacked Cards. See [batch 35 evidence](parity/batch-35-integration.md) and the [completed component list](parity/completed-components.md). Batches 4–30 were merged into `feat/kit-ui-library` at `cfcfc68`; Registry CI and Pages deployment passed. Older rows saying integration pending for those batches are historical labels.
 
 User priority: finish simpler components first. AI Response work is preserved on `feat/angular-ai-response-parity` and remains in progress. Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work proceeds in batches of two, with focused component checks during implementation and one full baseline before batch merge. Batch 2 merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); batch 3 merged through [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Batch 4 and its stacked batch 5 are locally validated and await integration. The original inventory order remains below for tracking, not execution priority.
 
 ## Pending work
 
-- Review and fix the remaining 33 components listed below: 32 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
-- Review batches 31-34 for integration. Continue with Pricing and Stacked Cards in batch 35.
+- Review and fix the remaining 31 components listed below: 30 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
+- Review batches 31-35 for integration. Continue with macOS Folder Cards and Story Cards in batch 36.
 - Before integration, audit earlier parity fixture HTML for standard doctype and viewport metadata, including batches 11 through 19. Batch 23 corrects these headers and renews browser checks for batches 20 through 23. Earlier mobile input/reduced-motion checks alone do not prove narrow responsive layouts in standards mode.
 - Resume AI Response later from local `kit-ui-angular-response` on `feat/angular-ai-response-parity`. Its unfinished changes and audit at `docs/parity/ai-response-audit.md` remain preserved in that worktree and are not merged or validated.
 - After all 116 components have validated baselines, the user will perform the full QA run. Address the resulting feedback before calling the overall parity effort complete.
@@ -107,7 +107,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 75 | Peek Card | `peek-card` | Validated locally; integration pending | [Report](parity/peek-card.md) |
 | 76 | Pill Navigation | `pill-navigation` | Validated locally; integration pending | [Report](parity/pill-navigation.md) |
 | 77 | PressButton | `press-button` | Validated baseline | [Review](parity/press-button.md) |
-| 78 | Pricing | `pricing` | Queued | — |
+| 78 | Pricing | `pricing` | Validated locally; integration pending | [Report](parity/pricing.md) |
 | 79 | Profile Card | `profile-card` | Validated locally; integration pending | [Report](parity/profile-card.md) |
 | 80 | Pull to Refresh | `pull-to-refresh` | Queued | — |
 | 81 | Rainbow Button | `rainbow-button` | Validated baseline | [Review](parity/rainbow-button.md) |
@@ -132,7 +132,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 100 | Spotlight Search | `spotlight-search` | Queued | — |
 | 101 | SpringSelect | `spring-select` | Validated locally; integration pending | [Report](parity/spring-select.md) |
 | 102 | Stack Unfold Panel | `stack-unfold-panel` | Validated locally; integration pending | [Evidence](parity/stack-unfold-panel.md) |
-| 103 | Stacked Cards | `stacked-cards` | Queued | — |
+| 103 | Stacked Cards | `stacked-cards` | Validated locally; integration pending | [Report](parity/stacked-cards.md) |
 | 104 | Sticky Pages | `sticky-pages` | Validated locally; integration pending | [Report](parity/sticky-pages.md) |
 | 105 | Story Cards | `story-card` | Queued | — |
 | 106 | StretchSwitch | `stretch-switch` | Validated baseline | [Report](parity/stretch-switch.md) |

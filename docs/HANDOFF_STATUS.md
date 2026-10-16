@@ -1,6 +1,10 @@
 # Implementation handoff — 2026-10-08
 
-## Latest batch handoff - 2026-10-16 (batch 34)
+## Latest batch handoff - 2026-10-16 (batch 35)
+
+Pricing and Stacked Cards are validated on `feat/angular-parity-batch-35`, stacked on pushed batch 34 `ac79022`. See [batch 35 evidence](parity/batch-35-integration.md). Thirty-six distinct desktop/mobile behavior/geometry/motion/bare/demo/disposal cases, renewed Pricing card/shadow/price checks, focused packaged contracts, 117 unit tests, production build/289 SEO and four independent Angular compiler consumers pass. Progress is 85/116: 75 merged, ten awaiting review, 30 queued plus AI Response deferred. Next is batch 36: macOS Folder Cards and Story Cards. Review the documented Stacked Cards empty/repopulation recovery difference and inherited source heading contrast issue. Preserve named stashes, older standards-mode audit and final user QA follow-ups.
+
+## Previous batch handoff - 2026-10-16 (batch 34)
 
 Dependency Trace and Recovery Ledger are validated on `feat/angular-parity-batch-34`, stacked on pushed batch 33 `7cec765`. See [batch 34 evidence](parity/batch-34-integration.md). Thirty-two desktop/mobile behavior/geometry/motion/bare/demo/disposal cases, focused packaged contracts, 117 unit tests, production build/289 SEO checks and four independent Angular compiler consumers pass. Progress is 83/116: 75 merged, eight awaiting review, 32 queued plus AI Response deferred. Next is batch 35: Pricing and Stacked Cards. Preserve named stashes, the older standards-mode fixture audit and final user QA follow-ups.
 

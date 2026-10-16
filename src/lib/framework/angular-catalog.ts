@@ -147,6 +147,14 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if(entry.id==='pricing')return `import {Component} from '@angular/core';
+import {KitPricingComponent,type PricingTier} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitPricingComponent],template:\`<kit-pricing heading="Choose your plan" [proTier]="pro"/>\`})
+export class Example{pro:PricingTier={name:'Team',price:'$49',cadence:'Per month',features:['All components',{label:'Team support',description:'Contact your team for details'}],ctaLabel:'Choose Team',onCtaClick:()=>this.chooseTeam()};chooseTeam():void{/* Connect your checkout here. */}}`;
+  if(entry.id==='stacked-cards')return `import {Component} from '@angular/core';
+import {KitStackedCardsComponent,type StackedCard} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitStackedCardsComponent],template:\`<kit-stacked-cards title="Latest stories" [cards]="cards"/>\`})
+export class Example{cards:StackedCard[]=[{id:'story',title:'Our next chapter',description:'Read what we are building.',image:'/images/story.jpg',imageAlt:'Our team',href:'/stories/next',ctaLabel:'Read story'}]}`;
   if(entry.id==='dependency-trace')return `import {Component} from '@angular/core';
 import {KitDependencyTraceComponent,type TraceNode,type TraceConnection} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitDependencyTraceComponent],template:\`<kit-dependency-trace [nodes]="nodes" [connections]="connections" [onNodeSelect]="select"/>\`})

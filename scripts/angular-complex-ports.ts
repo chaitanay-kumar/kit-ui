@@ -1,25 +1,11 @@
+import {pricingPort} from './angular-pricing';
 import {dependencyTracePort} from './angular-dependency-trace';
 import { advancedDataTablePort } from './angular-data-table';
 /** Native implementations for components with independent state/data contracts. */
 export const COMPLEX_PORTS = [
   advancedDataTablePort,
   dependencyTracePort,
-  {
-    id: "pricing",
-    kind: "plain" as const,
-    description:
-      "Selectable pricing plans with monthly/yearly billing, real price inputs and an application-owned selection event.",
-    inputs: [
-      "plans: KitPlan[]",
-      "yearly: boolean (two-way)",
-      "yearlyDiscount: number",
-      "currency: string",
-      "disabled: boolean",
-    ],
-    outputs: ["planSelect: { plan: KitPlan; yearly: boolean }"],
-    template: `<section class="kit-control kit-stack"><label class="kit-row"><input type="checkbox" [checked]="yearly()" [disabled]="disabled()" (change)="yearly.set($any($event.target).checked)" />Yearly billing · {{yearlyDiscount()}}% discount</label><div class="k-pricing">@for(plan of plans();track plan.id){<article class="kit-surface kit-stack" [class.k-featured]="plan.featured"><h3>{{plan.label}}</h3><p class="k-price">{{price(plan)}} <small>/{{yearly()?'year':'month'}}</small></p><ul>@for(feature of plan.features;track $index){<li>{{feature}}</li>}</ul><button type="button" [disabled]="disabled()" (click)="planSelect.emit({plan,yearly:yearly()})">Choose {{plan.label}}</button></article>}</div></section>`,
-    body: `readonly plans=input<KitPlan[]>([{id:'starter',label:'Starter',price:12,features:['Core components','One workspace']},{id:'team',label:'Team',price:24,features:['Shared workspace','Team controls'],featured:true}]);readonly yearly=model(false);readonly yearlyDiscount=input(20);readonly currency=input('USD');readonly disabled=input(false);readonly planSelect=output<{plan:KitPlan;yearly:boolean}>();price(plan:KitPlan):string{const value=this.yearly()?plan.price*12*(1-Math.max(0,Math.min(100,this.yearlyDiscount()))/100):plan.price;try{return new Intl.NumberFormat('en',{style:'currency',currency:this.currency()}).format(value);}catch{return value.toFixed(2)+' '+this.currency();}}`,
-  },
+  pricingPort,
   {
     id: "smart-comparison",
     kind: "plain" as const,

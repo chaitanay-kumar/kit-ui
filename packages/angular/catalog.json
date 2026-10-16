@@ -1379,18 +1379,22 @@
     "name": "Pricing",
     "exportName": "KitPricingComponent",
     "selector": "kit-pricing",
-    "description": "Selectable pricing plans with monthly/yearly billing, real price inputs and an application-owned selection event.",
+    "description": "Source-contract Free/Pro tier presentation with typed data, positional reversal, responsive columns, reduced entry and native CTA sheen/shimmer.",
     "inputs": [
-      "plans: KitPlan[]",
-      "yearly: boolean (two-way)",
-      "yearlyDiscount: number",
-      "currency: string",
-      "disabled: boolean"
+      "freeTier: PricingTier",
+      "proTier: PricingTier",
+      "reverse: boolean",
+      "columns: 1 | 2 | 'auto'",
+      "eyebrow: string",
+      "heading: string",
+      "subheading: string",
+      "className: string",
+      "style: PricingStyle",
+      "attributes: PricingAttributes",
+      "onClick: (event: MouseEvent) => void",
+      "onKeyDown: (event: KeyboardEvent) => void"
     ],
-    "outputs": [
-      "planSelect: { plan: KitPlan; yearly: boolean }",
-      "yearlyChange: boolean"
-    ]
+    "outputs": []
   },
   {
     "id": "profile-card",
@@ -1793,24 +1797,18 @@
     "name": "Stacked Cards",
     "exportName": "KitStackedCardsComponent",
     "selector": "kit-stacked-cards",
-    "description": "A configurable content card collection with selection, disclosure, disabled items and projected details.",
+    "description": "Native source-contract sticky story articles with linear scroll depth, typed cards, images and CTA links.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "cards: StackedCard[]",
+      "title: string",
+      "subtitle: string",
+      "className: string",
+      "style: StackedCardsStyle",
+      "attributes: StackedCardsAttributes",
+      "onClick: (event: MouseEvent) => void",
+      "onKeyDown: (event: KeyboardEvent) => void"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "sticky-pages",
