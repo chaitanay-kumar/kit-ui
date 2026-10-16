@@ -1,28 +1,33 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component, input } from '@angular/core';
-import { KitCollectionController } from './port-controllers';
-import type { KitItem } from './port-types';
-
+import { Component, ViewEncapsulation, DestroyRef, ElementRef, computed, inject, input, signal, viewChild } from '@angular/core';
+import {afterRenderEffect,ErrorHandler} from '@angular/core';import {invokeNativeEventCallback} from './native-event-callback';import {StoryCardSlotComponent} from './story-card-slot';import {StoryNavigationButtonDirective} from './story-navigation-button';import {DEFAULT_STORY_CARDS,type StoryCard} from './story-cards-types';import {StoryCardsNavigation} from './story-cards-navigation';import {NativeRootBindings,type NativeAttributes,type NativeStyle} from './native-root-bindings';export type {StoryCard} from './story-cards-types';export type {NativeAttributes as StoryCardsAttributes,NativeStyle as StoryCardsStyle} from './native-root-bindings';
 @Component({
  selector:"kit-story-card", standalone:true,
- host:{'data-kit':"story-card",style:'display:block;min-width:0'},
- template:`
-<section class="kit-control kit-stack">
-<h3>{{label()||'Your stories'}}</h3>
-<div class="k-cards k-stories">@for(item of items();track item.id){<article class="k-card kit-surface" [class.k-active]="current()?.id===item.id" (pointermove)="spot($event)" (pointerleave)="clearSpot($event)">
-<button type="button" [disabled]="loading()||disabled()||item.disabled" [attr.aria-expanded]="expanded().includes(item.id)" (click)="select(item);toggle(item.id)">{{item.label}}</button>
-<p>{{item.value}}</p>
-<div [hidden]="!expanded().includes(item.id)">
-<p>{{item.description}}</p>
-<ng-content>
-</ng-content>
-<button type="button" [disabled]="loading()||disabled()||busy()||item.disabled" (click)="execute([item])">Select {{item.label}}</button>
-</div>
-</article>}</div>@if(loading()){<p role="status">Loading…</p>}@if(error()){<p role="alert">{{error()}}</p>}@if(actionError()){<p role="alert">{{actionError()}}</p>}<p role="status" class="kit-status">{{busy()?'Working…':status()}}</p>
-</section>
+ host:{style:'display:contents'},
+ imports:[StoryCardSlotComponent,StoryNavigationButtonDirective],
+encapsulation:ViewEncapsulation.None,styleUrls:["./story-cards.css"],
+template:`
+@if(cards().length){<section #root aria-label="Stories" [class]="'k-native-stories '+className()" (mouseenter)="enter($event)" (mouseleave)="leave($event)" (click)="rootClick($event)" (keydown)="rootKey($event)">
+<div class="k-stories-header">@if(title()||subtitle()){<div class="k-stories-heading">@if(title()){<h2>{{title()}}</h2>}@if(subtitle()){<p>{{subtitle()}}</p>}</div>}@if(cards().length>1){<div class="k-stories-controls">@if(showNavigation()){<div>
+<button kitStoryNav [reduced]="reduced()" type="button" aria-label="Previous story" (click)="previous()">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+<path d="M19 12H5M11 18L5 12L11 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</button>
+<button kitStoryNav [reduced]="reduced()" type="button" aria-label="Next story" (click)="next()">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+<path d="M5 12H19M13 6L19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</button>
+</div>}</div>}</div>
+<div class="k-stories-track" role="region" aria-live="polite" [attr.aria-label]="'Story '+(activeIndex()+1)+' of '+cards().length" (wheel)="wheel($event)" (touchstart)="touchStart($event)" (touchend)="touchEnd($event)">@for(slot of slots();track slot.virtualIndex){<div kitStorySlot [card]="slot.card" [relativePos]="slot.relativePos" [virtualIndex]="slot.virtualIndex" [viewport]="viewport()" [reduced]="reduced()" [onChoose]="choose">
+</div>}</div>@if(activeCard()?.description){<div class="k-stories-summary">
+<p>{{activeCard()!.description}}</p>@if(activeCard()!.href){<a [href]="activeCard()!.href">{{activeCard()!.ctaLabel??'Read more'}}<svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+<path d="M5 12H19M13 6L19 12L13 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>}</div>}</section>}
 `
 })
-export class KitStoryCardComponent extends KitCollectionController {
-spot(event:PointerEvent):void{if(this.disabled())return;const el=event.currentTarget as HTMLElement;const r=el.getBoundingClientRect();el.style.setProperty('--spot-x',(event.clientX-r.left)+'px');el.style.setProperty('--spot-y',(event.clientY-r.top)+'px');}clearSpot(event:PointerEvent):void{(event.currentTarget as HTMLElement).style.removeProperty('--spot-x');}
-override readonly items=input<KitItem[]>([{"id":"beginning","label":"A small beginning","value":"Chapter 01","description":"Every useful idea starts with a question."},{"id":"rhythm","label":"Find the rhythm","value":"Chapter 02","description":"Build, test and follow the details."},{"id":"share","label":"Ready to share","value":"Chapter 03","description":"Bring the finished pieces together."}]);
+export class KitStoryCardComponent {
+readonly cards=input<StoryCard[],StoryCard[]|undefined>(DEFAULT_STORY_CARDS,{transform:v=>v===undefined?DEFAULT_STORY_CARDS:v});readonly initialIndex=input<number,number|undefined>(0,{transform:v=>v===undefined?0:v});readonly autoPlay=input<boolean,boolean|undefined>(false,{transform:v=>v===undefined?false:v});readonly autoPlayInterval=input<number,number|undefined>(5000,{transform:v=>v===undefined?5000:v});readonly showNavigation=input<boolean,boolean|undefined>(true,{transform:v=>v===undefined?true:v});readonly loop=input<boolean,boolean|undefined>(true,{transform:v=>v===undefined?true:v});readonly enableWheelScroll=input<boolean,boolean|undefined>(true,{transform:v=>v===undefined?true:v});readonly title=input<string,string|undefined>("What's happening",{transform:v=>v===undefined?"What's happening":v});readonly subtitle=input<string,string|undefined>('Discover the latest stories.',{transform:v=>v===undefined?'Discover the latest stories.':v});readonly className=input<string,string|undefined>('',{transform:v=>v===undefined?'':v});readonly styles=input<NativeStyle|undefined>(undefined,{alias:'style'});readonly attributes=input<NativeAttributes|undefined>();readonly onClick=input<((event:MouseEvent)=>void)|undefined>();readonly onKeyDown=input<((event:KeyboardEvent)=>void)|undefined>();readonly onMouseEnter=input<((event:MouseEvent)=>void)|undefined>();readonly onMouseLeave=input<((event:MouseEvent)=>void)|undefined>();readonly root=viewChild<ElementRef<HTMLElement>>('root');readonly virtualIndex=signal(0);readonly viewport=signal(1024);readonly reduced=signal(false);readonly hovered=signal(false);readonly count=signal(0);readonly activeIndex=computed(()=>this.count()>0?((this.virtualIndex()%this.count())+this.count())%this.count():0);activeCard():StoryCard|undefined{return this.cards()[this.activeIndex()]}slots(){return [-1,0,1,2,3,4].map(relativePos=>{const virtualIndex=this.virtualIndex()+relativePos,realIndex=((virtualIndex%this.count())+this.count())%this.count();return {virtualIndex,relativePos,card:this.cards()[realIndex]}})}ngDoCheck():void{this.count.set(this.cards().length)}private navigation:StoryCardsNavigation|undefined;private readonly errors=inject(ErrorHandler);private bindings:NativeRootBindings|undefined;private boundRoot:HTMLElement|undefined;ngOnInit():void{this.virtualIndex.set(this.initialIndex());if(typeof window!=='undefined'){this.viewport.set(window.innerWidth);this.reduced.set(window.matchMedia('(prefers-reduced-motion: reduce)').matches);this.navigation=new StoryCardsNavigation(window,direction=>direction===1?this.next():this.previous(),width=>this.viewport.set(width))}}next():void{if(this.count()>1&&(!this.loop()?this.virtualIndex()<this.count()-1:true))this.virtualIndex.update(index=>index+1)}previous():void{if(this.count()>1&&(!this.loop()?this.virtualIndex()>0:true))this.virtualIndex.update(index=>index-1)}readonly choose=(index:number):void=>{if(this.count()&&(!this.loop()?(index>=0&&index<this.count()):true))this.virtualIndex.set(index)};enter(event:MouseEvent):void{const callback=this.onMouseEnter();if(callback)invokeNativeEventCallback(callback,event,this.errors);else this.hovered.set(true)}leave(event:MouseEvent):void{const callback=this.onMouseLeave();if(callback)invokeNativeEventCallback(callback,event,this.errors);else this.hovered.set(false)}rootClick(event:MouseEvent):void{invokeNativeEventCallback(this.onClick(),event,this.errors)}rootKey(event:KeyboardEvent):void{invokeNativeEventCallback(this.onKeyDown(),event,this.errors)}wheel(event:WheelEvent):void{this.navigation?.wheel(event)}touchStart(event:TouchEvent):void{this.navigation?.touchStart(event)}touchEnd(event:TouchEvent):void{this.navigation?.touchEnd(event)}constructor(){afterRenderEffect(()=>{const root=this.root()?.nativeElement,style=this.styles(),attributes=this.attributes();if(root){if(root!==this.boundRoot){this.bindings=new NativeRootBindings(root);this.boundRoot=root}this.bindings!.apply(style,attributes,{'aria-label':'Stories'})}});afterRenderEffect(()=>this.navigation?.configure({count:this.count(),loop:this.loop(),enableWheelScroll:this.enableWheelScroll(),autoPlay:this.autoPlay(),autoPlayInterval:this.autoPlayInterval(),reduced:this.reduced(),hovered:this.hovered()}));inject(DestroyRef).onDestroy(()=>this.navigation?.destroy())}
 }

@@ -147,6 +147,14 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if(entry.id==='mac-os-folder-cards')return `import {Component,TemplateRef} from '@angular/core';
+import {KitMacOsFolderCardsComponent,type MacOSFolderCardItem} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitMacOsFolderCardsComponent],template:\`<ng-template #icon><span aria-hidden="true">★</span></ng-template><kit-mac-os-folder-cards folderTitle="Projects" [items]="items(icon)" [defaultOpen]="false"/>\`})
+export class Example{items(icon:TemplateRef<unknown>):MacOSFolderCardItem[]{return [{id:'project',title:'Design system',description:'Shared components and tokens.',meta:'01',icon}]}}`;
+  if(entry.id==='story-card')return `import {Component} from '@angular/core';
+import {KitStoryCardComponent,type StoryCard} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitStoryCardComponent],template:\`<kit-story-card title="Latest stories" [cards]="cards" [autoPlay]="true" [autoPlayInterval]="5000"/>\`})
+export class Example{cards:StoryCard[]=[{id:'launch',title:'A new chapter',description:'See what we are building.',image:'/images/launch.jpg',href:'/stories/launch',ctaLabel:'Read story'},{id:'team',title:'Meet the team',image:'/images/team.jpg',imageAlt:'Our team'}]}`;
   if(entry.id==='pricing')return `import {Component} from '@angular/core';
 import {KitPricingComponent,type PricingTier} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitPricingComponent],template:\`<kit-pricing heading="Choose your plan" [proTier]="pro"/>\`})

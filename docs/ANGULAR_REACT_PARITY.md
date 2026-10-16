@@ -2,16 +2,17 @@
 
 React is the source of truth for component appearance, interactions, data contracts, options and defaults. Angular implementations stay native; template projection and output events provide Angular equivalents for React nodes and callbacks. Catalog coverage does not establish parity.
 
-Current progress: 85 components have recorded validated baselines (75 merged through batch 30, ten on batches 31-35); 31 remain unvalidated. Batch 35 adds Pricing and Stacked Cards. See [batch 35 evidence](parity/batch-35-integration.md) and the [completed component list](parity/completed-components.md). Batches 4–30 were merged into `feat/kit-ui-library` at `cfcfc68`; Registry CI and Pages deployment passed. Older rows saying integration pending for those batches are historical labels.
+Current progress: 87 components have recorded validated baselines (75 merged through batch 30, twelve on batches 31-36); 29 remain unvalidated. Batch 36 adds macOS Folder Cards and Story Cards, with callback-default regressions renewed for Pricing/Stacked Cards. See [batch 36 evidence](parity/batch-36-integration.md) and the [completed component list](parity/completed-components.md). Batches 4–30 were merged into `feat/kit-ui-library` at `cfcfc68`; Registry CI and Pages deployment passed. Older rows saying integration pending for those batches are historical labels.
 
-User priority: finish simpler components first. AI Response work is preserved on `feat/angular-ai-response-parity` and remains in progress. Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work proceeds in batches of two, with focused component checks during implementation and one full baseline before batch merge. Batch 2 merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); batch 3 merged through [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Batch 4 and its stacked batch 5 are locally validated and await integration. The original inventory order remains below for tracking, not execution priority.
+User priority: finish simpler components first. AI Response remains deferred; its previously documented working copy must be located before resuming (see Pending work). Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work proceeds in batches of two, with focused component checks during implementation and one full baseline before batch merge. Batch 2 merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); batch 3 merged through [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Batch 4 and its stacked batch 5 are locally validated and await integration. The original inventory order remains below for tracking, not execution priority.
 
 ## Pending work
 
-- Review and fix the remaining 31 components listed below: 30 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
-- Review batches 31-35 for integration. Continue with macOS Folder Cards and Story Cards in batch 36.
+- Review and fix the remaining 29 components listed below: 28 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
+- Review batches 31-36 for integration. Continue with Expandable Data Row and Interactive Timeline in batch 37.
+- Before integration, audit older direct button callback expressions (starting with Book Call Button/Split Button) for return-value/exception event-default semantics. Batch 36 renews this contract for Folder Cards, Story Cards, Pricing and Stacked Cards only.
 - Before integration, audit earlier parity fixture HTML for standard doctype and viewport metadata, including batches 11 through 19. Batch 23 corrects these headers and renews browser checks for batches 20 through 23. Earlier mobile input/reduced-motion checks alone do not prove narrow responsive layouts in standards mode.
-- Resume AI Response later from local `kit-ui-angular-response` on `feat/angular-ai-response-parity`. Its unfinished changes and audit at `docs/parity/ai-response-audit.md` remain preserved in that worktree and are not merged or validated.
+- Keep AI Response deferred. No AI code/refs were changed. The previously documented `kit-ui-angular-response` / `feat/angular-ai-response-parity` working copy is not registered in this checkout, its audit is not here, and named Desktop sibling paths on C:/D: were not present when checked. Locate that prior work before resuming; do not substitute the generic generated port or claim the deferred work is validated.
 - After all 116 components have validated baselines, the user will perform the full QA run. Address the resulting feedback before calling the overall parity effort complete.
 
 No component PRs remained open after batch 3. Its completed feature branches/worktrees were removed. The implementation branch and unfinished AI Response work remain; the completed iOS Search Bar branch has been removed and local batch 4 plus stacked batch 5 await integration.
@@ -34,7 +35,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 2 | Advanced Data Table | `advanced-data-table` | Validated baseline | [Review](parity/advanced-data-table.md) |
 | 3 | AI Agent Activity | `ai-agent-activity` | Validated baseline | [Review](parity/ai-agent-activity.md) |
 | 4 | AI Prompt Composer | `ai-prompt-composer` | Validated baseline | [Review](parity/ai-prompt-composer.md) |
-| 5 | AI Response | `ai-response` | In progress, deferred for simpler controls | Local audit on deferred branch |
+| 5 | AI Response | `ai-response` | Deferred; prior working-copy location unconfirmed | Locate prior branch/audit before resuming |
 | 6 | Airport Matrix Clock | `airport-matrix-clock` | Validated locally; integration pending | [Report](parity/airport-matrix-clock.md) |
 | 7 | Animated File Upload | `animated-file-upload` | Queued | — |
 | 8 | Animated Number Morph | `animated-number` | Validated locally; integration pending | [Report](parity/animated-number.md) |
@@ -84,7 +85,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 52 | Loader | `loader` | Validated baseline | [Review](parity/loader.md) |
 | 53 | LockInput | `lock-input` | Validated locally; integration pending | [Report](parity/lock-input.md) |
 | 54 | Login | `login` | Queued | — |
-| 55 | macOS Folder Cards | `mac-os-folder-cards` | Queued | — |
+| 55 | macOS Folder Cards | `mac-os-folder-cards` | Validated locally; integration pending | [Report](parity/mac-os-folder-cards.md) |
 | 56 | Magnetic Button | `magnetic-button` | Validated baseline | [Review](parity/magnetic-button.md) |
 | 57 | Meteors | `meteors` | Validated locally; integration pending | [Evidence](parity/meteors.md) |
 | 58 | Metric HUD | `metric-hud` | Validated locally; integration pending | [Report](parity/metric-hud.md) |
@@ -134,7 +135,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 102 | Stack Unfold Panel | `stack-unfold-panel` | Validated locally; integration pending | [Evidence](parity/stack-unfold-panel.md) |
 | 103 | Stacked Cards | `stacked-cards` | Validated locally; integration pending | [Report](parity/stacked-cards.md) |
 | 104 | Sticky Pages | `sticky-pages` | Validated locally; integration pending | [Report](parity/sticky-pages.md) |
-| 105 | Story Cards | `story-card` | Queued | — |
+| 105 | Story Cards | `story-card` | Validated locally; integration pending | [Report](parity/story-card.md) |
 | 106 | StretchSwitch | `stretch-switch` | Validated baseline | [Report](parity/stretch-switch.md) |
 | 107 | Swipe Action List | `swipe-action-list` | Validated locally; integration pending | [Report](parity/swipe-action-list.md) |
 | 108 | Text Scramble Decoder | `text-scramble-decoder` | Validated locally; integration pending | [Evidence](parity/text-scramble-decoder.md) |

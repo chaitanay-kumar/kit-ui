@@ -942,24 +942,20 @@
     "name": "macOS Folder Cards",
     "exportName": "KitMacOsFolderCardsComponent",
     "selector": "kit-mac-os-folder-cards",
-    "description": "A configurable content card collection with selection, disclosure, disabled items and projected details.",
+    "description": "Source-contract porcelain folder with independent peek state, native keyboard toggle, retained wait-mode view transitions and typed card/icon content.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "folderTitle: string",
+      "folderCategory: string",
+      "items: MacOSFolderCardItem[]",
+      "defaultOpen: boolean",
+      "isPeeked: boolean",
+      "className: string",
+      "style: MacOSFolderStyle",
+      "attributes: MacOSFolderAttributes",
+      "onClick: (event: MouseEvent) => void",
+      "onKeyDown: (event: KeyboardEvent) => void"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "magnetic-button",
@@ -1833,24 +1829,26 @@
     "name": "Story Cards",
     "exportName": "KitStoryCardComponent",
     "selector": "kit-story-card",
-    "description": "A configurable content card collection with selection, disclosure, disabled items and projected details.",
+    "description": "Source-contract responsive six-slot virtual story carousel with native links, global arrows, wheel/touch navigation and hover-paused autoplay.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "cards: StoryCard[]",
+      "initialIndex: number",
+      "autoPlay: boolean",
+      "autoPlayInterval: number",
+      "showNavigation: boolean",
+      "loop: boolean",
+      "enableWheelScroll: boolean",
+      "title: string",
+      "subtitle: string",
+      "className: string",
+      "style: StoryCardsStyle",
+      "attributes: StoryCardsAttributes",
+      "onClick: (event: MouseEvent) => void",
+      "onKeyDown: (event: KeyboardEvent) => void",
+      "onMouseEnter: (event: MouseEvent) => void",
+      "onMouseLeave: (event: MouseEvent) => void"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "stretch-switch",

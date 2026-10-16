@@ -1,3 +1,4 @@
+import {FolderCardsDemoComponent,StoryCardsDemoComponent} from './batch36-demos';
 import {PricingDemoComponent,StackedCardsDemoComponent} from './batch35-demos';
 import {DependencyTraceDemoComponent,RecoveryLedgerDemoComponent} from './batch34-demos';
 import {VelocityToastDemoComponent,MorphingDialogDemoComponent} from './batch33-demos';
@@ -75,7 +76,7 @@ import {RainbowButtonDemoComponent} from "./rainbow-button-demo";
 @Component({
   selector: "kit-angular-demo",
   standalone: true,
-  imports: [PricingDemoComponent,StackedCardsDemoComponent,RecoveryLedgerDemoComponent,DependencyTraceDemoComponent,MorphingDialogDemoComponent,VelocityToastDemoComponent,SpringSelectDemoComponent,GooeyMenuDemoComponent,GlassNavbarDemoComponent,ScrollProgressNavDemoComponent,SmallFloatingDockDemoComponent,BranchingSubmenuDemoComponent,AnimatedTabsDemoComponent,ScrollVelocityDemoComponent,StackUnfoldDemoComponent,SettleModalDemoComponent,ElasticSheetDemoComponent,SelectionBasketDemoComponent,DensityLensDemoComponent,GravityParticleBurstDemoComponent,DotFieldDemoComponent,FloatingActionDockDemoComponent,MorphingBlobDemoComponent,CircularOrbitDemoComponent,MeteorsDemoComponent,CursorFollowerDemoComponent,LiquidRippleButtonDemoComponent,AnimatedNumberDemoComponent,UnfoldAccordionDemoComponent,IOSSearchDemoComponent,RevealCardDemoComponent,StretchSwitchDemoComponent,SmoothAccordionDemoComponent,HamburgerMenuDemoComponent,ExpandableSearchDemoComponent,
+  imports: [FolderCardsDemoComponent,StoryCardsDemoComponent,PricingDemoComponent,StackedCardsDemoComponent,RecoveryLedgerDemoComponent,DependencyTraceDemoComponent,MorphingDialogDemoComponent,VelocityToastDemoComponent,SpringSelectDemoComponent,GooeyMenuDemoComponent,GlassNavbarDemoComponent,ScrollProgressNavDemoComponent,SmallFloatingDockDemoComponent,BranchingSubmenuDemoComponent,AnimatedTabsDemoComponent,ScrollVelocityDemoComponent,StackUnfoldDemoComponent,SettleModalDemoComponent,ElasticSheetDemoComponent,SelectionBasketDemoComponent,DensityLensDemoComponent,GravityParticleBurstDemoComponent,DotFieldDemoComponent,FloatingActionDockDemoComponent,MorphingBlobDemoComponent,CircularOrbitDemoComponent,MeteorsDemoComponent,CursorFollowerDemoComponent,LiquidRippleButtonDemoComponent,AnimatedNumberDemoComponent,UnfoldAccordionDemoComponent,IOSSearchDemoComponent,RevealCardDemoComponent,StretchSwitchDemoComponent,SmoothAccordionDemoComponent,HamburgerMenuDemoComponent,ExpandableSearchDemoComponent,
     PressButtonDemoComponent,ButtonDemoComponent,MagneticButtonDemoComponent,MorphingButtonDemoComponent,TypewriterButtonDemoComponent,RainbowButtonDemoComponent,
     WalletCardDemoComponent,StickyPagesDemoComponent,
     NeonEdgeButtonDemoComponent,
@@ -127,6 +128,8 @@ import {RainbowButtonDemoComponent} from "./rainbow-button-demo";
       @case("reveal-card"){<kit-reveal-card-demo/>}
       @case("spotlight-card"){<kit-spotlight-card-demo/>}
       @case("morphing-icon"){<kit-morphing-icon-demo/>}
+      @case("mac-os-folder-cards"){<kit-folder-cards-demo/>}
+      @case("story-card"){<kit-story-cards-demo/>}
       @case("pricing"){<kit-pricing-demo/>}
       @case("stacked-cards"){<kit-stacked-cards-demo/>}
       @case("recovery-ledger"){<kit-recovery-ledger-demo/>}

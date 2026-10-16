@@ -1,6 +1,6 @@
 # Completed parity checks
 
-85 components have recorded validated baselines: 75 merged through batch 30 and ten awaiting integration from batches 31-35. Validation scope and remaining limits are recorded in each linked report. Older integration-pending labels for batches 4–30 predate their merge at `cfcfc68`. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
+87 components have recorded validated baselines: 75 merged through batch 30 and twelve awaiting integration from batches 31-36. Validation scope and remaining limits are recorded in each linked report. Older integration-pending labels for batches 4–30 predate their merge at `cfcfc68`. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
 
 | Component | Status | Evidence |
 | --- | --- | --- |
@@ -41,6 +41,7 @@
 | Liquid Toggle | Validated locally; integration pending | [Report](liquid-toggle.md) |
 | Loader | Validated baseline | [Review](loader.md) |
 | LockInput | Validated locally; integration pending | [Report](lock-input.md) |
+| macOS Folder Cards | Validated locally; integration pending | [Report](mac-os-folder-cards.md) |
 | Magnetic Button | Validated baseline | [Review](magnetic-button.md) |
 | Meteors | Validated locally; integration pending | [Evidence](meteors.md) |
 | Metric HUD | Validated locally; integration pending | [Report](metric-hud.md) |
@@ -78,6 +79,7 @@
 | Spotlight Card | Validated baseline | [Review](spotlight-card.md) |
 | SpringSelect | Validated locally; integration pending | [Report](spring-select.md) |
 | Stack Unfold Panel | Validated locally; integration pending | [Evidence](stack-unfold-panel.md) |
+| Story Cards | Validated locally; integration pending | [Report](story-card.md) |
 | StretchSwitch | Validated baseline | [Report](stretch-switch.md) |
 | Swipe Action List | Validated locally; integration pending | [Report](swipe-action-list.md) |
 | Text Scramble Decoder | Validated locally; integration pending | [Evidence](text-scramble-decoder.md) |

@@ -1,3 +1,5 @@
+import {storyCardsPort} from './angular-story-cards';
+import {folderCardsPort} from './angular-folder-cards';
 import {stackedCardsPort} from './angular-stacked-cards';
 import {recoveryLedgerPort} from './angular-recovery-ledger';
 import {morphingDialogPort} from './angular-morphing-dialog';
@@ -368,19 +370,6 @@ add(
   `readonly distance=signal(0);private startY:number|undefined;start(event:PointerEvent):void{if(this.blocked()||event.button!==0)return;this.startY=event.clientY;(event.currentTarget as HTMLElement).setPointerCapture(event.pointerId);}pull(event:PointerEvent):void{if(this.startY!==undefined)this.distance.set(Math.max(0,Math.min(100,(event.clientY-this.startY)*.5)));}release():void{if(this.distance()>65)void this.run();this.startY=undefined;this.distance.set(0);}`,
 );
 
-// Data and account cards use actual inputs and local disclosure, not screenshots.
-for (const [id, title, layout] of [
-  ["mac-os-folder-cards", "Project folders", "folders"],
-  ["story-card", "Your stories", "stories"],
-]) {
-  add(
-    id,
-    "collection",
-    "A configurable content card collection with selection, disclosure, disabled items and projected details.",
-    `<section class="kit-control kit-stack"><h3>{{label()||'${title}'}}</h3><div class="k-cards k-${layout}">@for(item of items();track item.id){<article class="k-card kit-surface" [class.k-active]="current()?.id===item.id" (pointermove)="spot($event)" (pointerleave)="clearSpot($event)">${id === "mac-os-folder-cards" ? '<span class="k-folder-tab" aria-hidden="true"></span>' : id === "profile-card" ? '<span class="k-avatar" aria-hidden="true">{{item.label.slice(0,2)}}</span>' : id === "wallet-card" ? '<span class="k-card-chip" aria-hidden="true">▦</span>' : ""}<button type="button" [disabled]="disabled()||item.disabled" [attr.aria-expanded]="expanded().includes(item.id)" (click)="select(item);toggle(item.id)">{{item.label}}</button><p>{{item.value}}</p><div [hidden]="!expanded().includes(item.id)"><p>{{item.description}}</p><ng-content></ng-content><button type="button" [disabled]="disabled()||busy()||item.disabled" (click)="execute([item])">Select {{item.label}}</button></div></article>}</div>${collectionFeedback}</section>`,
-    `spot(event:PointerEvent):void{if(this.disabled())return;const el=event.currentTarget as HTMLElement;const r=el.getBoundingClientRect();el.style.setProperty('--spot-x',(event.clientX-r.left)+'px');el.style.setProperty('--spot-y',(event.clientY-r.top)+'px');}clearSpot(event:PointerEvent):void{(event.currentTarget as HTMLElement).style.removeProperty('--spot-x');}`,
-  );
-}
 add("peek-card","plain",peekCardPort.description,peekCardPort.template,peekCardPort.body,peekCardPort);
 add("profile-card","plain",profileCardPort.description,profileCardPort.template,profileCardPort.body,profileCardPort);
 add("reveal-card","plain",revealCardPort.description,revealCardPort.template,revealCardPort.body,revealCardPort);
@@ -624,6 +613,8 @@ add("directional-tooltip","plain",directionalTooltipPort.description,directional
 add('settle-modal','plain',settleModalPort.description,settleModalPort.template,settleModalPort.body,settleModalPort);
 add('morphing-dialog','plain',morphingDialogPort.description,morphingDialogPort.template,morphingDialogPort.body,morphingDialogPort);
 
+add('story-card','plain',storyCardsPort.description,storyCardsPort.template,storyCardsPort.body,storyCardsPort);
+add('mac-os-folder-cards','plain',folderCardsPort.description,folderCardsPort.template,folderCardsPort.body,folderCardsPort);
 add('stacked-cards','plain',stackedCardsPort.description,stackedCardsPort.template,stackedCardsPort.body,stackedCardsPort);
 
 // The larger data, comparison, chat and graph ports are authored separately.
@@ -661,40 +652,6 @@ const cardDefaults: Record<
       value: "USD 2,240.00",
       description:
         "Account ending 4821 · Local preview data. No financial service is connected.",
-    },
-  ],
-  "mac-os-folder-cards": [
-    {
-      id: "components",
-      label: "Components",
-      value: "116 files",
-      description: "Native interface building blocks.",
-    },
-    {
-      id: "assets",
-      label: "Assets",
-      value: "12 files",
-      description: "Your workspace illustrations and design assets.",
-    },
-  ],
-  "story-card": [
-    {
-      id: "beginning",
-      label: "A small beginning",
-      value: "Chapter 01",
-      description: "Every useful idea starts with a question.",
-    },
-    {
-      id: "rhythm",
-      label: "Find the rhythm",
-      value: "Chapter 02",
-      description: "Build, test and follow the details.",
-    },
-    {
-      id: "share",
-      label: "Ready to share",
-      value: "Chapter 03",
-      description: "Bring the finished pieces together.",
     },
   ],
 };

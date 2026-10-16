@@ -1,6 +1,12 @@
 # Implementation handoff — 2026-10-08
 
-## Latest batch handoff - 2026-10-16 (batch 35)
+## Latest batch handoff - 2026-10-16 (batch 36)
+
+macOS Folder Cards and Story Cards are validated on `feat/angular-parity-batch-36`, stacked on pushed batch 35 `e0bd5f7`. See [batch 36 evidence](parity/batch-36-integration.md). The recorded scope covers 76 distinct React/Angular desktop/mobile cases, including twelve renewed Pricing/StackedCards callback-default regressions. Final current-source production/289 SEO, 117 unit tests/lint and independent Angular 20.0/20.3/21.2/22.2 compiler consumers pass. Motion samples and paired screenshots were renewed after the final library build; projected SVG dimensions/color and default icon geometry pass.
+
+Progress is 87/116: 75 merged, twelve awaiting review, 28 queued plus AI Response deferred. Next is batch 37: Expandable Data Row and Interactive Timeline. Integration remains for review. Preserve the two named stashes, older standards-mode audit and final user QA; review the older direct callback expressions before integration. The prior AI working-copy location could not be confirmed in this checkout/named Desktop paths; no AI code or refs were changed, and that work must be located before resuming it.
+
+## Previous batch handoff - 2026-10-16 (batch 35)
 
 Pricing and Stacked Cards are validated on `feat/angular-parity-batch-35`, stacked on pushed batch 34 `ac79022`. See [batch 35 evidence](parity/batch-35-integration.md). Thirty-six distinct desktop/mobile behavior/geometry/motion/bare/demo/disposal cases, renewed Pricing card/shadow/price checks, focused packaged contracts, 117 unit tests, production build/289 SEO and four independent Angular compiler consumers pass. Progress is 85/116: 75 merged, ten awaiting review, 30 queued plus AI Response deferred. Next is batch 36: macOS Folder Cards and Story Cards. Review the documented Stacked Cards empty/repopulation recovery difference and inherited source heading contrast issue. Preserve named stashes, older standards-mode audit and final user QA follow-ups.
 
