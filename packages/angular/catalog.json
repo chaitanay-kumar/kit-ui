@@ -715,24 +715,27 @@
     "name": "Gooey Menu",
     "exportName": "KitGooeyMenuComponent",
     "selector": "kit-gooey-menu",
-    "description": "An expandable action menu with Escape, arrow keys and disabled-item handling.",
+    "description": "A native source-contract liquid dropdown with independent panel springs, staggered retained rows, controlled open state and local selection.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "options: string[]",
+      "value: string",
+      "defaultValue: string",
+      "open: boolean",
+      "defaultOpen: boolean",
+      "onOpenChange: (open: boolean) => void",
+      "onSelect: (option: string, index: number) => void",
+      "width: number",
+      "className: string",
+      "style: Record<string,string|number|null|undefined>",
+      "attributes: Record<string,string|number|boolean|null|undefined>",
+      "id: string",
+      "title: string",
+      "role: string",
+      "tabIndex: number",
+      "aria-label: string",
+      "onKeyDown: (event: KeyboardEvent) => void"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "gravity-particle-burst",
@@ -1770,24 +1773,19 @@
     "name": "SpringSelect",
     "exportName": "KitSpringSelectComponent",
     "selector": "kit-spring-select",
-    "description": "A native accessible select with keyboard typeahead and selected-item output.",
+    "description": "Source-contract custom listbox selection with controlled/uncontrolled value, disabled options, label/error and native dismissal lifecycle.",
     "inputs": [
-      "items: KitItem[]",
+      "options: SpringSelectOption[]",
+      "value: string",
+      "defaultValue: string",
+      "placeholder: string",
+      "onChange: (value: string) => void",
       "label: string",
       "disabled: boolean",
-      "loading: boolean",
       "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "stack-unfold-panel",

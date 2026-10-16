@@ -1,3 +1,5 @@
+import {gooeyMenuPort} from './angular-gooey-menu';
+import {springSelectPort} from './angular-spring-select';
 import {walletCardPort} from './angular-wallet-card';
 import {stickyPagesPort} from './angular-sticky-pages';
 import {glassNavbarPort} from './angular-glass-navbar';
@@ -222,13 +224,8 @@ add("stretch-switch","plain",stretchSwitchPort.description,stretchSwitchPort.tem
 
 add("draw-checkbox", "plain", drawCheckboxPort.description, drawCheckboxPort.template, drawCheckboxPort.body.replace("readonly internal=signal(false);", "readonly internal=signal<boolean|undefined>(undefined);").replace("readonly current=computed(()=>this.checked()??this.internal());", "readonly current=computed(()=>this.checked()??this.internal()??this.defaultChecked());").replace("constructor(){effect(()=>{this.defaultChecked();untracked(()=>{if(this.checked()===undefined&&!this.initialized){this.initialized=true;this.internal.set(this.defaultChecked());}});});}private initialized=false;", "").replace("this.onChange()?.(event);}", "this.onChange()?.(event);if(this.checked()!==undefined)input.checked=this.checked()!;}").replace("this.host.nativeElement.querySelector<HTMLInputElement>('input')?.click()", "(this.host.nativeElement.querySelector('input') as HTMLInputElement|null)?.click()"), drawCheckboxPort);
 add("liquid-toggle", "plain", liquidTogglePort.description, liquidTogglePort.template.replace("isOn()?.7:0", "isOn() ? .7 : 0"), liquidTogglePort.body.replace("readonly internal=signal(false);", "readonly internal=signal<boolean|undefined>(undefined);").replace("readonly isOn=computed(()=>this.value()??this.internal());", "readonly isOn=computed(()=>this.value()??this.internal()??this.defaultValue());").replace("private initialized=false;constructor(){effect(()=>{this.defaultValue();untracked(()=>{if(this.value()===undefined&&!this.initialized){this.initialized=true;this.internal.set(this.defaultValue());}});});}", ""), liquidTogglePort);
-add(
-  "spring-select",
-  "collection",
-  "A native accessible select with keyboard typeahead and selected-item output.",
-  `<div class="kit-control kit-stack"><label>{{label()||'Choose a workspace'}}<select [disabled]="disabled()||loading()" [value]="current()?.id" (change)="pick($event)">@for(item of items();track item.id){<option [value]="item.id" [disabled]="item.disabled">{{item.label}}</option>}</select></label><p>{{current()?.description}}</p>${collectionFeedback}</div>`,
-  `pick(event:Event):void{const item=this.items().find(i=>i.id===(event.target as HTMLSelectElement).value);if(item)this.select(item);}`,
-);
+add('spring-select','plain',springSelectPort.description,springSelectPort.template,springSelectPort.body,springSelectPort);
+
 add("otp-input", "plain", otpInputPort.description, otpInputPort.template, otpInputPort.body, otpInputPort);
 add("lock-input", "plain", lockInputPort.description, lockInputPort.template, lockInputPort.body, lockInputPort);
 for (const [id, title, button] of [
@@ -267,16 +264,7 @@ add('animated-tabs','plain',animatedTabsPort.description,animatedTabsPort.templa
 add('glass-navbar','plain',glassNavbarPort.description,glassNavbarPort.template,glassNavbarPort.body,glassNavbarPort);
 add('small-floating-dock','plain',smallFloatingDockPort.description,smallFloatingDockPort.template,smallFloatingDockPort.body,smallFloatingDockPort);
 add('floating-action-dock','plain',floatingActionDockPort.description,floatingActionDockPort.template,floatingActionDockPort.body,floatingActionDockPort);
-for (const [id, title] of [
-  ["gooey-menu", "Explore"],
-]) {
-  add(
-    id,
-    "collection",
-    "An expandable action menu with Escape, arrow keys and disabled-item handling.",
-    `<div class="kit-control kit-stack" (keydown.escape)="open.set(false)"><div class="k-menu"><button type="button" [disabled]="disabled()" [attr.aria-expanded]="open()" [attr.aria-controls]="uid" (click)="open.set(!open())"><span aria-hidden="true">{{open()?'×':'☰'}}</span> {{label()||'${title}'}}</button>@if(open()){<div [id]="uid" class="k-menu-panel" (keydown)="keys($event)">@for(item of items();track item.id){<button type="button" data-item [disabled]="item.disabled||disabled()" (click)="select(item);open.set(false)">{{item.label}}</button>}</div>}</div>${collectionFeedback}</div>`,
-  );
-}
+add('gooey-menu','plain',gooeyMenuPort.description,gooeyMenuPort.template,gooeyMenuPort.body,gooeyMenuPort);
 add("pill-navigation","plain",pillNavigationPort.description,pillNavigationPort.template,pillNavigationPort.body,pillNavigationPort);
 add("origin-dropdown", "plain", originDropdownPort.description, originDropdownPort.template, originDropdownPort.body, originDropdownPort);
 add('branching-submenu','plain',branchingSubmenuPort.description,branchingSubmenuPort.template,branchingSubmenuPort.body,branchingSubmenuPort);
@@ -737,10 +725,6 @@ const cardDefaults: Record<
   ],
 };
 for (const port of ports) {
-  if(port.id==='gooey-menu'){
-    port.template=port.template.replace('(keydown.escape)="open.set(false)"','(keydown.escape)="closeMenu()"').replace('<button type="button" [disabled]','<button #trigger type="button" [disabled]').replace('(click)="select(item);open.set(false)"','(click)="pick(item)"');
-    port.body+=`readonly trigger=viewChild<ElementRef<HTMLButtonElement>>('trigger');closeMenu():void{this.open.set(false);this.trigger()?.nativeElement.focus();}pick(item:KitItem):void{if(this.disabled()||this.loading()||item.disabled)return;this.select(item);this.closeMenu();}override keys(event:KeyboardEvent):void{if(!['ArrowDown','ArrowUp','Home','End'].includes(event.key)||this.disabled())return;const buttons=Array.from((event.currentTarget as HTMLElement).querySelectorAll<HTMLButtonElement>('button[data-item]:not(:disabled)'));if(!buttons.length)return;event.preventDefault();const index=buttons.indexOf(event.target as HTMLButtonElement);const next=event.key==='Home'?0:event.key==='End'?buttons.length-1:(index+(event.key==='ArrowUp'?-1:1)+buttons.length)%buttons.length;buttons[next].focus();}`;
-  }
   if (["action", "collection", "form"].includes(port.kind))
     port.template = port.template.replaceAll(
       "<summary>",

@@ -147,6 +147,15 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if(entry.id==='spring-select')return `import {Component,signal} from '@angular/core';
+import {KitSpringSelectComponent,type SpringSelectOption} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitSpringSelectComponent],template:\`<kit-spring-select [options]="options" label="Workspace" [value]="selected()" [onChange]="change"/>\`})
+export class ExampleComponent {readonly options:SpringSelectOption[]=[{value:'design',label:'Design'},{value:'engineering',label:'Engineering'}];readonly selected=signal('design');readonly change=(value:string)=>this.selected.set(value);}`;
+  if(entry.id==='gooey-menu')return `import {Component} from '@angular/core';
+import {KitGooeyMenuComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitGooeyMenuComponent],template:\`<kit-gooey-menu [options]="options" [onSelect]="select"/>\`})
+export class ExampleComponent {readonly options=['Home','About','Projects','Contact'];readonly select=(option:string,index:number)=>console.log(option,index);}`;
+
   if (entry.id === 'wallet-card') return `import {Component} from '@angular/core';
 import {KitWalletCardComponent} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitWalletCardComponent],template:\`<kit-wallet-card balance="$4,566.00" cardType="Mastercard" cardLastFour="3040" [onUseWallet]="useWallet"/>\`})

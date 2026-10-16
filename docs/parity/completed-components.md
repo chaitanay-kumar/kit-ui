@@ -1,6 +1,6 @@
 # Completed parity checks
 
-77 components have recorded validated baselines: 75 merged through batch 30 and two awaiting integration from batch 31. Validation scope and remaining limits are recorded in each linked report. Older integration-pending labels for batches 4–30 predate their merge at `cfcfc68`. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
+79 components have recorded validated baselines: 75 merged through batch 30 and four awaiting integration from batches 31/32. Validation scope and remaining limits are recorded in each linked report. Older integration-pending labels for batches 4–30 predate their merge at `cfcfc68`. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
 
 | Component | Status | Evidence |
 | --- | --- | --- |
@@ -28,6 +28,7 @@
 | Focus Mode | Validated locally; integration pending | [Report](focus-mode.md) |
 | Glass Navbar | Validated locally; integration pending | [Report](glass-navbar.md) |
 | Glitch Text | Validated locally; integration pending | [Report](glitch-text.md) |
+| Gooey Menu | Validated locally; integration pending | [Report](gooey-menu.md) |
 | Gravity Particle Burst | Validated locally; integration pending | [Evidence](gravity-particle-burst.md) |
 | Hamburger Menu | Validated baseline | [Report](hamburger-menu.md) |
 | Hold-to-Confirm | Validated locally; integration pending | [Report](hold-to-confirm.md) |
@@ -71,6 +72,7 @@
 | Smooth Accordion | Validated baseline | [Report](smooth-accordion.md) |
 | Split Button | Validated locally; integration pending | [Report](split-button.md) |
 | Spotlight Card | Validated baseline | [Review](spotlight-card.md) |
+| SpringSelect | Validated locally; integration pending | [Report](spring-select.md) |
 | Stack Unfold Panel | Validated locally; integration pending | [Evidence](stack-unfold-panel.md) |
 | StretchSwitch | Validated baseline | [Report](stretch-switch.md) |
 | Swipe Action List | Validated locally; integration pending | [Report](swipe-action-list.md) |

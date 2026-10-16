@@ -1,6 +1,12 @@
 # Implementation handoff — 2026-10-08
 
-## Latest batch handoff — 2026-10-16
+## Latest batch handoff - 2026-10-16 (batch 32)
+
+SpringSelect and Gooey Menu are validated on `feat/angular-parity-batch-32`, stacked on completed batch 31 `c8db7cc`. See [batch 32 evidence](parity/batch-32-integration.md). Thirty-eight distinct desktop/mobile scenarios, focused packaged contracts, 117 unit tests, production build/289 SEO checks and four independent Angular compiler consumers pass within the documented validation scope. Progress is 79/116: 75 merged, four awaiting review, 36 queued and AI Response deferred. Batches 31/32 await integration review. Next is batch 33: Morphing Dialog and VelocityToast.
+
+Earlier local WIP and integration audit are preserved in named stashes. The standards-mode fixture audit and final user QA remain outstanding.
+
+## Previous batch handoff — 2026-10-16
 
 Batch 31 implements Wallet Card and Sticky Pages on `feat/angular-parity-batch-31` from `cfcfc68`. See [batch 31 evidence](parity/batch-31-integration.md) for changed files, API migration, recorded checks and coverage limits. Sixteen distinct desktop/mobile browser cases, packaged contracts, 117 unit tests, production build/289 SEO checks and four Angular compiler consumers pass. Review this batch for integration next; 77/116 baselines are recorded, with 39 components remaining (including deferred AI Response).
 
