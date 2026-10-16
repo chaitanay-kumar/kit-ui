@@ -1,3 +1,4 @@
+import {recoveryLedgerPort} from './angular-recovery-ledger';
 import {morphingDialogPort} from './angular-morphing-dialog';
 import {velocityToastPort} from './angular-velocity-toast';
 import {gooeyMenuPort} from './angular-gooey-menu';
@@ -321,7 +322,6 @@ add('stack-unfold-panel','plain',stackUnfoldPanelPort.description,stackUnfoldPan
 add("faq", "plain", faqPort.description, faqPort.template, faqPort.body.replace("input.required<FAQItem[]>()", "input<FAQItem[]>([])") , faqPort);
 for (const [id, title] of [
   ["expandable-data-row", "Data details"],
-  ["recovery-ledger", "Recovery ledger"],
 ]) {
   add(
     id,
@@ -330,6 +330,7 @@ for (const [id, title] of [
     `<section class="kit-control kit-surface kit-stack"><h3>{{label()||'${title}'}}</h3>@for(item of items();track item.id){<details class="k-disclosure"><summary>{{item.label}} @if(item.value!==undefined){<span>{{item.value}}</span>}</summary><div class="kit-stack"><p>{{item.description}}</p><ng-content></ng-content>${id === "recovery-ledger" ? '<button type="button" [disabled]="disabled()||busy()||item.disabled" (click)="execute([item])">Restore snapshot</button>' : ""}</div></details>}@empty{<p>No items yet.</p>}${collectionFeedback}</section>`,
   );
 }
+add('recovery-ledger','plain',recoveryLedgerPort.description,recoveryLedgerPort.template,recoveryLedgerPort.body,recoveryLedgerPort);
 add('ai-agent-activity','plain',agentActivityPort.description,agentActivityPort.template,agentActivityPort.body,agentActivityPort);
 for (const [id, title] of [
 

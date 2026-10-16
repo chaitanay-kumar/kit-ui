@@ -147,6 +147,15 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if(entry.id==='dependency-trace')return `import {Component} from '@angular/core';
+import {KitDependencyTraceComponent,type TraceNode,type TraceConnection} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitDependencyTraceComponent],template:\`<kit-dependency-trace [nodes]="nodes" [connections]="connections" [onNodeSelect]="select"/>\`})
+export class ExampleComponent{readonly nodes:TraceNode[]=[{id:'client',label:'Client'},{id:'api',label:'API'},{id:'db',label:'Database'}];readonly connections:TraceConnection[]=[{from:'client',to:'api'},{from:'api',to:'db'}];readonly select=(id:string)=>console.log(id);}`;
+  if(entry.id==='recovery-ledger')return `import {Component,signal} from '@angular/core';
+import {KitRecoveryLedgerComponent,type LedgerEntry} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitRecoveryLedgerComponent],template:\`<kit-recovery-ledger [entries]="entries" [currentEntryId]="current()" [onRestore]="restore"/>\`})
+export class ExampleComponent{readonly current=signal('v2');readonly entries:LedgerEntry[]=[{id:'v2',timestamp:'Now',action:'Current version',description:'Latest snapshot'},{id:'v1',timestamp:'Yesterday',action:'Previous version',description:'Earlier snapshot',details:{diff:'- old\\n+ restored'}}];readonly restore=async(id:string)=>{this.current.set(id)};}`;
+
   if(entry.id==='velocity-toast')return `import {Component,signal} from '@angular/core';
 import {KitVelocityToastComponent} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitVelocityToastComponent],template:\`<button type="button" (click)="open.set(true)">Show toast</button><kit-velocity-toast [open]="open()" title="File uploaded" description="Ready to use." variant="success" position="bottom-right" [onDismiss]="dismiss"/>\`})

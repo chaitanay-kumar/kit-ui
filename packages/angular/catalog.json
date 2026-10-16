@@ -388,19 +388,16 @@
     "name": "Dependency Trace",
     "exportName": "KitDependencyTraceComponent",
     "selector": "kit-dependency-trace",
-    "description": "An SVG dependency graph with selectable nodes, highlighted connections and keyboard-accessible node buttons.",
+    "description": "Source-contract SVG dependency relationships with exact radial/explicit geometry, hover-over-selection tracing, native springs and callback lifecycle.",
     "inputs": [
-      "nodes: KitGraphNode[]",
-      "connections: KitGraphEdge[]",
-      "selected: string (two-way)",
-      "label: string",
-      "disabled: boolean"
+      "nodes: TraceNode[]",
+      "connections: TraceConnection[]",
+      "onNodeSelect: (id: string) => void",
+      "onNodeHover: (id: string | null) => void",
+      "nodeSize: number",
+      "className: string"
     ],
-    "outputs": [
-      "nodeSelect: KitGraphNode",
-      "nodeHover: string | null",
-      "selectedChange: string"
-    ]
+    "outputs": []
   },
   {
     "id": "depth-corridor",
@@ -1459,24 +1456,16 @@
     "name": "Recovery Ledger",
     "exportName": "KitRecoveryLedgerComponent",
     "selector": "kit-recovery-ledger",
-    "description": "Expandable item details with keyboard-native disclosure and application-owned recovery actions.",
+    "description": "Source-contract recovery timeline with controlled head, local disclosure, retained detail springs and application-owned async restore/failure recovery.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "entries: LedgerEntry[]",
+      "currentEntryId: string",
+      "onRestore: (id: string) => Promise<void> | void",
+      "onSelect: (id: string) => void",
+      "variant: 'timeline' | 'compact'",
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "reveal-card",

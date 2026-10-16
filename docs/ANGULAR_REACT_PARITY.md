@@ -2,14 +2,14 @@
 
 React is the source of truth for component appearance, interactions, data contracts, options and defaults. Angular implementations stay native; template projection and output events provide Angular equivalents for React nodes and callbacks. Catalog coverage does not establish parity.
 
-Current progress: 81 components have recorded validated baselines (75 merged through batch 30, six on batches 31-33); 35 remain unvalidated. Batch 33 adds Morphing Dialog and VelocityToast. See [batch 33 evidence](parity/batch-33-integration.md) and the [completed component list](parity/completed-components.md). Batches 4–30 were merged into `feat/kit-ui-library` at `cfcfc68`; Registry CI and Pages deployment passed. Older rows saying integration pending for those batches are historical labels.
+Current progress: 83 components have recorded validated baselines (75 merged through batch 30, eight on batches 31-34); 33 remain unvalidated. Batch 34 adds Dependency Trace and Recovery Ledger. See [batch 34 evidence](parity/batch-34-integration.md) and the [completed component list](parity/completed-components.md). Batches 4–30 were merged into `feat/kit-ui-library` at `cfcfc68`; Registry CI and Pages deployment passed. Older rows saying integration pending for those batches are historical labels.
 
 User priority: finish simpler components first. AI Response work is preserved on `feat/angular-ai-response-parity` and remains in progress. Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work proceeds in batches of two, with focused component checks during implementation and one full baseline before batch merge. Batch 2 merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); batch 3 merged through [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Batch 4 and its stacked batch 5 are locally validated and await integration. The original inventory order remains below for tracking, not execution priority.
 
 ## Pending work
 
-- Review and fix the remaining 35 components listed below: 34 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
-- Review batches 31-33 for integration. Continue with Dependency Trace and Recovery Ledger in batch 34.
+- Review and fix the remaining 33 components listed below: 32 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
+- Review batches 31-34 for integration. Continue with Pricing and Stacked Cards in batch 35.
 - Before integration, audit earlier parity fixture HTML for standard doctype and viewport metadata, including batches 11 through 19. Batch 23 corrects these headers and renews browser checks for batches 20 through 23. Earlier mobile input/reduced-motion checks alone do not prove narrow responsive layouts in standards mode.
 - Resume AI Response later from local `kit-ui-angular-response` on `feat/angular-ai-response-parity`. Its unfinished changes and audit at `docs/parity/ai-response-audit.md` remain preserved in that worktree and are not merged or validated.
 - After all 116 components have validated baselines, the user will perform the full QA run. Address the resulting feedback before calling the overall parity effort complete.
@@ -51,7 +51,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 19 | Command Menu | `command-menu` | Queued | — |
 | 20 | Cursor Follower | `cursor-follower` | Validated locally; integration pending | [Report](parity/cursor-follower.md) |
 | 21 | Density Lens | `density-lens` | Validated locally; integration pending | [Evidence](parity/density-lens.md) |
-| 22 | Dependency Trace | `dependency-trace` | Queued | — |
+| 22 | Dependency Trace | `dependency-trace` | Validated locally; integration pending | [Report](parity/dependency-trace.md) |
 | 23 | Depth Corridor | `depth-corridor` | Queued | — |
 | 24 | DirectionalTooltip | `directional-tooltip` | Validated locally; integration pending | [Report](parity/directional-tooltip.md) |
 | 25 | Dot Field | `dot-field` | Validated locally; integration pending | [Evidence](parity/dot-field.md) |
@@ -111,7 +111,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 79 | Profile Card | `profile-card` | Validated locally; integration pending | [Report](parity/profile-card.md) |
 | 80 | Pull to Refresh | `pull-to-refresh` | Queued | — |
 | 81 | Rainbow Button | `rainbow-button` | Validated baseline | [Review](parity/rainbow-button.md) |
-| 82 | Recovery Ledger | `recovery-ledger` | Queued | — |
+| 82 | Recovery Ledger | `recovery-ledger` | Validated locally; integration pending | [Report](parity/recovery-ledger.md) |
 | 83 | Reveal Card | `reveal-card` | Validated baseline | [Report](parity/reveal-card.md) |
 | 84 | Rocket Party Popper | `rocket-party-popper` | Queued | — |
 | 85 | Scroll Progress Navigation | `scroll-progress-nav` | Validated locally; integration pending | [Report](parity/scroll-progress-nav.md) |

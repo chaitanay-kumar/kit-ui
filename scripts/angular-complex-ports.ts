@@ -1,23 +1,9 @@
+import {dependencyTracePort} from './angular-dependency-trace';
 import { advancedDataTablePort } from './angular-data-table';
 /** Native implementations for components with independent state/data contracts. */
 export const COMPLEX_PORTS = [
   advancedDataTablePort,
-  {
-    id: "dependency-trace",
-    kind: "plain" as const,
-    description:
-      "An SVG dependency graph with selectable nodes, highlighted connections and keyboard-accessible node buttons.",
-    inputs: [
-      "nodes: KitGraphNode[]",
-      "connections: KitGraphEdge[]",
-      "selected: string (two-way)",
-      "label: string",
-      "disabled: boolean",
-    ],
-    outputs: ["nodeSelect: KitGraphNode", "nodeHover: string | null"],
-    template: `<section class="kit-control kit-surface kit-stack"><h3>{{label()}}</h3><div class="k-graph"><svg viewBox="0 0 400 260" aria-hidden="true">@for(edge of edges();track edge.from+'-'+edge.to){<line [attr.x1]="point(edge.from).x" [attr.y1]="point(edge.from).y" [attr.x2]="point(edge.to).x" [attr.y2]="point(edge.to).y" [class.k-connected]="edge.from===selected()||edge.to===selected()" />}</svg>@for(node of positioned();track node.id){<button type="button" class="k-graph-node" [style.left.%]="node.x/4" [style.top.%]="node.y/2.6" [disabled]="disabled()||node.disabled" [attr.aria-pressed]="selected()===node.id" (click)="select(node)" (pointerenter)="nodeHover.emit(node.id)" (pointerleave)="nodeHover.emit(null)">{{node.label}}</button>}</div><p role="status">{{selected()?'Selected node: '+selected():'Select a dependency to inspect its connections.'}}</p></section>`,
-    body: `readonly nodes=input<KitGraphNode[]>([{id:'client',label:'Client'},{id:'api',label:'API'},{id:'db',label:'Database'}]);readonly connections=input<KitGraphEdge[]>([{from:'client',to:'api'},{from:'api',to:'db'}]);readonly selected=model('');readonly label=input('Dependency trace');readonly disabled=input(false);readonly nodeSelect=output<KitGraphNode>();readonly nodeHover=output<string|null>();readonly positioned=computed(()=>this.nodes().map((node,i)=>({...node,x:Math.max(45,Math.min(355,node.x??200+Math.cos(i/Math.max(1,this.nodes().length)*Math.PI*2-Math.PI/2)*135)),y:Math.max(30,Math.min(230,node.y??130+Math.sin(i/Math.max(1,this.nodes().length)*Math.PI*2-Math.PI/2)*85))})));readonly edges=computed(()=>this.connections().filter(edge=>this.nodes().some(n=>n.id===edge.from)&&this.nodes().some(n=>n.id===edge.to)));point(id:string):{x:number;y:number}{return this.positioned().find(n=>n.id===id)??{x:0,y:0};}select(node:KitGraphNode):void{if(this.disabled()||node.disabled)return;this.selected.set(node.id);this.nodeSelect.emit(node);}`,
-  },
+  dependencyTracePort,
   {
     id: "pricing",
     kind: "plain" as const,

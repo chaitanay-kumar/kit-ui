@@ -1,6 +1,6 @@
 # Completed parity checks
 
-81 components have recorded validated baselines: 75 merged through batch 30 and six awaiting integration from batches 31-33. Validation scope and remaining limits are recorded in each linked report. Older integration-pending labels for batches 4–30 predate their merge at `cfcfc68`. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
+83 components have recorded validated baselines: 75 merged through batch 30 and eight awaiting integration from batches 31-34. Validation scope and remaining limits are recorded in each linked report. Older integration-pending labels for batches 4–30 predate their merge at `cfcfc68`. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
 
 | Component | Status | Evidence |
 | --- | --- | --- |
@@ -18,6 +18,7 @@
 | Circular Orbit | Validated locally; integration pending | [Evidence](circular-orbit.md) |
 | Cursor Follower | Validated locally; integration pending | [Report](cursor-follower.md) |
 | Density Lens | Validated locally; integration pending | [Evidence](density-lens.md) |
+| Dependency Trace | Validated locally; integration pending | [Report](dependency-trace.md) |
 | DirectionalTooltip | Validated locally; integration pending | [Report](directional-tooltip.md) |
 | Dot Field | Validated locally; integration pending | [Evidence](dot-field.md) |
 | DrawCheckbox | Validated locally; integration pending | [Report](draw-checkbox.md) |
@@ -62,6 +63,7 @@
 | PressButton | Validated baseline | [Review](press-button.md) |
 | Profile Card | Validated locally; integration pending | [Report](profile-card.md) |
 | Rainbow Button | Validated baseline | [Review](rainbow-button.md) |
+| Recovery Ledger | Validated locally; integration pending | [Report](recovery-ledger.md) |
 | Reveal Card | Validated baseline | [Report](reveal-card.md) |
 | Scroll Progress Navigation | Validated locally; integration pending | [Report](scroll-progress-nav.md) |
 | Scroll Velocity Text | Validated locally; integration pending | [Report](scrollvelocitytext.md) |

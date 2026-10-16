@@ -1,0 +1,13 @@
+# Recovery Ledger parity
+
+Native Angular replaces generic disclosures/actions with the actual source timeline. Source: `src/components/ui/RecoveryLedger.tsx`; authoring: `scripts/angular-recovery-ledger.ts`; native entry/types/CSS/motion helpers: `packages/angular/src/recovery-ledger*`.
+
+Entries are required, ordered as supplied, and use the source LedgerEntry shape. String timestamps display verbatim; Dates use toLocaleString in the consumer environment. Current head is controlled by currentEntryId. Timeline is default; compact removes only the rail while retaining pips, padding and spacing. Details metadata is accepted but not rendered.
+
+A single entry expands at a time. Toggling updates state before onSelect and reports the clicked ID even on collapse. Callback failure preserves that update. Diff/preview exits retain old content while height/opacity springSmooth animations finish; reopen interrupts exit. Entry staggering and default property transitions, chevron springSnappy, current-head styling and exact SVG geometry follow React. Height entry starts from the actual padded/bordered box, matching source measurement. Rail spacing preserves the source's Tailwind sibling-margin effect.
+
+Restore is an application-owned Promise<void>|void callback. The handler stops propagation before checking callback/pending state, then marks restoring, awaits the callback and clears loading in finally. All available restore buttons are disabled for a truthy restoring ID. Rejections propagate and restore readiness; they do not create an internal error banner or update current head. Current, explicitly non-restorable and callback-free rows have no restore button. Empty-ID truthiness behavior follows source. Removing entries or disposing the view does not invent transport cancellation; the callback remains owned by its consumer.
+
+Migration: replace generic items/action/selected bindings with entries, currentEntryId and onRestore/onSelect callback inputs. The source card/chevron disclosure is pointer based; only actual restore buttons are keyboard controls. No focus trap, keyboard-card activation, ordering/date parsing or reduced-motion override is added. CSS spinner behavior matches source.
+
+Validation: focused state/date/failure/disposal contracts, production build/289 SEO, 117 unit tests and independent Angular 20/21/22 compiler consumers pass. The final 32-case paired desktop/mobile suite passes; see [batch evidence](batch-34-integration.md). Identical typography needs the source page/monospace fonts and theme. Consumer-owned backend recovery, physical devices, other engines and exhaustive styling combinations are outside this baseline.
