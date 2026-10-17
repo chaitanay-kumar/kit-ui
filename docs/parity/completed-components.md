@@ -1,6 +1,6 @@
 # Completed parity checks
 
-95 components have recorded validated baselines: 75 merged through batch 30 and twenty awaiting integration from batches 31-40. Validation scope and remaining limits are recorded in each linked report. Older integration-pending labels for batches 4–30 predate their merge at `cfcfc68`. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
+97 components have recorded validated baselines: 75 merged through batch 30 and twenty-two awaiting integration from batches 31-41. Validation scope and remaining limits are recorded in each linked report. Older integration-pending labels for batches 4–30 predate their merge at `cfcfc68`. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
 
 | Component | Status | Evidence |
 | --- | --- | --- |
@@ -26,6 +26,7 @@
 | Dot Field | Validated locally; integration pending | [Evidence](dot-field.md) |
 | DrawCheckbox | Validated locally; integration pending | [Report](draw-checkbox.md) |
 | Elastic Sheet | Validated locally; integration pending | [Evidence](elastic-sheet.md) |
+| Evil Eye | Validated locally; integration pending | [Report](evil-eye.md) |
 | Expandable Data Row | Validated locally; integration pending | [Report](expandable-data-row.md) |
 | Expandable Search | Validated baseline | [Report](expandable-search.md) |
 | FAQ | Validated locally; integration pending | [Report](faq.md) |
@@ -56,6 +57,7 @@
 | Morphing Icon | Validated baseline | [Review](morphing-icon.md) |
 | Morphing Shape Loader | Validated locally; integration pending | [Report](morphing-shape-loader.md) |
 | Neon Edge Button | Validated baseline | [Review](neon-edge-button.md) |
+| Nimbu Mirchi | Validated locally; integration pending | [Report](nimbu-mirchi.md) |
 | Not Found | Validated locally; integration pending | [Report](not-found.md) |
 | Notification Bell | Validated locally; integration pending | [Report](notification-bell.md) |
 | Notification Stack | Validated locally; integration pending | [Report](notification-stack.md) |

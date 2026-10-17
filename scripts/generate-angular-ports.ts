@@ -1,3 +1,4 @@
+import {evilEyePort,nimbuMirchiPort} from './angular-hanging-charms';
 import {torqueDialPort} from './angular-torque-dial';
 import {rocketPartyPopperPort} from './angular-rocket-party-popper';
 import {codeSnippetDeckPort} from './angular-code-snippet-deck';
@@ -458,10 +459,10 @@ const canvasModes: Record<string, string> = {
   "glyph-matrix": "glyph",
   "shooting-stars": "shooting",
   "sparkles-core": "sparkles",
-  "evil-eye": "eye",
-  "nimbu-mirchi": "nimbu",
   "thinking-orb": "orb",
 };
+add('evil-eye','plain',evilEyePort.description,evilEyePort.template,evilEyePort.body,evilEyePort);
+add('nimbu-mirchi','plain',nimbuMirchiPort.description,nimbuMirchiPort.template,nimbuMirchiPort.body,nimbuMirchiPort);
 add('meteors','plain',meteorsPort.description,meteorsPort.template,meteorsPort.body,meteorsPort);
 add('speed-warp','plain',speedWarpPort.description,speedWarpPort.template,speedWarpPort.body,speedWarpPort);
 add('depth-corridor','plain',depthCorridorPort.description,depthCorridorPort.template,depthCorridorPort.body,depthCorridorPort);

@@ -1,0 +1,11 @@
+# Evil Eye parity (validated locally; integration pending)
+
+React source: `src/components/ui/EvilEye.tsx`; authoring: `scripts/angular-hanging-charms.ts`, `angular-evil-eye-art.ts`; native motion/styles: `packages/angular/src/hanging-charm-motion.ts` and `hanging-charm.css`.
+
+The unrelated canvas port is replaced with the complete painted SVG, including every gradient, braided strand, cap, disc ring, highlight and floor shadow. The root preserves the 600px minimum height, 360px responsive artwork, ceiling line, overflow, touch/selection styles and light/dark colors. Caption sets the accessible image label and optional visually hidden text; scalar root attributes can override the role/label, and native style input accepts React-style numeric values. Click, key and pointer callbacks preserve unbound invocation and exception/default semantics.
+
+Pointer coordinates clamp to [-1,1] against the actual root rectangle; zero-size roots ignore movement and leave returns targets to zero. Separate X 55/9/1.8 and Y 45/10/1.6 springs drive clamped transforms: root rotation ±13 degrees/lift ±5px, cord ±9, cap ±7 and disc ±5. The installed Motion version renders SVG layers with 50% fill-box origins, despite explicit coordinate origins in the JSX; the native artwork follows measured output. Spring samples match the installed generator, including clamped overshoot. Live options and interrupted/return motion are covered.
+
+Reduced preference is captured at mount by the actual source hook. A later media change does not add/remove pointer motion until remount. The image has no keyboard action, pause control or live status; native code does not invent them. Fixed gradient IDs are retained as in source, including its repeated-instance limitation. Native disposal removes listeners and frames. Application CSS/classes and typed native callbacks replace React DOM props; arbitrary Tailwind utility combinations are outside the recorded visual scenarios.
+
+Focused helper/package checks and paired Edge desktop/Pixel 7 source/native light/dark geometry, complete SVG attributes, captions/overrides, failure recovery, reduced state, motion and demos pass. Screenshots were inspected. Completed-batch baseline results are recorded in [batch 41 evidence](batch-41-integration.md). No physical-device, Safari/Firefox or exhaustive accessibility-conformance claim is made.

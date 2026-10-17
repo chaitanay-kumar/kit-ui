@@ -147,6 +147,11 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if(entry.id==='evil-eye'||entry.id==='nimbu-mirchi'){const name=entry.id==='evil-eye'?'KitEvilEyeComponent':'KitNimbuMirchiComponent';return `import {Component} from '@angular/core';
+import {${name}} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[${name}],template:\`<kit-${entry.id} [maxRotation]="13" [stiffnessX]="55" [stiffnessY]="45" [damping]="9" caption="Hanging charm"/>\`})
+export class ExampleComponent {}`}
+
   if(entry.id==='torque-dial')return `import {Component,signal} from '@angular/core';
 import {KitTorqueDialComponent} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitTorqueDialComponent],template:\`<kit-torque-dial [value]="gain()" [onChange]="change" label="Gain Level" unit="%"/>\`})

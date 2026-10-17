@@ -2,14 +2,14 @@
 
 React is the source of truth for component appearance, interactions, data contracts, options and defaults. Angular implementations stay native; template projection and output events provide Angular equivalents for React nodes and callbacks. Catalog coverage does not establish parity.
 
-Current progress: 95 components have recorded validated baselines (75 merged through batch 30, twenty on batches 31-40); 21 remain unvalidated. Batch 40 adds Torque Dial and Rocket Party Popper, including captured gestures, retained exit callbacks, native wait-mode scenes and exact confetti physics. See [batch 40 evidence](parity/batch-40-integration.md) and the [completed component list](parity/completed-components.md). Batches 4–30 were merged into `feat/kit-ui-library` at `cfcfc68`; Registry CI and Pages deployment passed. Older rows saying integration pending for those batches are historical labels.
+Current progress: 97 components have recorded validated baselines (75 merged through batch 30, twenty-two on batches 31-41); 19 remain unvalidated. Batch 41 adds Evil Eye and Nimbu Mirchi, including complete painted SVGs, layered pointer springs, actual runtime transform origins and captured reduced-motion preference. See [batch 41 evidence](parity/batch-41-integration.md) and the [completed component list](parity/completed-components.md). Batches 4–30 were merged into `feat/kit-ui-library` at `cfcfc68`; Registry CI and Pages deployment passed. Older rows saying integration pending for those batches are historical labels.
 
 User priority: finish simpler components first. AI Response remains deferred; its previously documented working copy must be located before resuming (see Pending work). Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work proceeds in batches of two, with focused component checks during implementation and one full baseline before batch merge. Batch 2 merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); batch 3 merged through [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Batch 4 and its stacked batch 5 are locally validated and await integration. The original inventory order remains below for tracking, not execution priority.
 
 ## Pending work
 
-- Review and fix the remaining 21 components listed below: 20 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
-- Review batches 31-40 for integration. Batch 40 is locally validated; select the next two queued components with simpler components first.
+- Review and fix the remaining 19 components listed below: 18 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
+- Review batches 31-41 for integration. Batch 41 is locally validated; select the next two queued components with simpler components first.
 - Before integration, audit older direct button callback expressions (starting with Book Call Button/Split Button) for return-value/exception event-default semantics. Batch 36 renews this contract for Folder Cards, Story Cards, Pricing and Stacked Cards only.
 - Before integration, audit earlier parity fixture HTML for standard doctype and viewport metadata, including batches 11 through 19. Batch 23 corrects these headers and renews browser checks for batches 20 through 23. Earlier mobile input/reduced-motion checks alone do not prove narrow responsive layouts in standards mode.
 - Keep AI Response deferred. No AI code/refs were changed. The previously documented `kit-ui-angular-response` / `feat/angular-ai-response-parity` working copy is not registered in this checkout, its audit is not here, and named Desktop sibling paths on C:/D: were not present when checked. Locate that prior work before resuming; do not substitute the generic generated port or claim the deferred work is validated.
@@ -61,7 +61,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 28 | DrawCheckbox | `draw-checkbox` | Validated locally; integration pending | [Report](parity/draw-checkbox.md) |
 | 29 | Dynamic Island | `dynamic-island` | Queued | — |
 | 30 | Elastic Sheet | `elastic-sheet` | Validated locally; integration pending | [Evidence](parity/elastic-sheet.md) |
-| 31 | Evil Eye | `evil-eye` | Queued | — |
+| 31 | Evil Eye | `evil-eye` | Validated locally; integration pending | [Report](parity/evil-eye.md) |
 | 32 | Expandable Data Row | `expandable-data-row` | Validated locally; integration pending | [Report](parity/expandable-data-row.md) |
 | 33 | Expandable Search | `expandable-search` | Validated baseline | [Report](parity/expandable-search.md) |
 | 34 | FAQ | `faq` | Validated locally; integration pending | [Report](parity/faq.md) |
@@ -95,7 +95,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 62 | Morphing Icon | `morphing-icon` | Validated baseline | [Review](parity/morphing-icon.md) |
 | 63 | Morphing Shape Loader | `morphing-shape-loader` | Validated locally; integration pending | [Report](parity/morphing-shape-loader.md) |
 | 64 | Neon Edge Button | `neon-edge-button` | Validated baseline | [Review](parity/neon-edge-button.md) |
-| 65 | Nimbu Mirchi | `nimbu-mirchi` | Queued | — |
+| 65 | Nimbu Mirchi | `nimbu-mirchi` | Validated locally; integration pending | [Report](parity/nimbu-mirchi.md) |
 | 66 | Not Found | `not-found` | Validated locally; integration pending | [Report](parity/not-found.md) |
 | 67 | Notification Bell | `notification-bell` | Validated locally; integration pending | [Report](parity/notification-bell.md) |
 | 68 | Notification Stack | `notification-stack` | Validated locally; integration pending | [Report](parity/notification-stack.md) |
