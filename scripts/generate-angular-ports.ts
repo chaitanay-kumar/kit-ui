@@ -1,3 +1,5 @@
+import {speedWarpPort} from './angular-speed-warp';
+import {depthCorridorPort} from './angular-depth-corridor';
 import {expandableDataRowPort} from './angular-expandable-data-row';
 import {interactiveTimelinePort} from './angular-interactive-timeline';
 import {storyCardsPort} from './angular-story-cards';
@@ -465,16 +467,16 @@ add("payment-receipt-printer","plain",paymentReceiptPrinterPort.description,paym
 // Canvas effects use distinct algorithms, pause off screen and clean up observers.
 const canvasModes: Record<string, string> = {
   "dot-shader": "shader",
-  "depth-corridor": "corridor",
   "glyph-matrix": "glyph",
   "shooting-stars": "shooting",
   "sparkles-core": "sparkles",
-  "speed-warp": "warp",
   "evil-eye": "eye",
   "nimbu-mirchi": "nimbu",
   "thinking-orb": "orb",
 };
 add('meteors','plain',meteorsPort.description,meteorsPort.template,meteorsPort.body,meteorsPort);
+add('speed-warp','plain',speedWarpPort.description,speedWarpPort.template,speedWarpPort.body,speedWarpPort);
+add('depth-corridor','plain',depthCorridorPort.description,depthCorridorPort.template,depthCorridorPort.body,depthCorridorPort);
 add('dot-field','plain',dotFieldPort.description,dotFieldPort.template,dotFieldPort.body,dotFieldPort);
 add('morphing-blob','plain',morphingBlobPort.description,morphingBlobPort.template,morphingBlobPort.body,morphingBlobPort);
 add('circular-orbit','plain',circularOrbitPort.description,circularOrbitPort.template,circularOrbitPort.body,circularOrbitPort);

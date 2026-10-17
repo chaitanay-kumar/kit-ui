@@ -405,14 +405,14 @@ export const ANGULAR_PORTS = [
     "name": "Depth Corridor",
     "exportName": "KitDepthCorridorComponent",
     "selector": "kit-depth-corridor",
-    "description": "A native Canvas 2D visual with pointer response, pause controls, offscreen suspension and reduced motion.",
+    "description": "Native source-contract 3D layer corridor with callback-owned selection, arrow navigation, parallax and retained smooth spring transforms.",
     "inputs": [
-      "label: string",
-      "density: number (1–400)",
-      "speed: number (0–5)",
-      "color: string",
-      "paused: boolean",
-      "disabled: boolean"
+      "layers: DepthLayer[]",
+      "activeLayerIndex: number",
+      "onLayerChange: (index: number) => void",
+      "perspectiveDepth: number",
+      "enableParallax: boolean",
+      "className: string"
     ],
     "outputs": []
   },
@@ -1684,14 +1684,13 @@ export const ANGULAR_PORTS = [
     "name": "Speed Warp",
     "exportName": "KitSpeedWarpComponent",
     "selector": "kit-speed-warp",
-    "description": "A native Canvas 2D visual with pointer response, pause controls, offscreen suspension and reduced motion.",
+    "description": "Source-contract transparent perspective starfield with frame-based velocity, source resize/offscreen suspension and optional native template overlay.",
     "inputs": [
-      "label: string",
-      "density: number (1–400)",
-      "speed: number (0–5)",
-      "color: string",
+      "speed: number",
+      "starCount: number",
       "paused: boolean",
-      "disabled: boolean"
+      "className: string",
+      "content: TemplateRef<unknown>"
     ],
     "outputs": []
   },

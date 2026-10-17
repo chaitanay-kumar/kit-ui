@@ -1,22 +1,22 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component } from '@angular/core';
-import { KitCanvasController } from './port-canvas';
-
+import { Component, ViewEncapsulation, DestroyRef, ElementRef, inject, input, viewChild } from '@angular/core';
+import {afterRenderEffect,contentChild,TemplateRef} from '@angular/core';import {NgTemplateOutlet} from '@angular/common';import {SpeedWarpRenderer} from './speed-warp-renderer';
 @Component({
  selector:"kit-speed-warp", standalone:true,
- host:{'data-kit':"speed-warp",style:'display:block;min-width:0'},
- template:`
-<section class="kit-control kit-stack">
-<div class="k-canvas-wrap" (pointermove)="move($event)" (pointerleave)="reset()">
-<canvas #canvas [attr.aria-label]="label()" role="img">
+ host:{style:'display:contents'},
+ imports:[NgTemplateOutlet],
+encapsulation:ViewEncapsulation.None,styleUrls:["./speed-warp.css"],
+template:`
+@if(content()||projected()){<div [class]="'k-speed-warp-overlay '+className()">
+<canvas #canvas aria-hidden="true" class="k-speed-warp-canvas">
 </canvas>
-<ng-content>
-</ng-content>
+<div class="k-speed-warp-content">
+<ng-container [ngTemplateOutlet]="content()||projected()||null"/>
 </div>
-<button type="button" [disabled]="disabled()||paused()" [attr.aria-pressed]="!running()" (click)="running.set(!running())">{{running()?'Pause animation':'Resume animation'}}</button>
-</section>
+</div>}@else{<canvas #canvas aria-hidden="true" [class]="'k-speed-warp-canvas '+className()">
+</canvas>}
 `
 })
-export class KitSpeedWarpComponent extends KitCanvasController {
-override readonly mode='warp';
+export class KitSpeedWarpComponent {
+readonly speed=input<number,number|undefined>(25,{transform:v=>v===undefined?25:v});readonly starCount=input<number,number|undefined>(600,{transform:v=>v===undefined?600:v});readonly paused=input<boolean,boolean|undefined>(false,{transform:v=>v===undefined?false:v});readonly className=input<string,string|undefined>('',{transform:v=>v===undefined?'':v});readonly content=input<TemplateRef<unknown>|undefined>();readonly projected=contentChild(TemplateRef);readonly canvas=viewChild<ElementRef<HTMLCanvasElement>>('canvas');private renderer:SpeedWarpRenderer|undefined;constructor(){afterRenderEffect(onCleanup=>{const canvas=this.canvas()?.nativeElement,speed=this.speed(),starCount=this.starCount(),paused=this.paused();if(!canvas)return;const context=canvas.getContext('2d'),view=canvas.ownerDocument.defaultView;if(context&&view){const renderer=new SpeedWarpRenderer(canvas,context,view,{speed,starCount,paused});this.renderer=renderer;onCleanup(()=>{renderer.destroy();if(this.renderer===renderer)this.renderer=undefined})}});inject(DestroyRef).onDestroy(()=>this.renderer?.destroy())}
 }

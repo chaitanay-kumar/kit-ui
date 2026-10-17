@@ -1,6 +1,6 @@
 # Completed parity checks
 
-89 components have recorded validated baselines: 75 merged through batch 30 and fourteen awaiting integration from batches 31-37. Validation scope and remaining limits are recorded in each linked report. Older integration-pending labels for batches 4–30 predate their merge at `cfcfc68`. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
+91 components have recorded validated baselines: 75 merged through batch 30 and sixteen awaiting integration from batches 31-38. Validation scope and remaining limits are recorded in each linked report. Older integration-pending labels for batches 4–30 predate their merge at `cfcfc68`. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
 
 | Component | Status | Evidence |
 | --- | --- | --- |
@@ -18,6 +18,7 @@
 | Circular Orbit | Validated locally; integration pending | [Evidence](circular-orbit.md) |
 | Cursor Follower | Validated locally; integration pending | [Report](cursor-follower.md) |
 | Density Lens | Validated locally; integration pending | [Evidence](density-lens.md) |
+| Depth Corridor | Validated locally; integration pending | [Report](depth-corridor.md) |
 | Dependency Trace | Validated locally; integration pending | [Report](dependency-trace.md) |
 | DirectionalTooltip | Validated locally; integration pending | [Report](directional-tooltip.md) |
 | Dot Field | Validated locally; integration pending | [Evidence](dot-field.md) |
@@ -78,6 +79,7 @@
 | Smart Upload | Validated locally; integration pending | [Report](smart-upload.md) |
 | Smooth Accordion | Validated baseline | [Report](smooth-accordion.md) |
 | Split Button | Validated locally; integration pending | [Report](split-button.md) |
+| Speed Warp | Validated locally; integration pending | [Report](speed-warp.md) |
 | Spotlight Card | Validated baseline | [Review](spotlight-card.md) |
 | SpringSelect | Validated locally; integration pending | [Report](spring-select.md) |
 | Stack Unfold Panel | Validated locally; integration pending | [Evidence](stack-unfold-panel.md) |

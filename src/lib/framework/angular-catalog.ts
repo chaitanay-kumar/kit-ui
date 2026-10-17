@@ -147,6 +147,14 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if(entry.id==='speed-warp')return `import {Component} from '@angular/core';
+import {KitSpeedWarpComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitSpeedWarpComponent],template:\`<div style="position:relative;height:360px;background:#050505"><kit-speed-warp [speed]="25" [starCount]="600"><ng-template><h2>Engage Warp Drive</h2></ng-template></kit-speed-warp></div>\`})
+export class ExampleComponent {}`;
+  if(entry.id==='depth-corridor')return `import {Component} from '@angular/core';
+import {KitDepthCorridorComponent,type DepthLayer} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitDepthCorridorComponent],template:\`<kit-depth-corridor [layers]="layers"/>\`})
+export class ExampleComponent {readonly layers:DepthLayer[]=[{id:'interface',title:'Interface',content:'Explore the interface.'},{id:'data',title:'Data',content:'Keep the source of truth close.'}]}`;
   if(entry.id==='expandable-data-row')return `import {Component} from '@angular/core';
 import {KitExpandableDataRowComponent,type DataRowItem} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitExpandableDataRowComponent],template:\`<kit-expandable-data-row [items]="items" [allowMultiple]="true" [onRowAction]="action"/>\`})
