@@ -1,6 +1,6 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component, input, signal } from '@angular/core';
-import {NgTemplateOutlet} from '@angular/common';import {ViewEncapsulation} from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
+import {invokeNativeEventCallback} from './native-event-callback';import {NgTemplateOutlet} from '@angular/common';import {ErrorHandler,ViewEncapsulation} from '@angular/core';
 @Component({
  selector:"kit-book-call-button", standalone:true,
  host:{style:'display:contents'},
@@ -9,7 +9,7 @@ encapsulation:ViewEncapsulation.None,styleUrls:["./book-call-button.css"],
 template:`
 @if(href()){<a [class]="'k-book-call '+className()" [href]="href()" rel="noreferrer" [attr.aria-label]="label()" (mouseenter)="hovered.set(true)" (mouseleave)="hovered.set(false)" (focus)="hovered.set(true)" (blur)="hovered.set(false)">
 <ng-container *ngTemplateOutlet="layers"/>
-</a>}@else{<button type="button" [class]="'k-book-call '+className()" [disabled]="disabled()" [attr.aria-label]="label()" (click)="onClick()?.()" (mouseenter)="hovered.set(true)" (mouseleave)="hovered.set(false)" (focus)="hovered.set(true)" (blur)="hovered.set(false)">
+</a>}@else{<button type="button" [class]="'k-book-call '+className()" [disabled]="disabled()" [attr.aria-label]="label()" (click)="primaryClick($event)" (mouseenter)="hovered.set(true)" (mouseleave)="hovered.set(false)" (focus)="hovered.set(true)" (blur)="hovered.set(false)">
 <ng-container *ngTemplateOutlet="layers"/>
 </button>}<ng-template #layers>
 <span class="k-book-capsule" [class.expanded]="hovered()">
@@ -28,5 +28,5 @@ template:`
 `
 })
 export class KitBookCallButtonComponent {
-readonly label=input<string,string|undefined>('Book a call',{alias:'children',transform:value=>value??'Book a call'});readonly onClick=input<(()=>void)|undefined>();readonly href=input<string|undefined>();readonly className=input<string,string|undefined>('',{transform:value=>value??''});readonly disabled=input<boolean,boolean|undefined>(false,{transform:value=>value??false});readonly hovered=signal(false);readonly dots:Array<[number,number]>=[[17,13],[28,13],[28,22],[38,29],[28,30],[38,37],[28,44],[17,47],[17,25],[17,36]];
+readonly label=input<string,string|undefined>('Book a call',{alias:'children',transform:value=>value??'Book a call'});private readonly callbackErrors=inject(ErrorHandler);primaryClick(event:MouseEvent):void{invokeNativeEventCallback(this.onClick(),event,this.callbackErrors)}readonly onClick=input<(()=>void)|undefined>();readonly href=input<string|undefined>();readonly className=input<string,string|undefined>('',{transform:value=>value??''});readonly disabled=input<boolean,boolean|undefined>(false,{transform:value=>value??false});readonly hovered=signal(false);readonly dots:Array<[number,number]>=[[17,13],[28,13],[28,22],[38,29],[28,30],[38,37],[28,44],[17,47],[17,25],[17,36]];
 }
