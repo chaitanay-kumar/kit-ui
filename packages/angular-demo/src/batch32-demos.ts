@@ -1,0 +1,6 @@
+import {Component,signal} from '@angular/core';
+import {KitSpringSelectComponent,KitGooeyMenuComponent} from 'kit-ui-angular';
+@Component({selector:'kit-spring-select-demo',standalone:true,imports:[KitSpringSelectComponent],template:`<div style="width:100%;max-width:320px;margin-inline:auto"><kit-spring-select [options]="options" label="Workspace" placeholder="Select a workspace" [value]="selected()" [onChange]="change"/><p role="status">Selected: {{selected()||'none'}}</p></div>`})
+export class SpringSelectDemoComponent{readonly options=[{value:'design',label:'Design',description:'Components and prototypes'},{value:'engineering',label:'Engineering',description:'Build and ship'},{value:'archive',label:'Archived',disabled:true}];readonly selected=signal('design');readonly change=(value:string)=>this.selected.set(value)}
+@Component({selector:'kit-gooey-menu-demo',standalone:true,imports:[KitGooeyMenuComponent],template:`<div style="width:100%;display:flex;justify-content:center"><kit-gooey-menu [options]="options" [onSelect]="select"/></div><p role="status">Selected: {{selected()}}</p>`})
+export class GooeyMenuDemoComponent{readonly options=['Home','About','Projects','Contact','Book a call','Follow us'];readonly selected=signal('Home');readonly select=(option:string)=>this.selected.set(option)}

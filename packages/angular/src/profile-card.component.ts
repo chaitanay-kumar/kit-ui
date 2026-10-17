@@ -1,6 +1,6 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component, computed, input } from '@angular/core';
-import {ViewEncapsulation} from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
+import {invokeNativeEventCallback} from './native-event-callback';import {ErrorHandler,ViewEncapsulation} from '@angular/core';
 @Component({
  selector:"kit-profile-card", standalone:true,
  host:{style:'display:contents'},
@@ -11,7 +11,7 @@ template:`
 </div>
 <div class="k-profile-actions">
 <a [href]="socialUrl()" target="_blank" rel="noreferrer noopener" aria-label="Open X (Twitter) profile in a new tab">𝕏</a>
-<button type="button" [attr.aria-label]="actionLabel()" (click)="onAction()?.()">{{actionLabel()}}</button>
+<button type="button" [attr.aria-label]="actionLabel()" (click)="actionClick($event)">{{actionLabel()}}</button>
 </div>
 <section>
 <div class="k-profile-avatar" aria-hidden="true">
@@ -36,5 +36,5 @@ template:`
 `
 })
 export class KitProfileCardComponent {
-readonly name=input<string,string|undefined>('Kit UI contributors',{transform:value=>value??'Kit UI contributors'});readonly username=input<string,string|undefined>('@kit-ui',{transform:value=>value??'@kit-ui'});readonly description=input<string,string|undefined>('Building Kit UI. Engineer.',{transform:value=>value??'Building Kit UI. Engineer.'});readonly followers=input<string,string|undefined>('200K',{transform:value=>value??'200K'});readonly posts=input<string,string|undefined>('72',{transform:value=>value??'72'});readonly website=input<string,string|undefined>('github.com/chaitanay-kumar/kit-ui',{transform:value=>value??'github.com/chaitanay-kumar/kit-ui'});readonly actionLabel=input<string,string|undefined>('Follow',{transform:value=>value??'Follow'});readonly onAction=input<(()=>void)|undefined>();readonly className=input<string,string|undefined>('',{transform:value=>value??''});readonly socialUrl=input<string,string|undefined>('https://x.com/kit_ui',{transform:value=>value??'https://x.com/kit_ui'});readonly websiteUrl=computed(()=>/^https?:\/\//.test(this.website())?this.website():'https://'+this.website());
+private readonly callbackErrors=inject(ErrorHandler);actionClick(event:MouseEvent):void{invokeNativeEventCallback(this.onAction(),event,this.callbackErrors)}readonly name=input<string,string|undefined>('Kit UI contributors',{transform:value=>value??'Kit UI contributors'});readonly username=input<string,string|undefined>('@kit-ui',{transform:value=>value??'@kit-ui'});readonly description=input<string,string|undefined>('Building Kit UI. Engineer.',{transform:value=>value??'Building Kit UI. Engineer.'});readonly followers=input<string,string|undefined>('200K',{transform:value=>value??'200K'});readonly posts=input<string,string|undefined>('72',{transform:value=>value??'72'});readonly website=input<string,string|undefined>('github.com/chaitanay-kumar/kit-ui',{transform:value=>value??'github.com/chaitanay-kumar/kit-ui'});readonly actionLabel=input<string,string|undefined>('Follow',{transform:value=>value??'Follow'});readonly onAction=input<(()=>void)|undefined>();readonly className=input<string,string|undefined>('',{transform:value=>value??''});readonly socialUrl=input<string,string|undefined>('https://x.com/kit_ui',{transform:value=>value??'https://x.com/kit_ui'});readonly websiteUrl=computed(()=>/^https?:\/\//.test(this.website())?this.website():'https://'+this.website());
 }

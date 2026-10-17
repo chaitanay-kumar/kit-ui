@@ -176,24 +176,16 @@ export const ANGULAR_PORTS = [
     "name": "Batch Gesture Tray",
     "exportName": "KitBatchGestureTrayComponent",
     "selector": "kit-batch-gesture-tray",
-    "description": "Select individual items or all items, then run a cancellable application-owned batch action.",
+    "description": "Source-contract keyboard item selection and sticky batch actions with callback-owned state, async recovery and native spring presence.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "items: BatchItem[]",
+      "actions: BatchAction[]",
+      "selectedIds: string[]",
+      "onSelectionChange: (ids: string[]) => void",
+      "onActionComplete: (id: string) => void",
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "book-call-button",
@@ -310,38 +302,34 @@ export const ANGULAR_PORTS = [
     "name": "Code Snippet Deck",
     "exportName": "KitCodeSnippetDeckComponent",
     "selector": "kit-code-snippet-deck",
-    "description": "Browse code snippets and copy the selected snippet with visible failure feedback.",
+    "description": "Source-contract multi-runtime code deck with mount-only variables, live code generators, shared tab springs and optimistic clipboard feedback.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "snippets: SnippetItem[]",
+      "parameters: SnippetParameter[]",
+      "defaultLanguage: string",
+      "showLineNumbers: boolean",
+      "showWindowBar: boolean",
+      "className: string",
+      "style: CodeSnippetDeckStyle",
+      "attributes: CodeSnippetDeckAttributes",
+      "onClick: (event: MouseEvent) => void",
+      "onKeyDown: (event: KeyboardEvent) => void"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "command-menu",
     "name": "Command Menu",
     "exportName": "KitCommandMenuComponent",
     "selector": "kit-command-menu",
-    "description": "A native modal command search with keyboard navigation, async errors and focus restoration.",
+    "description": "Native controlled catalog command overlay with retained search, global keyboard requests and source callback/action order.",
     "inputs": [
-      "commands: LiquidCommand[]",
-      "disabled: boolean"
+      "isOpen: boolean",
+      "onClose: () => void",
+      "onSelectComponent: (id: string) => void",
+      "onNavigateDocs: (topicId?: string) => void"
     ],
-    "outputs": [
-      "commandSelect: string"
-    ]
+    "outputs": []
   },
   {
     "id": "cursor-follower",
@@ -389,33 +377,30 @@ export const ANGULAR_PORTS = [
     "name": "Dependency Trace",
     "exportName": "KitDependencyTraceComponent",
     "selector": "kit-dependency-trace",
-    "description": "An SVG dependency graph with selectable nodes, highlighted connections and keyboard-accessible node buttons.",
+    "description": "Source-contract SVG dependency relationships with exact radial/explicit geometry, hover-over-selection tracing, native springs and callback lifecycle.",
     "inputs": [
-      "nodes: KitGraphNode[]",
-      "connections: KitGraphEdge[]",
-      "selected: string (two-way)",
-      "label: string",
-      "disabled: boolean"
+      "nodes: TraceNode[]",
+      "connections: TraceConnection[]",
+      "onNodeSelect: (id: string) => void",
+      "onNodeHover: (id: string | null) => void",
+      "nodeSize: number",
+      "className: string"
     ],
-    "outputs": [
-      "nodeSelect: KitGraphNode",
-      "nodeHover: string | null",
-      "selectedChange: string"
-    ]
+    "outputs": []
   },
   {
     "id": "depth-corridor",
     "name": "Depth Corridor",
     "exportName": "KitDepthCorridorComponent",
     "selector": "kit-depth-corridor",
-    "description": "A native Canvas 2D visual with pointer response, pause controls, offscreen suspension and reduced motion.",
+    "description": "Native source-contract 3D layer corridor with callback-owned selection, arrow navigation, parallax and retained smooth spring transforms.",
     "inputs": [
-      "label: string",
-      "density: number (1–400)",
-      "speed: number (0–5)",
-      "color: string",
-      "paused: boolean",
-      "disabled: boolean"
+      "layers: DepthLayer[]",
+      "activeLayerIndex: number",
+      "onLayerChange: (index: number) => void",
+      "perspectiveDepth: number",
+      "enableParallax: boolean",
+      "className: string"
     ],
     "outputs": []
   },
@@ -538,14 +523,20 @@ export const ANGULAR_PORTS = [
     "name": "Evil Eye",
     "exportName": "KitEvilEyeComponent",
     "selector": "kit-evil-eye",
-    "description": "A native Canvas 2D visual with pointer response, pause controls, offscreen suspension and reduced motion.",
+    "description": "Native painted SVG charm with normalized pointer springs, layered rotation, captured reduced preference and disposal.",
     "inputs": [
-      "label: string",
-      "density: number (1–400)",
-      "speed: number (0–5)",
-      "color: string",
-      "paused: boolean",
-      "disabled: boolean"
+      "maxRotation: number",
+      "stiffnessX: number",
+      "stiffnessY: number",
+      "damping: number",
+      "caption: string",
+      "className: string",
+      "style: NativeStyle",
+      "attributes: NativeAttributes",
+      "onClick: (event: MouseEvent) => void",
+      "onKeyDown: (event: KeyboardEvent) => void",
+      "onPointerMove: (event: PointerEvent) => void",
+      "onPointerLeave: (event: PointerEvent) => void"
     ],
     "outputs": []
   },
@@ -554,24 +545,16 @@ export const ANGULAR_PORTS = [
     "name": "Expandable Data Row",
     "exportName": "KitExpandableDataRowComponent",
     "selector": "kit-expandable-data-row",
-    "description": "Expandable item details with keyboard-native disclosure and application-owned recovery actions.",
+    "description": "Source-contract responsive account rows with mount-only single/multiple expansion, retained gentle detail transitions, optimistic copy feedback and typed application actions.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "items: DataRowItem[]",
+      "allowMultiple: boolean",
+      "defaultExpandedIds: string[]",
+      "isLoading: boolean",
+      "onRowAction: (action: string, row: DataRowItem) => void",
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "expandable-search",
@@ -716,24 +699,27 @@ export const ANGULAR_PORTS = [
     "name": "Gooey Menu",
     "exportName": "KitGooeyMenuComponent",
     "selector": "kit-gooey-menu",
-    "description": "An expandable action menu with Escape, arrow keys and disabled-item handling.",
+    "description": "A native source-contract liquid dropdown with independent panel springs, staggered retained rows, controlled open state and local selection.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "options: string[]",
+      "value: string",
+      "defaultValue: string",
+      "open: boolean",
+      "defaultOpen: boolean",
+      "onOpenChange: (open: boolean) => void",
+      "onSelect: (option: string, index: number) => void",
+      "width: number",
+      "className: string",
+      "style: Record<string,string|number|null|undefined>",
+      "attributes: Record<string,string|number|boolean|null|undefined>",
+      "id: string",
+      "title: string",
+      "role: string",
+      "tabIndex: number",
+      "aria-label: string",
+      "onKeyDown: (event: KeyboardEvent) => void"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "gravity-particle-burst",
@@ -779,24 +765,19 @@ export const ANGULAR_PORTS = [
     "name": "Interactive Timeline",
     "exportName": "KitInteractiveTimelineComponent",
     "selector": "kit-interactive-timeline",
-    "description": "Filter chronological events, inspect event payloads and select an event without simulated network activity.",
+    "description": "Source-contract deployment timeline with independent mount-only selection/expansion, status progress, retained details, optimistic hash copying and native node controls.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "items: TimelineItem[]",
+      "defaultSelectedId: string",
+      "onItemSelect: (item: TimelineItem) => void",
+      "collapsible: boolean",
+      "className: string",
+      "style: InteractiveTimelineStyle",
+      "attributes: InteractiveTimelineAttributes",
+      "onClick: (event: MouseEvent) => void",
+      "onKeyDown: (event: KeyboardEvent) => void"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "intro-loader",
@@ -943,24 +924,20 @@ export const ANGULAR_PORTS = [
     "name": "macOS Folder Cards",
     "exportName": "KitMacOsFolderCardsComponent",
     "selector": "kit-mac-os-folder-cards",
-    "description": "A configurable content card collection with selection, disclosure, disabled items and projected details.",
+    "description": "Source-contract porcelain folder with independent peek state, native keyboard toggle, retained wait-mode view transitions and typed card/icon content.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "folderTitle: string",
+      "folderCategory: string",
+      "items: MacOSFolderCardItem[]",
+      "defaultOpen: boolean",
+      "isPeeked: boolean",
+      "className: string",
+      "style: MacOSFolderStyle",
+      "attributes: MacOSFolderAttributes",
+      "onClick: (event: MouseEvent) => void",
+      "onKeyDown: (event: KeyboardEvent) => void"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "magnetic-button",
@@ -1064,20 +1041,16 @@ export const ANGULAR_PORTS = [
     "name": "Morphing Dialog",
     "exportName": "KitMorphingDialogComponent",
     "selector": "kit-morphing-dialog",
-    "description": "A native modal dialog with focus containment, Escape, projected content and asynchronous confirmation.",
+    "description": "Source-contract overlay with lazy native trigger/content templates, Escape/backdrop dismissal, body overflow lifecycle and delayed entries.",
     "inputs": [
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "action: KitAction",
+      "trigger: TemplateRef<MorphingDialogTriggerContext>",
+      "content: TemplateRef<unknown>",
       "title: string",
-      "description: string",
-      "opened: boolean (two-way)"
+      "subtitle: string",
+      "id: string",
+      "className: string"
     ],
-    "outputs": [
-      "activated: void",
-      "openedChange: boolean"
-    ]
+    "outputs": []
   },
   {
     "id": "morphing-icon",
@@ -1136,14 +1109,20 @@ export const ANGULAR_PORTS = [
     "name": "Nimbu Mirchi",
     "exportName": "KitNimbuMirchiComponent",
     "selector": "kit-nimbu-mirchi",
-    "description": "A native Canvas 2D visual with pointer response, pause controls, offscreen suspension and reduced motion.",
+    "description": "Native painted SVG charm with normalized pointer springs, layered rotation, captured reduced preference and disposal.",
     "inputs": [
-      "label: string",
-      "density: number (1–400)",
-      "speed: number (0–5)",
-      "color: string",
-      "paused: boolean",
-      "disabled: boolean"
+      "maxRotation: number",
+      "stiffnessX: number",
+      "stiffnessY: number",
+      "damping: number",
+      "caption: string",
+      "className: string",
+      "style: NativeStyle",
+      "attributes: NativeAttributes",
+      "onClick: (event: MouseEvent) => void",
+      "onKeyDown: (event: KeyboardEvent) => void",
+      "onPointerMove: (event: PointerEvent) => void",
+      "onPointerLeave: (event: PointerEvent) => void"
     ],
     "outputs": []
   },
@@ -1384,18 +1363,22 @@ export const ANGULAR_PORTS = [
     "name": "Pricing",
     "exportName": "KitPricingComponent",
     "selector": "kit-pricing",
-    "description": "Selectable pricing plans with monthly/yearly billing, real price inputs and an application-owned selection event.",
+    "description": "Source-contract Free/Pro tier presentation with typed data, positional reversal, responsive columns, reduced entry and native CTA sheen/shimmer.",
     "inputs": [
-      "plans: KitPlan[]",
-      "yearly: boolean (two-way)",
-      "yearlyDiscount: number",
-      "currency: string",
-      "disabled: boolean"
+      "freeTier: PricingTier",
+      "proTier: PricingTier",
+      "reverse: boolean",
+      "columns: 1 | 2 | 'auto'",
+      "eyebrow: string",
+      "heading: string",
+      "subheading: string",
+      "className: string",
+      "style: PricingStyle",
+      "attributes: PricingAttributes",
+      "onClick: (event: MouseEvent) => void",
+      "onKeyDown: (event: KeyboardEvent) => void"
     ],
-    "outputs": [
-      "planSelect: { plan: KitPlan; yearly: boolean }",
-      "yearlyChange: boolean"
-    ]
+    "outputs": []
   },
   {
     "id": "profile-card",
@@ -1461,24 +1444,16 @@ export const ANGULAR_PORTS = [
     "name": "Recovery Ledger",
     "exportName": "KitRecoveryLedgerComponent",
     "selector": "kit-recovery-ledger",
-    "description": "Expandable item details with keyboard-native disclosure and application-owned recovery actions.",
+    "description": "Source-contract recovery timeline with controlled head, local disclosure, retained detail springs and application-owned async restore/failure recovery.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "entries: LedgerEntry[]",
+      "currentEntryId: string",
+      "onRestore: (id: string) => Promise<void> | void",
+      "onSelect: (id: string) => void",
+      "variant: 'timeline' | 'compact'",
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "reveal-card",
@@ -1498,18 +1473,23 @@ export const ANGULAR_PORTS = [
     "name": "Rocket Party Popper",
     "exportName": "KitRocketPartyPopperComponent",
     "selector": "kit-rocket-party-popper",
-    "description": "Trigger a local particle celebration with a keyboard button, visible motion controls and cleanup.",
+    "description": "Source-contract rocket launch phases, wait-mode scenes and DPR confetti physics with mount-only motion preference and native cleanup.",
     "inputs": [
-      "label: string",
-      "density: number (1–400)",
-      "speed: number (0–5)",
-      "color: string",
-      "paused: boolean",
-      "disabled: boolean"
+      "triggerLabel: string",
+      "confettiCount: number",
+      "defaultLaunched: boolean",
+      "onLaunch: () => void",
+      "onReset: () => void",
+      "title: string",
+      "description: string",
+      "metric: string",
+      "className: string",
+      "style: RocketPartyPopperStyle",
+      "attributes: RocketPartyPopperAttributes",
+      "onClick: (event: MouseEvent) => void",
+      "onKeyDown: (event: KeyboardEvent) => void"
     ],
-    "outputs": [
-      "triggered: void"
-    ]
+    "outputs": []
   },
   {
     "id": "scroll-progress-nav",
@@ -1709,14 +1689,13 @@ export const ANGULAR_PORTS = [
     "name": "Speed Warp",
     "exportName": "KitSpeedWarpComponent",
     "selector": "kit-speed-warp",
-    "description": "A native Canvas 2D visual with pointer response, pause controls, offscreen suspension and reduced motion.",
+    "description": "Source-contract transparent perspective starfield with frame-based velocity, source resize/offscreen suspension and optional native template overlay.",
     "inputs": [
-      "label: string",
-      "density: number (1–400)",
-      "speed: number (0–5)",
-      "color: string",
+      "speed: number",
+      "starCount: number",
       "paused: boolean",
-      "disabled: boolean"
+      "className: string",
+      "content: TemplateRef<unknown>"
     ],
     "outputs": []
   },
@@ -1757,38 +1736,40 @@ export const ANGULAR_PORTS = [
     "name": "Spotlight Search",
     "exportName": "KitSpotlightSearchComponent",
     "selector": "kit-spotlight-search",
-    "description": "A native modal command search with keyboard navigation, async errors and focus restoration.",
+    "description": "Native controlled or internal Spotlight search with captured actions, input navigation, delayed focus and shared active highlight.",
     "inputs": [
-      "commands: LiquidCommand[]",
-      "disabled: boolean"
+      "open: boolean",
+      "onOpenChange: (open: boolean) => void",
+      "onClose: () => void",
+      "items: SpotlightSearchItem[]",
+      "placeholder: string",
+      "recentSearches: string[]",
+      "onSelect: (item: SpotlightSearchItem) => void",
+      "enableGlobalShortcut: boolean",
+      "className: string",
+      "onSelectComponent: (id: string) => void",
+      "onNavigateDocs: (topicId?: string) => void"
     ],
-    "outputs": [
-      "commandSelect: string"
-    ]
+    "outputs": []
   },
   {
     "id": "spring-select",
     "name": "SpringSelect",
     "exportName": "KitSpringSelectComponent",
     "selector": "kit-spring-select",
-    "description": "A native accessible select with keyboard typeahead and selected-item output.",
+    "description": "Source-contract custom listbox selection with controlled/uncontrolled value, disabled options, label/error and native dismissal lifecycle.",
     "inputs": [
-      "items: KitItem[]",
+      "options: SpringSelectOption[]",
+      "value: string",
+      "defaultValue: string",
+      "placeholder: string",
+      "onChange: (value: string) => void",
       "label: string",
       "disabled: boolean",
-      "loading: boolean",
       "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "stack-unfold-panel",
@@ -1811,72 +1792,62 @@ export const ANGULAR_PORTS = [
     "name": "Stacked Cards",
     "exportName": "KitStackedCardsComponent",
     "selector": "kit-stacked-cards",
-    "description": "A configurable content card collection with selection, disclosure, disabled items and projected details.",
+    "description": "Native source-contract sticky story articles with linear scroll depth, typed cards, images and CTA links.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "cards: StackedCard[]",
+      "title: string",
+      "subtitle: string",
+      "className: string",
+      "style: StackedCardsStyle",
+      "attributes: StackedCardsAttributes",
+      "onClick: (event: MouseEvent) => void",
+      "onKeyDown: (event: KeyboardEvent) => void"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "sticky-pages",
     "name": "Sticky Pages",
     "exportName": "KitStickyPagesComponent",
     "selector": "kit-sticky-pages",
-    "description": "Scrollable page sections with contained sticky headers and readable long-content layout.",
+    "description": "Native CSS sticky page stacking with configurable height/offsets, data content and projected page templates.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "pages: StickyPageItem[]",
+      "pageHeight: string",
+      "topOffset: number",
+      "stackOffset: number",
+      "rounded: boolean",
+      "shadow: boolean",
+      "border: boolean",
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "story-card",
     "name": "Story Cards",
     "exportName": "KitStoryCardComponent",
     "selector": "kit-story-card",
-    "description": "A configurable content card collection with selection, disclosure, disabled items and projected details.",
+    "description": "Source-contract responsive six-slot virtual story carousel with native links, global arrows, wheel/touch navigation and hover-paused autoplay.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "cards: StoryCard[]",
+      "initialIndex: number",
+      "autoPlay: boolean",
+      "autoPlayInterval: number",
+      "showNavigation: boolean",
+      "loop: boolean",
+      "enableWheelScroll: boolean",
+      "title: string",
+      "subtitle: string",
+      "className: string",
+      "style: StoryCardsStyle",
+      "attributes: StoryCardsAttributes",
+      "onClick: (event: MouseEvent) => void",
+      "onKeyDown: (event: KeyboardEvent) => void",
+      "onMouseEnter: (event: MouseEvent) => void",
+      "onMouseLeave: (event: MouseEvent) => void"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "stretch-switch",
@@ -1935,20 +1906,23 @@ export const ANGULAR_PORTS = [
     "name": "Torque Dial",
     "exportName": "KitTorqueDialComponent",
     "selector": "kit-torque-dial",
-    "description": "A bounded rotary input with pointer dragging, a native range alternative and keyboard increments.",
+    "description": "Native controlled angular dial with source wheel/key stepping, optimistic gesture ref, captured release momentum and disposal.",
     "inputs": [
-      "value: number (two-way)",
+      "value: number",
+      "onChange: (value: number) => void",
       "min: number",
       "max: number",
       "step: number",
+      "onChangeEnd: () => void",
       "label: string",
+      "showValue: boolean",
+      "size: number",
+      "disabled: boolean",
+      "momentum: boolean",
       "unit: string",
-      "disabled: boolean"
+      "className: string"
     ],
-    "outputs": [
-      "changeEnd: void",
-      "valueChange: number"
-    ]
+    "outputs": []
   },
   {
     "id": "typewriter-button",
@@ -2014,47 +1988,39 @@ export const ANGULAR_PORTS = [
     "name": "VelocityToast",
     "exportName": "KitVelocityToastComponent",
     "selector": "kit-velocity-toast",
-    "description": "Dismissible notifications with restore actions and restrained live announcements.",
+    "description": "Source-contract single toast with local visibility, hover-paused countdown, six placements, variants and retained spring exits.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "open: boolean",
+      "title: string",
+      "description: string",
+      "onDismiss: () => void",
+      "duration: number",
+      "variant: VelocityToastVariant",
+      "position: VelocityToastPosition",
+      "showProgress: boolean",
+      "icon: TemplateRef<unknown> | string | number",
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "wallet-card",
     "name": "Wallet Card",
     "exportName": "KitWalletCardComponent",
     "selector": "kit-wallet-card",
-    "description": "A configurable content card collection with selection, disclosure, disabled items and projected details.",
+    "description": "A native wallet balance card with configurable labels, disabled action and pointer-following cyan shine.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
+      "balance: string",
+      "cardType: string",
+      "cardLastFour: string",
+      "buttonLabel: string",
+      "balanceLabel: string",
       "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "className: string",
+      "onUseWallet: () => void",
+      "onPointerMove: (event: PointerEvent) => void",
+      "onPointerLeave: (event: PointerEvent) => void"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   }
 ];

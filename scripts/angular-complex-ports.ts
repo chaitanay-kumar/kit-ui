@@ -1,39 +1,11 @@
+import {pricingPort} from './angular-pricing';
+import {dependencyTracePort} from './angular-dependency-trace';
 import { advancedDataTablePort } from './angular-data-table';
 /** Native implementations for components with independent state/data contracts. */
 export const COMPLEX_PORTS = [
   advancedDataTablePort,
-  {
-    id: "dependency-trace",
-    kind: "plain" as const,
-    description:
-      "An SVG dependency graph with selectable nodes, highlighted connections and keyboard-accessible node buttons.",
-    inputs: [
-      "nodes: KitGraphNode[]",
-      "connections: KitGraphEdge[]",
-      "selected: string (two-way)",
-      "label: string",
-      "disabled: boolean",
-    ],
-    outputs: ["nodeSelect: KitGraphNode", "nodeHover: string | null"],
-    template: `<section class="kit-control kit-surface kit-stack"><h3>{{label()}}</h3><div class="k-graph"><svg viewBox="0 0 400 260" aria-hidden="true">@for(edge of edges();track edge.from+'-'+edge.to){<line [attr.x1]="point(edge.from).x" [attr.y1]="point(edge.from).y" [attr.x2]="point(edge.to).x" [attr.y2]="point(edge.to).y" [class.k-connected]="edge.from===selected()||edge.to===selected()" />}</svg>@for(node of positioned();track node.id){<button type="button" class="k-graph-node" [style.left.%]="node.x/4" [style.top.%]="node.y/2.6" [disabled]="disabled()||node.disabled" [attr.aria-pressed]="selected()===node.id" (click)="select(node)" (pointerenter)="nodeHover.emit(node.id)" (pointerleave)="nodeHover.emit(null)">{{node.label}}</button>}</div><p role="status">{{selected()?'Selected node: '+selected():'Select a dependency to inspect its connections.'}}</p></section>`,
-    body: `readonly nodes=input<KitGraphNode[]>([{id:'client',label:'Client'},{id:'api',label:'API'},{id:'db',label:'Database'}]);readonly connections=input<KitGraphEdge[]>([{from:'client',to:'api'},{from:'api',to:'db'}]);readonly selected=model('');readonly label=input('Dependency trace');readonly disabled=input(false);readonly nodeSelect=output<KitGraphNode>();readonly nodeHover=output<string|null>();readonly positioned=computed(()=>this.nodes().map((node,i)=>({...node,x:Math.max(45,Math.min(355,node.x??200+Math.cos(i/Math.max(1,this.nodes().length)*Math.PI*2-Math.PI/2)*135)),y:Math.max(30,Math.min(230,node.y??130+Math.sin(i/Math.max(1,this.nodes().length)*Math.PI*2-Math.PI/2)*85))})));readonly edges=computed(()=>this.connections().filter(edge=>this.nodes().some(n=>n.id===edge.from)&&this.nodes().some(n=>n.id===edge.to)));point(id:string):{x:number;y:number}{return this.positioned().find(n=>n.id===id)??{x:0,y:0};}select(node:KitGraphNode):void{if(this.disabled()||node.disabled)return;this.selected.set(node.id);this.nodeSelect.emit(node);}`,
-  },
-  {
-    id: "pricing",
-    kind: "plain" as const,
-    description:
-      "Selectable pricing plans with monthly/yearly billing, real price inputs and an application-owned selection event.",
-    inputs: [
-      "plans: KitPlan[]",
-      "yearly: boolean (two-way)",
-      "yearlyDiscount: number",
-      "currency: string",
-      "disabled: boolean",
-    ],
-    outputs: ["planSelect: { plan: KitPlan; yearly: boolean }"],
-    template: `<section class="kit-control kit-stack"><label class="kit-row"><input type="checkbox" [checked]="yearly()" [disabled]="disabled()" (change)="yearly.set($any($event.target).checked)" />Yearly billing · {{yearlyDiscount()}}% discount</label><div class="k-pricing">@for(plan of plans();track plan.id){<article class="kit-surface kit-stack" [class.k-featured]="plan.featured"><h3>{{plan.label}}</h3><p class="k-price">{{price(plan)}} <small>/{{yearly()?'year':'month'}}</small></p><ul>@for(feature of plan.features;track $index){<li>{{feature}}</li>}</ul><button type="button" [disabled]="disabled()" (click)="planSelect.emit({plan,yearly:yearly()})">Choose {{plan.label}}</button></article>}</div></section>`,
-    body: `readonly plans=input<KitPlan[]>([{id:'starter',label:'Starter',price:12,features:['Core components','One workspace']},{id:'team',label:'Team',price:24,features:['Shared workspace','Team controls'],featured:true}]);readonly yearly=model(false);readonly yearlyDiscount=input(20);readonly currency=input('USD');readonly disabled=input(false);readonly planSelect=output<{plan:KitPlan;yearly:boolean}>();price(plan:KitPlan):string{const value=this.yearly()?plan.price*12*(1-Math.max(0,Math.min(100,this.yearlyDiscount()))/100):plan.price;try{return new Intl.NumberFormat('en',{style:'currency',currency:this.currency()}).format(value);}catch{return value.toFixed(2)+' '+this.currency();}}`,
-  },
+  dependencyTracePort,
+  pricingPort,
   {
     id: "smart-comparison",
     kind: "plain" as const,

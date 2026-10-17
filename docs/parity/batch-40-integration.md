@@ -1,0 +1,27 @@
+# Feature: Angular parity batch 40
+
+- Outcome: replace generic ports with native source-contract Torque Dial and Rocket Party Popper.
+- Scope: `torque-dial`, `rocket-party-popper`; AI Response remains deferred; integration/merge/deployment and final user QA remain separate.
+- Base: `feat/angular-parity-batch-40` from locally validated batch 39 `316b5e0`. Worktree clean when branching; remote implementation confirmed `cfcfc68`; remote batch 40 absent.
+
+## Acceptance criteria
+
+- Dial: required controlled value/onChange; exact defaults, raw aria-valuenow versus clamped visual progress, source stepping/rounding and boundary formulas. Nonpassive wheel, all six source keys, double-click midpoint, angular pointer movement with wrap correction, optimistic pointer/wheel value ref and frame-based .92 release decay. Preserve callback/end ordering and captured gesture options; verify disabled changes, interruption, callback failure, keyboard focus and native cleanup. Do not substitute a range input or generic normalized bounds.
+- Rocket: mount-only launch default and captured motion preference, idle/launching/celebrating phases, launch callback before state and reset callback after clearing. Preserve the 600ms launch delay, captured count, wait-mode exit and partial reduced-motion path. Exact confetti initialization/update/drawing formulas and DPR resize at burst time only. Title/description/metric forward as root attributes; do not invent milestone/status content absent from the source.
+- Use authored definitions, regenerate tracked outputs, paired desktop/mobile behavior and rendered evidence, native demos and strict package consumers. Run focused contracts during implementation and the full library baseline once before batch handoff. Record actual source limitations and native lifecycle adaptations.
+
+## Relevant files
+
+- React: complete `TorqueDial.tsx` / `RocketPartyPopper.tsx` sources and metadata reviewed. Inspected installed Motion defaults and useReducedMotion implementation because comments/metadata do not prove runtime behavior.
+- Authoring: `scripts/angular-torque-dial.ts`, `angular-rocket-party-popper.ts`; pure `torque-dial-controller.ts`, `rocket-confetti.ts`, `rocket-scenes.ts`, icons and styles under `packages/angular/src/`. Removed both generic registrations and the obsolete rocket mode rewrite.
+- Integration: `packages/angular-demo/src/batch40-demos.ts`, demo cases, framework recipes and strict required-input consumers. Generated catalog/components/maps current from `npm run angular:build`.
+- Evidence: `scripts/verify-parity-batch40.mjs`, `e2e/fixtures/parity-batch40.*`, `e2e/parity-batch40.spec.ts`.
+
+## Validation and handoff
+
+- Changes: both native implementations and demos/recipes added. Dial display stays fully controlled and its static Motion attributes snap, as in source; wheel/pointer refs remain optimistic. Native cancellation/replacement/disposal release listeners/frames, including destruction inside a callback. Rocket keeps real wait-mode scenes, idle/launch CSS motion and exact frame-based confetti; native disposal also cancels the source's otherwise-retained launch timeout.
+- Checks: `npm run build` passes component/Angular sync, APF/demo/tarball build and 289 SEO checks; `npm test` passes 117 tests; final lint passes with 34 existing warnings outside batch files. Final private callback-snapshot corrections were regenerated with `npm run angular:build`. `npm run test:angular-package` passes all 116 selectors and usage recipes with strict Angular 20.0.0, 20.3.33, 21.2.25 and 22.2.1 compilers. `node scripts/verify-parity-batch40.mjs` passes source key/wheel ref differences, rounding/bounds, angular wrap, captured options, momentum and interruption; exact DPR drawing/gravity/lifetime; packaged raw ARIA/static visuals, callback order/guards, 600ms/wait phases, mount-only state/preference, forwarded attributes and disposal/source downloads. Renewed `node scripts/verify-parity-batch39.mjs` passes the unbound captured completion contract and source downloads. Batch 39 owned glyphs also use the installed Lucide paths; paired deck/tray/Rocket SVG comparisons cover the correction.
+- Browser evidence: Edge desktop and Pixel 7: main `npm run test:browser -- e2e/parity-batch40.spec.ts e2e/parity-native-glyphs.spec.ts` passed 36/42. Six failures were test assumptions: physical double-click generates pointer completions, and Motion applies static rotation on its next frame. Isolated dblclick dispatch and first-frame target assertions preserve the intended contracts; focused `-g 'key/wheel|decay ends'` passes all 8 cases. All 42 unique scenarios pass across these runs, not a claimed single 42-case run. Paired idle/updated geometry, typography/colors/radii, desktop/mobile screenshot inspection, exact seeded particle commands/DPR buffers, retained callbacks, failures, cleanup, demos and SVG geometry pass.
+- Tracker: 95/116 validated baselines; 75 merged and twenty from batches 31-40 await review. 20 queued plus deferred AI Response remain.
+- Remaining: integration review, prior callback/standards audits and final user QA. Native lifecycle adaptations and source limits are recorded in the component reports; no general accessibility, physical-device or frame-by-frame equality claim.
+- Next action: checkpoint batch 40 locally and continue the active goal with Evil Eye / Nimbu Mirchi. No merge/deployment performed. Existing stashes and deferred AI Response work remain preserved.

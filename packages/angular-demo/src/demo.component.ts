@@ -1,3 +1,15 @@
+import {CommandMenuDemoComponent,SpotlightSearchDemoComponent} from './batch42-demos';
+import {EvilEyeDemoComponent,NimbuMirchiDemoComponent} from './batch41-demos';
+import {TorqueDialDemoComponent,RocketPartyPopperDemoComponent} from './batch40-demos';
+import {CodeSnippetDeckDemoComponent,BatchGestureTrayDemoComponent} from './batch39-demos';
+import {SpeedWarpDemoComponent,DepthCorridorDemoComponent} from './batch38-demos';
+import {DataRowDemoComponent,InteractiveTimelineDemoComponent} from './batch37-demos';
+import {FolderCardsDemoComponent,StoryCardsDemoComponent} from './batch36-demos';
+import {PricingDemoComponent,StackedCardsDemoComponent} from './batch35-demos';
+import {DependencyTraceDemoComponent,RecoveryLedgerDemoComponent} from './batch34-demos';
+import {VelocityToastDemoComponent,MorphingDialogDemoComponent} from './batch33-demos';
+import {SpringSelectDemoComponent,GooeyMenuDemoComponent} from './batch32-demos';
+import {WalletCardDemoComponent,StickyPagesDemoComponent} from './batch31-demos';
 import {GlassNavbarDemoComponent,ScrollProgressNavDemoComponent} from './batch30-demos';
 import {SmallFloatingDockDemoComponent,BranchingSubmenuDemoComponent} from './batch29-demos';
 import {AnimatedTabsDemoComponent,ScrollVelocityDemoComponent} from './batch28-demos';
@@ -70,8 +82,9 @@ import {RainbowButtonDemoComponent} from "./rainbow-button-demo";
 @Component({
   selector: "kit-angular-demo",
   standalone: true,
-  imports: [GlassNavbarDemoComponent,ScrollProgressNavDemoComponent,SmallFloatingDockDemoComponent,BranchingSubmenuDemoComponent,AnimatedTabsDemoComponent,ScrollVelocityDemoComponent,StackUnfoldDemoComponent,SettleModalDemoComponent,ElasticSheetDemoComponent,SelectionBasketDemoComponent,DensityLensDemoComponent,GravityParticleBurstDemoComponent,DotFieldDemoComponent,FloatingActionDockDemoComponent,MorphingBlobDemoComponent,CircularOrbitDemoComponent,MeteorsDemoComponent,CursorFollowerDemoComponent,LiquidRippleButtonDemoComponent,AnimatedNumberDemoComponent,UnfoldAccordionDemoComponent,IOSSearchDemoComponent,RevealCardDemoComponent,StretchSwitchDemoComponent,SmoothAccordionDemoComponent,HamburgerMenuDemoComponent,ExpandableSearchDemoComponent,
+  imports: [CommandMenuDemoComponent,SpotlightSearchDemoComponent,EvilEyeDemoComponent,NimbuMirchiDemoComponent,TorqueDialDemoComponent,RocketPartyPopperDemoComponent,CodeSnippetDeckDemoComponent,BatchGestureTrayDemoComponent,SpeedWarpDemoComponent,DepthCorridorDemoComponent,DataRowDemoComponent,InteractiveTimelineDemoComponent,FolderCardsDemoComponent,StoryCardsDemoComponent,PricingDemoComponent,StackedCardsDemoComponent,RecoveryLedgerDemoComponent,DependencyTraceDemoComponent,MorphingDialogDemoComponent,VelocityToastDemoComponent,SpringSelectDemoComponent,GooeyMenuDemoComponent,GlassNavbarDemoComponent,ScrollProgressNavDemoComponent,SmallFloatingDockDemoComponent,BranchingSubmenuDemoComponent,AnimatedTabsDemoComponent,ScrollVelocityDemoComponent,StackUnfoldDemoComponent,SettleModalDemoComponent,ElasticSheetDemoComponent,SelectionBasketDemoComponent,DensityLensDemoComponent,GravityParticleBurstDemoComponent,DotFieldDemoComponent,FloatingActionDockDemoComponent,MorphingBlobDemoComponent,CircularOrbitDemoComponent,MeteorsDemoComponent,CursorFollowerDemoComponent,LiquidRippleButtonDemoComponent,AnimatedNumberDemoComponent,UnfoldAccordionDemoComponent,IOSSearchDemoComponent,RevealCardDemoComponent,StretchSwitchDemoComponent,SmoothAccordionDemoComponent,HamburgerMenuDemoComponent,ExpandableSearchDemoComponent,
     PressButtonDemoComponent,ButtonDemoComponent,MagneticButtonDemoComponent,MorphingButtonDemoComponent,TypewriterButtonDemoComponent,RainbowButtonDemoComponent,
+    WalletCardDemoComponent,StickyPagesDemoComponent,
     NeonEdgeButtonDemoComponent,
     OrbitalLoadingRingDemoComponent,
     SpotlightCardDemoComponent,
@@ -96,6 +109,18 @@ import {RainbowButtonDemoComponent} from "./rainbow-button-demo";
       @case ("ios-search-bar") { <kit-ios-search-demo/> }
       @case ("advanced-data-table") { <kit-table-demo/> }
       @case ("ai-agent-activity") { <kit-agent-demo/> }
+      @case("expandable-data-row"){<kit-data-row-demo/>}
+      @case("interactive-timeline"){<kit-interactive-timeline-demo/>}
+      @case("speed-warp"){<kit-speed-warp-demo/>}
+      @case("depth-corridor"){<kit-depth-corridor-demo/>}
+      @case("code-snippet-deck"){<kit-code-snippet-deck-demo/>}
+      @case("batch-gesture-tray"){<kit-batch-gesture-tray-demo/>}
+      @case("command-menu"){<kit-command-menu-demo/>}
+      @case("spotlight-search"){<kit-spotlight-search-demo/>}
+      @case("evil-eye"){<kit-evil-eye-demo/>}
+      @case("nimbu-mirchi"){<kit-nimbu-mirchi-demo/>}
+      @case("torque-dial"){<kit-torque-dial-demo/>}
+      @case("rocket-party-popper"){<kit-rocket-party-popper-demo/>}
       @case("loader"){<kit-loader-demo/>}
       @case("stretch-switch"){<kit-stretch-switch-demo/>}
       @case("press-button"){<kit-press-button-demo/>}
@@ -121,6 +146,18 @@ import {RainbowButtonDemoComponent} from "./rainbow-button-demo";
       @case("reveal-card"){<kit-reveal-card-demo/>}
       @case("spotlight-card"){<kit-spotlight-card-demo/>}
       @case("morphing-icon"){<kit-morphing-icon-demo/>}
+      @case("mac-os-folder-cards"){<kit-folder-cards-demo/>}
+      @case("story-card"){<kit-story-cards-demo/>}
+      @case("pricing"){<kit-pricing-demo/>}
+      @case("stacked-cards"){<kit-stacked-cards-demo/>}
+      @case("recovery-ledger"){<kit-recovery-ledger-demo/>}
+      @case("dependency-trace"){<kit-dependency-trace-demo/>}
+      @case("morphing-dialog"){<kit-morphing-dialog-demo/>}
+      @case("velocity-toast"){<kit-velocity-toast-demo/>}
+      @case("spring-select"){<kit-spring-select-demo/>}
+      @case("gooey-menu"){<kit-gooey-menu-demo/>}
+      @case("wallet-card"){<kit-wallet-card-demo/>}
+      @case("sticky-pages"){<kit-sticky-pages-demo/>}
       @case("glass-navbar"){<kit-glass-navbar-demo/>}
       @case("scroll-progress-nav"){<kit-scroll-progress-nav-demo/>}
       @case("small-floating-dock"){<kit-small-floating-dock-demo/>}

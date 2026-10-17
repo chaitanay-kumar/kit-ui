@@ -1,0 +1,11 @@
+# Nimbu Mirchi parity (validated locally; integration pending)
+
+React source: `src/components/ui/NimbuMirchi.tsx`; authoring: `scripts/angular-hanging-charms.ts`, `angular-nimbu-mirchi-art.ts`; native motion/styles: `packages/angular/src/hanging-charm-motion.ts` and `hanging-charm.css`.
+
+The unrelated canvas port is replaced with the complete SVG: four individually rotated painted chillies/stems, lemon gradients/highlight/texture, knot and trailing strings. The responsive 360px artwork, 600px minimum region, ceiling/suspending strings, light/dark styles and hidden caption match actual source output. Caption supplies the default image name; root attributes override it, numeric style values retain their units, and removing overrides restores defaults. Click/key/pointer callbacks use native typed inputs with unbound callback/error semantics.
+
+Separate X 55/9/1.8 and Y 45/10/1.6 springs follow normalized clamped pointer targets. Root rotation defaults to ±13 degrees and lift to ±5px; chilli cluster, lemon and strings rotate ±7, ±3 and ±5 degrees. Transformed values clamp spring overshoot like useTransform. SVG origins follow the installed Motion runtime's fill-box centers, rather than assuming the explicit JSX coordinate origins survive rendering. Tests cover exact generator samples, live options, interruption/leave, zero-size guards and disposal.
+
+The real useReducedMotion hook captures preference once: media changes affect a remounted charm, not the current instance. There are no source keyboard controls, pause button or announcements. Fixed gradient IDs are preserved, including the source's repeated-instance limitation. Native destruction releases listeners/frames. Application CSS/classes and typed native callbacks replace React DOM props; arbitrary Tailwind utility combinations are outside the recorded visual scenarios.
+
+Focused helper/package checks and paired Edge desktop/Pixel 7 light/dark layout, full SVG attributes, customization, callback recovery, reduced state, motion and demos pass. Screenshots were inspected. Completed-batch baseline results are recorded in [batch 41 evidence](batch-41-integration.md). No physical-device, Safari/Firefox or exhaustive accessibility-conformance claim is made.

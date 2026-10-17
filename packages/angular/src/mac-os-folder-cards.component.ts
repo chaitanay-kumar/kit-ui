@@ -1,30 +1,54 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component, input } from '@angular/core';
-import { KitCollectionController } from './port-controllers';
-import type { KitItem } from './port-types';
-
+import { Component, ViewEncapsulation, DestroyRef, ElementRef, inject, input, signal, viewChild } from '@angular/core';
+import {afterRenderEffect,ErrorHandler} from '@angular/core';import {invokeNativeEventCallback} from './native-event-callback';import {FolderIconComponent} from './folder-icon';import {FolderCardComponent} from './folder-card';import {FolderNodeMotion,FolderPeekMotion} from './folder-cards-motion';import {DEFAULT_FOLDER_ITEMS,type MacOSFolderCardItem} from './folder-cards-types';import {NativeRootBindings,type NativeAttributes,type NativeStyle} from './native-root-bindings';export type {MacOSFolderCardItem,MacOSFolderIcon,FolderBuiltinIcon} from './folder-cards-types';export type {NativeAttributes as MacOSFolderAttributes,NativeStyle as MacOSFolderStyle} from './native-root-bindings';
 @Component({
  selector:"kit-mac-os-folder-cards", standalone:true,
- host:{'data-kit':"mac-os-folder-cards",style:'display:block;min-width:0'},
- template:`
-<section class="kit-control kit-stack">
-<h3>{{label()||'Project folders'}}</h3>
-<div class="k-cards k-folders">@for(item of items();track item.id){<article class="k-card kit-surface" [class.k-active]="current()?.id===item.id" (pointermove)="spot($event)" (pointerleave)="clearSpot($event)">
-<span class="k-folder-tab" aria-hidden="true">
-</span>
-<button type="button" [disabled]="loading()||disabled()||item.disabled" [attr.aria-expanded]="expanded().includes(item.id)" (click)="select(item);toggle(item.id)">{{item.label}}</button>
-<p>{{item.value}}</p>
-<div [hidden]="!expanded().includes(item.id)">
-<p>{{item.description}}</p>
-<ng-content>
-</ng-content>
-<button type="button" [disabled]="loading()||disabled()||busy()||item.disabled" (click)="execute([item])">Select {{item.label}}</button>
+ host:{style:'display:contents'},
+ imports:[FolderIconComponent,FolderCardComponent],
+encapsulation:ViewEncapsulation.None,styleUrls:["./folder-cards.css"],
+template:`
+<div #root [class]="'k-native-folder '+className()" (click)="rootClick($event)" (keydown)="rootKey($event)">@if(!renderedOpen()){<div #view class="k-folder-closed" tabindex="0" role="button" aria-expanded="false" [attr.aria-label]="folderTitle()+' folder. Click to reveal cards.'" (mouseenter)="internalHover.set(true)" (mouseleave)="internalHover.set(false);tapped.set(false)" (click)="toggle()" (keydown)="key($event)">
+<div class="k-folder-body" [attr.tabindex]="reduced()?null:0" (keydown)="bodyKey($event,true)" (keyup)="bodyKey($event,false)" (blur)="tapped.set(false)" (pointerdown)="press($event)" (pointerup)="tapped.set(false)" (pointercancel)="tapped.set(false)">
+<div class="k-folder-back">
+<div class="k-folder-notch">
 </div>
-</article>}</div>@if(loading()){<p role="status">Loading…</p>}@if(error()){<p role="alert">{{error()}}</p>}@if(actionError()){<p role="alert">{{actionError()}}</p>}<p role="status" class="kit-status">{{busy()?'Working…':status()}}</p>
-</section>
+</div>
+<div class="k-folder-pocket">
+<div class="k-folder-peek deep">
+</div>
+<div class="k-folder-peek middle">
+<span>02</span>
+<svg kitFolderIcon icon="sparkles"/>
+</div>
+<div class="k-folder-peek front">
+<span>01</span>
+<span class="k-folder-preview-title">{{items()[0]?.title}}</span>
+<svg kitFolderIcon/>
+</div>
+</div>
+<div class="k-folder-flap">
+</div>
+</div>
+<div class="k-folder-label">
+<span>{{folderTitle()}}</span>
+<span>({{items().length}})</span>
+</div>
+</div>}@else{<div #view class="k-folder-open">
+<div class="k-folder-header">
+<div>
+<span>{{folderTitle()}}</span>
+<span>&#8226; {{items().length}} items</span>
+</div>
+<button type="button" aria-label="Close folder" (click)="toggle()">
+<svg kitFolderIcon icon="close"/>
+<span>Close</span>
+</button>
+</div>
+<div class="k-folder-grid">@for(item of items();track item.id;let index=$index){<article kitFolderCard [item]="item" [index]="index" [reduced]="reduced()">
+</article>}</div>
+</div>}</div>
 `
 })
-export class KitMacOsFolderCardsComponent extends KitCollectionController {
-spot(event:PointerEvent):void{if(this.disabled())return;const el=event.currentTarget as HTMLElement;const r=el.getBoundingClientRect();el.style.setProperty('--spot-x',(event.clientX-r.left)+'px');el.style.setProperty('--spot-y',(event.clientY-r.top)+'px');}clearSpot(event:PointerEvent):void{(event.currentTarget as HTMLElement).style.removeProperty('--spot-x');}
-override readonly items=input<KitItem[]>([{"id":"components","label":"Components","value":"116 files","description":"Native interface building blocks."},{"id":"assets","label":"Assets","value":"12 files","description":"Your workspace illustrations and design assets."}]);
+export class KitMacOsFolderCardsComponent {
+readonly folderTitle=input<string,string|undefined>('Components',{transform:v=>v===undefined?'Components':v});readonly folderCategory=input<string|undefined>();readonly items=input<MacOSFolderCardItem[],MacOSFolderCardItem[]|undefined>(DEFAULT_FOLDER_ITEMS,{transform:v=>v===undefined?DEFAULT_FOLDER_ITEMS:v});readonly defaultOpen=input<boolean,boolean|undefined>(false,{transform:v=>v===undefined?false:v});readonly isPeeked=input<boolean|undefined>();readonly className=input<string,string|undefined>('',{transform:v=>v===undefined?'':v});readonly styles=input<NativeStyle|undefined>(undefined,{alias:'style'});readonly attributes=input<NativeAttributes|undefined>();readonly onClick=input<((event:MouseEvent)=>void)|undefined>();readonly onKeyDown=input<((event:KeyboardEvent)=>void)|undefined>();readonly root=viewChild<ElementRef<HTMLElement>>('root');readonly view=viewChild<ElementRef<HTMLElement>>('view');readonly open=signal(false);readonly renderedOpen=signal(false);readonly leaving=signal(false);readonly internalHover=signal(false);readonly tapped=signal(false);readonly reduced=signal(false);private readonly errors=inject(ErrorHandler);private bindings:NativeRootBindings|undefined;private motion:FolderNodeMotion|undefined;private peek:FolderPeekMotion|undefined;private motionNode:HTMLElement|undefined;ngOnInit():void{this.open.set(this.defaultOpen());this.renderedOpen.set(this.defaultOpen());if(typeof window!=='undefined'){this.reduced.set(window.matchMedia('(prefers-reduced-motion: reduce)').matches);window.addEventListener('pointerup',this.release,true);window.addEventListener('pointercancel',this.release,true)}}rootClick(event:MouseEvent):void{invokeNativeEventCallback(this.onClick(),event,this.errors)}rootKey(event:KeyboardEvent):void{invokeNativeEventCallback(this.onKeyDown(),event,this.errors)}toggle():void{this.open.set(!this.open());this.leaving.set(this.open()!==this.renderedOpen())}key(event:KeyboardEvent):void{if(event.key==='Enter'||event.key===' '){event.preventDefault();this.toggle()}else if(event.key==='Escape'&&this.open()){this.open.set(false);this.leaving.set(this.renderedOpen()!==false)}}bodyKey(event:KeyboardEvent,pressed:boolean):void{if(event.key==='Enter'&&!this.reduced())this.tapped.set(pressed)}private release=():void=>{this.tapped.set(false)};press(event:PointerEvent):void{if(event.pointerType==='mouse'?event.button<=0:event.isPrimary!==false)this.tapped.set(true)}constructor(){afterRenderEffect(()=>{const root=this.root()?.nativeElement,style=this.styles(),attributes=this.attributes(),category=this.folderCategory();if(root){this.bindings??=new NativeRootBindings(root);this.bindings.apply(style,attributes,{foldercategory:category})}});afterRenderEffect(()=>{const node=this.view()?.nativeElement,rendered=this.renderedOpen(),leaving=this.leaving(),hover=this.isPeeked()??this.internalHover(),tap=this.tapped(),reduced=this.reduced();if(!node)return;if(node!==this.motionNode){this.motion?.destroy();this.peek?.destroy();this.motionNode=node;this.motion=new FolderNodeMotion(node,{opacity:0,y:rendered?10:0,scale:rendered?.98:.95},170,26,.9);this.peek=rendered?undefined:new FolderPeekMotion(node)}this.motion!.set(leaving?{opacity:0,y:rendered?8:0,scale:rendered?.98:.95}:{opacity:1,y:0,scale:1},leaving?()=>{if(this.open()!==this.renderedOpen()){this.renderedOpen.set(this.open());this.leaving.set(false)}}:undefined);this.peek?.set(hover,tap,reduced)});inject(DestroyRef).onDestroy(()=>{this.motion?.destroy();this.peek?.destroy();if(typeof window!=='undefined'){window.removeEventListener('pointerup',this.release,true);window.removeEventListener('pointercancel',this.release,true)}})}
 }

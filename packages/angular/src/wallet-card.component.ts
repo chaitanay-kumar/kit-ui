@@ -1,29 +1,55 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component, input } from '@angular/core';
-import { KitCollectionController } from './port-controllers';
-import type { KitItem } from './port-types';
-
+import { Component, ViewEncapsulation, ElementRef, effect, inject, input, viewChild } from '@angular/core';
+import {DOCUMENT} from '@angular/common';
+import {WalletCardPressMotion} from './wallet-card-motion';
 @Component({
  selector:"kit-wallet-card", standalone:true,
- host:{'data-kit':"wallet-card",style:'display:block;min-width:0'},
- template:`
-<section class="kit-control kit-stack">
-<h3>{{label()||'Your wallet'}}</h3>
-<div class="k-cards k-wallet">@for(item of items();track item.id){<article class="k-card kit-surface" [class.k-active]="current()?.id===item.id" (pointermove)="spot($event)" (pointerleave)="clearSpot($event)">
-<span class="k-card-chip" aria-hidden="true">▦</span>
-<button type="button" [disabled]="loading()||disabled()||item.disabled" [attr.aria-expanded]="expanded().includes(item.id)" (click)="select(item);toggle(item.id)">{{item.label}}</button>
-<p>{{item.value}}</p>
-<div [hidden]="!expanded().includes(item.id)">
-<p>{{item.description}}</p>
-<ng-content>
-</ng-content>
-<button type="button" [disabled]="loading()||disabled()||busy()||item.disabled" (click)="execute([item])">Select {{item.label}}</button>
+ host:{style:'display:contents'},
+ encapsulation:ViewEncapsulation.None,styleUrls:["./wallet-card.css"],
+template:`
+<article [class]="'k-wallet '+className()" (pointermove)="move($event)" (pointerleave)="leave($event)">
+    <div class="k-wallet-header">
+<div>
+<h2>Wallet</h2>
+<p>{{cardType()}} Ending with {{cardLastFour()}}</p>
 </div>
-</article>}</div>@if(loading()){<p role="status">Loading…</p>}@if(error()){<p role="alert">{{error()}}</p>}@if(actionError()){<p role="alert">{{actionError()}}</p>}<p role="status" class="kit-status">{{busy()?'Working…':status()}}</p>
-</section>
+<button #action type="button" [disabled]="disabled()" [attr.aria-label]="buttonLabel()" (click)="useWallet()">{{buttonLabel()}}</button>
+</div>
+    <div class="k-wallet-surface">
+<div class="k-wallet-shine" aria-hidden="true">
+</div>
+<div class="k-wallet-bloom" aria-hidden="true">
+</div>
+<div class="k-wallet-sweep" aria-hidden="true">
+</div>
+<div class="k-wallet-toggle" aria-hidden="true">
+<span>
+</span>
+</div>
+<div class="k-wallet-balance">
+<span>{{balance()}}</span>
+<small>{{balanceLabel()}}</small>
+</div>
+</div>
+  </article>
 `
 })
-export class KitWalletCardComponent extends KitCollectionController {
-spot(event:PointerEvent):void{if(this.disabled())return;const el=event.currentTarget as HTMLElement;const r=el.getBoundingClientRect();el.style.setProperty('--spot-x',(event.clientX-r.left)+'px');el.style.setProperty('--spot-y',(event.clientY-r.top)+'px');}clearSpot(event:PointerEvent):void{(event.currentTarget as HTMLElement).style.removeProperty('--spot-x');}
-override readonly items=input<KitItem[]>([{"id":"balance","label":"Available balance","value":"USD 2,240.00","description":"Account ending 4821 · Local preview data. No financial service is connected."}]);
+export class KitWalletCardComponent {
+readonly balance=input<string,string|undefined>('$4,566.00',{transform:v=>v===undefined?'$4,566.00':v});
+readonly cardType=input<string,string|undefined>('Mastercard',{transform:v=>v===undefined?'Mastercard':v});
+readonly cardLastFour=input<string,string|undefined>('3040',{transform:v=>v===undefined?'3040':v});
+readonly buttonLabel=input<string,string|undefined>('Use Wallet',{transform:v=>v===undefined?'Use Wallet':v});
+readonly balanceLabel=input<string,string|undefined>('Total Balance',{transform:v=>v===undefined?'Total Balance':v});
+readonly disabled=input<boolean,boolean|undefined>(false,{transform:v=>v===undefined?false:v});
+readonly className=input<string,string|undefined>('',{transform:v=>v===undefined?'':v});
+readonly onUseWallet=input<(()=>void)|undefined>();
+private readonly defaultPointer=Symbol('default pointer');
+readonly onPointerMove=input<((event:PointerEvent)=>void)|symbol|undefined,((event:PointerEvent)=>void)|undefined>(this.defaultPointer,{transform:v=>v});
+readonly onPointerLeave=input<((event:PointerEvent)=>void)|symbol|undefined,((event:PointerEvent)=>void)|undefined>(this.defaultPointer,{transform:v=>v});
+private readonly document=inject(DOCUMENT);
+readonly action=viewChild<ElementRef<HTMLButtonElement>>('action');
+constructor(){effect(cleanup=>{const node=this.action()?.nativeElement;if(node&&this.document.defaultView){const motion=new WalletCardPressMotion(node);cleanup(()=>motion.destroy());}});}
+move(event:PointerEvent):void{const handler=this.onPointerMove();if(typeof handler!=='symbol'){handler?.(event);return;}if(this.document.defaultView?.matchMedia('(prefers-reduced-motion: reduce)').matches)return;const el=event.currentTarget as HTMLElement;const rect=el.getBoundingClientRect();el.style.setProperty('--wallet-x',(event.clientX-rect.left)+'px');el.style.setProperty('--wallet-y',(event.clientY-rect.top)+'px');}
+leave(event:PointerEvent):void{const handler=this.onPointerLeave();if(typeof handler!=='symbol'){handler?.(event);return;}const el=event.currentTarget as HTMLElement;el.style.removeProperty('--wallet-x');el.style.removeProperty('--wallet-y');}
+useWallet():void{if(!this.disabled())this.onUseWallet()?.();}
 }

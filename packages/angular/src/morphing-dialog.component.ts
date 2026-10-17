@@ -1,28 +1,39 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component, ElementRef, effect, input, model, viewChild } from '@angular/core';
-import { portId, KitActionController } from './port-controllers';
-
+import { Component, ViewEncapsulation, ElementRef, computed, effect, input, signal, untracked, viewChild } from '@angular/core';
+import {TemplateRef} from '@angular/core';import {NgTemplateOutlet} from '@angular/common';import {MorphingDialogMotion} from './morphing-dialog-motion';export interface MorphingDialogTriggerContext{$implicit:()=>void;open:()=>void;layoutId:string}
 @Component({
  selector:"kit-morphing-dialog", standalone:true,
- host:{'data-kit':"morphing-dialog",style:'display:block;min-width:0'},
- template:`
-<div class="kit-control kit-stack">
-<button type="button" [disabled]="blocked()" (click)="opened.set(true)">{{label()||'Open dialog'}}</button>
-<dialog #dialog class="kit-dialog kit-control k-port-dialog" [attr.aria-labelledby]="uid" (close)="opened.set(false)" (cancel)="opened.set(false)">
-<div class="kit-stack">
-<h3 [id]="uid">{{title()}}</h3>
-<ng-content>
-<p>{{description()}}</p>
-</ng-content>
-<div class="kit-row">
-<button type="button" [disabled]="busy()" (click)="opened.set(false)">Close</button>
-<button type="button" [disabled]="blocked()" (click)="confirm()">{{busy()?'Working…':'Confirm'}}</button>
+ host:{style:'display:contents'},
+ imports:[NgTemplateOutlet],
+encapsulation:ViewEncapsulation.None,styleUrls:["./morphing-dialog.css"],
+template:`
+<div class="k-morph-trigger">
+<ng-container [ngTemplateOutlet]="trigger()" [ngTemplateOutletContext]="triggerContext()"/>
+</div>@if(present()){<div #overlay class="k-morph-overlay">
+<div class="k-morph-backdrop" (click)="setOpen(false)">
 </div>
-<p role="status" class="kit-status">{{loading() || busy() ? 'Working…' : status()}}</p>@if(error()){<p role="alert">{{error()}}</p>}@if(busy()){<button type="button" (click)="cancel()">Cancel</button>}</div>
-</dialog>
+<div [class]="'k-morph-panel '+rendered().className" [attr.data-morph-layout-id]="rendered().id">
+<div class="k-morph-header">
+<div>
+<h3 data-morph-entry="4" data-morph-delay="50">{{rendered().title}}</h3>@if(rendered().subtitle){<p #subtitleEntry data-morph-entry="4" data-morph-delay="100">{{rendered().subtitle}}</p>}</div>
+<button class="k-morph-close" aria-label="Close dialog" (click)="setOpen(false)">
+<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M18 6 6 18"/>
+<path d="m6 6 12 12"/>
+</svg>
+</button>
 </div>
+<div class="k-morph-body" data-morph-entry="8" data-morph-delay="150">
+<ng-container [ngTemplateOutlet]="rendered().content"/>
+</div>
+</div>
+</div>}
 `
 })
-export class KitMorphingDialogComponent extends KitActionController {
-readonly uid=portId('dialog');readonly title=input('A little more room');readonly description=input('Your application content belongs here.');readonly opened=model(false);readonly dialog=viewChild<ElementRef<HTMLDialogElement>>('dialog');constructor(){super();effect(()=>{const dialog=this.dialog()?.nativeElement;const opened=this.opened();if(!dialog)return;if(opened&&!dialog.open)dialog.showModal();else if(!opened&&dialog.open)dialog.close();});}async confirm():Promise<void>{const request=this.run();const controller=this.controller;await request;if(controller?.signal.aborted)return;if(!this.error()&&!this.destroyed)this.opened.set(false);}
+export class KitMorphingDialogComponent {
+readonly trigger=input.required<TemplateRef<MorphingDialogTriggerContext>>();readonly content=input.required<TemplateRef<unknown>>();readonly title=input.required<string>();readonly subtitle=input<string|undefined>();readonly id=input<string,string|undefined>('morph-dialog',{transform:v=>v===undefined?'morph-dialog':v});readonly className=input<string,string|undefined>('',{transform:v=>v===undefined?'':v});readonly isOpen=signal(false);readonly present=signal(false);readonly overlay=viewChild<ElementRef<HTMLElement>>('overlay');readonly show=()=>this.setOpen(true);readonly triggerContext=computed(()=>({$implicit:this.show,open:this.show,layoutId:this.id()}));readonly subtitleEntry=viewChild<ElementRef<HTMLElement>>('subtitleEntry');readonly current=computed(()=>({title:this.title(),subtitle:this.subtitle(),id:this.id(),className:this.className(),content:this.content()}));private snapshot:ReturnType<typeof this.current>|undefined;rendered(){return this.isOpen()?this.current():this.snapshot??this.current()}private motion:MorphingDialogMotion|undefined;private escape=(event:KeyboardEvent)=>{if(event.key==='Escape')this.setOpen(false)};
+setOpen(open:boolean):void{if(this.isOpen()===open)return;this.isOpen.set(open);if(open)this.present.set(true);if(typeof window!=='undefined'){document.body.style.overflow=open?'hidden':'unset';window.removeEventListener('keydown',this.escape);if(open)window.addEventListener('keydown',this.escape)}}
+ngOnInit():void{if(typeof document!=='undefined')document.body.style.overflow='unset'}
+constructor(){effect(()=>{const open=this.isOpen(),current=this.current();if(open)this.snapshot=current});effect(()=>{this.subtitleEntry();untracked(()=>this.motion?.refreshEntries())});effect(cleanup=>{const root=this.overlay()?.nativeElement;if(!root)return;untracked(()=>{const motion=new MorphingDialogMotion(root,()=>this.present.set(false));this.motion=motion;motion.set(this.isOpen());cleanup(()=>{motion.destroy();if(this.motion===motion)this.motion=undefined})})});effect(()=>{const open=this.isOpen();untracked(()=>this.motion?.set(open))})}
+ngOnDestroy():void{if(typeof window!=='undefined'){window.removeEventListener('keydown',this.escape);document.body.style.overflow='unset'}}
 }

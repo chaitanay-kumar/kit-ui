@@ -1,0 +1,3 @@
+import {Component} from '@angular/core';import {KitMacOsFolderCardsComponent,KitStoryCardComponent} from 'kit-ui-angular';
+@Component({selector:'kit-folder-cards-demo',standalone:true,imports:[KitMacOsFolderCardsComponent],template:`<div style="padding-block:32px;width:100%;max-width:768px;margin-inline:auto;display:flex;flex-direction:column;align-items:center;justify-content:center"><kit-mac-os-folder-cards/></div>`})export class FolderCardsDemoComponent{}
+@Component({selector:'kit-story-cards-demo',standalone:true,imports:[KitStoryCardComponent],template:`<div style="width:100%;max-width:1024px;margin-inline:auto"><kit-story-card/></div>`})export class StoryCardsDemoComponent{}

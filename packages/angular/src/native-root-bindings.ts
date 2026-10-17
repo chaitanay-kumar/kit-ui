@@ -1,0 +1,10 @@
+export type NativeStyle=Record<string,string|number|null|undefined>;
+export type NativeAttributes=Record<string,string|number|boolean|null|undefined>;
+const unitless=new Set('animationIterationCount aspectRatio borderImageOutset borderImageSlice borderImageWidth boxFlex boxFlexGroup boxOrdinalGroup columnCount columns flex flexGrow flexPositive flexShrink flexNegative flexOrder gridArea gridRow gridRowEnd gridRowSpan gridRowStart gridColumn gridColumnEnd gridColumnSpan gridColumnStart fontWeight lineHeight lineClamp WebkitLineClamp opacity order orphans scale tabSize widows zIndex zoom fillOpacity floodOpacity stopOpacity strokeDasharray strokeDashoffset strokeMiterlimit strokeOpacity strokeWidth'.split(' '));
+const cssName=(key:string)=>key==='cssFloat'?'float':key.startsWith('--')?key:key.replace(/[A-Z]/g,value=>'-'+value.toLowerCase());
+/** Scalar root attributes and React-style numeric CSS, without competing template bindings. */
+export class NativeRootBindings{
+ private previousStyle:NativeStyle={};private previousAttributes:NativeAttributes={};
+ constructor(private node:HTMLElement){}
+ apply(styles:NativeStyle|undefined,attributes:NativeAttributes|undefined,defaults:NativeAttributes={}):void{const nextStyle=styles??{},nextAttributes={...defaults,...attributes};for(const key of Object.keys(this.previousStyle))if(!(key in nextStyle))this.node.style.removeProperty(cssName(key));for(const [key,value] of Object.entries(nextStyle))if(value!==this.previousStyle[key])this.node.style.setProperty(cssName(key),value==null?'':typeof value==='number'&&value!==0&&!key.startsWith('--')&&!unitless.has(key)?value+'px':String(value));this.previousStyle={...nextStyle};for(const key of Object.keys(this.previousAttributes))if(!(key in nextAttributes))this.node.removeAttribute(key);for(const [key,value] of Object.entries(nextAttributes)){const boolean=['hidden','inert','itemscope'].includes(key.toLowerCase());if(value==null||boolean&&!value)this.node.removeAttribute(key);else this.node.setAttribute(key,boolean?'':String(value))}this.previousAttributes={...nextAttributes}}
+}

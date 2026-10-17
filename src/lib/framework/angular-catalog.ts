@@ -147,6 +147,104 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if(entry.id==='command-menu')return `import {Component,signal} from '@angular/core';
+import {KitCommandMenuComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitCommandMenuComponent],template:\`<button (click)="open.set(true)">Open commands</button><kit-command-menu [isOpen]="open()" [onClose]="close"/>\`})
+export class ExampleComponent {readonly open=signal(false);readonly close=()=>this.open.set(false)}`;
+  if(entry.id==='spotlight-search')return `import {Component} from '@angular/core';
+import {KitSpotlightSearchComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitSpotlightSearchComponent],template:\`<kit-spotlight-search [enableGlobalShortcut]="true"/>\`})
+export class ExampleComponent {}`;
+
+  if(entry.id==='evil-eye'||entry.id==='nimbu-mirchi'){const name=entry.id==='evil-eye'?'KitEvilEyeComponent':'KitNimbuMirchiComponent';return `import {Component} from '@angular/core';
+import {${name}} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[${name}],template:\`<kit-${entry.id} [maxRotation]="13" [stiffnessX]="55" [stiffnessY]="45" [damping]="9" caption="Hanging charm"/>\`})
+export class ExampleComponent {}`}
+
+  if(entry.id==='torque-dial')return `import {Component,signal} from '@angular/core';
+import {KitTorqueDialComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitTorqueDialComponent],template:\`<kit-torque-dial [value]="gain()" [onChange]="change" label="Gain Level" unit="%"/>\`})
+export class ExampleComponent {readonly gain=signal(48);readonly change=(value:number)=>this.gain.set(value)}`;
+  if(entry.id==='rocket-party-popper')return `import {Component,signal} from '@angular/core';
+import {KitRocketPartyPopperComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitRocketPartyPopperComponent],template:\`<kit-rocket-party-popper triggerLabel="Launch celebration" [confettiCount]="50" [onLaunch]="launch" [onReset]="reset"/>\`})
+export class ExampleComponent {readonly lastEvent=signal('');readonly launch=()=>this.lastEvent.set('launch');readonly reset=()=>this.lastEvent.set('reset')}`;
+  if(entry.id==='code-snippet-deck')return `import {Component} from '@angular/core';
+import {KitCodeSnippetDeckComponent,type SnippetItem,type SnippetParameter} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitCodeSnippetDeckComponent],template:\`<kit-code-snippet-deck [snippets]="snippets" [parameters]="parameters"/>\`})
+export class ExampleComponent {readonly parameters:SnippetParameter[]=[{id:'name',label:'Name',type:'text',defaultValue:'Kit UI'}];readonly snippets:SnippetItem[]=[{language:'typescript',label:'TypeScript',filename:'example.ts',code:p=>'const name = '+JSON.stringify(p['name'])+';'}]}`;
+  if(entry.id==='batch-gesture-tray')return `import {Component,signal} from '@angular/core';
+import {KitBatchGestureTrayComponent,type BatchItem,type BatchAction} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitBatchGestureTrayComponent],template:\`<kit-batch-gesture-tray [items]="items" [actions]="actions"/>\`})
+export class ExampleComponent {readonly lastSelection=signal<string[]>([]);readonly items:BatchItem[]=[{id:'one',title:'Example item'}];readonly actions:BatchAction[]=[{id:'inspect',label:'Inspect',action:ids=>{this.lastSelection.set(ids)}}]}`;
+  if(entry.id==='speed-warp')return `import {Component} from '@angular/core';
+import {KitSpeedWarpComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitSpeedWarpComponent],template:\`<div style="position:relative;height:360px;background:#050505"><kit-speed-warp [speed]="25" [starCount]="600"><ng-template><h2>Engage Warp Drive</h2></ng-template></kit-speed-warp></div>\`})
+export class ExampleComponent {}`;
+  if(entry.id==='depth-corridor')return `import {Component} from '@angular/core';
+import {KitDepthCorridorComponent,type DepthLayer} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitDepthCorridorComponent],template:\`<kit-depth-corridor [layers]="layers"/>\`})
+export class ExampleComponent {readonly layers:DepthLayer[]=[{id:'interface',title:'Interface',content:'Explore the interface.'},{id:'data',title:'Data',content:'Keep the source of truth close.'}]}`;
+  if(entry.id==='expandable-data-row')return `import {Component} from '@angular/core';
+import {KitExpandableDataRowComponent,type DataRowItem} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitExpandableDataRowComponent],template:\`<kit-expandable-data-row [items]="items" [allowMultiple]="true" [onRowAction]="action"/>\`})
+export class Example{items:DataRowItem[]=[{id:'account',user:{name:'Alex Chen',email:'alex@example.com'},status:'active',revenue:'$850',date:'Oct 14, 2026'}];action=(action:string,row:DataRowItem):void=>{/* Connect account actions here. */};}`;
+  if(entry.id==='interactive-timeline')return `import {Component} from '@angular/core';
+import {KitInteractiveTimelineComponent,type TimelineItem} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitInteractiveTimelineComponent],template:\`<kit-interactive-timeline [items]="items" [onItemSelect]="select"/>\`})
+export class Example{items:TimelineItem[]=[{id:'build',title:'Build verified',timestamp:'Now',status:'completed'},{id:'deploy',title:'Deploy',timestamp:'Next',status:'pending'}];select=(item:TimelineItem):void=>{/* Observe selection here. */};}`;
+
+  if(entry.id==='mac-os-folder-cards')return `import {Component,TemplateRef} from '@angular/core';
+import {KitMacOsFolderCardsComponent,type MacOSFolderCardItem} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitMacOsFolderCardsComponent],template:\`<ng-template #icon><span aria-hidden="true">★</span></ng-template><kit-mac-os-folder-cards folderTitle="Projects" [items]="items(icon)" [defaultOpen]="false"/>\`})
+export class Example{items(icon:TemplateRef<unknown>):MacOSFolderCardItem[]{return [{id:'project',title:'Design system',description:'Shared components and tokens.',meta:'01',icon}]}}`;
+  if(entry.id==='story-card')return `import {Component} from '@angular/core';
+import {KitStoryCardComponent,type StoryCard} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitStoryCardComponent],template:\`<kit-story-card title="Latest stories" [cards]="cards" [autoPlay]="true" [autoPlayInterval]="5000"/>\`})
+export class Example{cards:StoryCard[]=[{id:'launch',title:'A new chapter',description:'See what we are building.',image:'/images/launch.jpg',href:'/stories/launch',ctaLabel:'Read story'},{id:'team',title:'Meet the team',image:'/images/team.jpg',imageAlt:'Our team'}]}`;
+  if(entry.id==='pricing')return `import {Component} from '@angular/core';
+import {KitPricingComponent,type PricingTier} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitPricingComponent],template:\`<kit-pricing heading="Choose your plan" [proTier]="pro"/>\`})
+export class Example{pro:PricingTier={name:'Team',price:'$49',cadence:'Per month',features:['All components',{label:'Team support',description:'Contact your team for details'}],ctaLabel:'Choose Team',onCtaClick:()=>this.chooseTeam()};chooseTeam():void{/* Connect your checkout here. */}}`;
+  if(entry.id==='stacked-cards')return `import {Component} from '@angular/core';
+import {KitStackedCardsComponent,type StackedCard} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitStackedCardsComponent],template:\`<kit-stacked-cards title="Latest stories" [cards]="cards"/>\`})
+export class Example{cards:StackedCard[]=[{id:'story',title:'Our next chapter',description:'Read what we are building.',image:'/images/story.jpg',imageAlt:'Our team',href:'/stories/next',ctaLabel:'Read story'}]}`;
+  if(entry.id==='dependency-trace')return `import {Component} from '@angular/core';
+import {KitDependencyTraceComponent,type TraceNode,type TraceConnection} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitDependencyTraceComponent],template:\`<kit-dependency-trace [nodes]="nodes" [connections]="connections" [onNodeSelect]="select"/>\`})
+export class ExampleComponent{readonly nodes:TraceNode[]=[{id:'client',label:'Client'},{id:'api',label:'API'},{id:'db',label:'Database'}];readonly connections:TraceConnection[]=[{from:'client',to:'api'},{from:'api',to:'db'}];readonly select=(id:string)=>console.log(id);}`;
+  if(entry.id==='recovery-ledger')return `import {Component,signal} from '@angular/core';
+import {KitRecoveryLedgerComponent,type LedgerEntry} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitRecoveryLedgerComponent],template:\`<kit-recovery-ledger [entries]="entries" [currentEntryId]="current()" [onRestore]="restore"/>\`})
+export class ExampleComponent{readonly current=signal('v2');readonly entries:LedgerEntry[]=[{id:'v2',timestamp:'Now',action:'Current version',description:'Latest snapshot'},{id:'v1',timestamp:'Yesterday',action:'Previous version',description:'Earlier snapshot',details:{diff:'- old\\n+ restored'}}];readonly restore=async(id:string)=>{this.current.set(id)};}`;
+
+  if(entry.id==='velocity-toast')return `import {Component,signal} from '@angular/core';
+import {KitVelocityToastComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitVelocityToastComponent],template:\`<button type="button" (click)="open.set(true)">Show toast</button><kit-velocity-toast [open]="open()" title="File uploaded" description="Ready to use." variant="success" position="bottom-right" [onDismiss]="dismiss"/>\`})
+export class ExampleComponent{readonly open=signal(false);readonly dismiss=()=>this.open.set(false);}`;
+  if(entry.id==='morphing-dialog')return `import {Component} from '@angular/core';
+import {KitMorphingDialogComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitMorphingDialogComponent],template:\`<ng-template #trigger let-open><button type="button" (click)="open()">Configure keys</button></ng-template><ng-template #body><p>Manage access permissions.</p></ng-template><kit-morphing-dialog title="API Key Configuration" subtitle="Access settings" [trigger]="trigger" [content]="body"/>\`})
+export class ExampleComponent{}`;
+
+  if(entry.id==='spring-select')return `import {Component,signal} from '@angular/core';
+import {KitSpringSelectComponent,type SpringSelectOption} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitSpringSelectComponent],template:\`<kit-spring-select [options]="options" label="Workspace" [value]="selected()" [onChange]="change"/>\`})
+export class ExampleComponent {readonly options:SpringSelectOption[]=[{value:'design',label:'Design'},{value:'engineering',label:'Engineering'}];readonly selected=signal('design');readonly change=(value:string)=>this.selected.set(value);}`;
+  if(entry.id==='gooey-menu')return `import {Component} from '@angular/core';
+import {KitGooeyMenuComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitGooeyMenuComponent],template:\`<kit-gooey-menu [options]="options" [onSelect]="select"/>\`})
+export class ExampleComponent {readonly options=['Home','About','Projects','Contact'];readonly select=(option:string,index:number)=>console.log(option,index);}`;
+
+  if (entry.id === 'wallet-card') return `import {Component} from '@angular/core';
+import {KitWalletCardComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitWalletCardComponent],template:\`<kit-wallet-card balance="$4,566.00" cardType="Mastercard" cardLastFour="3040" [onUseWallet]="useWallet"/>\`})
+export class ExampleComponent { readonly useWallet=()=>console.log('Wallet requested'); }`;
+  if (entry.id === 'sticky-pages') return `import {Component} from '@angular/core';
+import {KitStickyPagesComponent,type StickyPageItem} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitStickyPagesComponent],template:\`<kit-sticky-pages [pages]="pages" pageHeight="60vh" [stackOffset]="24"/>\`})
+export class ExampleComponent { readonly pages:StickyPageItem[]=[{id:'one',title:'First page',subtitle:'Introduction'},{id:'two',title:'Second page',description:'Keep scrolling.'}]; }`;
   if (entry.id === 'glass-navbar') return `import {Component} from '@angular/core';
 import {KitGlassNavbarComponent,type GlassNavbarItem} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitGlassNavbarComponent],template:\`<ng-template #cta><button type="button">Deploy Now</button></ng-template><kit-glass-navbar [items]="items" [cta]="cta" [sticky]="false" [onItemSelect]="select"/>\`})

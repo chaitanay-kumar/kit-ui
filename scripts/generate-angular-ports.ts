@@ -1,3 +1,23 @@
+import {commandMenuPort,spotlightSearchPort} from './angular-search-palettes';
+import {evilEyePort,nimbuMirchiPort} from './angular-hanging-charms';
+import {torqueDialPort} from './angular-torque-dial';
+import {rocketPartyPopperPort} from './angular-rocket-party-popper';
+import {codeSnippetDeckPort} from './angular-code-snippet-deck';
+import {batchGestureTrayPort} from './angular-batch-gesture-tray';
+import {speedWarpPort} from './angular-speed-warp';
+import {depthCorridorPort} from './angular-depth-corridor';
+import {expandableDataRowPort} from './angular-expandable-data-row';
+import {interactiveTimelinePort} from './angular-interactive-timeline';
+import {storyCardsPort} from './angular-story-cards';
+import {folderCardsPort} from './angular-folder-cards';
+import {stackedCardsPort} from './angular-stacked-cards';
+import {recoveryLedgerPort} from './angular-recovery-ledger';
+import {morphingDialogPort} from './angular-morphing-dialog';
+import {velocityToastPort} from './angular-velocity-toast';
+import {gooeyMenuPort} from './angular-gooey-menu';
+import {springSelectPort} from './angular-spring-select';
+import {walletCardPort} from './angular-wallet-card';
+import {stickyPagesPort} from './angular-sticky-pages';
 import {glassNavbarPort} from './angular-glass-navbar';
 import {scrollProgressNavPort} from './angular-scroll-progress-nav';
 import {branchingSubmenuPort} from './angular-branching-submenu';
@@ -208,25 +228,14 @@ add(
   `readonly value=model(0);finish():void{if(this.value()>=100)void this.run();else this.value.set(0);}`,
   { inputs: ["value: number (two-way)"] },
 );
-add(
-  "code-snippet-deck",
-  "collection",
-  "Browse code snippets and copy the selected snippet with visible failure feedback.",
-  `<div class="kit-control kit-surface kit-stack"><div class="kit-row" (keydown)="keys($event)">@for(item of items();track item.id){${itemButton}}</div><pre class="k-code">{{current()?.description}}</pre><button type="button" [disabled]="disabled()||!current()" (click)="copy()">Copy snippet</button>${collectionFeedback}</div>`,
-  `override readonly items=input<KitItem[]>([{id:'install',label:'Install',description:'npm install ./kit-ui-angular-0.1.0.tgz'},{id:'import',label:'Import',description:"import { KitButtonComponent } from 'kit-ui-angular';"}]);async copy():Promise<void>{try{await navigator.clipboard.writeText(this.current()?.description??'');this.status.set('Copied.');}catch{this.actionError.set('Clipboard unavailable. Select and copy the snippet manually.');}}`,
-);
+add('code-snippet-deck','plain',codeSnippetDeckPort.description,codeSnippetDeckPort.template,codeSnippetDeckPort.body,codeSnippetDeckPort);
 
 add("stretch-switch","plain",stretchSwitchPort.description,stretchSwitchPort.template,stretchSwitchPort.body,stretchSwitchPort);
 
 add("draw-checkbox", "plain", drawCheckboxPort.description, drawCheckboxPort.template, drawCheckboxPort.body.replace("readonly internal=signal(false);", "readonly internal=signal<boolean|undefined>(undefined);").replace("readonly current=computed(()=>this.checked()??this.internal());", "readonly current=computed(()=>this.checked()??this.internal()??this.defaultChecked());").replace("constructor(){effect(()=>{this.defaultChecked();untracked(()=>{if(this.checked()===undefined&&!this.initialized){this.initialized=true;this.internal.set(this.defaultChecked());}});});}private initialized=false;", "").replace("this.onChange()?.(event);}", "this.onChange()?.(event);if(this.checked()!==undefined)input.checked=this.checked()!;}").replace("this.host.nativeElement.querySelector<HTMLInputElement>('input')?.click()", "(this.host.nativeElement.querySelector('input') as HTMLInputElement|null)?.click()"), drawCheckboxPort);
 add("liquid-toggle", "plain", liquidTogglePort.description, liquidTogglePort.template.replace("isOn()?.7:0", "isOn() ? .7 : 0"), liquidTogglePort.body.replace("readonly internal=signal(false);", "readonly internal=signal<boolean|undefined>(undefined);").replace("readonly isOn=computed(()=>this.value()??this.internal());", "readonly isOn=computed(()=>this.value()??this.internal()??this.defaultValue());").replace("private initialized=false;constructor(){effect(()=>{this.defaultValue();untracked(()=>{if(this.value()===undefined&&!this.initialized){this.initialized=true;this.internal.set(this.defaultValue());}});});}", ""), liquidTogglePort);
-add(
-  "spring-select",
-  "collection",
-  "A native accessible select with keyboard typeahead and selected-item output.",
-  `<div class="kit-control kit-stack"><label>{{label()||'Choose a workspace'}}<select [disabled]="disabled()||loading()" [value]="current()?.id" (change)="pick($event)">@for(item of items();track item.id){<option [value]="item.id" [disabled]="item.disabled">{{item.label}}</option>}</select></label><p>{{current()?.description}}</p>${collectionFeedback}</div>`,
-  `pick(event:Event):void{const item=this.items().find(i=>i.id===(event.target as HTMLSelectElement).value);if(item)this.select(item);}`,
-);
+add('spring-select','plain',springSelectPort.description,springSelectPort.template,springSelectPort.body,springSelectPort);
+
 add("otp-input", "plain", otpInputPort.description, otpInputPort.template, otpInputPort.body, otpInputPort);
 add("lock-input", "plain", lockInputPort.description, lockInputPort.template, lockInputPort.body, lockInputPort);
 for (const [id, title, button] of [
@@ -265,36 +274,13 @@ add('animated-tabs','plain',animatedTabsPort.description,animatedTabsPort.templa
 add('glass-navbar','plain',glassNavbarPort.description,glassNavbarPort.template,glassNavbarPort.body,glassNavbarPort);
 add('small-floating-dock','plain',smallFloatingDockPort.description,smallFloatingDockPort.template,smallFloatingDockPort.body,smallFloatingDockPort);
 add('floating-action-dock','plain',floatingActionDockPort.description,floatingActionDockPort.template,floatingActionDockPort.body,floatingActionDockPort);
-for (const [id, title] of [
-  ["gooey-menu", "Explore"],
-]) {
-  add(
-    id,
-    "collection",
-    "An expandable action menu with Escape, arrow keys and disabled-item handling.",
-    `<div class="kit-control kit-stack" (keydown.escape)="open.set(false)"><div class="k-menu"><button type="button" [disabled]="disabled()" [attr.aria-expanded]="open()" [attr.aria-controls]="uid" (click)="open.set(!open())"><span aria-hidden="true">{{open()?'×':'☰'}}</span> {{label()||'${title}'}}</button>@if(open()){<div [id]="uid" class="k-menu-panel" (keydown)="keys($event)">@for(item of items();track item.id){<button type="button" data-item [disabled]="item.disabled||disabled()" (click)="select(item);open.set(false)">{{item.label}}</button>}</div>}</div>${collectionFeedback}</div>`,
-  );
-}
+add('gooey-menu','plain',gooeyMenuPort.description,gooeyMenuPort.template,gooeyMenuPort.body,gooeyMenuPort);
 add("pill-navigation","plain",pillNavigationPort.description,pillNavigationPort.template,pillNavigationPort.body,pillNavigationPort);
 add("origin-dropdown", "plain", originDropdownPort.description, originDropdownPort.template, originDropdownPort.body, originDropdownPort);
 add('branching-submenu','plain',branchingSubmenuPort.description,branchingSubmenuPort.template,branchingSubmenuPort.body,branchingSubmenuPort);
 add("ios-search-bar","plain",iosSearchPort.description,iosSearchPort.template,iosSearchPort.body,iosSearchPort);
-for (const id of ["command-menu", "spotlight-search"]) {
-  add(
-    id,
-    "plain",
-    "A native modal command search with keyboard navigation, async errors and focus restoration.",
-    `<kit-liquid-command-palette [commands]="commands()" [disabled]="disabled()" />`,
-    `readonly commands=input<LiquidCommand[]>([{id:'home',label:'Go home',onSelect:()=>this.commandSelect.emit('home')},{id:'docs',label:'Open documentation',onSelect:()=>this.commandSelect.emit('docs')}]);readonly disabled=input(false);readonly commandSelect=output<string>();`,
-    {
-      inputs: ["commands: LiquidCommand[]", "disabled: boolean"],
-      outputs: ["commandSelect: string"],
-      imports:
-        "import { KitLiquidCommandPaletteComponent } from './liquid-command-palette.component';\nimport type { LiquidCommand } from './types';",
-      componentImports: "KitLiquidCommandPaletteComponent",
-    },
-  );
-}
+add('command-menu','plain',commandMenuPort.description,commandMenuPort.template,commandMenuPort.body,commandMenuPort);
+add('spotlight-search','plain',spotlightSearchPort.description,spotlightSearchPort.template,spotlightSearchPort.body,spotlightSearchPort);
 add(
   "dynamic-island",
   "collection",
@@ -327,56 +313,13 @@ add("smooth-accordion","plain",smoothAccordionPort.description,smoothAccordionPo
 // Expandable information and selectable collections.
 add('stack-unfold-panel','plain',stackUnfoldPanelPort.description,stackUnfoldPanelPort.template,stackUnfoldPanelPort.body,stackUnfoldPanelPort);
 add("faq", "plain", faqPort.description, faqPort.template, faqPort.body.replace("input.required<FAQItem[]>()", "input<FAQItem[]>([])") , faqPort);
-for (const [id, title] of [
-  ["expandable-data-row", "Data details"],
-  ["recovery-ledger", "Recovery ledger"],
-]) {
-  add(
-    id,
-    "collection",
-    "Expandable item details with keyboard-native disclosure and application-owned recovery actions.",
-    `<section class="kit-control kit-surface kit-stack"><h3>{{label()||'${title}'}}</h3>@for(item of items();track item.id){<details class="k-disclosure"><summary>{{item.label}} @if(item.value!==undefined){<span>{{item.value}}</span>}</summary><div class="kit-stack"><p>{{item.description}}</p><ng-content></ng-content>${id === "recovery-ledger" ? '<button type="button" [disabled]="disabled()||busy()||item.disabled" (click)="execute([item])">Restore snapshot</button>' : ""}</div></details>}@empty{<p>No items yet.</p>}${collectionFeedback}</section>`,
-  );
-}
+add('expandable-data-row','plain',expandableDataRowPort.description,expandableDataRowPort.template,expandableDataRowPort.body,expandableDataRowPort);
+add('recovery-ledger','plain',recoveryLedgerPort.description,recoveryLedgerPort.template,recoveryLedgerPort.body,recoveryLedgerPort);
 add('ai-agent-activity','plain',agentActivityPort.description,agentActivityPort.template,agentActivityPort.body,agentActivityPort);
-for (const [id, title] of [
-
-  ["interactive-timeline", "Your timeline"],
-]) {
-  add(
-    id,
-    "collection",
-    "Filter chronological events, inspect event payloads and select an event without simulated network activity.",
-    `<section class="kit-control kit-surface kit-stack"><h3>{{label()||'${title}'}}</h3><label>Filter events<input type="search" [value]="query()" (input)="search($event)" [disabled]="disabled()" /></label><ol class="k-timeline">@for(item of visible();track item.id){<li><details><summary><span class="k-event-dot" aria-hidden="true"></span>{{item.label}} <small>{{item.status||item.value}}</small></summary><p>{{item.description}}</p><button type="button" [disabled]="disabled()||item.disabled" (click)="select(item)">Inspect event</button></details></li>}@empty{<li>No matching events.</li>}</ol>${collectionFeedback}</section>`,
-  );
-}
+add('interactive-timeline','plain',interactiveTimelinePort.description,interactiveTimelinePort.template,interactiveTimelinePort.body,interactiveTimelinePort);
 add('selection-basket','plain',selectionBasketPort.description,selectionBasketPort.template,selectionBasketPort.body,selectionBasketPort);
-for (const [id, title] of [
-  ["batch-gesture-tray", "Batch selection"],
-]) {
-  add(
-    id,
-    "collection",
-    "Select individual items or all items, then run a cancellable application-owned batch action.",
-    `<section class="kit-control kit-surface kit-stack"><h3>{{label()||'${title}'}}</h3><div class="kit-row"><button type="button" [disabled]="disabled()||busy()" (click)="selectedIds.set(items().filter(enabled).map(itemId))">Select all</button><button type="button" [disabled]="disabled()||busy()" (click)="selectedIds.set([])">Clear selection</button></div>@for(item of items();track item.id){<label class="kit-row"><input type="checkbox" [checked]="selectedIds().includes(item.id)" [disabled]="disabled()||busy()||item.disabled" (change)="choose(item)" /><span>{{item.label}}</span></label>}<div class="k-tray"><span>{{selectedIds().length}} selected</span><button type="button" [disabled]="disabled()||busy()||!selectedIds().length" (click)="execute()">{{busy()?'Applying…':'Apply to selected'}}</button></div>${collectionFeedback}</section>`,
-    `readonly enabled=(item:KitItem)=>!item.disabled;readonly itemId=(item:KitItem)=>item.id;`,
-  );
-}
-for (const [id, title] of [
-  ["velocity-toast", "Update available"],
-]) {
-  const bell = id === "notification-bell",
-    toast = id.endsWith("toast");
-  add(
-    id,
-    "collection",
-    "Dismissible notifications with restore actions and restrained live announcements.",
-    `<section class="kit-control kit-stack">${bell ? '<button type="button" [disabled]="disabled()" [attr.aria-expanded]="open()" (click)="open.set(!open())">♧ {{label()||\'Notifications\'}} ({{visible().length}})</button>@if(open()){' : ""}<div class="k-notification-stack">@for(item of visible();track item.id){<article class="kit-surface kit-stack"><strong>{{${toast ? "label()||'" + title + "'" : "item.label"}}}</strong><p>{{item.description}}</p><div class="kit-row"><button type="button" [disabled]="disabled()" (click)="dismiss(item)">Dismiss <span class="sr-only">{{item.label}}</span></button>${id === "undo-toast" ? '<button type="button" [disabled]="disabled()||busy()" (click)="execute([item])">Undo action</button>' : ""}</div></article>}@empty{<p>No notifications.</p>}</div>${bell ? "}" : ""}@if(dismissed().length){<button type="button" (click)="undo()" [disabled]="disabled()">Restore notifications</button>}${collectionFeedback}</section>`,
-    toast
-      ? `override readonly items=input<KitItem[]>([{id:'notice',label:'${title}',description:'A local notification. Connect actions to your application.'}]);`
-      : "",
-  );
-}
+add('batch-gesture-tray','plain',batchGestureTrayPort.description,batchGestureTrayPort.template,batchGestureTrayPort.body,batchGestureTrayPort);
+add('velocity-toast','plain',velocityToastPort.description,velocityToastPort.template,velocityToastPort.body,velocityToastPort);
 add("notification-stack","plain",notificationStackPort.description,notificationStackPort.template,notificationStackPort.body,notificationStackPort);
 add("undo-toast","plain",undoToastPort.description,undoToastPort.template,undoToastPort.body,undoToastPort);
 add("notification-bell","plain",notificationBellPort.description,notificationBellPort.template,notificationBellPort.body,notificationBellPort);
@@ -388,21 +331,6 @@ add(
   `readonly distance=signal(0);private startY:number|undefined;start(event:PointerEvent):void{if(this.blocked()||event.button!==0)return;this.startY=event.clientY;(event.currentTarget as HTMLElement).setPointerCapture(event.pointerId);}pull(event:PointerEvent):void{if(this.startY!==undefined)this.distance.set(Math.max(0,Math.min(100,(event.clientY-this.startY)*.5)));}release():void{if(this.distance()>65)void this.run();this.startY=undefined;this.distance.set(0);}`,
 );
 
-// Data and account cards use actual inputs and local disclosure, not screenshots.
-for (const [id, title, layout] of [
-  ["wallet-card", "Your wallet", "wallet"],
-  ["mac-os-folder-cards", "Project folders", "folders"],
-  ["stacked-cards", "Your collection", "stacked"],
-  ["story-card", "Your stories", "stories"],
-]) {
-  add(
-    id,
-    "collection",
-    "A configurable content card collection with selection, disclosure, disabled items and projected details.",
-    `<section class="kit-control kit-stack"><h3>{{label()||'${title}'}}</h3><div class="k-cards k-${layout}">@for(item of items();track item.id){<article class="k-card kit-surface" [class.k-active]="current()?.id===item.id" (pointermove)="spot($event)" (pointerleave)="clearSpot($event)">${id === "mac-os-folder-cards" ? '<span class="k-folder-tab" aria-hidden="true"></span>' : id === "profile-card" ? '<span class="k-avatar" aria-hidden="true">{{item.label.slice(0,2)}}</span>' : id === "wallet-card" ? '<span class="k-card-chip" aria-hidden="true">▦</span>' : ""}<button type="button" [disabled]="disabled()||item.disabled" [attr.aria-expanded]="expanded().includes(item.id)" (click)="select(item);toggle(item.id)">{{item.label}}</button><p>{{item.value}}</p><div [hidden]="!expanded().includes(item.id)"><p>{{item.description}}</p><ng-content></ng-content><button type="button" [disabled]="disabled()||busy()||item.disabled" (click)="execute([item])">Select {{item.label}}</button></div></article>}</div>${collectionFeedback}</section>`,
-    `spot(event:PointerEvent):void{if(this.disabled())return;const el=event.currentTarget as HTMLElement;const r=el.getBoundingClientRect();el.style.setProperty('--spot-x',(event.clientX-r.left)+'px');el.style.setProperty('--spot-y',(event.clientY-r.top)+'px');}clearSpot(event:PointerEvent):void{(event.currentTarget as HTMLElement).style.removeProperty('--spot-x');}`,
-  );
-}
 add("peek-card","plain",peekCardPort.description,peekCardPort.template,peekCardPort.body,peekCardPort);
 add("profile-card","plain",profileCardPort.description,profileCardPort.template,profileCardPort.body,profileCardPort);
 add("reveal-card","plain",revealCardPort.description,revealCardPort.template,revealCardPort.body,revealCardPort);
@@ -418,12 +346,8 @@ add(
 );
 */
 add("avatar-stack","plain",avatarStackPort.description,avatarStackPort.template,avatarStackPort.body,avatarStackPort);
-add(
-  "sticky-pages",
-  "collection",
-  "Scrollable page sections with contained sticky headers and readable long-content layout.",
-  `<div class="kit-control k-scroll-page" tabindex="0" aria-label="Sticky pages">@for(item of items();track item.id){<section class="k-sticky-page"><h3>{{item.label}}</h3><p>{{item.description}}</p><ng-content></ng-content><button type="button" [disabled]="disabled()||item.disabled" (click)="select(item)">Open {{item.label}}</button></section>}</div>`,
-);
+add('wallet-card','plain',walletCardPort.description,walletCardPort.template,walletCardPort.body,walletCardPort);
+add('sticky-pages','plain',stickyPagesPort.description,stickyPagesPort.template,stickyPagesPort.body,stickyPagesPort);
 /* Legacy focus mode replaced by the authored React-contract port.
 add(
   "focus-mode",
@@ -519,16 +443,16 @@ add("payment-receipt-printer","plain",paymentReceiptPrinterPort.description,paym
 // Canvas effects use distinct algorithms, pause off screen and clean up observers.
 const canvasModes: Record<string, string> = {
   "dot-shader": "shader",
-  "depth-corridor": "corridor",
   "glyph-matrix": "glyph",
   "shooting-stars": "shooting",
   "sparkles-core": "sparkles",
-  "speed-warp": "warp",
-  "evil-eye": "eye",
-  "nimbu-mirchi": "nimbu",
   "thinking-orb": "orb",
 };
+add('evil-eye','plain',evilEyePort.description,evilEyePort.template,evilEyePort.body,evilEyePort);
+add('nimbu-mirchi','plain',nimbuMirchiPort.description,nimbuMirchiPort.template,nimbuMirchiPort.body,nimbuMirchiPort);
 add('meteors','plain',meteorsPort.description,meteorsPort.template,meteorsPort.body,meteorsPort);
+add('speed-warp','plain',speedWarpPort.description,speedWarpPort.template,speedWarpPort.body,speedWarpPort);
+add('depth-corridor','plain',depthCorridorPort.description,depthCorridorPort.template,depthCorridorPort.body,depthCorridorPort);
 add('dot-field','plain',dotFieldPort.description,dotFieldPort.template,dotFieldPort.body,dotFieldPort);
 add('morphing-blob','plain',morphingBlobPort.description,morphingBlobPort.template,morphingBlobPort.body,morphingBlobPort);
 add('circular-orbit','plain',circularOrbitPort.description,circularOrbitPort.template,circularOrbitPort.body,circularOrbitPort);
@@ -543,18 +467,7 @@ for (const [id, mode] of Object.entries(canvasModes)) {
 }
 add('density-lens','plain',densityLensPort.description,densityLensPort.template,densityLensPort.body,densityLensPort);
 add('gravity-particle-burst','plain',gravityParticleBurstPort.description,gravityParticleBurstPort.template,gravityParticleBurstPort.body,gravityParticleBurstPort);
-for (const [id, label] of [
-  ["rocket-party-popper", "Launch celebration"],
-]) {
-  add(
-    id,
-    "canvas",
-    "Trigger a local particle celebration with a keyboard button, visible motion controls and cleanup.",
-    `<section class="kit-control kit-stack"><div class="k-canvas-wrap" (pointermove)="move($event)"><canvas #canvas role="img" [attr.aria-label]="label()" [style.opacity]="active()?1:.15"></canvas></div><div class="kit-row"><button type="button" [disabled]="disabled()" (click)="launch()">${label}</button><button type="button" [disabled]="disabled()" (click)="running.set(!running())">{{running()?'Pause':'Resume'}}</button></div><p role="status">{{active()?'Celebration launched.':''}}</p></section>`,
-    `override readonly mode='burst';readonly active=signal(false);readonly triggered=output<void>();private stopTimer:ReturnType<typeof setTimeout>|undefined;constructor(){super();this.running.set(false);inject(DestroyRef).onDestroy(()=>clearTimeout(this.stopTimer));}launch():void{if(this.disabled())return;clearTimeout(this.stopTimer);this.active.set(true);this.running.set(true);this.triggered.emit();this.stopTimer=setTimeout(()=>{this.active.set(false);this.running.set(false);},3000);}`,
-    { outputs: ["triggered: void"] },
-  );
-}
+add('rocket-party-popper','plain',rocketPartyPopperPort.description,rocketPartyPopperPort.template,rocketPartyPopperPort.body,rocketPartyPopperPort);
 add("cursor-follower","plain",cursorFollowerPort.description,cursorFollowerPort.template,cursorFollowerPort.body,cursorFollowerPort);
 add(
   "particle-delete",
@@ -609,25 +522,7 @@ add(
 */
 add("airport-matrix-clock","plain",airportMatrixClockPort.description,airportMatrixClockPort.template,airportMatrixClockPort.body,airportMatrixClockPort);
 add("metric-hud","plain",metricHudPort.description,metricHudPort.template,metricHudPort.body,metricHudPort);
-add(
-  "torque-dial",
-  "plain",
-  "A bounded rotary input with pointer dragging, a native range alternative and keyboard increments.",
-  `<section class="kit-control kit-stack"><label>{{label()}}<input type="range" [min]="min()" [max]="safeMax()" [step]="safeStep()" [value]="bounded()" [disabled]="disabled()" (input)="set(+$any($event.target).value)" (change)="changeEnd.emit()" /></label><div class="k-dial" role="slider" [attr.aria-label]="label()" [attr.aria-valuemin]="min()" [attr.aria-valuemax]="safeMax()" [attr.aria-valuenow]="bounded()" [attr.aria-disabled]="disabled()" [tabIndex]="disabled()?-1:0" (keydown)="key($event)" (pointerdown)="start($event)" (pointermove)="drag($event)" (pointerup)="end()" (pointercancel)="end()"><span class="k-dial-tick" [style.transform]="'rotate('+angle()+'deg)'"></span><output>{{bounded()}}{{unit()}}</output></div></section>`,
-  `readonly value=model(50);readonly min=input(0);readonly max=input(100);readonly step=input(1);readonly label=input('Dial control');readonly unit=input('%');readonly disabled=input(false);readonly changeEnd=output<void>();readonly safeMax=computed(()=>Math.max(this.min(),this.max()));readonly safeStep=computed(()=>Math.max(.001,this.step()));readonly bounded=computed(()=>Math.max(this.min(),Math.min(this.safeMax(),this.value())));readonly angle=computed(()=>-135+(this.bounded()-this.min())/Math.max(1,this.safeMax()-this.min())*270);private origin?:{y:number;value:number};set(value:number):void{if(this.disabled())return;const step=this.safeStep();this.value.set(Math.max(this.min(),Math.min(this.safeMax(),Math.round((value-this.min())/step)*step+this.min())));}start(event:PointerEvent):void{if(this.disabled()||event.button!==0)return;this.origin={y:event.clientY,value:this.bounded()};(event.currentTarget as HTMLElement).setPointerCapture(event.pointerId);}drag(event:PointerEvent):void{if(this.origin)this.set(this.origin.value+(this.origin.y-event.clientY)*(this.safeMax()-this.min())/150);}end():void{if(this.origin)this.changeEnd.emit();this.origin=undefined;}key(event:KeyboardEvent):void{if(['ArrowUp','ArrowRight','ArrowDown','ArrowLeft','Home','End','PageUp','PageDown'].includes(event.key)){event.preventDefault();this.set(event.key==='Home'?this.min():event.key==='End'?this.safeMax():this.bounded()+(['ArrowDown','ArrowLeft','PageDown'].includes(event.key)?-1:1)*this.safeStep()*(event.key.startsWith('Page')?10:1));this.changeEnd.emit();}}`,
-  {
-    inputs: [
-      "value: number (two-way)",
-      "min: number",
-      "max: number",
-      "step: number",
-      "label: string",
-      "unit: string",
-      "disabled: boolean",
-    ],
-    outputs: ["changeEnd: void"],
-  },
-);
+add('torque-dial','plain',torqueDialPort.description,torqueDialPort.template,torqueDialPort.body,torqueDialPort);
 
 /* Legacy directional tooltip replaced by the authored React-contract port.
 add(
@@ -648,24 +543,11 @@ add(
 */
 add("directional-tooltip","plain",directionalTooltipPort.description,directionalTooltipPort.template,directionalTooltipPort.body,directionalTooltipPort);
 add('settle-modal','plain',settleModalPort.description,settleModalPort.template,settleModalPort.body,settleModalPort);
-for (const [id, title] of [
-  ["morphing-dialog", "A little more room"],
-]) {
-  add(
-    id,
-    "action",
-    "A native modal dialog with focus containment, Escape, projected content and asynchronous confirmation.",
-    `<div class="kit-control kit-stack"><button type="button" [disabled]="blocked()" (click)="opened.set(true)">{{label()||'Open dialog'}}</button><dialog #dialog class="kit-dialog kit-control k-port-dialog" [attr.aria-labelledby]="uid" (close)="opened.set(false)" (cancel)="opened.set(false)"><div class="kit-stack"><h3 [id]="uid">{{title()}}</h3><ng-content><p>{{description()}}</p></ng-content><div class="kit-row"><button type="button" [disabled]="busy()" (click)="opened.set(false)">Close</button><button type="button" [disabled]="blocked()" (click)="confirm()">{{busy()?'Working…':'Confirm'}}</button></div>${actionFeedback}</div></dialog></div>`,
-    `readonly uid=portId('dialog');readonly title=input('${title}');readonly description=input('Your application content belongs here.');readonly opened=model(false);readonly dialog=viewChild<ElementRef<HTMLDialogElement>>('dialog');constructor(){super();effect(()=>{const dialog=this.dialog()?.nativeElement;const opened=this.opened();if(!dialog)return;if(opened&&!dialog.open)dialog.showModal();else if(!opened&&dialog.open)dialog.close();});}async confirm():Promise<void>{await this.run();if(!this.error()&&!this.destroyed)this.opened.set(false);}`,
-    {
-      inputs: [
-        "title: string",
-        "description: string",
-        "opened: boolean (two-way)",
-      ],
-    },
-  );
-}
+add('morphing-dialog','plain',morphingDialogPort.description,morphingDialogPort.template,morphingDialogPort.body,morphingDialogPort);
+
+add('story-card','plain',storyCardsPort.description,storyCardsPort.template,storyCardsPort.body,storyCardsPort);
+add('mac-os-folder-cards','plain',folderCardsPort.description,folderCardsPort.template,folderCardsPort.body,folderCardsPort);
+add('stacked-cards','plain',stackedCardsPort.description,stackedCardsPort.template,stackedCardsPort.body,stackedCardsPort);
 
 // The larger data, comparison, chat and graph ports are authored separately.
 import { COMPLEX_PORTS } from "./angular-complex-ports";
@@ -704,46 +586,8 @@ const cardDefaults: Record<
         "Account ending 4821 · Local preview data. No financial service is connected.",
     },
   ],
-  "mac-os-folder-cards": [
-    {
-      id: "components",
-      label: "Components",
-      value: "116 files",
-      description: "Native interface building blocks.",
-    },
-    {
-      id: "assets",
-      label: "Assets",
-      value: "12 files",
-      description: "Your workspace illustrations and design assets.",
-    },
-  ],
-  "story-card": [
-    {
-      id: "beginning",
-      label: "A small beginning",
-      value: "Chapter 01",
-      description: "Every useful idea starts with a question.",
-    },
-    {
-      id: "rhythm",
-      label: "Find the rhythm",
-      value: "Chapter 02",
-      description: "Build, test and follow the details.",
-    },
-    {
-      id: "share",
-      label: "Ready to share",
-      value: "Chapter 03",
-      description: "Bring the finished pieces together.",
-    },
-  ],
 };
 for (const port of ports) {
-  if(port.id==='gooey-menu'){
-    port.template=port.template.replace('(keydown.escape)="open.set(false)"','(keydown.escape)="closeMenu()"').replace('<button type="button" [disabled]','<button #trigger type="button" [disabled]').replace('(click)="select(item);open.set(false)"','(click)="pick(item)"');
-    port.body+=`readonly trigger=viewChild<ElementRef<HTMLButtonElement>>('trigger');closeMenu():void{this.open.set(false);this.trigger()?.nativeElement.focus();}pick(item:KitItem):void{if(this.disabled()||this.loading()||item.disabled)return;this.select(item);this.closeMenu();}override keys(event:KeyboardEvent):void{if(!['ArrowDown','ArrowUp','Home','End'].includes(event.key)||this.disabled())return;const buttons=Array.from((event.currentTarget as HTMLElement).querySelectorAll<HTMLButtonElement>('button[data-item]:not(:disabled)'));if(!buttons.length)return;event.preventDefault();const index=buttons.indexOf(event.target as HTMLButtonElement);const next=event.key==='Home'?0:event.key==='End'?buttons.length-1:(index+(event.key==='ArrowUp'?-1:1)+buttons.length)%buttons.length;buttons[next].focus();}`;
-  }
   if (["action", "collection", "form"].includes(port.kind))
     port.template = port.template.replaceAll(
       "<summary>",
@@ -757,27 +601,21 @@ for (const port of ports) {
           ? match
           : `[disabled]="loading()||${expression}"`,
     );
-  if (cardDefaults[port.id])
+  if (port.kind === 'collection' && cardDefaults[port.id])
     port.body += `\noverride readonly items=input<KitItem[]>(${JSON.stringify(cardDefaults[port.id])});`;
-  if (port.id === "rocket-party-popper")
-    port.body = port.body.replace("mode='burst'", "mode='rocket'");
   if (port.id === "particle-delete")
     port.body = port.body.replace(
       "await this.run();",
       "const request=this.run();const controller=this.controller;await request;if(controller?.signal.aborted)return;",
     );
-  if (port.id === "morphing-dialog" || port.id === "settle-modal")
+  if (port.id === "settle-modal")
     port.body = port.body.replace(
       "await this.run();",
       "const request=this.run();const controller=this.controller;await request;if(controller?.signal.aborted)return;",
     );
   if (port.id === "sign-up")
     port.body = `override readonly fields=input<KitField[]>([{key:'name',label:'Name',type:'text',required:true},{key:'email',label:'Email',type:'email',required:true},{key:'password',label:'Password',type:'password',required:true,minLength:8},{key:'confirmPassword',label:'Confirm password',type:'password',required:true,minLength:8}]);override async submit(event:SubmitEvent):Promise<void>{if(this.values()['password']!==this.values()['confirmPassword']){event.preventDefault();this.error.set('Passwords do not match.');return;}await super.submit(event);}`;
-  if (port.id === "stacked-cards")
-    port.template = port.template.replace(
-      '<div class="k-cards',
-      `<nav class="kit-row" aria-label="Choose a card" (keydown)="keys($event)">@for(item of items();track item.id){${itemButton}}</nav><div class="k-cards`,
-    );
+
 
 }
 const directory = path.join(root, "packages/angular/src");

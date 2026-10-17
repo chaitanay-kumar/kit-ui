@@ -1,0 +1,13 @@
+# Depth Corridor parity (validated locally; integration pending)
+
+React source: `src/components/ui/DepthCorridor.tsx`; authoring: `scripts/angular-depth-corridor.ts`; native motion/types/styles: `packages/angular/src/depth-corridor-*` and `depth-corridor.css`.
+
+This replaces the unrelated canvas effect with the actual native DOM region, responsive perspective scene, source card hierarchy, seven-layer visibility window, arrow controls, indicator spans and parallax. Layer coordinates, scale, opacity, blur and rotation follow source formulas; the public `blurAmount` field remains unused. Smooth spring axes use 200/28/.85 with velocity preserved on interruption. Initial transforms are staged directly; cards outside the visibility window are removed without exit presence, as in React.
+
+Selection preserves the source's unusual callback ownership: when a callback exists, it receives a clamped request and internal state does not change, even without a controlled index. Without a callback, hidden internal state still updates under a controlled index; removing that control reveals it. Rendering does not clamp controlled indexes. Arrow keys prevent default before requesting selection. Exceptions leave selection unchanged and native ErrorHandler receives them. Empty input preserves the enabled Next button and zero-clamped requests.
+
+Packaged contracts and desktop/mobile browser cases pass state/control transitions, callback failure recovery, keyboard navigation, empty/replaced data, required layer templates, projected interactive content, interrupted motion, cleanup and native demos. Paired settled visible text/control geometry (within 1 px), typography, colors/radii and real-pointer parallax reset pass. The checked desktop screenshot pair is byte-identical in decoded RGB pixels for that single scenario; this is not a general pixel-parity claim. See [batch evidence](batch-38-integration.md) for final baseline status.
+
+Source limits remain: clickable layers and dot spans have no native keyboard activation, roles or tabindex. The root handles arrows, including bubbled keys from nested controls; navigation disables only at exact boundaries. No selection announcement or reduced-motion branch is present. Browser sampling confirms transforms continue under reduced preference in both frameworks. Colors are hardcoded dark values. No physical-device or general accessibility-conformance claim is made.
+
+Angular layer content accepts text or a typed `TemplateRef` with `$implicit` layer and `index` context. `layers` remains required. Application state, callbacks and projected content stay application-owned.
