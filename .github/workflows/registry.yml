@@ -98,6 +98,8 @@ jobs:
 
       - name: Verify Angular package in a separate consumer
         run: npm run test:angular-package
+      - name: Verify audited native callback defaults and failures
+        run: node scripts/verify-integration-callbacks.mjs
       - name: Verify iOS Search Bar controlled contract
         run: npm run test:ios-search
       - name: Verify UnfoldAccordion and Animated Number contracts

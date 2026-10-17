@@ -3,7 +3,7 @@ async function open(page: Page, f: string, kind: string, initial: object = {}) {
   await page.route("**/batch8.html*", (r) =>
     r.fulfill({
       contentType: "text/html",
-      body: '<meta name="viewport" content="width=device-width"><script type="module">import R from "/@react-refresh";R.injectIntoGlobalHook(window);window.$RefreshReg$=()=>{};window.$RefreshSig$=()=>x=>x;window.__vite_plugin_react_preamble_installed__=true;</script><script type="module" src="/e2e/fixtures/parity-batch8-contract.tsx"></script>',
+      body: '<!doctype html><meta name="viewport" content="width=device-width"><script type="module">import R from "/@react-refresh";R.injectIntoGlobalHook(window);window.$RefreshReg$=()=>{};window.$RefreshSig$=()=>x=>x;window.__vite_plugin_react_preamble_installed__=true;</script><script type="module" src="/e2e/fixtures/parity-batch8-contract.tsx"></script>',
     }),
   );
   await page.goto(

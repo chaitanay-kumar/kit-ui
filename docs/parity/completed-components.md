@@ -1,6 +1,6 @@
 # Completed parity checks
 
-99 components have recorded validated baselines: 75 merged through batch 30 and twenty-four awaiting integration from batches 31-42. Validation scope and remaining limits are recorded in each linked report. Older integration-pending labels for batches 4–30 predate their merge at `cfcfc68`. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
+99 components have recorded validated baselines across batches 1?42. Batches 31?42 are published through [PR #26](https://github.com/chaitanay-kumar/kit-ui/pull/26); see the [integration evidence](batches-31-42-integration.md). Validation scope and remaining limits are recorded in each linked report. Older integration-pending labels for batches 4–30 predate their merge at `cfcfc68`. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
 
 | Component | Status | Evidence |
 | --- | --- | --- |
@@ -8,98 +8,98 @@
 | Advanced Data Table | Validated baseline | [Review](advanced-data-table.md) |
 | AI Agent Activity | Validated baseline | [Review](ai-agent-activity.md) |
 | AI Prompt Composer | Validated baseline | [Review](ai-prompt-composer.md) |
-| Airport Matrix Clock | Validated locally; integration pending | [Report](airport-matrix-clock.md) |
-| Animated Number Morph | Validated locally; integration pending | [Report](animated-number.md) |
-| Animated Tabs | Validated locally; integration pending | [Report](animated-tabs.md) |
-| Avatar Stack | Validated locally; integration pending | [Report](avatar-stack.md) |
-| Batch Gesture Tray | Validated locally; integration pending | [Report](batch-gesture-tray.md) |
-| Book Call Button | Validated locally; integration pending | [Report](book-call-button.md) |
-| Branching Submenu | Validated locally; integration pending | [Report](branching-submenu.md) |
+| Airport Matrix Clock | Validated baseline | [Report](airport-matrix-clock.md) |
+| Animated Number Morph | Validated baseline | [Report](animated-number.md) |
+| Animated Tabs | Validated baseline | [Report](animated-tabs.md) |
+| Avatar Stack | Validated baseline | [Report](avatar-stack.md) |
+| Batch Gesture Tray | Validated baseline | [Report](batch-gesture-tray.md) |
+| Book Call Button | Validated baseline | [Report](book-call-button.md) |
+| Branching Submenu | Validated baseline | [Report](branching-submenu.md) |
 | Button | Validated baseline | [Review](button.md) |
-| Circular Orbit | Validated locally; integration pending | [Evidence](circular-orbit.md) |
-| Code Snippet Deck | Validated locally; integration pending | [Report](code-snippet-deck.md) |
-| Command Menu | Validated locally; integration pending | [Report](command-menu.md) |
-| Cursor Follower | Validated locally; integration pending | [Report](cursor-follower.md) |
-| Density Lens | Validated locally; integration pending | [Evidence](density-lens.md) |
-| Depth Corridor | Validated locally; integration pending | [Report](depth-corridor.md) |
-| Dependency Trace | Validated locally; integration pending | [Report](dependency-trace.md) |
-| DirectionalTooltip | Validated locally; integration pending | [Report](directional-tooltip.md) |
-| Dot Field | Validated locally; integration pending | [Evidence](dot-field.md) |
-| DrawCheckbox | Validated locally; integration pending | [Report](draw-checkbox.md) |
-| Elastic Sheet | Validated locally; integration pending | [Evidence](elastic-sheet.md) |
-| Evil Eye | Validated locally; integration pending | [Report](evil-eye.md) |
-| Expandable Data Row | Validated locally; integration pending | [Report](expandable-data-row.md) |
+| Circular Orbit | Validated baseline | [Evidence](circular-orbit.md) |
+| Code Snippet Deck | Validated baseline | [Report](code-snippet-deck.md) |
+| Command Menu | Validated baseline | [Report](command-menu.md) |
+| Cursor Follower | Validated baseline | [Report](cursor-follower.md) |
+| Density Lens | Validated baseline | [Evidence](density-lens.md) |
+| Depth Corridor | Validated baseline | [Report](depth-corridor.md) |
+| Dependency Trace | Validated baseline | [Report](dependency-trace.md) |
+| DirectionalTooltip | Validated baseline | [Report](directional-tooltip.md) |
+| Dot Field | Validated baseline | [Evidence](dot-field.md) |
+| DrawCheckbox | Validated baseline | [Report](draw-checkbox.md) |
+| Elastic Sheet | Validated baseline | [Evidence](elastic-sheet.md) |
+| Evil Eye | Validated baseline | [Report](evil-eye.md) |
+| Expandable Data Row | Validated baseline | [Report](expandable-data-row.md) |
 | Expandable Search | Validated baseline | [Report](expandable-search.md) |
-| FAQ | Validated locally; integration pending | [Report](faq.md) |
-| Floating Action Dock | Validated locally; integration pending | [Evidence](floating-action-dock.md) |
-| Focus Mode | Validated locally; integration pending | [Report](focus-mode.md) |
-| Glass Navbar | Validated locally; integration pending | [Report](glass-navbar.md) |
-| Glitch Text | Validated locally; integration pending | [Report](glitch-text.md) |
-| Gooey Menu | Validated locally; integration pending | [Report](gooey-menu.md) |
-| Gravity Particle Burst | Validated locally; integration pending | [Evidence](gravity-particle-burst.md) |
+| FAQ | Validated baseline | [Report](faq.md) |
+| Floating Action Dock | Validated baseline | [Evidence](floating-action-dock.md) |
+| Focus Mode | Validated baseline | [Report](focus-mode.md) |
+| Glass Navbar | Validated baseline | [Report](glass-navbar.md) |
+| Glitch Text | Validated baseline | [Report](glitch-text.md) |
+| Gooey Menu | Validated baseline | [Report](gooey-menu.md) |
+| Gravity Particle Burst | Validated baseline | [Evidence](gravity-particle-burst.md) |
 | Hamburger Menu | Validated baseline | [Report](hamburger-menu.md) |
-| Hold-to-Confirm | Validated locally; integration pending | [Report](hold-to-confirm.md) |
-| Interactive Data Card | Validated locally; integration pending | [Report](interactive-data-card.md) |
-| Interactive Timeline | Validated locally; integration pending | [Report](interactive-timeline.md) |
-| Intro Loader | Validated locally; integration pending | [Report](intro-loader.md) |
+| Hold-to-Confirm | Validated baseline | [Report](hold-to-confirm.md) |
+| Interactive Data Card | Validated baseline | [Report](interactive-data-card.md) |
+| Interactive Timeline | Validated baseline | [Report](interactive-timeline.md) |
+| Intro Loader | Validated baseline | [Report](intro-loader.md) |
 | iOS-style Search Bar | Validated baseline | [Report](ios-search-bar.md) |
-| Liquid Command Palette | Validated locally; integration pending | [Report](liquid-command-palette.md) |
-| Liquid Ripple Button | Validated locally; integration pending | [Report](liquid-ripple-button.md) |
-| Liquid Toggle | Validated locally; integration pending | [Report](liquid-toggle.md) |
+| Liquid Command Palette | Validated baseline | [Report](liquid-command-palette.md) |
+| Liquid Ripple Button | Validated baseline | [Report](liquid-ripple-button.md) |
+| Liquid Toggle | Validated baseline | [Report](liquid-toggle.md) |
 | Loader | Validated baseline | [Review](loader.md) |
-| LockInput | Validated locally; integration pending | [Report](lock-input.md) |
-| macOS Folder Cards | Validated locally; integration pending | [Report](mac-os-folder-cards.md) |
+| LockInput | Validated baseline | [Report](lock-input.md) |
+| macOS Folder Cards | Validated baseline | [Report](mac-os-folder-cards.md) |
 | Magnetic Button | Validated baseline | [Review](magnetic-button.md) |
-| Meteors | Validated locally; integration pending | [Evidence](meteors.md) |
-| Metric HUD | Validated locally; integration pending | [Report](metric-hud.md) |
-| Morphing Blob | Validated locally; integration pending | [Evidence](morphing-blob.md) |
+| Meteors | Validated baseline | [Evidence](meteors.md) |
+| Metric HUD | Validated baseline | [Report](metric-hud.md) |
+| Morphing Blob | Validated baseline | [Evidence](morphing-blob.md) |
 | Morphing Button | Validated baseline | [Review](morphing-button.md) |
-| Morphing Dialog | Validated locally; integration pending | [Report](morphing-dialog.md) |
+| Morphing Dialog | Validated baseline | [Report](morphing-dialog.md) |
 | Morphing Icon | Validated baseline | [Review](morphing-icon.md) |
-| Morphing Shape Loader | Validated locally; integration pending | [Report](morphing-shape-loader.md) |
+| Morphing Shape Loader | Validated baseline | [Report](morphing-shape-loader.md) |
 | Neon Edge Button | Validated baseline | [Review](neon-edge-button.md) |
-| Nimbu Mirchi | Validated locally; integration pending | [Report](nimbu-mirchi.md) |
-| Not Found | Validated locally; integration pending | [Report](not-found.md) |
-| Notification Bell | Validated locally; integration pending | [Report](notification-bell.md) |
-| Notification Stack | Validated locally; integration pending | [Report](notification-stack.md) |
+| Nimbu Mirchi | Validated baseline | [Report](nimbu-mirchi.md) |
+| Not Found | Validated baseline | [Report](not-found.md) |
+| Notification Bell | Validated baseline | [Report](notification-bell.md) |
+| Notification Stack | Validated baseline | [Report](notification-stack.md) |
 | Orbital Loading Ring | Validated baseline | [Review](orbital-loading-ring.md) |
-| OriginDropdown | Validated locally; integration pending | [Report](origin-dropdown.md) |
-| OTP Input | Validated locally; integration pending | [Report](otp-input.md) |
-| Payment Receipt Printer | Validated locally; integration pending | [Report](payment-receipt-printer.md) |
-| Payment Status | Validated locally; integration pending | [Report](payment-status.md) |
-| Peek Card | Validated locally; integration pending | [Report](peek-card.md) |
-| Pill Navigation | Validated locally; integration pending | [Report](pill-navigation.md) |
+| OriginDropdown | Validated baseline | [Report](origin-dropdown.md) |
+| OTP Input | Validated baseline | [Report](otp-input.md) |
+| Payment Receipt Printer | Validated baseline | [Report](payment-receipt-printer.md) |
+| Payment Status | Validated baseline | [Report](payment-status.md) |
+| Peek Card | Validated baseline | [Report](peek-card.md) |
+| Pill Navigation | Validated baseline | [Report](pill-navigation.md) |
 | PressButton | Validated baseline | [Review](press-button.md) |
-| Pricing | Validated locally; integration pending | [Report](pricing.md) |
-| Profile Card | Validated locally; integration pending | [Report](profile-card.md) |
+| Pricing | Validated baseline | [Report](pricing.md) |
+| Profile Card | Validated baseline | [Report](profile-card.md) |
 | Rainbow Button | Validated baseline | [Review](rainbow-button.md) |
-| Rocket Party Popper | Validated locally; integration pending | [Report](rocket-party-popper.md) |
-| Recovery Ledger | Validated locally; integration pending | [Report](recovery-ledger.md) |
+| Rocket Party Popper | Validated baseline | [Report](rocket-party-popper.md) |
+| Recovery Ledger | Validated baseline | [Report](recovery-ledger.md) |
 | Reveal Card | Validated baseline | [Report](reveal-card.md) |
-| Scroll Progress Navigation | Validated locally; integration pending | [Report](scroll-progress-nav.md) |
-| Scroll Velocity Text | Validated locally; integration pending | [Report](scrollvelocitytext.md) |
-| Selection Basket | Validated locally; integration pending | [Evidence](selection-basket.md) |
-| SettleModal | Validated locally; integration pending | [Evidence](settle-modal.md) |
-| SlidePagination | Validated locally; integration pending | [Report](slide-pagination.md) |
-| Small Floating Dock | Validated locally; integration pending | [Report](small-floating-dock.md) |
-| Smart Upload | Validated locally; integration pending | [Report](smart-upload.md) |
+| Scroll Progress Navigation | Validated baseline | [Report](scroll-progress-nav.md) |
+| Scroll Velocity Text | Validated baseline | [Report](scrollvelocitytext.md) |
+| Selection Basket | Validated baseline | [Evidence](selection-basket.md) |
+| SettleModal | Validated baseline | [Evidence](settle-modal.md) |
+| SlidePagination | Validated baseline | [Report](slide-pagination.md) |
+| Small Floating Dock | Validated baseline | [Report](small-floating-dock.md) |
+| Smart Upload | Validated baseline | [Report](smart-upload.md) |
 | Smooth Accordion | Validated baseline | [Report](smooth-accordion.md) |
-| Split Button | Validated locally; integration pending | [Report](split-button.md) |
-| Speed Warp | Validated locally; integration pending | [Report](speed-warp.md) |
+| Split Button | Validated baseline | [Report](split-button.md) |
+| Speed Warp | Validated baseline | [Report](speed-warp.md) |
 | Spotlight Card | Validated baseline | [Review](spotlight-card.md) |
-| Spotlight Search | Validated locally; integration pending | [Report](spotlight-search.md) |
-| SpringSelect | Validated locally; integration pending | [Report](spring-select.md) |
-| Stack Unfold Panel | Validated locally; integration pending | [Evidence](stack-unfold-panel.md) |
-| Story Cards | Validated locally; integration pending | [Report](story-card.md) |
+| Spotlight Search | Validated baseline | [Report](spotlight-search.md) |
+| SpringSelect | Validated baseline | [Report](spring-select.md) |
+| Stack Unfold Panel | Validated baseline | [Evidence](stack-unfold-panel.md) |
+| Story Cards | Validated baseline | [Report](story-card.md) |
 | StretchSwitch | Validated baseline | [Report](stretch-switch.md) |
-| Swipe Action List | Validated locally; integration pending | [Report](swipe-action-list.md) |
-| Text Scramble Decoder | Validated locally; integration pending | [Evidence](text-scramble-decoder.md) |
-| Timeline Scrubber | Validated locally; integration pending | [Report](timeline-scrubber.md) |
-| Torque Dial | Validated locally; integration pending | [Report](torque-dial.md) |
+| Swipe Action List | Validated baseline | [Report](swipe-action-list.md) |
+| Text Scramble Decoder | Validated baseline | [Evidence](text-scramble-decoder.md) |
+| Timeline Scrubber | Validated baseline | [Report](timeline-scrubber.md) |
+| Torque Dial | Validated baseline | [Report](torque-dial.md) |
 | Typewriter Button | Validated baseline | [Review](typewriter-button.md) |
-| Undo Toast | Validated locally; integration pending | [Report](undo-toast.md) |
-| UnfoldAccordion | Validated locally; integration pending | [Report](unfold-accordion.md) |
-| Stacked Cards | Validated locally; integration pending | [Report](stacked-cards.md) |
-| Sticky Pages | Validated locally; integration pending | [Report](sticky-pages.md) |
-| VelocityToast | Validated locally; integration pending | [Report](velocity-toast.md) |
-| Wallet Card | Validated locally; integration pending | [Report](wallet-card.md) |
+| Undo Toast | Validated baseline | [Report](undo-toast.md) |
+| UnfoldAccordion | Validated baseline | [Report](unfold-accordion.md) |
+| Stacked Cards | Validated baseline | [Report](stacked-cards.md) |
+| Sticky Pages | Validated baseline | [Report](sticky-pages.md) |
+| VelocityToast | Validated baseline | [Report](velocity-toast.md) |
+| Wallet Card | Validated baseline | [Report](wallet-card.md) |
