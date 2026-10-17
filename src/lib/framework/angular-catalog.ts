@@ -147,6 +147,15 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if(entry.id==='expandable-data-row')return `import {Component} from '@angular/core';
+import {KitExpandableDataRowComponent,type DataRowItem} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitExpandableDataRowComponent],template:\`<kit-expandable-data-row [items]="items" [allowMultiple]="true" [onRowAction]="action"/>\`})
+export class Example{items:DataRowItem[]=[{id:'account',user:{name:'Alex Chen',email:'alex@example.com'},status:'active',revenue:'$850',date:'Oct 14, 2026'}];action=(action:string,row:DataRowItem):void=>{/* Connect account actions here. */};}`;
+  if(entry.id==='interactive-timeline')return `import {Component} from '@angular/core';
+import {KitInteractiveTimelineComponent,type TimelineItem} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitInteractiveTimelineComponent],template:\`<kit-interactive-timeline [items]="items" [onItemSelect]="select"/>\`})
+export class Example{items:TimelineItem[]=[{id:'build',title:'Build verified',timestamp:'Now',status:'completed'},{id:'deploy',title:'Deploy',timestamp:'Next',status:'pending'}];select=(item:TimelineItem):void=>{/* Observe selection here. */};}`;
+
   if(entry.id==='mac-os-folder-cards')return `import {Component,TemplateRef} from '@angular/core';
 import {KitMacOsFolderCardsComponent,type MacOSFolderCardItem} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitMacOsFolderCardsComponent],template:\`<ng-template #icon><span aria-hidden="true">★</span></ng-template><kit-mac-os-folder-cards folderTitle="Projects" [items]="items(icon)" [defaultOpen]="false"/>\`})

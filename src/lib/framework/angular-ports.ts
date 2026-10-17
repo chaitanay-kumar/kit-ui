@@ -551,24 +551,16 @@ export const ANGULAR_PORTS = [
     "name": "Expandable Data Row",
     "exportName": "KitExpandableDataRowComponent",
     "selector": "kit-expandable-data-row",
-    "description": "Expandable item details with keyboard-native disclosure and application-owned recovery actions.",
+    "description": "Source-contract responsive account rows with mount-only single/multiple expansion, retained gentle detail transitions, optimistic copy feedback and typed application actions.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "items: DataRowItem[]",
+      "allowMultiple: boolean",
+      "defaultExpandedIds: string[]",
+      "isLoading: boolean",
+      "onRowAction: (action: string, row: DataRowItem) => void",
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "expandable-search",
@@ -779,24 +771,19 @@ export const ANGULAR_PORTS = [
     "name": "Interactive Timeline",
     "exportName": "KitInteractiveTimelineComponent",
     "selector": "kit-interactive-timeline",
-    "description": "Filter chronological events, inspect event payloads and select an event without simulated network activity.",
+    "description": "Source-contract deployment timeline with independent mount-only selection/expansion, status progress, retained details, optimistic hash copying and native node controls.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "items: TimelineItem[]",
+      "defaultSelectedId: string",
+      "onItemSelect: (item: TimelineItem) => void",
+      "collapsible: boolean",
+      "className: string",
+      "style: InteractiveTimelineStyle",
+      "attributes: InteractiveTimelineAttributes",
+      "onClick: (event: MouseEvent) => void",
+      "onKeyDown: (event: KeyboardEvent) => void"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "intro-loader",

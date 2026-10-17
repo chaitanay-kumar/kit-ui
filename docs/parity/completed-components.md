@@ -1,6 +1,6 @@
 # Completed parity checks
 
-87 components have recorded validated baselines: 75 merged through batch 30 and twelve awaiting integration from batches 31-36. Validation scope and remaining limits are recorded in each linked report. Older integration-pending labels for batches 4–30 predate their merge at `cfcfc68`. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
+89 components have recorded validated baselines: 75 merged through batch 30 and fourteen awaiting integration from batches 31-37. Validation scope and remaining limits are recorded in each linked report. Older integration-pending labels for batches 4–30 predate their merge at `cfcfc68`. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
 
 | Component | Status | Evidence |
 | --- | --- | --- |
@@ -23,6 +23,7 @@
 | Dot Field | Validated locally; integration pending | [Evidence](dot-field.md) |
 | DrawCheckbox | Validated locally; integration pending | [Report](draw-checkbox.md) |
 | Elastic Sheet | Validated locally; integration pending | [Evidence](elastic-sheet.md) |
+| Expandable Data Row | Validated locally; integration pending | [Report](expandable-data-row.md) |
 | Expandable Search | Validated baseline | [Report](expandable-search.md) |
 | FAQ | Validated locally; integration pending | [Report](faq.md) |
 | Floating Action Dock | Validated locally; integration pending | [Evidence](floating-action-dock.md) |
@@ -34,6 +35,7 @@
 | Hamburger Menu | Validated baseline | [Report](hamburger-menu.md) |
 | Hold-to-Confirm | Validated locally; integration pending | [Report](hold-to-confirm.md) |
 | Interactive Data Card | Validated locally; integration pending | [Report](interactive-data-card.md) |
+| Interactive Timeline | Validated locally; integration pending | [Report](interactive-timeline.md) |
 | Intro Loader | Validated locally; integration pending | [Report](intro-loader.md) |
 | iOS-style Search Bar | Validated baseline | [Report](ios-search-bar.md) |
 | Liquid Command Palette | Validated locally; integration pending | [Report](liquid-command-palette.md) |

@@ -2,14 +2,14 @@
 
 React is the source of truth for component appearance, interactions, data contracts, options and defaults. Angular implementations stay native; template projection and output events provide Angular equivalents for React nodes and callbacks. Catalog coverage does not establish parity.
 
-Current progress: 87 components have recorded validated baselines (75 merged through batch 30, twelve on batches 31-36); 29 remain unvalidated. Batch 36 adds macOS Folder Cards and Story Cards, with callback-default regressions renewed for Pricing/Stacked Cards. See [batch 36 evidence](parity/batch-36-integration.md) and the [completed component list](parity/completed-components.md). Batches 4–30 were merged into `feat/kit-ui-library` at `cfcfc68`; Registry CI and Pages deployment passed. Older rows saying integration pending for those batches are historical labels.
+Current progress: 89 components have recorded validated baselines (75 merged through batch 30, fourteen on batches 31-37); 27 remain unvalidated. Batch 37 adds Expandable Data Row and Interactive Timeline, including responsive geometry, clipboard/lifecycle behavior and actual reduced-motion runtime checks. See [batch 37 evidence](parity/batch-37-integration.md) and the [completed component list](parity/completed-components.md). Batches 4–30 were merged into `feat/kit-ui-library` at `cfcfc68`; Registry CI and Pages deployment passed. Older rows saying integration pending for those batches are historical labels.
 
 User priority: finish simpler components first. AI Response remains deferred; its previously documented working copy must be located before resuming (see Pending work). Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work proceeds in batches of two, with focused component checks during implementation and one full baseline before batch merge. Batch 2 merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); batch 3 merged through [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Batch 4 and its stacked batch 5 are locally validated and await integration. The original inventory order remains below for tracking, not execution priority.
 
 ## Pending work
 
-- Review and fix the remaining 29 components listed below: 28 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
-- Review batches 31-36 for integration. Continue with Expandable Data Row and Interactive Timeline in batch 37.
+- Review and fix the remaining 27 components listed below: 26 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
+- Review batches 31-37 for integration. Batch 37 is locally validated; select the next two queued components with simpler components first.
 - Before integration, audit older direct button callback expressions (starting with Book Call Button/Split Button) for return-value/exception event-default semantics. Batch 36 renews this contract for Folder Cards, Story Cards, Pricing and Stacked Cards only.
 - Before integration, audit earlier parity fixture HTML for standard doctype and viewport metadata, including batches 11 through 19. Batch 23 corrects these headers and renews browser checks for batches 20 through 23. Earlier mobile input/reduced-motion checks alone do not prove narrow responsive layouts in standards mode.
 - Keep AI Response deferred. No AI code/refs were changed. The previously documented `kit-ui-angular-response` / `feat/angular-ai-response-parity` working copy is not registered in this checkout, its audit is not here, and named Desktop sibling paths on C:/D: were not present when checked. Locate that prior work before resuming; do not substitute the generic generated port or claim the deferred work is validated.
@@ -62,7 +62,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 29 | Dynamic Island | `dynamic-island` | Queued | — |
 | 30 | Elastic Sheet | `elastic-sheet` | Validated locally; integration pending | [Evidence](parity/elastic-sheet.md) |
 | 31 | Evil Eye | `evil-eye` | Queued | — |
-| 32 | Expandable Data Row | `expandable-data-row` | Queued | — |
+| 32 | Expandable Data Row | `expandable-data-row` | Validated locally; integration pending | [Report](parity/expandable-data-row.md) |
 | 33 | Expandable Search | `expandable-search` | Validated baseline | [Report](parity/expandable-search.md) |
 | 34 | FAQ | `faq` | Validated locally; integration pending | [Report](parity/faq.md) |
 | 35 | Floating Action Dock | `floating-action-dock` | Validated locally; integration pending | [Evidence](parity/floating-action-dock.md) |
@@ -76,7 +76,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 43 | Hamburger Menu | `hamburger-menu` | Validated baseline | [Report](parity/hamburger-menu.md) |
 | 44 | Hold-to-Confirm | `hold-to-confirm` | Validated locally; integration pending | [Report](parity/hold-to-confirm.md) |
 | 45 | Interactive Data Card | `interactive-data-card` | Validated locally; integration pending | [Report](parity/interactive-data-card.md) |
-| 46 | Interactive Timeline | `interactive-timeline` | Queued | — |
+| 46 | Interactive Timeline | `interactive-timeline` | Validated locally; integration pending | [Report](parity/interactive-timeline.md) |
 | 47 | Intro Loader | `intro-loader` | Validated locally; integration pending | [Report](parity/intro-loader.md) |
 | 48 | iOS-style Search Bar | `ios-search-bar` | Validated baseline | [Report](parity/ios-search-bar.md) |
 | 49 | Liquid Command Palette | `liquid-command-palette` | Validated locally; integration pending | [Report](parity/liquid-command-palette.md) |

@@ -1,3 +1,5 @@
+import {expandableDataRowPort} from './angular-expandable-data-row';
+import {interactiveTimelinePort} from './angular-interactive-timeline';
 import {storyCardsPort} from './angular-story-cards';
 import {folderCardsPort} from './angular-folder-cards';
 import {stackedCardsPort} from './angular-stacked-cards';
@@ -323,29 +325,10 @@ add("smooth-accordion","plain",smoothAccordionPort.description,smoothAccordionPo
 // Expandable information and selectable collections.
 add('stack-unfold-panel','plain',stackUnfoldPanelPort.description,stackUnfoldPanelPort.template,stackUnfoldPanelPort.body,stackUnfoldPanelPort);
 add("faq", "plain", faqPort.description, faqPort.template, faqPort.body.replace("input.required<FAQItem[]>()", "input<FAQItem[]>([])") , faqPort);
-for (const [id, title] of [
-  ["expandable-data-row", "Data details"],
-]) {
-  add(
-    id,
-    "collection",
-    "Expandable item details with keyboard-native disclosure and application-owned recovery actions.",
-    `<section class="kit-control kit-surface kit-stack"><h3>{{label()||'${title}'}}</h3>@for(item of items();track item.id){<details class="k-disclosure"><summary>{{item.label}} @if(item.value!==undefined){<span>{{item.value}}</span>}</summary><div class="kit-stack"><p>{{item.description}}</p><ng-content></ng-content>${id === "recovery-ledger" ? '<button type="button" [disabled]="disabled()||busy()||item.disabled" (click)="execute([item])">Restore snapshot</button>' : ""}</div></details>}@empty{<p>No items yet.</p>}${collectionFeedback}</section>`,
-  );
-}
+add('expandable-data-row','plain',expandableDataRowPort.description,expandableDataRowPort.template,expandableDataRowPort.body,expandableDataRowPort);
 add('recovery-ledger','plain',recoveryLedgerPort.description,recoveryLedgerPort.template,recoveryLedgerPort.body,recoveryLedgerPort);
 add('ai-agent-activity','plain',agentActivityPort.description,agentActivityPort.template,agentActivityPort.body,agentActivityPort);
-for (const [id, title] of [
-
-  ["interactive-timeline", "Your timeline"],
-]) {
-  add(
-    id,
-    "collection",
-    "Filter chronological events, inspect event payloads and select an event without simulated network activity.",
-    `<section class="kit-control kit-surface kit-stack"><h3>{{label()||'${title}'}}</h3><label>Filter events<input type="search" [value]="query()" (input)="search($event)" [disabled]="disabled()" /></label><ol class="k-timeline">@for(item of visible();track item.id){<li><details><summary><span class="k-event-dot" aria-hidden="true"></span>{{item.label}} <small>{{item.status||item.value}}</small></summary><p>{{item.description}}</p><button type="button" [disabled]="disabled()||item.disabled" (click)="select(item)">Inspect event</button></details></li>}@empty{<li>No matching events.</li>}</ol>${collectionFeedback}</section>`,
-  );
-}
+add('interactive-timeline','plain',interactiveTimelinePort.description,interactiveTimelinePort.template,interactiveTimelinePort.body,interactiveTimelinePort);
 add('selection-basket','plain',selectionBasketPort.description,selectionBasketPort.template,selectionBasketPort.body,selectionBasketPort);
 for (const [id, title] of [
   ["batch-gesture-tray", "Batch selection"],
