@@ -1,6 +1,6 @@
 # Completed parity checks
 
-97 components have recorded validated baselines: 75 merged through batch 30 and twenty-two awaiting integration from batches 31-41. Validation scope and remaining limits are recorded in each linked report. Older integration-pending labels for batches 4–30 predate their merge at `cfcfc68`. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
+99 components have recorded validated baselines: 75 merged through batch 30 and twenty-four awaiting integration from batches 31-42. Validation scope and remaining limits are recorded in each linked report. Older integration-pending labels for batches 4–30 predate their merge at `cfcfc68`. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
 
 | Component | Status | Evidence |
 | --- | --- | --- |
@@ -18,6 +18,7 @@
 | Button | Validated baseline | [Review](button.md) |
 | Circular Orbit | Validated locally; integration pending | [Evidence](circular-orbit.md) |
 | Code Snippet Deck | Validated locally; integration pending | [Report](code-snippet-deck.md) |
+| Command Menu | Validated locally; integration pending | [Report](command-menu.md) |
 | Cursor Follower | Validated locally; integration pending | [Report](cursor-follower.md) |
 | Density Lens | Validated locally; integration pending | [Evidence](density-lens.md) |
 | Depth Corridor | Validated locally; integration pending | [Report](depth-corridor.md) |
@@ -86,6 +87,7 @@
 | Split Button | Validated locally; integration pending | [Report](split-button.md) |
 | Speed Warp | Validated locally; integration pending | [Report](speed-warp.md) |
 | Spotlight Card | Validated baseline | [Review](spotlight-card.md) |
+| Spotlight Search | Validated locally; integration pending | [Report](spotlight-search.md) |
 | SpringSelect | Validated locally; integration pending | [Report](spring-select.md) |
 | Stack Unfold Panel | Validated locally; integration pending | [Evidence](stack-unfold-panel.md) |
 | Story Cards | Validated locally; integration pending | [Report](story-card.md) |

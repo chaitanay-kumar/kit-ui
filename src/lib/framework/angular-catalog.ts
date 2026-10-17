@@ -147,6 +147,15 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if(entry.id==='command-menu')return `import {Component,signal} from '@angular/core';
+import {KitCommandMenuComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitCommandMenuComponent],template:\`<button (click)="open.set(true)">Open commands</button><kit-command-menu [isOpen]="open()" [onClose]="close"/>\`})
+export class ExampleComponent {readonly open=signal(false);readonly close=()=>this.open.set(false)}`;
+  if(entry.id==='spotlight-search')return `import {Component} from '@angular/core';
+import {KitSpotlightSearchComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitSpotlightSearchComponent],template:\`<kit-spotlight-search [enableGlobalShortcut]="true"/>\`})
+export class ExampleComponent {}`;
+
   if(entry.id==='evil-eye'||entry.id==='nimbu-mirchi'){const name=entry.id==='evil-eye'?'KitEvilEyeComponent':'KitNimbuMirchiComponent';return `import {Component} from '@angular/core';
 import {${name}} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[${name}],template:\`<kit-${entry.id} [maxRotation]="13" [stiffnessX]="55" [stiffnessY]="45" [damping]="9" caption="Hanging charm"/>\`})

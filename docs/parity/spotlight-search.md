@@ -1,0 +1,13 @@
+# Spotlight Search parity (validated locally; integration pending)
+
+React source: `src/components/ui/SpotlightSearch.tsx`; authoring: `scripts/angular-search-palettes.ts`; native controller, presence/highlight support, glyphs and styles: `packages/angular/src/search-palette-*`, `search-palettes.css`.
+
+The native view preserves controlled versus internal open ownership, optional global shortcut, 30ms opening focus/reset and input-local arrow/Enter navigation. The shortcut also makes controlled requests despite the misleading source comment. Escape can invoke both input and enabled global handlers when the controlled parent keeps the overlay open. Whitespace-only queries show all items; other queries use the untrimmed lowercase value against title/category/description. Replacing data does not clamp an out-of-range selected index.
+
+Custom items retain their original object identity and method-bound action; onSelect and open/close observers are unbound. The execution order is action, onSelect, close. Default catalog/document/repository actions already call close, so their selection can request close twice. Synchronous failures stop the remaining callbacks; native ErrorHandler reports them without adding error UI or preventing an unrelated DOM default. Catalog item identities survive filtering and selection changes. Native destruction cancels focus timers, listeners and motion.
+
+Source output renders titles only: description is searchable, while icon, shortcut and recentSearches fields do not create visible content. The Search-labeled input and dialog remain; result divs and the clickable ESC kbd retain the source's lack of option/keyboard semantics. No focus trap, restoration, body lock or automatic scrolling is invented. Panel/backdrop exit snapshots keep captured callbacks and visible text, including when an item is mutated during exit.
+
+The panel uses the actual Inter Variable font, source theme tokens/radii, 380/30/.5 presence and 150ms backdrop transition. The source's unresolved shadow-elevated utility renders no shadow; native output follows that result. Caller classes can override native defaults through the components CSS layer; paired width/radius overrides pass. The active pill reuses isolated shared-layout projection with 170/26/.9 physics, measured in the panel's untransformed layout space. Paired highlight interpolation/reversal and reduced-motion exit checks pass; the source keeps animation under reduced preference.
+
+Focused package and desktop/mobile behavior/visual evidence is recorded in [batch 42](batch-42-integration.md). No physical-device, Safari/Firefox, exhaustive accessibility or frame-by-frame equality claim is made.

@@ -322,14 +322,14 @@ export const ANGULAR_PORTS = [
     "name": "Command Menu",
     "exportName": "KitCommandMenuComponent",
     "selector": "kit-command-menu",
-    "description": "A native modal command search with keyboard navigation, async errors and focus restoration.",
+    "description": "Native controlled catalog command overlay with retained search, global keyboard requests and source callback/action order.",
     "inputs": [
-      "commands: LiquidCommand[]",
-      "disabled: boolean"
+      "isOpen: boolean",
+      "onClose: () => void",
+      "onSelectComponent: (id: string) => void",
+      "onNavigateDocs: (topicId?: string) => void"
     ],
-    "outputs": [
-      "commandSelect: string"
-    ]
+    "outputs": []
   },
   {
     "id": "cursor-follower",
@@ -1736,14 +1736,21 @@ export const ANGULAR_PORTS = [
     "name": "Spotlight Search",
     "exportName": "KitSpotlightSearchComponent",
     "selector": "kit-spotlight-search",
-    "description": "A native modal command search with keyboard navigation, async errors and focus restoration.",
+    "description": "Native controlled or internal Spotlight search with captured actions, input navigation, delayed focus and shared active highlight.",
     "inputs": [
-      "commands: LiquidCommand[]",
-      "disabled: boolean"
+      "open: boolean",
+      "onOpenChange: (open: boolean) => void",
+      "onClose: () => void",
+      "items: SpotlightSearchItem[]",
+      "placeholder: string",
+      "recentSearches: string[]",
+      "onSelect: (item: SpotlightSearchItem) => void",
+      "enableGlobalShortcut: boolean",
+      "className: string",
+      "onSelectComponent: (id: string) => void",
+      "onNavigateDocs: (topicId?: string) => void"
     ],
-    "outputs": [
-      "commandSelect: string"
-    ]
+    "outputs": []
   },
   {
     "id": "spring-select",

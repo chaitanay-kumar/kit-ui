@@ -1,3 +1,4 @@
+import {commandMenuPort,spotlightSearchPort} from './angular-search-palettes';
 import {evilEyePort,nimbuMirchiPort} from './angular-hanging-charms';
 import {torqueDialPort} from './angular-torque-dial';
 import {rocketPartyPopperPort} from './angular-rocket-party-popper';
@@ -278,22 +279,8 @@ add("pill-navigation","plain",pillNavigationPort.description,pillNavigationPort.
 add("origin-dropdown", "plain", originDropdownPort.description, originDropdownPort.template, originDropdownPort.body, originDropdownPort);
 add('branching-submenu','plain',branchingSubmenuPort.description,branchingSubmenuPort.template,branchingSubmenuPort.body,branchingSubmenuPort);
 add("ios-search-bar","plain",iosSearchPort.description,iosSearchPort.template,iosSearchPort.body,iosSearchPort);
-for (const id of ["command-menu", "spotlight-search"]) {
-  add(
-    id,
-    "plain",
-    "A native modal command search with keyboard navigation, async errors and focus restoration.",
-    `<kit-liquid-command-palette [commands]="commands()" [disabled]="disabled()" />`,
-    `readonly commands=input<LiquidCommand[]>([{id:'home',label:'Go home',onSelect:()=>this.commandSelect.emit('home')},{id:'docs',label:'Open documentation',onSelect:()=>this.commandSelect.emit('docs')}]);readonly disabled=input(false);readonly commandSelect=output<string>();`,
-    {
-      inputs: ["commands: LiquidCommand[]", "disabled: boolean"],
-      outputs: ["commandSelect: string"],
-      imports:
-        "import { KitLiquidCommandPaletteComponent } from './liquid-command-palette.component';\nimport type { LiquidCommand } from './types';",
-      componentImports: "KitLiquidCommandPaletteComponent",
-    },
-  );
-}
+add('command-menu','plain',commandMenuPort.description,commandMenuPort.template,commandMenuPort.body,commandMenuPort);
+add('spotlight-search','plain',spotlightSearchPort.description,spotlightSearchPort.template,spotlightSearchPort.body,spotlightSearchPort);
 add(
   "dynamic-island",
   "collection",
