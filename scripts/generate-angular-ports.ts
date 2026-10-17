@@ -1,3 +1,5 @@
+import {torqueDialPort} from './angular-torque-dial';
+import {rocketPartyPopperPort} from './angular-rocket-party-popper';
 import {codeSnippetDeckPort} from './angular-code-snippet-deck';
 import {batchGestureTrayPort} from './angular-batch-gesture-tray';
 import {speedWarpPort} from './angular-speed-warp';
@@ -477,18 +479,7 @@ for (const [id, mode] of Object.entries(canvasModes)) {
 }
 add('density-lens','plain',densityLensPort.description,densityLensPort.template,densityLensPort.body,densityLensPort);
 add('gravity-particle-burst','plain',gravityParticleBurstPort.description,gravityParticleBurstPort.template,gravityParticleBurstPort.body,gravityParticleBurstPort);
-for (const [id, label] of [
-  ["rocket-party-popper", "Launch celebration"],
-]) {
-  add(
-    id,
-    "canvas",
-    "Trigger a local particle celebration with a keyboard button, visible motion controls and cleanup.",
-    `<section class="kit-control kit-stack"><div class="k-canvas-wrap" (pointermove)="move($event)"><canvas #canvas role="img" [attr.aria-label]="label()" [style.opacity]="active()?1:.15"></canvas></div><div class="kit-row"><button type="button" [disabled]="disabled()" (click)="launch()">${label}</button><button type="button" [disabled]="disabled()" (click)="running.set(!running())">{{running()?'Pause':'Resume'}}</button></div><p role="status">{{active()?'Celebration launched.':''}}</p></section>`,
-    `override readonly mode='burst';readonly active=signal(false);readonly triggered=output<void>();private stopTimer:ReturnType<typeof setTimeout>|undefined;constructor(){super();this.running.set(false);inject(DestroyRef).onDestroy(()=>clearTimeout(this.stopTimer));}launch():void{if(this.disabled())return;clearTimeout(this.stopTimer);this.active.set(true);this.running.set(true);this.triggered.emit();this.stopTimer=setTimeout(()=>{this.active.set(false);this.running.set(false);},3000);}`,
-    { outputs: ["triggered: void"] },
-  );
-}
+add('rocket-party-popper','plain',rocketPartyPopperPort.description,rocketPartyPopperPort.template,rocketPartyPopperPort.body,rocketPartyPopperPort);
 add("cursor-follower","plain",cursorFollowerPort.description,cursorFollowerPort.template,cursorFollowerPort.body,cursorFollowerPort);
 add(
   "particle-delete",
@@ -543,25 +534,7 @@ add(
 */
 add("airport-matrix-clock","plain",airportMatrixClockPort.description,airportMatrixClockPort.template,airportMatrixClockPort.body,airportMatrixClockPort);
 add("metric-hud","plain",metricHudPort.description,metricHudPort.template,metricHudPort.body,metricHudPort);
-add(
-  "torque-dial",
-  "plain",
-  "A bounded rotary input with pointer dragging, a native range alternative and keyboard increments.",
-  `<section class="kit-control kit-stack"><label>{{label()}}<input type="range" [min]="min()" [max]="safeMax()" [step]="safeStep()" [value]="bounded()" [disabled]="disabled()" (input)="set(+$any($event.target).value)" (change)="changeEnd.emit()" /></label><div class="k-dial" role="slider" [attr.aria-label]="label()" [attr.aria-valuemin]="min()" [attr.aria-valuemax]="safeMax()" [attr.aria-valuenow]="bounded()" [attr.aria-disabled]="disabled()" [tabIndex]="disabled()?-1:0" (keydown)="key($event)" (pointerdown)="start($event)" (pointermove)="drag($event)" (pointerup)="end()" (pointercancel)="end()"><span class="k-dial-tick" [style.transform]="'rotate('+angle()+'deg)'"></span><output>{{bounded()}}{{unit()}}</output></div></section>`,
-  `readonly value=model(50);readonly min=input(0);readonly max=input(100);readonly step=input(1);readonly label=input('Dial control');readonly unit=input('%');readonly disabled=input(false);readonly changeEnd=output<void>();readonly safeMax=computed(()=>Math.max(this.min(),this.max()));readonly safeStep=computed(()=>Math.max(.001,this.step()));readonly bounded=computed(()=>Math.max(this.min(),Math.min(this.safeMax(),this.value())));readonly angle=computed(()=>-135+(this.bounded()-this.min())/Math.max(1,this.safeMax()-this.min())*270);private origin?:{y:number;value:number};set(value:number):void{if(this.disabled())return;const step=this.safeStep();this.value.set(Math.max(this.min(),Math.min(this.safeMax(),Math.round((value-this.min())/step)*step+this.min())));}start(event:PointerEvent):void{if(this.disabled()||event.button!==0)return;this.origin={y:event.clientY,value:this.bounded()};(event.currentTarget as HTMLElement).setPointerCapture(event.pointerId);}drag(event:PointerEvent):void{if(this.origin)this.set(this.origin.value+(this.origin.y-event.clientY)*(this.safeMax()-this.min())/150);}end():void{if(this.origin)this.changeEnd.emit();this.origin=undefined;}key(event:KeyboardEvent):void{if(['ArrowUp','ArrowRight','ArrowDown','ArrowLeft','Home','End','PageUp','PageDown'].includes(event.key)){event.preventDefault();this.set(event.key==='Home'?this.min():event.key==='End'?this.safeMax():this.bounded()+(['ArrowDown','ArrowLeft','PageDown'].includes(event.key)?-1:1)*this.safeStep()*(event.key.startsWith('Page')?10:1));this.changeEnd.emit();}}`,
-  {
-    inputs: [
-      "value: number (two-way)",
-      "min: number",
-      "max: number",
-      "step: number",
-      "label: string",
-      "unit: string",
-      "disabled: boolean",
-    ],
-    outputs: ["changeEnd: void"],
-  },
-);
+add('torque-dial','plain',torqueDialPort.description,torqueDialPort.template,torqueDialPort.body,torqueDialPort);
 
 /* Legacy directional tooltip replaced by the authored React-contract port.
 add(
@@ -642,8 +615,6 @@ for (const port of ports) {
     );
   if (port.kind === 'collection' && cardDefaults[port.id])
     port.body += `\noverride readonly items=input<KitItem[]>(${JSON.stringify(cardDefaults[port.id])});`;
-  if (port.id === "rocket-party-popper")
-    port.body = port.body.replace("mode='burst'", "mode='rocket'");
   if (port.id === "particle-delete")
     port.body = port.body.replace(
       "await this.run();",

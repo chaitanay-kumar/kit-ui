@@ -147,6 +147,14 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if(entry.id==='torque-dial')return `import {Component,signal} from '@angular/core';
+import {KitTorqueDialComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitTorqueDialComponent],template:\`<kit-torque-dial [value]="gain()" [onChange]="change" label="Gain Level" unit="%"/>\`})
+export class ExampleComponent {readonly gain=signal(48);readonly change=(value:number)=>this.gain.set(value)}`;
+  if(entry.id==='rocket-party-popper')return `import {Component,signal} from '@angular/core';
+import {KitRocketPartyPopperComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitRocketPartyPopperComponent],template:\`<kit-rocket-party-popper triggerLabel="Launch celebration" [confettiCount]="50" [onLaunch]="launch" [onReset]="reset"/>\`})
+export class ExampleComponent {readonly lastEvent=signal('');readonly launch=()=>this.lastEvent.set('launch');readonly reset=()=>this.lastEvent.set('reset')}`;
   if(entry.id==='code-snippet-deck')return `import {Component} from '@angular/core';
 import {KitCodeSnippetDeckComponent,type SnippetItem,type SnippetParameter} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitCodeSnippetDeckComponent],template:\`<kit-code-snippet-deck [snippets]="snippets" [parameters]="parameters"/>\`})

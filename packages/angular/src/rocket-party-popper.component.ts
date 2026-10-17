@@ -1,24 +1,39 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component, DestroyRef, inject, output, signal } from '@angular/core';
-import { KitCanvasController } from './port-canvas';
-
+import { Component, ViewEncapsulation, DestroyRef, ElementRef, inject, input, signal, viewChild } from '@angular/core';
+import {afterRenderEffect,ErrorHandler} from '@angular/core';import {RocketConfetti} from './rocket-confetti';import {RocketScenes,type RocketScene} from './rocket-scenes';import {RocketPartyIconComponent} from './rocket-party-icons';import {NativeRootBindings,type NativeAttributes,type NativeStyle} from './native-root-bindings';import {invokeNativeEventCallback} from './native-event-callback';export type {NativeAttributes as RocketPartyPopperAttributes,NativeStyle as RocketPartyPopperStyle} from './native-root-bindings';
 @Component({
  selector:"kit-rocket-party-popper", standalone:true,
- host:{'data-kit':"rocket-party-popper",style:'display:block;min-width:0'},
- template:`
-<section class="kit-control kit-stack">
-<div class="k-canvas-wrap" (pointermove)="move($event)">
-<canvas #canvas role="img" [attr.aria-label]="label()" [style.opacity]="active()?1:.15">
-</canvas>
+ host:{style:'display:contents'},
+ imports:[RocketPartyIconComponent],
+encapsulation:ViewEncapsulation.None,styleUrls:["./rocket-party-popper.css"],
+template:`
+<div #root [class]="'k-rocket-party '+className()" (click)="rootClick($event)" (keydown)="rootKey($event)">
+<canvas #canvas class="k-rocket-confetti" aria-hidden="true">
+</canvas>@if(scene()==='pad'){<div #sceneNode class="k-rocket-pad">
+<div class="k-rocket-track">
+<div class="k-rocket-ground">
 </div>
-<div class="kit-row">
-<button type="button" [disabled]="disabled()" (click)="launch()">Launch celebration</button>
-<button type="button" [disabled]="disabled()" (click)="running.set(!running())">{{running()?'Pause':'Resume'}}</button>
+<div class="k-rocket-flight" [class.launching]="padLaunching()" (click)="launch()">
+<div class="k-rocket-body">
+<svg kitRocketIcon icon="rocket" class="k-rocket-glyph"/>
+</div>@if(padLaunching()){<div class="k-rocket-launch-flame">
+</div>}@else{<div class="k-rocket-idle-flame">
+</div>}</div>
 </div>
-<p role="status">{{active()?'Celebration launched.':''}}</p>
-</section>
+<div class="k-rocket-trigger-wrap">
+<button type="button" class="k-rocket-launch" [disabled]="padLaunching()" (click)="launch()">
+<svg kitRocketIcon icon="sparkles"/>
+<span>{{padLaunching()?'Launching...':padLabel()}}</span>
+</button>
+</div>
+</div>}@else{<div #sceneNode class="k-rocket-success">
+<button type="button" class="k-rocket-reset" aria-label="Launch again" (click)="reset()">
+<svg kitRocketIcon icon="reset"/>
+<span>Launch again</span>
+</button>
+</div>}</div>
 `
 })
-export class KitRocketPartyPopperComponent extends KitCanvasController {
-override readonly mode='rocket';readonly active=signal(false);readonly triggered=output<void>();private stopTimer:ReturnType<typeof setTimeout>|undefined;constructor(){super();this.running.set(false);inject(DestroyRef).onDestroy(()=>clearTimeout(this.stopTimer));}launch():void{if(this.disabled())return;clearTimeout(this.stopTimer);this.active.set(true);this.running.set(true);this.triggered.emit();this.stopTimer=setTimeout(()=>{this.active.set(false);this.running.set(false);},3000);}
+export class KitRocketPartyPopperComponent {
+readonly triggerLabel=input<string,string|undefined>('Launch celebration',{transform:v=>v===undefined?'Launch celebration':v});readonly confettiCount=input<number,number|undefined>(50,{transform:v=>v===undefined?50:v});readonly defaultLaunched=input<boolean,boolean|undefined>(false,{transform:v=>v===undefined?false:v});readonly onLaunch=input<(()=>void)|undefined>();readonly onReset=input<(()=>void)|undefined>();readonly title=input<string|undefined>();readonly description=input<string|undefined>();readonly metric=input<string|undefined>();readonly className=input<string,string|undefined>('',{transform:v=>v===undefined?'':v});readonly styles=input<NativeStyle|undefined>(undefined,{alias:'style'});readonly attributes=input<NativeAttributes|undefined>();readonly onClick=input<((event:MouseEvent)=>void)|undefined>();readonly onKeyDown=input<((event:KeyboardEvent)=>void)|undefined>();readonly root=viewChild<ElementRef<HTMLElement>>('root');readonly canvas=viewChild<ElementRef<HTMLCanvasElement>>('canvas');readonly sceneNode=viewChild<ElementRef<HTMLElement>>('sceneNode');readonly status=signal<'idle'|'launching'|'celebrating'>('idle');readonly scene=signal<RocketScene>('pad');readonly padLaunching=signal(false);readonly padLabel=signal('Launch celebration');readonly reduced=signal(false);private readonly errors=inject(ErrorHandler);private confetti:RocketConfetti|undefined;private scenes:RocketScenes|undefined;private bindings:NativeRootBindings|undefined;private view:Window|undefined;private timer:number|undefined;private disposed=false;private padSnapshot:{status:'idle'|'launching';count:number;reduced:boolean;launch:(()=>void)|undefined}={status:'idle',count:50,reduced:false,launch:undefined};private resetSnapshot:(()=>void)|undefined;ngOnInit():void{this.status.set(this.defaultLaunched()?'celebrating':'idle');this.scene.set(this.defaultLaunched()?'success':'pad');this.padLabel.set(this.triggerLabel());if(typeof window!=='undefined')this.reduced.set(window.matchMedia('(prefers-reduced-motion: reduce)').matches);this.padSnapshot={status:'idle',count:this.confettiCount(),reduced:this.reduced(),launch:this.onLaunch()};this.resetSnapshot=this.onReset()}launch():void{if(this.scene()!=='pad'||this.padSnapshot.status!=='idle'||this.disposed)return;this.view??=this.root()?.nativeElement.ownerDocument.defaultView??undefined;const snapshot=this.padSnapshot,count=snapshot.count,reduced=snapshot.reduced,callback=snapshot.launch;try{callback?.()}catch(error){queueMicrotask(()=>this.errors.handleError(error));return}if(this.disposed)return;if(reduced){this.status.set('celebrating');return}this.status.set('launching');this.padLaunching.set(true);this.timer=this.view?.setTimeout(()=>{this.timer=undefined;if(this.disposed)return;try{const canvas=this.canvas()?.nativeElement;if(canvas){const rect=canvas.getBoundingClientRect();this.confetti?.spawn(count,rect.width/2,60,reduced)}this.status.set('celebrating')}catch(error){queueMicrotask(()=>this.errors.handleError(error))}},600)}reset():void{if(this.disposed)return;const callback=this.scene()==='success'?this.resetSnapshot:this.onReset();this.status.set('idle');this.padLaunching.set(false);this.padLabel.set(this.triggerLabel());if(this.timer!==undefined)this.view?.clearTimeout(this.timer);this.timer=undefined;this.confetti?.reset();try{callback?.()}catch(error){queueMicrotask(()=>this.errors.handleError(error))}}rootClick(event:MouseEvent):void{invokeNativeEventCallback(this.onClick(),event,this.errors)}rootKey(event:KeyboardEvent):void{invokeNativeEventCallback(this.onKeyDown(),event,this.errors)}constructor(){afterRenderEffect(()=>{const root=this.root()?.nativeElement,canvas=this.canvas()?.nativeElement;if(root&&canvas){this.view=root.ownerDocument.defaultView??undefined;if(this.view){this.confetti??=new RocketConfetti(canvas,this.view);this.scenes??=new RocketScenes(this.view,scene=>{if(!this.disposed){this.scene.set(scene);if(scene==='pad'){this.padLaunching.set(false);this.padLabel.set(this.triggerLabel())}}})}this.bindings??=new NativeRootBindings(root);this.bindings.apply(this.styles(),this.attributes(),{title:this.title(),description:this.description(),metric:this.metric()})}});afterRenderEffect(()=>{const scene=this.scene(),status=this.status(),label=this.triggerLabel();if(scene==='pad'&&status!=='celebrating'){this.padSnapshot={status,count:this.confettiCount(),reduced:this.reduced(),launch:this.onLaunch()};if(status==='idle')this.padLabel.set(label)}else if(scene==='success'&&status==='celebrating')this.resetSnapshot=this.onReset();this.scenes?.rendered(this.sceneNode()?.nativeElement,scene,status==='celebrating'?'success':'pad',this.reduced())});inject(DestroyRef).onDestroy(()=>{this.disposed=true;if(this.timer!==undefined)this.view?.clearTimeout(this.timer);this.confetti?.destroy();this.scenes?.destroy()})}
 }

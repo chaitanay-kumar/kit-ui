@@ -1,6 +1,6 @@
 # Completed parity checks
 
-93 components have recorded validated baselines: 75 merged through batch 30 and eighteen awaiting integration from batches 31-39. Validation scope and remaining limits are recorded in each linked report. Older integration-pending labels for batches 4–30 predate their merge at `cfcfc68`. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
+95 components have recorded validated baselines: 75 merged through batch 30 and twenty awaiting integration from batches 31-40. Validation scope and remaining limits are recorded in each linked report. Older integration-pending labels for batches 4–30 predate their merge at `cfcfc68`. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
 
 | Component | Status | Evidence |
 | --- | --- | --- |
@@ -70,6 +70,7 @@
 | Pricing | Validated locally; integration pending | [Report](pricing.md) |
 | Profile Card | Validated locally; integration pending | [Report](profile-card.md) |
 | Rainbow Button | Validated baseline | [Review](rainbow-button.md) |
+| Rocket Party Popper | Validated locally; integration pending | [Report](rocket-party-popper.md) |
 | Recovery Ledger | Validated locally; integration pending | [Report](recovery-ledger.md) |
 | Reveal Card | Validated baseline | [Report](reveal-card.md) |
 | Scroll Progress Navigation | Validated locally; integration pending | [Report](scroll-progress-nav.md) |
@@ -90,6 +91,7 @@
 | Swipe Action List | Validated locally; integration pending | [Report](swipe-action-list.md) |
 | Text Scramble Decoder | Validated locally; integration pending | [Evidence](text-scramble-decoder.md) |
 | Timeline Scrubber | Validated locally; integration pending | [Report](timeline-scrubber.md) |
+| Torque Dial | Validated locally; integration pending | [Report](torque-dial.md) |
 | Typewriter Button | Validated baseline | [Review](typewriter-button.md) |
 | Undo Toast | Validated locally; integration pending | [Report](undo-toast.md) |
 | UnfoldAccordion | Validated locally; integration pending | [Report](unfold-accordion.md) |

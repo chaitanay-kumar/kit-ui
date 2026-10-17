@@ -1460,18 +1460,23 @@
     "name": "Rocket Party Popper",
     "exportName": "KitRocketPartyPopperComponent",
     "selector": "kit-rocket-party-popper",
-    "description": "Trigger a local particle celebration with a keyboard button, visible motion controls and cleanup.",
+    "description": "Source-contract rocket launch phases, wait-mode scenes and DPR confetti physics with mount-only motion preference and native cleanup.",
     "inputs": [
-      "label: string",
-      "density: number (1–400)",
-      "speed: number (0–5)",
-      "color: string",
-      "paused: boolean",
-      "disabled: boolean"
+      "triggerLabel: string",
+      "confettiCount: number",
+      "defaultLaunched: boolean",
+      "onLaunch: () => void",
+      "onReset: () => void",
+      "title: string",
+      "description: string",
+      "metric: string",
+      "className: string",
+      "style: RocketPartyPopperStyle",
+      "attributes: RocketPartyPopperAttributes",
+      "onClick: (event: MouseEvent) => void",
+      "onKeyDown: (event: KeyboardEvent) => void"
     ],
-    "outputs": [
-      "triggered: void"
-    ]
+    "outputs": []
   },
   {
     "id": "scroll-progress-nav",
@@ -1881,20 +1886,23 @@
     "name": "Torque Dial",
     "exportName": "KitTorqueDialComponent",
     "selector": "kit-torque-dial",
-    "description": "A bounded rotary input with pointer dragging, a native range alternative and keyboard increments.",
+    "description": "Native controlled angular dial with source wheel/key stepping, optimistic gesture ref, captured release momentum and disposal.",
     "inputs": [
-      "value: number (two-way)",
+      "value: number",
+      "onChange: (value: number) => void",
       "min: number",
       "max: number",
       "step: number",
+      "onChangeEnd: () => void",
       "label: string",
+      "showValue: boolean",
+      "size: number",
+      "disabled: boolean",
+      "momentum: boolean",
       "unit: string",
-      "disabled: boolean"
+      "className: string"
     ],
-    "outputs": [
-      "changeEnd: void",
-      "valueChange: number"
-    ]
+    "outputs": []
   },
   {
     "id": "typewriter-button",
