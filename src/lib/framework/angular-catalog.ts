@@ -147,6 +147,14 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if(entry.id==='code-snippet-deck')return `import {Component} from '@angular/core';
+import {KitCodeSnippetDeckComponent,type SnippetItem,type SnippetParameter} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitCodeSnippetDeckComponent],template:\`<kit-code-snippet-deck [snippets]="snippets" [parameters]="parameters"/>\`})
+export class ExampleComponent {readonly parameters:SnippetParameter[]=[{id:'name',label:'Name',type:'text',defaultValue:'Kit UI'}];readonly snippets:SnippetItem[]=[{language:'typescript',label:'TypeScript',filename:'example.ts',code:p=>'const name = '+JSON.stringify(p['name'])+';'}]}`;
+  if(entry.id==='batch-gesture-tray')return `import {Component,signal} from '@angular/core';
+import {KitBatchGestureTrayComponent,type BatchItem,type BatchAction} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitBatchGestureTrayComponent],template:\`<kit-batch-gesture-tray [items]="items" [actions]="actions"/>\`})
+export class ExampleComponent {readonly lastSelection=signal<string[]>([]);readonly items:BatchItem[]=[{id:'one',title:'Example item'}];readonly actions:BatchAction[]=[{id:'inspect',label:'Inspect',action:ids=>{this.lastSelection.set(ids)}}]}`;
   if(entry.id==='speed-warp')return `import {Component} from '@angular/core';
 import {KitSpeedWarpComponent} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitSpeedWarpComponent],template:\`<div style="position:relative;height:360px;background:#050505"><kit-speed-warp [speed]="25" [starCount]="600"><ng-template><h2>Engage Warp Drive</h2></ng-template></kit-speed-warp></div>\`})

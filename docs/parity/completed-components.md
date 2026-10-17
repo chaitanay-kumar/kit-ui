@@ -1,6 +1,6 @@
 # Completed parity checks
 
-91 components have recorded validated baselines: 75 merged through batch 30 and sixteen awaiting integration from batches 31-38. Validation scope and remaining limits are recorded in each linked report. Older integration-pending labels for batches 4–30 predate their merge at `cfcfc68`. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
+93 components have recorded validated baselines: 75 merged through batch 30 and eighteen awaiting integration from batches 31-39. Validation scope and remaining limits are recorded in each linked report. Older integration-pending labels for batches 4–30 predate their merge at `cfcfc68`. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
 
 | Component | Status | Evidence |
 | --- | --- | --- |
@@ -12,10 +12,12 @@
 | Animated Number Morph | Validated locally; integration pending | [Report](animated-number.md) |
 | Animated Tabs | Validated locally; integration pending | [Report](animated-tabs.md) |
 | Avatar Stack | Validated locally; integration pending | [Report](avatar-stack.md) |
+| Batch Gesture Tray | Validated locally; integration pending | [Report](batch-gesture-tray.md) |
 | Book Call Button | Validated locally; integration pending | [Report](book-call-button.md) |
 | Branching Submenu | Validated locally; integration pending | [Report](branching-submenu.md) |
 | Button | Validated baseline | [Review](button.md) |
 | Circular Orbit | Validated locally; integration pending | [Evidence](circular-orbit.md) |
+| Code Snippet Deck | Validated locally; integration pending | [Report](code-snippet-deck.md) |
 | Cursor Follower | Validated locally; integration pending | [Report](cursor-follower.md) |
 | Density Lens | Validated locally; integration pending | [Evidence](density-lens.md) |
 | Depth Corridor | Validated locally; integration pending | [Report](depth-corridor.md) |

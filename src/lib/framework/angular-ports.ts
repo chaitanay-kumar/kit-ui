@@ -176,24 +176,16 @@ export const ANGULAR_PORTS = [
     "name": "Batch Gesture Tray",
     "exportName": "KitBatchGestureTrayComponent",
     "selector": "kit-batch-gesture-tray",
-    "description": "Select individual items or all items, then run a cancellable application-owned batch action.",
+    "description": "Source-contract keyboard item selection and sticky batch actions with callback-owned state, async recovery and native spring presence.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "items: BatchItem[]",
+      "actions: BatchAction[]",
+      "selectedIds: string[]",
+      "onSelectionChange: (ids: string[]) => void",
+      "onActionComplete: (id: string) => void",
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "book-call-button",
@@ -310,24 +302,20 @@ export const ANGULAR_PORTS = [
     "name": "Code Snippet Deck",
     "exportName": "KitCodeSnippetDeckComponent",
     "selector": "kit-code-snippet-deck",
-    "description": "Browse code snippets and copy the selected snippet with visible failure feedback.",
+    "description": "Source-contract multi-runtime code deck with mount-only variables, live code generators, shared tab springs and optimistic clipboard feedback.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "snippets: SnippetItem[]",
+      "parameters: SnippetParameter[]",
+      "defaultLanguage: string",
+      "showLineNumbers: boolean",
+      "showWindowBar: boolean",
+      "className: string",
+      "style: CodeSnippetDeckStyle",
+      "attributes: CodeSnippetDeckAttributes",
+      "onClick: (event: MouseEvent) => void",
+      "onKeyDown: (event: KeyboardEvent) => void"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "command-menu",

@@ -1,3 +1,5 @@
+import {codeSnippetDeckPort} from './angular-code-snippet-deck';
+import {batchGestureTrayPort} from './angular-batch-gesture-tray';
 import {speedWarpPort} from './angular-speed-warp';
 import {depthCorridorPort} from './angular-depth-corridor';
 import {expandableDataRowPort} from './angular-expandable-data-row';
@@ -222,13 +224,7 @@ add(
   `readonly value=model(0);finish():void{if(this.value()>=100)void this.run();else this.value.set(0);}`,
   { inputs: ["value: number (two-way)"] },
 );
-add(
-  "code-snippet-deck",
-  "collection",
-  "Browse code snippets and copy the selected snippet with visible failure feedback.",
-  `<div class="kit-control kit-surface kit-stack"><div class="kit-row" (keydown)="keys($event)">@for(item of items();track item.id){${itemButton}}</div><pre class="k-code">{{current()?.description}}</pre><button type="button" [disabled]="disabled()||!current()" (click)="copy()">Copy snippet</button>${collectionFeedback}</div>`,
-  `override readonly items=input<KitItem[]>([{id:'install',label:'Install',description:'npm install ./kit-ui-angular-0.1.0.tgz'},{id:'import',label:'Import',description:"import { KitButtonComponent } from 'kit-ui-angular';"}]);async copy():Promise<void>{try{await navigator.clipboard.writeText(this.current()?.description??'');this.status.set('Copied.');}catch{this.actionError.set('Clipboard unavailable. Select and copy the snippet manually.');}}`,
-);
+add('code-snippet-deck','plain',codeSnippetDeckPort.description,codeSnippetDeckPort.template,codeSnippetDeckPort.body,codeSnippetDeckPort);
 
 add("stretch-switch","plain",stretchSwitchPort.description,stretchSwitchPort.template,stretchSwitchPort.body,stretchSwitchPort);
 
@@ -332,17 +328,7 @@ add('recovery-ledger','plain',recoveryLedgerPort.description,recoveryLedgerPort.
 add('ai-agent-activity','plain',agentActivityPort.description,agentActivityPort.template,agentActivityPort.body,agentActivityPort);
 add('interactive-timeline','plain',interactiveTimelinePort.description,interactiveTimelinePort.template,interactiveTimelinePort.body,interactiveTimelinePort);
 add('selection-basket','plain',selectionBasketPort.description,selectionBasketPort.template,selectionBasketPort.body,selectionBasketPort);
-for (const [id, title] of [
-  ["batch-gesture-tray", "Batch selection"],
-]) {
-  add(
-    id,
-    "collection",
-    "Select individual items or all items, then run a cancellable application-owned batch action.",
-    `<section class="kit-control kit-surface kit-stack"><h3>{{label()||'${title}'}}</h3><div class="kit-row"><button type="button" [disabled]="disabled()||busy()" (click)="selectedIds.set(items().filter(enabled).map(itemId))">Select all</button><button type="button" [disabled]="disabled()||busy()" (click)="selectedIds.set([])">Clear selection</button></div>@for(item of items();track item.id){<label class="kit-row"><input type="checkbox" [checked]="selectedIds().includes(item.id)" [disabled]="disabled()||busy()||item.disabled" (change)="choose(item)" /><span>{{item.label}}</span></label>}<div class="k-tray"><span>{{selectedIds().length}} selected</span><button type="button" [disabled]="disabled()||busy()||!selectedIds().length" (click)="execute()">{{busy()?'Applying…':'Apply to selected'}}</button></div>${collectionFeedback}</section>`,
-    `readonly enabled=(item:KitItem)=>!item.disabled;readonly itemId=(item:KitItem)=>item.id;`,
-  );
-}
+add('batch-gesture-tray','plain',batchGestureTrayPort.description,batchGestureTrayPort.template,batchGestureTrayPort.body,batchGestureTrayPort);
 add('velocity-toast','plain',velocityToastPort.description,velocityToastPort.template,velocityToastPort.body,velocityToastPort);
 add("notification-stack","plain",notificationStackPort.description,notificationStackPort.template,notificationStackPort.body,notificationStackPort);
 add("undo-toast","plain",undoToastPort.description,undoToastPort.template,undoToastPort.body,undoToastPort);

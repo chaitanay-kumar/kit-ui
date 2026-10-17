@@ -2,14 +2,14 @@
 
 React is the source of truth for component appearance, interactions, data contracts, options and defaults. Angular implementations stay native; template projection and output events provide Angular equivalents for React nodes and callbacks. Catalog coverage does not establish parity.
 
-Current progress: 91 components have recorded validated baselines (75 merged through batch 30, sixteen on batches 31-38); 25 remain unvalidated. Batch 38 adds Speed Warp and Depth Corridor, including seeded drawing parity, native layer navigation and lifecycle/motion checks. See [batch 38 evidence](parity/batch-38-integration.md) and the [completed component list](parity/completed-components.md). Batches 4–30 were merged into `feat/kit-ui-library` at `cfcfc68`; Registry CI and Pages deployment passed. Older rows saying integration pending for those batches are historical labels.
+Current progress: 93 components have recorded validated baselines (75 merged through batch 30, eighteen on batches 31-39); 23 remain unvalidated. Batch 39 adds Code Snippet Deck and Batch Gesture Tray, including live parameters, captured async recovery and source gesture/clipboard contracts. See [batch 39 evidence](parity/batch-39-integration.md) and the [completed component list](parity/completed-components.md). Batches 4–30 were merged into `feat/kit-ui-library` at `cfcfc68`; Registry CI and Pages deployment passed. Older rows saying integration pending for those batches are historical labels.
 
 User priority: finish simpler components first. AI Response remains deferred; its previously documented working copy must be located before resuming (see Pending work). Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work proceeds in batches of two, with focused component checks during implementation and one full baseline before batch merge. Batch 2 merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); batch 3 merged through [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Batch 4 and its stacked batch 5 are locally validated and await integration. The original inventory order remains below for tracking, not execution priority.
 
 ## Pending work
 
-- Review and fix the remaining 25 components listed below: 24 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
-- Review batches 31-38 for integration. Batch 38 is locally validated; select the next two queued components with simpler components first.
+- Review and fix the remaining 23 components listed below: 22 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
+- Review batches 31-39 for integration. Batch 39 is locally validated; select the next two queued components with simpler components first.
 - Before integration, audit older direct button callback expressions (starting with Book Call Button/Split Button) for return-value/exception event-default semantics. Batch 36 renews this contract for Folder Cards, Story Cards, Pricing and Stacked Cards only.
 - Before integration, audit earlier parity fixture HTML for standard doctype and viewport metadata, including batches 11 through 19. Batch 23 corrects these headers and renews browser checks for batches 20 through 23. Earlier mobile input/reduced-motion checks alone do not prove narrow responsive layouts in standards mode.
 - Keep AI Response deferred. No AI code/refs were changed. The previously documented `kit-ui-angular-response` / `feat/angular-ai-response-parity` working copy is not registered in this checkout, its audit is not here, and named Desktop sibling paths on C:/D: were not present when checked. Locate that prior work before resuming; do not substitute the generic generated port or claim the deferred work is validated.
@@ -41,14 +41,14 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 8 | Animated Number Morph | `animated-number` | Validated locally; integration pending | [Report](parity/animated-number.md) |
 | 9 | Animated Tabs | `animated-tabs` | Validated locally; integration pending | [Report](parity/animated-tabs.md) |
 | 10 | Avatar Stack | `avatar-stack` | Validated locally; integration pending | [Report](parity/avatar-stack.md) |
-| 11 | Batch Gesture Tray | `batch-gesture-tray` | Queued | — |
+| 11 | Batch Gesture Tray | `batch-gesture-tray` | Validated locally; integration pending | [Report](parity/batch-gesture-tray.md) |
 | 12 | Book Call Button | `book-call-button` | Validated locally; integration pending | [Report](parity/book-call-button.md) |
 | 13 | Branching Submenu | `branching-submenu` | Validated locally; integration pending | [Report](parity/branching-submenu.md) |
 | 14 | Button | `button` | Validated baseline | [Review](parity/button.md) |
 | 15 | Car Smoke Page Transition | `car-smoke-page-transition` | Queued | — |
 | 16 | Chat | `chat` | Queued | — |
 | 17 | Circular Orbit | `circular-orbit` | Validated locally; integration pending | [Evidence](parity/circular-orbit.md) |
-| 18 | Code Snippet Deck | `code-snippet-deck` | Queued | — |
+| 18 | Code Snippet Deck | `code-snippet-deck` | Validated locally; integration pending | [Report](parity/code-snippet-deck.md) |
 | 19 | Command Menu | `command-menu` | Queued | — |
 | 20 | Cursor Follower | `cursor-follower` | Validated locally; integration pending | [Report](parity/cursor-follower.md) |
 | 21 | Density Lens | `density-lens` | Validated locally; integration pending | [Evidence](parity/density-lens.md) |

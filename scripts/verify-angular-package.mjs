@@ -12,6 +12,7 @@ const ports = JSON.parse(
 const portImports = ports.map((port) => port.exportName).join(", ");
 // Keep every selector in the strict consumer, supplying newly required contracts.
 const requiredPortTemplates = {
+  'batch-gesture-tray':'<kit-batch-gesture-tray [items]="[]" [actions]="[]"/>',
   'depth-corridor':'<kit-depth-corridor [layers]="[]"/>',
   'dependency-trace':'<kit-dependency-trace [nodes]="[]" [connections]="[]"/>',
   'recovery-ledger':'<kit-recovery-ledger [entries]="[]"/>',
@@ -41,7 +42,7 @@ const portTemplates = ports.map((port) => requiredPortTemplates[port.id] ?? (por
 // Each consumer installs and runs its own compiler. Reusing the repository's
 // compiler would miss incompatibilities with older Angular versions.
 const {angularUsage,ANGULAR_COMPONENTS}=await tsImport('../src/lib/framework/angular-catalog.ts',import.meta.url);
-const parityUsageSources=['animated-tabs','scrollvelocitytext','small-floating-dock','branching-submenu','glass-navbar','scroll-progress-nav','wallet-card','sticky-pages','spring-select','gooey-menu','morphing-dialog','velocity-toast','dependency-trace','recovery-ledger','pricing','stacked-cards','mac-os-folder-cards','story-card','expandable-data-row','interactive-timeline','speed-warp','depth-corridor'].map(id=>angularUsage(ANGULAR_COMPONENTS.find(entry=>entry.id===id)));
+const parityUsageSources=['animated-tabs','scrollvelocitytext','small-floating-dock','branching-submenu','glass-navbar','scroll-progress-nav','wallet-card','sticky-pages','spring-select','gooey-menu','morphing-dialog','velocity-toast','dependency-trace','recovery-ledger','pricing','stacked-cards','mac-os-folder-cards','story-card','expandable-data-row','interactive-timeline','speed-warp','depth-corridor','code-snippet-deck','batch-gesture-tray'].map(id=>angularUsage(ANGULAR_COMPONENTS.find(entry=>entry.id===id)));
 const matrix = [
   { angularVersion: "20.0.0", typescript: "5.8.3" },
   { angularVersion: "20.3.33", typescript: "5.9.3" },
