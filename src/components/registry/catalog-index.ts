@@ -1415,7 +1415,7 @@ export const CATALOG_INDEX: ComponentCatalogIndex[] = [
   {
     "id": "sparkles-core",
     "name": "Sparkles Core",
-    "tagline": "Zero-dependency GPU canvas particle sparkles with celestial stars, organic twinkle, and cursor reactions",
+    "tagline": "Canvas 2D particle sparkles with celestial stars, organic twinkle, and cursor reactions",
     "description": "A high-performance, zero-dependency particle sparkle canvas with multi-shape geometry (circles, radiant diamond stars, cross starlets), organic twinkling, interactive cursor repulsion/attraction, click particle bursts, and fluid SSR safety.",
     "category": "Motion",
     "badges": [

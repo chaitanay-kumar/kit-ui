@@ -1,3 +1,5 @@
+import {thinkingOrbPort} from './angular-thinking-orb';
+import {sparklesCorePort} from './angular-sparkles-core';
 import {dragToConfirmPort} from './angular-drag-to-confirm';
 import {commandMenuPort,spotlightSearchPort} from './angular-search-palettes';
 import {evilEyePort,nimbuMirchiPort} from './angular-hanging-charms';
@@ -439,9 +441,9 @@ const canvasModes: Record<string, string> = {
   "dot-shader": "shader",
   "glyph-matrix": "glyph",
   "shooting-stars": "shooting",
-  "sparkles-core": "sparkles",
-  "thinking-orb": "orb",
 };
+add('thinking-orb','plain',thinkingOrbPort.description,thinkingOrbPort.template,thinkingOrbPort.body,thinkingOrbPort);
+add('sparkles-core','plain',sparklesCorePort.description,sparklesCorePort.template,sparklesCorePort.body,sparklesCorePort);
 add('evil-eye','plain',evilEyePort.description,evilEyePort.template,evilEyePort.body,evilEyePort);
 add('nimbu-mirchi','plain',nimbuMirchiPort.description,nimbuMirchiPort.template,nimbuMirchiPort.body,nimbuMirchiPort);
 add('meteors','plain',meteorsPort.description,meteorsPort.template,meteorsPort.body,meteorsPort);

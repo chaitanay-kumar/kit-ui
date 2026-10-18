@@ -8560,7 +8560,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
   {
     "id": "sparkles-core",
     "name": "Sparkles Core",
-    "tagline": "Zero-dependency GPU canvas particle sparkles with celestial stars, organic twinkle, and cursor reactions",
+    "tagline": "Canvas 2D particle sparkles with celestial stars, organic twinkle, and cursor reactions",
     "description": "A high-performance, zero-dependency particle sparkle canvas with multi-shape geometry (circles, radiant diamond stars, cross starlets), organic twinkling, interactive cursor repulsion/attraction, click particle bursts, and fluid SSR safety.",
     "category": "Motion",
     "badges": [
@@ -8572,7 +8572,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     "cliCommand": "npx shadcn@latest add chaitanay-kumar/kit-ui/sparkles-core",
     "features": [
       "Zero external particle dependencies: 100% native HTML5 Canvas 2D with sub-pixel DPR scaling",
-      "Full backward compatibility with Aceternity SparklesCore props signature",
+      "Size, density and color controls without an external particle runtime",
       "Multiple particle shapes: circle, 4-pointed diamond star, celestial cross starlet, or mixed",
       "Multi-color palette distribution supporting chromatic nebulae and gradient sparkle fields",
       "Organic twinkle brightness pulsation with phase modulation and customizable twinkle speeds",
@@ -8580,7 +8580,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       "Interactive cursor modes: repulsion, attraction, or proximity radiant enlargement",
       "Click & tap particle burst generation spawning dynamic kinetic firework sparks",
       "Wraps arbitrary children effortlessly with pointer event pass-through and depth stratification",
-      "Full accessibility: aria-hidden canvas and prefers-reduced-motion compliance"
+      "Canvas is hidden from assistive technology and particle movement respects reduced motion"
     ],
     "props": [
       {
@@ -9709,9 +9709,9 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     "features": [
       "Pure monochrome aesthetic (clean white/silver on dark, deep obsidian on light) with zero colors",
       "9 unique cognitive states: working, searching, solving, listening, connecting, weaving, composing, breathing, and shaping",
-      "GPU-accelerated Canvas rendering with 3D spherical trigonometry and perspective projection",
+      "Canvas 2D rendering with 3D spherical trigonometry and perspective projection",
       "Adaptive particle density scaling automatically calibrated to size",
-      "Full accessibility support with automatic prefers-reduced-motion fallback",
+      "Image label and automatic prefers-reduced-motion time freezing",
       "Minimalist optical core with subtle particle motion trailing and star sparkles"
     ],
     "props": [
@@ -9736,8 +9736,8 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       {
         "name": "dark",
         "type": "boolean",
-        "default": "true",
-        "description": "Dark mode tuning: true renders luminous white particles, false renders crisp dark graphite particles"
+        "default": "undefined",
+        "description": "Automatically follows the document dark class when omitted; true renders luminous white particles and false renders dark graphite particles"
       },
       {
         "name": "paused",

@@ -1,6 +1,6 @@
 # Completed parity checks
 
-101 components have recorded validated baselines through batch 43. The 99 baselines through batch 42 are integrated; batches 31?42 were merged through [PR #26](https://github.com/chaitanay-kumar/kit-ui/pull/26). Batch 43 is locally validated and awaits integration review, merge/deployment and final user QA; see its [evidence](batch-43-integration.md). Validation scope and remaining limits are recorded in each linked report. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
+103 components have recorded validated baselines through batch 44. The 99 baselines through batch 42 are integrated; batches 31?42 were merged through [PR #26](https://github.com/chaitanay-kumar/kit-ui/pull/26). Batches 43?44 are locally validated and await integration review, merge/deployment and final user QA; see [batch 43](batch-43-integration.md) and [batch 44](batch-44-integration.md) evidence. Validation scope and remaining limits are recorded in each linked report. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
 
 | Component | Status | Evidence |
 | --- | --- | --- |
@@ -87,6 +87,7 @@
 | Smart Upload | Validated baseline | [Report](smart-upload.md) |
 | Smooth Accordion | Validated baseline | [Report](smooth-accordion.md) |
 | Split Button | Validated baseline | [Report](split-button.md) |
+| Sparkles Core | Validated baseline | [Report](sparkles-core.md) |
 | Speed Warp | Validated baseline | [Report](speed-warp.md) |
 | Spotlight Card | Validated baseline | [Review](spotlight-card.md) |
 | Spotlight Search | Validated baseline | [Report](spotlight-search.md) |
@@ -96,6 +97,7 @@
 | StretchSwitch | Validated baseline | [Report](stretch-switch.md) |
 | Swipe Action List | Validated baseline | [Report](swipe-action-list.md) |
 | Text Scramble Decoder | Validated baseline | [Evidence](text-scramble-decoder.md) |
+| Thinking Orb | Validated baseline | [Report](thinking-orb.md) |
 | Timeline Scrubber | Validated baseline | [Report](timeline-scrubber.md) |
 | Torque Dial | Validated baseline | [Report](torque-dial.md) |
 | Typewriter Button | Validated baseline | [Review](typewriter-button.md) |

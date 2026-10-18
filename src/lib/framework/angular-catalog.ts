@@ -147,6 +147,16 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if(entry.id==='thinking-orb')return `import {Component} from '@angular/core';
+import {KitThinkingOrbComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitThinkingOrbComponent],template:\`<kit-thinking-orb state="listening" [size]="64" aria-label="Assistant listening"/>\`})
+export class ExampleComponent{}
+`;
+  if(entry.id==='sparkles-core')return `import {Component} from '@angular/core';
+import {KitSparklesCoreComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitSparklesCoreComponent],template:\`<div style="height:240px;background:#09090b"><kit-sparkles-core particleShape="mixed" [particleCount]="60"><strong style="color:white">Explore the field</strong></kit-sparkles-core></div>\`})
+export class ExampleComponent{}
+`;
   if(entry.id==='drag-to-confirm')return `import {Component} from '@angular/core';
 import {KitDragToConfirmComponent} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitDragToConfirmComponent],template:\`<kit-drag-to-confirm label="Slide to archive" actionType="archive" [onConfirm]="confirm"/>\`})
