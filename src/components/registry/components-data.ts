@@ -2367,7 +2367,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
         "name": "size",
         "type": "'sm' | 'md' | 'lg'",
         "default": "'md'",
-        "description": "Slider dimension profile (sm: 40px, md: 48px, lg: 54px)"
+        "description": "Slider dimension profile (sm: 40px, md: 48px, lg: 56px)"
       },
       {
         "name": "icon",
@@ -8395,7 +8395,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     "accessibility": [
       "Semantic region container with ARIA labels",
       "Keyboard accessible category accordions and tooltips",
-      "High-contrast state indicators with screen reader readable labels"
+      "Boolean values render visual check and minus icons"
     ],
     "createdAt": "2026-08-19",
     "usageCode": "import { SmartComparison } from \"@/components/ui/smart-comparison\";\n\nconst plans = [\n  { id: \"hobby\", name: \"Hobby\", tagline: \"For side projects\", price: \"$0\", billingPeriod: \"mo\" },\n  { id: \"pro\", name: \"Pro\", tagline: \"For fast-moving teams\", price: \"$29\", billingPeriod: \"mo\", featured: true, badge: \"Popular\" },\n  { id: \"enterprise\", name: \"Enterprise\", tagline: \"Dedicated compliance\", price: \"Custom\", billingPeriod: \"yr\" },\n];\n\nconst categories = [\n  {\n    id: \"compute\",\n    title: \"Compute & Scale\",\n    features: [\n      { id: \"bandwidth\", name: \"Global Bandwidth\", values: { hobby: \"100 GB\", pro: \"1 TB\", enterprise: \"Unlimited\" } },\n      { id: \"regions\", name: \"Multi-Region Routing\", values: { hobby: false, pro: true, enterprise: true } },\n      { id: \"concurrency\", name: \"Max Concurrency\", values: { hobby: \"10\", pro: \"250\", enterprise: \"Dedicated\" } },\n    ],\n  },\n];\n\nexport function Demo() {\n  return <SmartComparison plans={plans} categories={categories} />;\n}",

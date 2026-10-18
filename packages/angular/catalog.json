@@ -458,18 +458,24 @@
     "name": "Drag to Confirm",
     "exportName": "KitDragToConfirmComponent",
     "selector": "kit-drag-to-confirm",
-    "description": "Slide to the end to request confirmation, with arrow-key and explicit button alternatives.",
+    "description": "Native measured drag confirmation with source controlled/internal ownership, captured auto-reset, keyboard fallback and spring feedback.",
     "inputs": [
       "label: string",
+      "confirmedLabel: string",
+      "actionType: DragConfirmActionType",
+      "variant: DragConfirmVariant",
+      "size: DragConfirmSize",
+      "icon: TemplateRef<unknown>",
+      "confirmedIcon: TemplateRef<unknown>",
+      "isConfirmed: boolean",
+      "onConfirm: () => void",
+      "onReset: () => void",
+      "autoResetDelay: number",
       "disabled: boolean",
-      "loading: boolean",
-      "action: KitAction",
-      "value: number (two-way)"
+      "haptic: boolean",
+      "className: string"
     ],
-    "outputs": [
-      "activated: void",
-      "valueChange: number"
-    ]
+    "outputs": []
   },
   {
     "id": "draw-checkbox",
@@ -1640,18 +1646,20 @@
     "name": "Smart Comparison",
     "exportName": "KitSmartComparisonComponent",
     "selector": "kit-smart-comparison",
-    "description": "Searchable plan comparison with differences-only filtering, collapsible categories and plan selection.",
+    "description": "Source-contract feature matrix with mount-only mobile plan selection, JSON difference filtering, projected native values and retained category exits.",
     "inputs": [
-      "plans: KitPlan[]",
-      "features: KitCompareFeature[]",
-      "categories: KitCompareCategory[]",
-      "selected: string (two-way)",
-      "disabled: boolean"
+      "plans: ComparisonPlan[]",
+      "categories: ComparisonCategory[]",
+      "defaultPlanId: string",
+      "enableSearch: boolean",
+      "enableDiffFilter: boolean",
+      "className: string",
+      "style: SmartComparisonStyle",
+      "attributes: SmartComparisonAttributes",
+      "onClick: (event: MouseEvent) => void",
+      "onKeyDown: (event: KeyboardEvent) => void"
     ],
-    "outputs": [
-      "planSelect: KitPlan",
-      "selectedChange: string"
-    ]
+    "outputs": []
   },
   {
     "id": "smooth-accordion",

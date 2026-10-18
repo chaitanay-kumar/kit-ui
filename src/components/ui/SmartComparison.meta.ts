@@ -25,7 +25,7 @@ const meta: KitUIComponentMeta = {
   accessibility: [
     'Semantic region container with ARIA labels',
     'Keyboard accessible category accordions and tooltips',
-    'High-contrast state indicators with screen reader readable labels',
+    'Boolean values render visual check and minus icons',
   ],
   usageCode: `import { SmartComparison } from "@/components/ui/smart-comparison";
 

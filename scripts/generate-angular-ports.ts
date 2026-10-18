@@ -1,3 +1,4 @@
+import {dragToConfirmPort} from './angular-drag-to-confirm';
 import {commandMenuPort,spotlightSearchPort} from './angular-search-palettes';
 import {evilEyePort,nimbuMirchiPort} from './angular-hanging-charms';
 import {torqueDialPort} from './angular-torque-dial';
@@ -220,14 +221,7 @@ add(
 */
 add("split-button","plain",splitButtonPort.description,splitButtonPort.template,splitButtonPort.body,splitButtonPort);
 add("book-call-button","plain",bookCallButtonPort.description,bookCallButtonPort.template,bookCallButtonPort.body,bookCallButtonPort);
-add(
-  "drag-to-confirm",
-  "action",
-  "Slide to the end to request confirmation, with arrow-key and explicit button alternatives.",
-  `<div class="kit-control kit-stack"><label>{{label()||'Slide to confirm'}}<input type="range" min="0" max="100" [value]="value()" [disabled]="blocked()" aria-label="Confirmation progress" [attr.aria-valuetext]="value()+' percent'" (input)="value.set(+$any($event.target).value)" (change)="finish()" /></label><button type="button" [disabled]="blocked()||value()<100" (click)="run()">Confirm</button>${actionFeedback}</div>`,
-  `readonly value=model(0);finish():void{if(this.value()>=100)void this.run();else this.value.set(0);}`,
-  { inputs: ["value: number (two-way)"] },
-);
+add('drag-to-confirm','plain',dragToConfirmPort.description,dragToConfirmPort.template,dragToConfirmPort.body,dragToConfirmPort);
 add('code-snippet-deck','plain',codeSnippetDeckPort.description,codeSnippetDeckPort.template,codeSnippetDeckPort.body,codeSnippetDeckPort);
 
 add("stretch-switch","plain",stretchSwitchPort.description,stretchSwitchPort.template,stretchSwitchPort.body,stretchSwitchPort);

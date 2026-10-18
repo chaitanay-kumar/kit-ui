@@ -2,20 +2,20 @@
 
 React is the source of truth for component appearance, interactions, data contracts, options and defaults. Angular implementations stay native; template projection and output events provide Angular equivalents for React nodes and callbacks. Catalog coverage does not establish parity.
 
-Current progress: 99 components have recorded validated baselines across batches 1?42; 17 remain unvalidated. Batch 42 adds Command Menu and Spotlight Search, including distinct state/key ownership, actual catalog/actions, captured exit callbacks and source shared-highlight motion. See [batch 42 evidence](parity/batch-42-integration.md) and the [completed component list](parity/completed-components.md). Batches 4–30 were merged into `feat/kit-ui-library` at `cfcfc68`; Registry CI and Pages deployment passed. Batches 31?42 are published through [PR #26](https://github.com/chaitanay-kumar/kit-ui/pull/26); see the [integration evidence](parity/batches-31-42-integration.md) for renewed checks. Older component reports saying integration pending are historical handoffs.
+Current progress: 101 of 116 components have recorded validated baselines through batch 43; 15 remain unvalidated (14 queued and AI Response deferred). Batch 43 adds Drag to Confirm and Smart Comparison as locally validated baselines; integration review, merge/deployment and final user QA remain outstanding. See [batch 43 evidence](parity/batch-43-integration.md) and the [completed component list](parity/completed-components.md). The prior 99 baselines through batch 42 are integrated in `feat/kit-ui-library`; batches 31?42 were merged through [PR #26](https://github.com/chaitanay-kumar/kit-ui/pull/26), with renewed checks in the [integration evidence](parity/batches-31-42-integration.md). Older component reports saying integration pending are historical handoffs.
 
-User priority: finish simpler components first. AI Response remains deferred; its previously documented working copy must be located before resuming (see Pending work). Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work proceeds in batches of two, with focused component checks during implementation and one full baseline before batch merge. Batch 2 merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); batch 3 merged through [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Batch 4 and its stacked batch 5 are locally validated and await integration. The original inventory order remains below for tracking, not execution priority.
+User priority: finish simpler components first. AI Response remains deferred; its previously documented working copy must be located before resuming (see Pending work). Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work proceeds in batches of two, with focused component checks during implementation and one full baseline before batch merge. Batch 2 merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); batch 3 merged through [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Batches 4?42 have since been integrated; batch 43 is locally validated and awaits integration. The original inventory order remains below for tracking, not execution priority.
 
 ## Pending work
 
-- Review and fix the remaining 17 components listed below: 16 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
-- Review batches 31-42 for integration. Batch 42 is locally validated; select the next two queued components with simpler components first.
+- Review and fix the remaining 15 components listed below: 14 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
+- Batch 43 is locally validated and awaits integration review. Continue with Thinking Orb and Sparkles Core as batch 44; keep final user QA outstanding.
 - Integration audit: direct optional button callbacks in Book Call Button, Split Button, Notification Bell, Payment Status, Profile Card and Peek Card now preserve return-value/exception event-default semantics, explicit cancellation and nested callback receivers. Split option failures retain the open menu. See [integration evidence](parity/batches-31-42-integration.md); batch 36 separately covers Folder Cards, Story Cards, Pricing and Stacked Cards.
 - Integration fixture audit: inline batches 6?19 now include standard doctype and viewport metadata; later standalone fixture HTML already includes both. Renewed desktop/mobile results are recorded in the [integration brief](parity/batches-31-42-integration.md). Batch 23 separately renewed batches 20?23.
 - Keep AI Response deferred. No AI code/refs were changed. The previously documented `kit-ui-angular-response` / `feat/angular-ai-response-parity` working copy is not registered in this checkout, its audit is not here, and named Desktop sibling paths on C:/D: were not present when checked. Locate that prior work before resuming; do not substitute the generic generated port or claim the deferred work is validated.
 - After all 116 components have validated baselines, the user will perform the full QA run. Address the resulting feedback before calling the overall parity effort complete.
 
-No component PRs remained open after batch 3. Its completed feature branches/worktrees were removed. The implementation branch and unfinished AI Response work remain; the completed iOS Search Bar branch has been removed and local batch 4 plus stacked batch 5 await integration.
+Completed work through batch 42 is integrated and its completed feature branches have been cleaned up. The implementation branch, active local parity work and both preserved stashes remain.
 
 ## Review requirements
 
@@ -57,7 +57,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 24 | DirectionalTooltip | `directional-tooltip` | Validated baseline | [Report](parity/directional-tooltip.md) |
 | 25 | Dot Field | `dot-field` | Validated baseline | [Evidence](parity/dot-field.md) |
 | 26 | Dot Shader | `dot-shader` | Queued | — |
-| 27 | Drag to Confirm | `drag-to-confirm` | Queued | — |
+| 27 | Drag to Confirm | `drag-to-confirm` | Validated baseline | [Report](parity/drag-to-confirm.md) |
 | 28 | DrawCheckbox | `draw-checkbox` | Validated baseline | [Report](parity/draw-checkbox.md) |
 | 29 | Dynamic Island | `dynamic-island` | Queued | — |
 | 30 | Elastic Sheet | `elastic-sheet` | Validated baseline | [Evidence](parity/elastic-sheet.md) |
@@ -123,7 +123,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 90 | Sign Up | `sign-up` | Queued | — |
 | 91 | SlidePagination | `slide-pagination` | Validated baseline | [Report](parity/slide-pagination.md) |
 | 92 | Small Floating Dock | `small-floating-dock` | Validated baseline | [Report](parity/small-floating-dock.md) |
-| 93 | Smart Comparison | `smart-comparison` | Queued | — |
+| 93 | Smart Comparison | `smart-comparison` | Validated baseline | [Report](parity/smart-comparison.md) |
 | 94 | Smart Upload | `smart-upload` | Validated baseline | [Report](parity/smart-upload.md) |
 | 95 | Smooth Accordion | `smooth-accordion` | Validated baseline | [Report](parity/smooth-accordion.md) |
 | 96 | Sparkles Core | `sparkles-core` | Queued | — |

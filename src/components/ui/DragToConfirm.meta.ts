@@ -20,7 +20,7 @@ const meta: KitUIComponentMeta = {
     { name: 'confirmedLabel', type: 'string', default: "'Confirmed ✓'", description: 'Text shown when slider locks into completion' },
     { name: 'actionType', type: "'delete' | 'archive' | 'confirm' | 'submit' | 'unlock' | 'continue'", default: "'confirm'", description: 'Action preset style and icon archetype' },
     { name: 'variant', type: "'default' | 'danger' | 'warning' | 'info' | 'success'", default: 'undefined', description: 'Visual tone variant override' },
-    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Slider dimension profile (sm: 40px, md: 48px, lg: 54px)' },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Slider dimension profile (sm: 40px, md: 48px, lg: 56px)' },
     { name: 'icon', type: 'React.ReactNode', default: 'undefined', description: 'Custom idle state icon rendered inside thumb' },
     { name: 'confirmedIcon', type: 'React.ReactNode', default: 'undefined', description: 'Custom confirmed state icon rendered inside thumb' },
     { name: 'isConfirmed', type: 'boolean', default: 'undefined', description: 'Controlled confirmation state' },

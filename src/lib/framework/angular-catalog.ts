@@ -147,6 +147,16 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if(entry.id==='drag-to-confirm')return `import {Component} from '@angular/core';
+import {KitDragToConfirmComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitDragToConfirmComponent],template:\`<kit-drag-to-confirm label="Slide to archive" actionType="archive" [onConfirm]="confirm"/>\`})
+export class ExampleComponent{readonly confirm=()=>console.log('Archive confirmed')}
+`;
+  if(entry.id==='smart-comparison')return `import {Component} from '@angular/core';
+import {KitSmartComparisonComponent,type ComparisonPlan,type ComparisonCategory} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitSmartComparisonComponent],template:\`<kit-smart-comparison [plans]="plans" [categories]="categories"/>\`})
+export class ExampleComponent{readonly plans:ComparisonPlan[]=[{id:'free',name:'Free',tagline:'Personal projects',price:'$0'},{id:'team',name:'Team',tagline:'Shared workspaces',price:'$24',featured:true}];readonly categories:ComparisonCategory[]=[{id:'core',title:'Workspace',features:[{id:'sharing',name:'Sharing',values:{free:false,team:true}}]}]}
+`;
   if(entry.id==='command-menu')return `import {Component,signal} from '@angular/core';
 import {KitCommandMenuComponent} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitCommandMenuComponent],template:\`<button (click)="open.set(true)">Open commands</button><kit-command-menu [isOpen]="open()" [onClose]="close"/>\`})

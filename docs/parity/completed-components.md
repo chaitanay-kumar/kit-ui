@@ -1,6 +1,6 @@
 # Completed parity checks
 
-99 components have recorded validated baselines across batches 1?42. Batches 31?42 are published through [PR #26](https://github.com/chaitanay-kumar/kit-ui/pull/26); see the [integration evidence](batches-31-42-integration.md). Validation scope and remaining limits are recorded in each linked report. Older integration-pending labels for batches 4–30 predate their merge at `cfcfc68`. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
+101 components have recorded validated baselines through batch 43. The 99 baselines through batch 42 are integrated; batches 31?42 were merged through [PR #26](https://github.com/chaitanay-kumar/kit-ui/pull/26). Batch 43 is locally validated and awaits integration review, merge/deployment and final user QA; see its [evidence](batch-43-integration.md). Validation scope and remaining limits are recorded in each linked report. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
 
 | Component | Status | Evidence |
 | --- | --- | --- |
@@ -25,6 +25,7 @@
 | Dependency Trace | Validated baseline | [Report](dependency-trace.md) |
 | DirectionalTooltip | Validated baseline | [Report](directional-tooltip.md) |
 | Dot Field | Validated baseline | [Evidence](dot-field.md) |
+| Drag to Confirm | Validated baseline | [Report](drag-to-confirm.md) |
 | DrawCheckbox | Validated baseline | [Report](draw-checkbox.md) |
 | Elastic Sheet | Validated baseline | [Evidence](elastic-sheet.md) |
 | Evil Eye | Validated baseline | [Report](evil-eye.md) |
@@ -82,6 +83,7 @@
 | SettleModal | Validated baseline | [Evidence](settle-modal.md) |
 | SlidePagination | Validated baseline | [Report](slide-pagination.md) |
 | Small Floating Dock | Validated baseline | [Report](small-floating-dock.md) |
+| Smart Comparison | Validated baseline | [Report](smart-comparison.md) |
 | Smart Upload | Validated baseline | [Report](smart-upload.md) |
 | Smooth Accordion | Validated baseline | [Report](smooth-accordion.md) |
 | Split Button | Validated baseline | [Report](split-button.md) |
