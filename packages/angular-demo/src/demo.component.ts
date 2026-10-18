@@ -1,3 +1,4 @@
+import {GlyphMatrixDemoComponent,ShootingStarsDemoComponent} from './batch45-demos';
 import {ThinkingOrbDemoComponent,SparklesCoreDemoComponent} from './batch44-demos';
 import {DragToConfirmDemoComponent,SmartComparisonDemoComponent} from './batch43-demos';
 import {CommandMenuDemoComponent,SpotlightSearchDemoComponent} from './batch42-demos';
@@ -84,7 +85,7 @@ import {RainbowButtonDemoComponent} from "./rainbow-button-demo";
 @Component({
   selector: "kit-angular-demo",
   standalone: true,
-  imports: [ThinkingOrbDemoComponent,SparklesCoreDemoComponent,DragToConfirmDemoComponent,SmartComparisonDemoComponent,CommandMenuDemoComponent,SpotlightSearchDemoComponent,EvilEyeDemoComponent,NimbuMirchiDemoComponent,TorqueDialDemoComponent,RocketPartyPopperDemoComponent,CodeSnippetDeckDemoComponent,BatchGestureTrayDemoComponent,SpeedWarpDemoComponent,DepthCorridorDemoComponent,DataRowDemoComponent,InteractiveTimelineDemoComponent,FolderCardsDemoComponent,StoryCardsDemoComponent,PricingDemoComponent,StackedCardsDemoComponent,RecoveryLedgerDemoComponent,DependencyTraceDemoComponent,MorphingDialogDemoComponent,VelocityToastDemoComponent,SpringSelectDemoComponent,GooeyMenuDemoComponent,GlassNavbarDemoComponent,ScrollProgressNavDemoComponent,SmallFloatingDockDemoComponent,BranchingSubmenuDemoComponent,AnimatedTabsDemoComponent,ScrollVelocityDemoComponent,StackUnfoldDemoComponent,SettleModalDemoComponent,ElasticSheetDemoComponent,SelectionBasketDemoComponent,DensityLensDemoComponent,GravityParticleBurstDemoComponent,DotFieldDemoComponent,FloatingActionDockDemoComponent,MorphingBlobDemoComponent,CircularOrbitDemoComponent,MeteorsDemoComponent,CursorFollowerDemoComponent,LiquidRippleButtonDemoComponent,AnimatedNumberDemoComponent,UnfoldAccordionDemoComponent,IOSSearchDemoComponent,RevealCardDemoComponent,StretchSwitchDemoComponent,SmoothAccordionDemoComponent,HamburgerMenuDemoComponent,ExpandableSearchDemoComponent,
+  imports: [GlyphMatrixDemoComponent,ShootingStarsDemoComponent,ThinkingOrbDemoComponent,SparklesCoreDemoComponent,DragToConfirmDemoComponent,SmartComparisonDemoComponent,CommandMenuDemoComponent,SpotlightSearchDemoComponent,EvilEyeDemoComponent,NimbuMirchiDemoComponent,TorqueDialDemoComponent,RocketPartyPopperDemoComponent,CodeSnippetDeckDemoComponent,BatchGestureTrayDemoComponent,SpeedWarpDemoComponent,DepthCorridorDemoComponent,DataRowDemoComponent,InteractiveTimelineDemoComponent,FolderCardsDemoComponent,StoryCardsDemoComponent,PricingDemoComponent,StackedCardsDemoComponent,RecoveryLedgerDemoComponent,DependencyTraceDemoComponent,MorphingDialogDemoComponent,VelocityToastDemoComponent,SpringSelectDemoComponent,GooeyMenuDemoComponent,GlassNavbarDemoComponent,ScrollProgressNavDemoComponent,SmallFloatingDockDemoComponent,BranchingSubmenuDemoComponent,AnimatedTabsDemoComponent,ScrollVelocityDemoComponent,StackUnfoldDemoComponent,SettleModalDemoComponent,ElasticSheetDemoComponent,SelectionBasketDemoComponent,DensityLensDemoComponent,GravityParticleBurstDemoComponent,DotFieldDemoComponent,FloatingActionDockDemoComponent,MorphingBlobDemoComponent,CircularOrbitDemoComponent,MeteorsDemoComponent,CursorFollowerDemoComponent,LiquidRippleButtonDemoComponent,AnimatedNumberDemoComponent,UnfoldAccordionDemoComponent,IOSSearchDemoComponent,RevealCardDemoComponent,StretchSwitchDemoComponent,SmoothAccordionDemoComponent,HamburgerMenuDemoComponent,ExpandableSearchDemoComponent,
     PressButtonDemoComponent,ButtonDemoComponent,MagneticButtonDemoComponent,MorphingButtonDemoComponent,TypewriterButtonDemoComponent,RainbowButtonDemoComponent,
     WalletCardDemoComponent,StickyPagesDemoComponent,
     NeonEdgeButtonDemoComponent,
@@ -117,6 +118,8 @@ import {RainbowButtonDemoComponent} from "./rainbow-button-demo";
       @case("depth-corridor"){<kit-depth-corridor-demo/>}
       @case("code-snippet-deck"){<kit-code-snippet-deck-demo/>}
       @case("batch-gesture-tray"){<kit-batch-gesture-tray-demo/>}
+      @case("glyph-matrix"){<kit-glyph-matrix-demo/>}
+      @case("shooting-stars"){<kit-shooting-stars-demo/>}
       @case("thinking-orb"){<kit-thinking-orb-demo/>}
       @case("sparkles-core"){<kit-sparkles-core-demo/>}
       @case("drag-to-confirm"){<kit-drag-to-confirm-demo/>}

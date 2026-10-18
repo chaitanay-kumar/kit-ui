@@ -9,7 +9,7 @@ const meta: KitUIComponentMeta = {
   badges: ['Canvas', 'Space', 'Stars', 'Interactive', 'Background'],
   createdAt: '2026-09-20',
   features: [
-    'Zero external runtime dependencies: 100% native HTML5 Canvas 2D with sub-pixel DPR scaling',
+    'No external particle runtime: native HTML5 Canvas 2D with sub-pixel DPR scaling',
     'Multi-depth twinkling starfield with radiant 4-point celestial cross-sparkles and soft halo blooms',
     'Cinematic meteors with radiant head bursts, tapered linear-gradient fading trails, and custom trajectory angles',
     'Stardust ember particles dynamically shed from traveling meteor tails for realistic atmospheric burns',

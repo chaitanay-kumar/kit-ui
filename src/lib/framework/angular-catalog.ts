@@ -147,6 +147,16 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if(entry.id==='glyph-matrix')return `import {Component} from '@angular/core';
+import {KitGlyphMatrixComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitGlyphMatrixComponent],template:\`<div style="height:260px"><kit-glyph-matrix #matrix><h2>Follow the signal</h2></kit-glyph-matrix></div><button (click)="matrix.reset()">Reset streams</button>\`})
+export class ExampleComponent{}
+`;
+  if(entry.id==='shooting-stars')return `import {Component} from '@angular/core';
+import {KitShootingStarsComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitShootingStarsComponent],template:\`<div style="height:260px"><kit-shooting-stars [starCount]="80" [interval]="2200"><h2 style="color:white">Explore the night sky</h2></kit-shooting-stars></div>\`})
+export class ExampleComponent{}
+`;
   if(entry.id==='thinking-orb')return `import {Component} from '@angular/core';
 import {KitThinkingOrbComponent} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitThinkingOrbComponent],template:\`<kit-thinking-orb state="listening" [size]="64" aria-label="Assistant listening"/>\`})

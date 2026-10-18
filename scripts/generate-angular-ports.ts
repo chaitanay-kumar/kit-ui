@@ -1,3 +1,5 @@
+import {shootingStarsPort} from './angular-shooting-stars';
+import {glyphMatrixPort} from './angular-glyph-matrix';
 import {thinkingOrbPort} from './angular-thinking-orb';
 import {sparklesCorePort} from './angular-sparkles-core';
 import {dragToConfirmPort} from './angular-drag-to-confirm';
@@ -439,10 +441,10 @@ add("payment-receipt-printer","plain",paymentReceiptPrinterPort.description,paym
 // Canvas effects use distinct algorithms, pause off screen and clean up observers.
 const canvasModes: Record<string, string> = {
   "dot-shader": "shader",
-  "glyph-matrix": "glyph",
-  "shooting-stars": "shooting",
 };
 add('thinking-orb','plain',thinkingOrbPort.description,thinkingOrbPort.template,thinkingOrbPort.body,thinkingOrbPort);
+add('glyph-matrix','plain',glyphMatrixPort.description,glyphMatrixPort.template,glyphMatrixPort.body,glyphMatrixPort);
+add('shooting-stars','plain',shootingStarsPort.description,shootingStarsPort.template,shootingStarsPort.body,shootingStarsPort);
 add('sparkles-core','plain',sparklesCorePort.description,sparklesCorePort.template,sparklesCorePort.body,sparklesCorePort);
 add('evil-eye','plain',evilEyePort.description,evilEyePort.template,evilEyePort.body,evilEyePort);
 add('nimbu-mirchi','plain',nimbuMirchiPort.description,nimbuMirchiPort.template,nimbuMirchiPort.body,nimbuMirchiPort);

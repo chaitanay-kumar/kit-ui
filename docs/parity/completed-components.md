@@ -1,6 +1,6 @@
 # Completed parity checks
 
-103 components have recorded validated baselines through batch 44. The 99 baselines through batch 42 are integrated; batches 31?42 were merged through [PR #26](https://github.com/chaitanay-kumar/kit-ui/pull/26). Batches 43?44 are locally validated and await integration review, merge/deployment and final user QA; see [batch 43](batch-43-integration.md) and [batch 44](batch-44-integration.md) evidence. Validation scope and remaining limits are recorded in each linked report. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
+105 components have recorded validated baselines through batch 45. The 99 baselines through batch 42 are integrated; batches 31?42 were merged through [PR #26](https://github.com/chaitanay-kumar/kit-ui/pull/26). Batches 43?45 are locally validated and await integration review, merge/deployment and final user QA; see [batch 43](batch-43-integration.md), [batch 44](batch-44-integration.md) and [batch 45](batch-45-integration.md) evidence. Validation scope and remaining limits are recorded in each linked report. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
 
 | Component | Status | Evidence |
 | --- | --- | --- |
@@ -36,6 +36,7 @@
 | Focus Mode | Validated baseline | [Report](focus-mode.md) |
 | Glass Navbar | Validated baseline | [Report](glass-navbar.md) |
 | Glitch Text | Validated baseline | [Report](glitch-text.md) |
+| Glyph Matrix | Validated baseline | [Report](glyph-matrix.md) |
 | Gooey Menu | Validated baseline | [Report](gooey-menu.md) |
 | Gravity Particle Burst | Validated baseline | [Evidence](gravity-particle-burst.md) |
 | Hamburger Menu | Validated baseline | [Report](hamburger-menu.md) |
@@ -81,6 +82,7 @@
 | Scroll Velocity Text | Validated baseline | [Report](scrollvelocitytext.md) |
 | Selection Basket | Validated baseline | [Evidence](selection-basket.md) |
 | SettleModal | Validated baseline | [Evidence](settle-modal.md) |
+| Shooting Stars | Validated baseline | [Report](shooting-stars.md) |
 | SlidePagination | Validated baseline | [Report](slide-pagination.md) |
 | Small Floating Dock | Validated baseline | [Report](small-floating-dock.md) |
 | Smart Comparison | Validated baseline | [Report](smart-comparison.md) |

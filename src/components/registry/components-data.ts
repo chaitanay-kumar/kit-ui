@@ -3525,11 +3525,11 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     ],
     "cliCommand": "npx shadcn@latest add chaitanay-kumar/kit-ui/glyph-matrix",
     "features": [
-      "GPU-friendly HTML5 Canvas implementation running at silky 60fps",
+      "Canvas 2D glyph streams with offscreen suspension",
       "Phosphor decay trails rendered via progressive alpha blending",
       "Authentic Katakana, matrix operators, and hexadecimal character set",
       "Interactive pointer disturbance causing streams near the cursor to flare and accelerate",
-      "Supports both bounded containers and full-page fixed background backdrops"
+      "Supports caller-defined container sizing and layered content"
     ],
     "props": [
       {
@@ -3583,8 +3583,8 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       {
         "name": "fullPage",
         "type": "boolean",
-        "default": "false",
-        "description": "Fixes canvas to fill the entire viewport as a full-page background"
+        "default": "undefined",
+        "description": "Legacy declared prop; it does not change the bounded layout. Use caller styles for a full-page backdrop."
       },
       {
         "name": "opacity",
@@ -7899,7 +7899,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     ],
     "cliCommand": "npx shadcn@latest add chaitanay-kumar/kit-ui/shooting-stars",
     "features": [
-      "Zero external runtime dependencies: 100% native HTML5 Canvas 2D with sub-pixel DPR scaling",
+      "No external particle runtime: native HTML5 Canvas 2D with sub-pixel DPR scaling",
       "Multi-depth twinkling starfield with radiant 4-point celestial cross-sparkles and soft halo blooms",
       "Cinematic meteors with radiant head bursts, tapered linear-gradient fading trails, and custom trajectory angles",
       "Stardust ember particles dynamically shed from traveling meteor tails for realistic atmospheric burns",

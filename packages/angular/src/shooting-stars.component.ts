@@ -1,22 +1,20 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component } from '@angular/core';
-import { KitCanvasController } from './port-canvas';
-
+import { Component, ViewEncapsulation, DestroyRef, ElementRef, inject, input, signal, untracked, viewChild } from '@angular/core';
+import {afterRenderEffect,ErrorHandler} from '@angular/core';import {ShootingStarsRenderer} from './shooting-stars-renderer';import {SparklesRootMotion,type SparklesMotionTarget,type SparklesTransition} from './sparkles-motion';import {NativeRootBindings,type NativeStyle,type NativeAttributes} from './native-root-bindings';import {invokeNativeEventCallback} from './native-event-callback';export type {SparklesMotionTarget as ShootingStarsMotionTarget,SparklesTransition as ShootingStarsTransition} from './sparkles-motion';export type {NativeStyle as ShootingStarsStyle,NativeAttributes as ShootingStarsAttributes} from './native-root-bindings';
 @Component({
  selector:"kit-shooting-stars", standalone:true,
- host:{'data-kit':"shooting-stars",style:'display:block;min-width:0'},
- template:`
-<section class="kit-control kit-stack">
-<div class="k-canvas-wrap" (pointermove)="move($event)" (pointerleave)="reset()">
-<canvas #canvas [attr.aria-label]="label()" role="img">
+ host:{style:'display:contents'},
+ encapsulation:ViewEncapsulation.None,styleUrls:["./shooting-stars.css"],
+template:`
+<div #root [class]="'k-shooting-stars '+className()" (pointermove)="pointer($event)" (pointerleave)="leave($event)" (click)="click($event)" (keydown)="key($event)">
+<canvas #canvas [id]="canvasId" aria-hidden="true">
 </canvas>
-<ng-content>
-</ng-content>
+<div class="k-shooting-content">
+<ng-content/>
 </div>
-<button type="button" [disabled]="disabled()||paused()" [attr.aria-pressed]="!running()" (click)="running.set(!running())">{{running()?'Pause animation':'Resume animation'}}</button>
-</section>
+</div>
 `
 })
-export class KitShootingStarsComponent extends KitCanvasController {
-override readonly mode='shooting';
+export class KitShootingStarsComponent {
+readonly background=input<string,string|undefined>('#020617',{transform:v=>v===undefined?'#020617':v});readonly starCount=input<number,number|undefined>(120,{transform:v=>v===undefined?120:v});readonly starColors=input<string[],string[]|undefined>(['#FFFFFF','#E0F2FE','#C7D2FE','#FEF08A'],{transform:v=>v===undefined?['#FFFFFF','#E0F2FE','#C7D2FE','#FEF08A']:v});readonly minStarSize=input<number,number|undefined>(.6,{transform:v=>v===undefined?.6:v});readonly maxStarSize=input<number,number|undefined>(2.2,{transform:v=>v===undefined?2.2:v});readonly twinkleSpeed=input<number,number|undefined>(1,{transform:v=>v===undefined?1:v});readonly trailColor=input<string,string|undefined>('#38BDF8',{transform:v=>v===undefined?'#38BDF8':v});readonly headColor=input<string,string|undefined>('#FFFFFF',{transform:v=>v===undefined?'#FFFFFF':v});readonly interval=input<number,number|undefined>(2200,{transform:v=>v===undefined?2200:v});readonly speed=input<number|[number,number],number|[number,number]|undefined>([12,22],{transform:v=>v===undefined?[12,22]:v});readonly trailLength=input<number|[number,number],number|[number,number]|undefined>([90,180],{transform:v=>v===undefined?[90,180]:v});readonly angle=input<number,number|undefined>(42,{transform:v=>v===undefined?42:v});readonly maxActiveShootingStars=input<number,number|undefined>(2,{transform:v=>v===undefined?2:v});readonly showEmbers=input<boolean,boolean|undefined>(true,{transform:v=>v===undefined?true:v});readonly nebula=input<boolean,boolean|undefined>(true,{transform:v=>v===undefined?true:v});readonly clickToSpawn=input<boolean,boolean|undefined>(true,{transform:v=>v===undefined?true:v});readonly parallax=input<boolean,boolean|undefined>(true,{transform:v=>v===undefined?true:v});readonly paused=input<boolean,boolean|undefined>(false,{transform:v=>v===undefined?false:v});readonly className=input<string,string|undefined>('',{transform:v=>v===undefined?'':v});readonly styles=input<NativeStyle|undefined>(undefined,{alias:'style'});readonly attributes=input<NativeAttributes|undefined>();readonly initial=input<SparklesMotionTarget|false|undefined>();readonly animate=input<SparklesMotionTarget|undefined>();readonly transition=input<SparklesTransition|undefined>();readonly onClick=input<((event:MouseEvent)=>void)|undefined>();readonly onPointerMove=input<((event:PointerEvent)=>void)|undefined>();readonly onPointerLeave=input<((event:PointerEvent)=>void)|undefined>();readonly onKeyDown=input<((event:KeyboardEvent)=>void)|undefined>();readonly root=viewChild<ElementRef<HTMLElement>>('root');readonly canvas=viewChild<ElementRef<HTMLCanvasElement>>('canvas');readonly ready=signal(false);private static serial=0;readonly canvasId='space-native-'+(++KitShootingStarsComponent.serial);private readonly renderer=new ShootingStarsRenderer(()=>this.ready.set(true));private readonly motion=new SparklesRootMotion();private bindings:NativeRootBindings|undefined;private readonly errors=inject(ErrorHandler);pointer(event:PointerEvent):void{this.renderer.move(event);invokeNativeEventCallback(this.onPointerMove(),event,this.errors)}leave(event:PointerEvent):void{this.renderer.leave();invokeNativeEventCallback(this.onPointerLeave(),event,this.errors)}click(event:MouseEvent):void{this.renderer.click(event);invokeNativeEventCallback(this.onClick(),event,this.errors)}key(event:KeyboardEvent):void{invokeNativeEventCallback(this.onKeyDown(),event,this.errors)}constructor(){afterRenderEffect(()=>{const root=this.root()?.nativeElement,styles=this.styles(),background=this.background(),attributes=this.attributes();if(root){this.bindings??=new NativeRootBindings(root);this.bindings.apply({background,...styles},attributes,{})}});afterRenderEffect(()=>{const root=this.root()?.nativeElement,canvas=this.canvas()?.nativeElement;this.className();this.styles();this.attributes();this.background();const options={starCount:this.starCount(),starColors:this.starColors(),minStarSize:this.minStarSize(),maxStarSize:this.maxStarSize(),twinkleSpeed:this.twinkleSpeed(),trailColor:this.trailColor(),headColor:this.headColor(),interval:this.interval(),speed:this.speed(),trailLength:this.trailLength(),angle:this.angle(),maxActiveShootingStars:this.maxActiveShootingStars(),showEmbers:this.showEmbers(),nebula:this.nebula(),clickToSpawn:this.clickToSpawn(),parallax:this.parallax(),paused:this.paused()};if(root&&canvas)untracked(()=>this.renderer.update(root,canvas,options))});afterRenderEffect(()=>{const root=this.root()?.nativeElement,ready=this.ready(),initial=this.initial(),animate=this.animate(),transition=this.transition();if(root)untracked(()=>this.motion.update(root,ready,initial,animate,transition))});inject(DestroyRef).onDestroy(()=>{this.renderer.destroy();this.motion.destroy()})}
 }

@@ -28,7 +28,7 @@ export const GlyphMatrixMeta: KitUIComponentMeta = {
     { name: 'fadeRate', type: 'number', default: '0.06', description: 'Decay rate per frame for phosphor trails' },
     { name: 'interactive', type: 'boolean', default: 'true', description: 'Whether mouse proximity disturbs and accelerates glyph streams' },
     { name: 'paused', type: 'boolean', default: 'false', description: 'Pauses stream animation' },
-    { name: 'fullPage', type: 'boolean', default: 'false', description: 'Fixes canvas to fill the entire viewport as a full-page background' },
+    { name: 'fullPage', type: 'boolean', default: 'undefined', description: 'Legacy declared prop; it does not change the bounded layout. Use caller styles for a full-page backdrop.' },
     { name: 'opacity', type: 'number', default: '1', description: 'Overall opacity of the matrix backdrop' },
     { name: 'children', type: 'React.ReactNode', description: 'Optional content layered over the matrix background' },
   ],
@@ -39,11 +39,11 @@ export const GlyphMatrixMeta: KitUIComponentMeta = {
     'Children layered on top retain full keyboard access and standard browser focus',
   ],
   features: [
-    'GPU-friendly HTML5 Canvas implementation running at silky 60fps',
+    'Canvas 2D glyph streams with offscreen suspension',
     'Phosphor decay trails rendered via progressive alpha blending',
     'Authentic Katakana, matrix operators, and hexadecimal character set',
     'Interactive pointer disturbance causing streams near the cursor to flare and accelerate',
-    'Supports both bounded containers and full-page fixed background backdrops',
+    'Supports caller-defined container sizing and layered content',
   ],
   createdAt: '2026-09-16',
 };

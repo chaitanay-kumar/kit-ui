@@ -2,14 +2,14 @@
 
 React is the source of truth for component appearance, interactions, data contracts, options and defaults. Angular implementations stay native; template projection and output events provide Angular equivalents for React nodes and callbacks. Catalog coverage does not establish parity.
 
-Current progress: 103 of 116 components have recorded validated baselines through batch 44; 13 remain unvalidated (12 queued and AI Response deferred). Batch 44 adds Thinking Orb and Sparkles Core as locally validated baselines; see [batch 44 evidence](parity/batch-44-integration.md) and the [completed component list](parity/completed-components.md). The 99 baselines through batch 42 are integrated in `feat/kit-ui-library`; batches 43?44 await integration review, merge/deployment and final user QA. Batches 31?42 were merged through [PR #26](https://github.com/chaitanay-kumar/kit-ui/pull/26), with checks in the [integration evidence](parity/batches-31-42-integration.md). Older integration-pending reports are historical handoffs.
+Current progress: 105 of 116 components have recorded validated baselines through batch 45; 11 remain unvalidated (10 queued and AI Response deferred). Batch 45 adds Glyph Matrix and Shooting Stars; see [batch 45 evidence](parity/batch-45-integration.md) and the [completed component list](parity/completed-components.md). The 99 baselines through batch 42 are integrated in `feat/kit-ui-library`; batches 43?45 await integration review, merge/deployment and final user QA. Batches 31?42 were merged through [PR #26](https://github.com/chaitanay-kumar/kit-ui/pull/26), with checks in the [integration evidence](parity/batches-31-42-integration.md). Older integration-pending reports are historical handoffs.
 
-User priority: finish simpler components first. AI Response remains deferred; its previously documented working copy must be located before resuming (see Pending work). Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work proceeds in batches of two, with focused component checks during implementation and one full baseline before batch merge. Batch 2 merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); batch 3 merged through [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Batches 4?42 have since been integrated; batches 43?44 are locally validated and await integration. The original inventory order remains below for tracking, not execution priority.
+User priority: finish simpler components first. AI Response remains deferred; its previously documented working copy must be located before resuming (see Pending work). Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work proceeds in batches of two, with focused component checks during implementation and one full baseline before batch merge. Batch 2 merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); batch 3 merged through [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Batches 4?42 have since been integrated; batches 43?45 are locally validated and await integration. The original inventory order remains below for tracking, not execution priority.
 
 ## Pending work
 
-- Review and fix the remaining 13 components listed below: 12 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
-- Batches 43?44 are locally validated and await integration review. Continue with Glyph Matrix and Shooting Stars as batch 45; keep final user QA outstanding.
+- Review and fix the remaining 11 components listed below: 10 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
+- Batches 43?45 are locally validated and await integration review. Continue with Dot Shader and Animated File Upload as batch 46; keep final user QA outstanding.
 - Integration audit: direct optional button callbacks in Book Call Button, Split Button, Notification Bell, Payment Status, Profile Card and Peek Card now preserve return-value/exception event-default semantics, explicit cancellation and nested callback receivers. Split option failures retain the open menu. See [integration evidence](parity/batches-31-42-integration.md); batch 36 separately covers Folder Cards, Story Cards, Pricing and Stacked Cards.
 - Integration fixture audit: inline batches 6?19 now include standard doctype and viewport metadata; later standalone fixture HTML already includes both. Renewed desktop/mobile results are recorded in the [integration brief](parity/batches-31-42-integration.md). Batch 23 separately renewed batches 20?23.
 - Keep AI Response deferred. No AI code/refs were changed. The previously documented `kit-ui-angular-response` / `feat/angular-ai-response-parity` working copy is not registered in this checkout, its audit is not here, and named Desktop sibling paths on C:/D: were not present when checked. Locate that prior work before resuming; do not substitute the generic generated port or claim the deferred work is validated.
@@ -70,7 +70,7 @@ Completed work through batch 42 is integrated and its completed feature branches
 | 37 | Form | `form` | Queued | — |
 | 38 | Glass Navbar | `glass-navbar` | Validated baseline | [Report](parity/glass-navbar.md) |
 | 39 | Glitch Text | `glitch-text` | Validated baseline | [Report](parity/glitch-text.md) |
-| 40 | Glyph Matrix | `glyph-matrix` | Queued | — |
+| 40 | Glyph Matrix | `glyph-matrix` | Validated baseline | [Report](parity/glyph-matrix.md) |
 | 41 | Gooey Menu | `gooey-menu` | Validated baseline | [Report](parity/gooey-menu.md) |
 | 42 | Gravity Particle Burst | `gravity-particle-burst` | Validated baseline | [Evidence](parity/gravity-particle-burst.md) |
 | 43 | Hamburger Menu | `hamburger-menu` | Validated baseline | [Report](parity/hamburger-menu.md) |
@@ -119,7 +119,7 @@ Completed work through batch 42 is integrated and its completed feature branches
 | 86 | Scroll Velocity Text | `scrollvelocitytext` | Validated baseline | [Report](parity/scrollvelocitytext.md) |
 | 87 | Selection Basket | `selection-basket` | Validated baseline | [Evidence](parity/selection-basket.md) |
 | 88 | SettleModal | `settle-modal` | Validated baseline | [Evidence](parity/settle-modal.md) |
-| 89 | Shooting Stars | `shooting-stars` | Queued | — |
+| 89 | Shooting Stars | `shooting-stars` | Validated baseline | [Report](parity/shooting-stars.md) |
 | 90 | Sign Up | `sign-up` | Queued | — |
 | 91 | SlidePagination | `slide-pagination` | Validated baseline | [Report](parity/slide-pagination.md) |
 | 92 | Small Floating Dock | `small-floating-dock` | Validated baseline | [Report](parity/small-floating-dock.md) |
