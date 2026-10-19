@@ -1,6 +1,6 @@
 # Completed parity checks
 
-105 components have recorded validated baselines through batch 45. The 99 baselines through batch 42 are integrated; batches 31?42 were merged through [PR #26](https://github.com/chaitanay-kumar/kit-ui/pull/26). Batches 43?45 are locally validated and await integration review, merge/deployment and final user QA; see [batch 43](batch-43-integration.md), [batch 44](batch-44-integration.md) and [batch 45](batch-45-integration.md) evidence. Validation scope and remaining limits are recorded in each linked report. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
+107 components have recorded validated baselines through batch 46. The 99 baselines through batch 42 are integrated; batches 31?42 were merged through [PR #26](https://github.com/chaitanay-kumar/kit-ui/pull/26). Batches 43-46 are locally validated and await integration review, merge/deployment and final user QA; see [batch 43](batch-43-integration.md), [batch 44](batch-44-integration.md), [batch 45](batch-45-integration.md) and [batch 46](batch-46-integration.md) evidence. Validation scope and remaining limits are recorded in each linked report. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
 
 | Component | Status | Evidence |
 | --- | --- | --- |
@@ -9,6 +9,7 @@
 | AI Agent Activity | Validated baseline | [Review](ai-agent-activity.md) |
 | AI Prompt Composer | Validated baseline | [Review](ai-prompt-composer.md) |
 | Airport Matrix Clock | Validated baseline | [Report](airport-matrix-clock.md) |
+| Animated File Upload | Validated baseline | [Report](animated-file-upload.md) |
 | Animated Number Morph | Validated baseline | [Report](animated-number.md) |
 | Animated Tabs | Validated baseline | [Report](animated-tabs.md) |
 | Avatar Stack | Validated baseline | [Report](avatar-stack.md) |
@@ -24,6 +25,7 @@
 | Depth Corridor | Validated baseline | [Report](depth-corridor.md) |
 | Dependency Trace | Validated baseline | [Report](dependency-trace.md) |
 | DirectionalTooltip | Validated baseline | [Report](directional-tooltip.md) |
+| Dot Shader | Validated baseline | [Report](dot-shader.md) |
 | Dot Field | Validated baseline | [Evidence](dot-field.md) |
 | Drag to Confirm | Validated baseline | [Report](drag-to-confirm.md) |
 | DrawCheckbox | Validated baseline | [Report](draw-checkbox.md) |

@@ -147,6 +147,17 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if(entry.id==='dot-shader')return `import {Component} from '@angular/core';
+import {KitDotShaderComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitDotShaderComponent],template:\`<kit-dot-shader [style]="{height:260}" [accentColor]="'#00F0FF'"><h2>Move through the dot field</h2></kit-dot-shader>\`})
+export class ExampleComponent {}`;
+  if(entry.id==='animated-file-upload')return `import {Component,signal} from '@angular/core';
+import {KitAnimatedFileUploadComponent,type UploadFileItem} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitAnimatedFileUploadComponent],template:\`<kit-animated-file-upload [accept]="['image/*','.pdf']" [onUploadComplete]="complete"/><p>{{message()}}</p>\`})
+export class ExampleComponent {
+ readonly message=signal('Local simulation; supply uploadHandler for your transport');
+ readonly complete=(file:UploadFileItem)=>this.message.set(file.name+' ready');
+}`;
   if(entry.id==='glyph-matrix')return `import {Component} from '@angular/core';
 import {KitGlyphMatrixComponent} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitGlyphMatrixComponent],template:\`<div style="height:260px"><kit-glyph-matrix #matrix><h2>Follow the signal</h2></kit-glyph-matrix></div><button (click)="matrix.reset()">Reset streams</button>\`})

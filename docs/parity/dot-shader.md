@@ -1,0 +1,15 @@
+# Dot Shader parity
+
+Validated baseline in batch 46. Integration review, merge/deployment and final user QA remain outstanding.
+
+The native standalone Angular component replaces the generic canvas port with the React source's WebGL shaders, grid buffers, color parsing, pointer damping, proximity deformation, waves and actual Canvas 2D fallback. Inputs preserve defaults and explicit zero through the source's safe minima. Root styles apply before renderer measurement; callers supply height. Overlay and projected content retain source placement. Pointer callback inputs replace the internal handler when supplied, following React's trailing props spread; null suppresses the internal handler.
+
+Authoring: `scripts/angular-dot-shader.ts`; implementation: `packages/angular/src/dot-shader-renderer.ts` and `dot-shader.css`. Native scalar root bindings and event callback handling are reused. The demo and Angular usage recipe provide a height and projected content. There is no React runtime dependency in the native component.
+
+Focused browser evidence: 22 distinct passing desktop/mobile Chromium cases in `e2e/parity-batch46-dot.spec.ts` and `parity-batch46-dot-lifecycle.spec.ts`. Actual WebGL uses Edge's software GPU implementation; fallback forces WebGL unavailable before creating the 2D context. Tests compare source/native raster bytes on the same path, shader inputs and grid geometry, actual pointer movement/leave, pause, live reduced-motion preferences, visibility, resize, overlays and keyboard-projected content. Whole-page vignette/content screenshots match byte for byte at both viewports and rendering paths. Shader/program/buffer failure cases check visible failure and native resource release. Manual observer fixtures establish callback behavior; they do not prove physical-device performance or every browser's GPU implementation.
+
+The initial four pixel failures were fixture pointerleave events that React's delegated pointerout processing did not receive. Real mouse entry/exit fixed the fixture; renewed cases all pass. No renderer math was changed to satisfy those failures.
+
+Deliberate difference: the source leaves successful shaders and some partial initialization resources allocated. Native cleanup releases all owned shaders, buffers, programs, animation frames, observers and media listeners on restart/destruction, including failed initialization. If a WebGL context exists but shader/program initialization fails, the source's same-canvas fallback cannot acquire 2D and stays blank; native preserves that visible result. WebGL and Canvas fallback have different source proximity/alpha calculations, so cross-path raster equivalence is not claimed.
+
+Batch baseline passes: component/Angular sync, production build with 289 SEO checks, all 117 unit tests, lint with 34 inherited warnings, focused packaged contract and installed-tarball strict consumers on Angular 20.0.0, 20.3.33, 21.2.25 and 22.2.1. Four consuming demo checks pass in light/dark themes on desktop/mobile. See [batch evidence](batch-46-integration.md). Safari/Firefox, physical devices, exhaustive accessibility and final user QA are not covered.

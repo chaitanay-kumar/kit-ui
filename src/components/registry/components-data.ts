@@ -576,7 +576,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       "Automatic mime-type detection and contextual file icon attribution",
       "Multi-file queue management with independent Uploading → Processing → Complete stages",
       "Self-morphing progress bar into checkmark state with non-aggressive error recovery",
-      "Customizable file constraints (maxSize, maxFiles, accept) with accessible screen reader labels"
+      "Size checks, visible file limits and native picker accept hints"
     ],
     "props": [
       {
@@ -589,7 +589,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
         "name": "accept",
         "type": "string | string[]",
         "default": "undefined",
-        "description": "Accepted MIME types or file extensions (e.g. image/*, .pdf)"
+        "description": "Native picker hint for MIME types or extensions; dropped files are not filtered"
       },
       {
         "name": "maxSize",
@@ -625,7 +625,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
         "name": "disabled",
         "type": "boolean",
         "default": "false",
-        "description": "Disables all interactions and file picking"
+        "description": "Disables file picking and incoming drops; existing row actions remain available"
       },
       {
         "name": "onFilesSelected",
@@ -648,9 +648,9 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     ],
     "accessibility": [
       "Keyboard accessible dropzone triggerable via Enter or Space key",
-      "Hidden semantic file input accessible to assistive technologies",
-      "Aria-live announcements for file upload progression, completion, and error states",
-      "Respects prefers-reduced-motion with instant state changes"
+      "Keyboard trigger opens a hidden native file input",
+      "Named remove and retry buttons with visible progress and error text",
+      "Progress is not announced by a live region; component springs have no reduced-motion bypass"
     ],
     "createdAt": "2026-08-21",
     "usageCode": "import { AnimatedFileUpload } from \"@/components/ui/animated-file-upload\";\n\nexport function Demo() {\n  return (\n    <div className=\"max-w-md mx-auto p-4\">\n      <AnimatedFileUpload\n        multiple\n        maxSize={10 * 1024 * 1024}\n        accept=\"image/*,application/pdf\"\n        onFilesSelected={(files) => console.log('Selected:', files)}\n        onUploadComplete={(file) => console.log('Uploaded:', file.name)}\n      />\n    </div>\n  );\n}",
@@ -2214,7 +2214,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       "Magnetic/gravitational radial repulsion with smooth exponential damping",
       "Dynamic scale expansion creating a 3D lens bulge around the cursor",
       "Ambient wave undulation breathing subtle life into the background when idle",
-      "Zero CPU overhead during rendering via GPU vertex shader positioning",
+      "GPU vertex shader positioning with a Canvas 2D fallback",
       "Supports wrapping arbitrary children without interfering with pointer interactions",
       "Full prefers-reduced-motion compliance freezing displacement and waves"
     ],

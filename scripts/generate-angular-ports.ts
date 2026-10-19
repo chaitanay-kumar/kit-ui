@@ -1,3 +1,5 @@
+import {animatedFileUploadPort} from './angular-animated-file-upload';
+import {dotShaderPort} from './angular-dot-shader';
 import {shootingStarsPort} from './angular-shooting-stars';
 import {glyphMatrixPort} from './angular-glyph-matrix';
 import {thinkingOrbPort} from './angular-thinking-orb';
@@ -248,25 +250,7 @@ for (const [id, title, button] of [
     `<form class="kit-control kit-surface kit-stack" aria-label="${title}" (submit)="submit($event)"><h3>{{label()||'${title}'}}</h3>@for(field of fields();track field.key){<label [for]="uid+'-'+field.key">{{field.label}}<input [id]="uid+'-'+field.key" [name]="field.key" [type]="field.type==='password'&&showPassword()?'text':field.type||'text'" [attr.autocomplete]="field.type==='password'?'${id === "sign-up" ? "new-password" : "current-password"}':field.type==='email'?'email':'on'" [required]="field.required||false" [attr.minlength]="field.minLength??null" [value]="values()[field.key]||''" [disabled]="disabled()||busy()" (input)="change(field.key,$event)" /></label>}<label class="kit-row"><input type="checkbox" [checked]="showPassword()" (change)="showPassword.set($any($event.target).checked)" />Show password</label><button type="submit" [disabled]="disabled()||busy()">{{busy()?'Submitting…':'${button}'}}</button>@if(busy()){<button type="button" (click)="cancel()">Cancel</button>}<p role="status">{{status()}}</p>@if(error()){<p role="alert">{{error()}}</p>}</form>`,
   );
 }
-add(
-  "animated-file-upload",
-  "plain",
-  "File previews, validation, progress, abort and retry using the native Angular upload engine.",
-  `<kit-smart-upload [accept]="accept()" [maxFiles]="maxFiles()" [maxSize]="maxSize()" [disabled]="disabled()" [upload]="upload()" />`,
-  `readonly accept=input('image/*,.pdf');readonly maxFiles=input(5);readonly maxSize=input(10*1024*1024);readonly disabled=input(false);readonly upload=input<UploadHandler>();`,
-  {
-    inputs: [
-      "accept: string",
-      "maxFiles: number",
-      "maxSize: number",
-      "disabled: boolean",
-      "upload: UploadHandler",
-    ],
-    imports:
-      "import { KitSmartUploadComponent } from './smart-upload.component';\nimport type { UploadHandler } from './types';",
-    componentImports: "KitSmartUploadComponent",
-  },
-);
+add('animated-file-upload','plain',animatedFileUploadPort.description,animatedFileUploadPort.template,animatedFileUploadPort.body,animatedFileUploadPort);
 
 add('animated-tabs','plain',animatedTabsPort.description,animatedTabsPort.template,animatedTabsPort.body,animatedTabsPort);
 add('glass-navbar','plain',glassNavbarPort.description,glassNavbarPort.template,glassNavbarPort.body,glassNavbarPort);
@@ -440,11 +424,11 @@ add("payment-receipt-printer","plain",paymentReceiptPrinterPort.description,paym
 
 // Canvas effects use distinct algorithms, pause off screen and clean up observers.
 const canvasModes: Record<string, string> = {
-  "dot-shader": "shader",
 };
 add('thinking-orb','plain',thinkingOrbPort.description,thinkingOrbPort.template,thinkingOrbPort.body,thinkingOrbPort);
 add('glyph-matrix','plain',glyphMatrixPort.description,glyphMatrixPort.template,glyphMatrixPort.body,glyphMatrixPort);
 add('shooting-stars','plain',shootingStarsPort.description,shootingStarsPort.template,shootingStarsPort.body,shootingStarsPort);
+add('dot-shader','plain',dotShaderPort.description,dotShaderPort.template,dotShaderPort.body,dotShaderPort);
 add('sparkles-core','plain',sparklesCorePort.description,sparklesCorePort.template,sparklesCorePort.body,sparklesCorePort);
 add('evil-eye','plain',evilEyePort.description,evilEyePort.template,evilEyePort.body,evilEyePort);
 add('nimbu-mirchi','plain',nimbuMirchiPort.description,nimbuMirchiPort.template,nimbuMirchiPort.body,nimbuMirchiPort);

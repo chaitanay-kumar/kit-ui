@@ -1,3 +1,4 @@
+import {DotShaderDemoComponent,AnimatedFileUploadDemoComponent} from './batch46-demos';
 import {GlyphMatrixDemoComponent,ShootingStarsDemoComponent} from './batch45-demos';
 import {ThinkingOrbDemoComponent,SparklesCoreDemoComponent} from './batch44-demos';
 import {DragToConfirmDemoComponent,SmartComparisonDemoComponent} from './batch43-demos';
@@ -85,7 +86,7 @@ import {RainbowButtonDemoComponent} from "./rainbow-button-demo";
 @Component({
   selector: "kit-angular-demo",
   standalone: true,
-  imports: [GlyphMatrixDemoComponent,ShootingStarsDemoComponent,ThinkingOrbDemoComponent,SparklesCoreDemoComponent,DragToConfirmDemoComponent,SmartComparisonDemoComponent,CommandMenuDemoComponent,SpotlightSearchDemoComponent,EvilEyeDemoComponent,NimbuMirchiDemoComponent,TorqueDialDemoComponent,RocketPartyPopperDemoComponent,CodeSnippetDeckDemoComponent,BatchGestureTrayDemoComponent,SpeedWarpDemoComponent,DepthCorridorDemoComponent,DataRowDemoComponent,InteractiveTimelineDemoComponent,FolderCardsDemoComponent,StoryCardsDemoComponent,PricingDemoComponent,StackedCardsDemoComponent,RecoveryLedgerDemoComponent,DependencyTraceDemoComponent,MorphingDialogDemoComponent,VelocityToastDemoComponent,SpringSelectDemoComponent,GooeyMenuDemoComponent,GlassNavbarDemoComponent,ScrollProgressNavDemoComponent,SmallFloatingDockDemoComponent,BranchingSubmenuDemoComponent,AnimatedTabsDemoComponent,ScrollVelocityDemoComponent,StackUnfoldDemoComponent,SettleModalDemoComponent,ElasticSheetDemoComponent,SelectionBasketDemoComponent,DensityLensDemoComponent,GravityParticleBurstDemoComponent,DotFieldDemoComponent,FloatingActionDockDemoComponent,MorphingBlobDemoComponent,CircularOrbitDemoComponent,MeteorsDemoComponent,CursorFollowerDemoComponent,LiquidRippleButtonDemoComponent,AnimatedNumberDemoComponent,UnfoldAccordionDemoComponent,IOSSearchDemoComponent,RevealCardDemoComponent,StretchSwitchDemoComponent,SmoothAccordionDemoComponent,HamburgerMenuDemoComponent,ExpandableSearchDemoComponent,
+  imports: [DotShaderDemoComponent,AnimatedFileUploadDemoComponent,GlyphMatrixDemoComponent,ShootingStarsDemoComponent,ThinkingOrbDemoComponent,SparklesCoreDemoComponent,DragToConfirmDemoComponent,SmartComparisonDemoComponent,CommandMenuDemoComponent,SpotlightSearchDemoComponent,EvilEyeDemoComponent,NimbuMirchiDemoComponent,TorqueDialDemoComponent,RocketPartyPopperDemoComponent,CodeSnippetDeckDemoComponent,BatchGestureTrayDemoComponent,SpeedWarpDemoComponent,DepthCorridorDemoComponent,DataRowDemoComponent,InteractiveTimelineDemoComponent,FolderCardsDemoComponent,StoryCardsDemoComponent,PricingDemoComponent,StackedCardsDemoComponent,RecoveryLedgerDemoComponent,DependencyTraceDemoComponent,MorphingDialogDemoComponent,VelocityToastDemoComponent,SpringSelectDemoComponent,GooeyMenuDemoComponent,GlassNavbarDemoComponent,ScrollProgressNavDemoComponent,SmallFloatingDockDemoComponent,BranchingSubmenuDemoComponent,AnimatedTabsDemoComponent,ScrollVelocityDemoComponent,StackUnfoldDemoComponent,SettleModalDemoComponent,ElasticSheetDemoComponent,SelectionBasketDemoComponent,DensityLensDemoComponent,GravityParticleBurstDemoComponent,DotFieldDemoComponent,FloatingActionDockDemoComponent,MorphingBlobDemoComponent,CircularOrbitDemoComponent,MeteorsDemoComponent,CursorFollowerDemoComponent,LiquidRippleButtonDemoComponent,AnimatedNumberDemoComponent,UnfoldAccordionDemoComponent,IOSSearchDemoComponent,RevealCardDemoComponent,StretchSwitchDemoComponent,SmoothAccordionDemoComponent,HamburgerMenuDemoComponent,ExpandableSearchDemoComponent,
     PressButtonDemoComponent,ButtonDemoComponent,MagneticButtonDemoComponent,MorphingButtonDemoComponent,TypewriterButtonDemoComponent,RainbowButtonDemoComponent,
     WalletCardDemoComponent,StickyPagesDemoComponent,
     NeonEdgeButtonDemoComponent,
@@ -118,6 +119,8 @@ import {RainbowButtonDemoComponent} from "./rainbow-button-demo";
       @case("depth-corridor"){<kit-depth-corridor-demo/>}
       @case("code-snippet-deck"){<kit-code-snippet-deck-demo/>}
       @case("batch-gesture-tray"){<kit-batch-gesture-tray-demo/>}
+      @case("dot-shader"){<kit-dot-shader-demo/>}
+      @case("animated-file-upload"){<kit-animated-file-upload-demo/>}
       @case("glyph-matrix"){<kit-glyph-matrix-demo/>}
       @case("shooting-stars"){<kit-shooting-stars-demo/>}
       @case("thinking-orb"){<kit-thinking-orb-demo/>}
@@ -290,8 +293,6 @@ export class DemoComponent {
   get portInputs(): Record<string, unknown> {
     if (this.component === 'text-scramble-decoder') return {text:'KIT_UI.REGISTRY.SYNCED',trigger:'manual',duration:1000};
     if (this.component === "activity-feed") return { events: this.activityEvents };
-    if (this.component === "animated-file-upload")
-      return { upload: this.upload };
     if (this.component === "chat") return { sendHandler: this.portChat };
     const kind = DEMO_PORT_KINDS[this.component];
     return kind === "action"

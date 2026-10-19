@@ -1,0 +1,26 @@
+import {test,expect} from '@playwright/test';
+for(const framework of ['react','angular'])test(framework+': drag motion, progress tween, sibling layout and final list exit',async({page})=>{
+ await page.goto(`/e2e/fixtures/parity-batch46-upload.html?framework=${framework}`);
+ await page.waitForFunction(()=>(window as any).ready&&document.querySelector('input[type=file]'));
+ const zone=page.getByRole('button',{name:/Drop files here/});
+ await page.evaluate(()=>(window as any).drag('dragover'));
+ await expect.poll(()=>zone.evaluate(node=>new DOMMatrixReadOnly(getComputedStyle(node).transform).a)).toBeCloseTo(1.01,3);
+ await expect.poll(()=>zone.evaluate(node=>getComputedStyle(node).backgroundColor)).toBe('rgb(20, 20, 20)');
+ const icon=await zone.evaluate(node=>{const m=new DOMMatrixReadOnly(getComputedStyle(node.children[0]).transform);return[m.a,m.f]});
+ expect(icon[0]).toBeCloseTo(1.08,2);expect(icon[1]).toBeCloseTo(-3,1);
+ await page.evaluate(()=>(window as any).drag('dragleave'));
+ await expect.poll(()=>zone.evaluate(node=>new DOMMatrixReadOnly(getComputedStyle(node).transform).a)).toBeCloseTo(1,3);
+ await page.evaluate(()=>(window as any).drop([{name:'first.txt',size:5},{name:'second.txt',size:5}]));
+ const row=(name:string)=>page.getByRole('button',{name:'Remove '+name}).locator('xpath=ancestor::div[contains(concat(" ",@class," ")," k-upload-row ") or (contains(@class,"relative") and contains(@class,"overflow-hidden") and contains(@class,"rounded-xl"))][1]');
+ await expect.poll(()=>row('first.txt').evaluate(node=>Number(getComputedStyle(node).opacity))).toBeCloseTo(1,3);
+ await page.evaluate(()=>(window as any).progress(0,80));
+ await expect.poll(()=>row('first.txt').evaluate(node=>{const bar=node.children[1];return bar.children[0].getBoundingClientRect().width/bar.getBoundingClientRect().width})).toBeCloseTo(.8,2);
+ const before=(await row('second.txt').boundingBox())!;
+ await page.getByRole('button',{name:'Remove first.txt'}).evaluate(node=>(node as HTMLButtonElement).click());
+ await expect(page.getByRole('button',{name:'Remove first.txt'})).toHaveCount(0);
+ await expect.poll(async()=>{const after=(await row('second.txt').boundingBox())!;return before.y-after.y}).toBeGreaterThan(50);
+ await page.waitForTimeout(1000);
+ const exit=await page.getByRole('button',{name:'Remove second.txt'}).evaluate(node=>{node.click();return !!document.querySelector('button[aria-label="Remove second.txt"]')});
+ expect(exit).toBe(true);
+ await expect(page.getByRole('button',{name:'Remove second.txt'})).toHaveCount(0);
+});

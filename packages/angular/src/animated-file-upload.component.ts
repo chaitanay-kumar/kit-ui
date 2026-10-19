@@ -1,15 +1,58 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component, input } from '@angular/core';
-import { KitSmartUploadComponent } from './smart-upload.component';
-import type { UploadHandler } from './types';
+import { Component, ViewEncapsulation, DestroyRef, ElementRef, computed, effect, inject, input, signal, untracked, viewChild } from '@angular/core';
+import {afterRenderEffect,ErrorHandler} from '@angular/core';import {AnimatedUploadState,animatedFileSize,animatedFileIcon,type UploadFileItem,type AnimatedUploadOptions} from './animated-upload-state';import {AnimatedUploadIconComponent} from './animated-upload-icons';import {AnimatedUploadDropMotionDirective,AnimatedUploadListMotionDirective,AnimatedUploadRowMotionDirective,AnimatedUploadProgressDirective,AnimatedUploadLayout} from './animated-upload-motion';import {invokeNativeEventCallback} from './native-event-callback';export type {FileUploadStatus,UploadFileItem} from './animated-upload-state';
 @Component({
  selector:"kit-animated-file-upload", standalone:true,
- host:{'data-kit':"animated-file-upload",style:'display:block;min-width:0'},
- imports:[KitSmartUploadComponent],
+ host:{style:'display:contents'},
+ imports:[AnimatedUploadIconComponent,AnimatedUploadDropMotionDirective,AnimatedUploadListMotionDirective,AnimatedUploadRowMotionDirective,AnimatedUploadProgressDirective],
+encapsulation:ViewEncapsulation.None,styleUrls:["./animated-file-upload.css"],
 template:`
-<kit-smart-upload [accept]="accept()" [maxFiles]="maxFiles()" [maxSize]="maxSize()" [disabled]="disabled()" [upload]="upload()" />
+<div #root [class]="'k-animated-upload '+className()">
+<input #picker type="file" [multiple]="multiple()" [attr.accept]="acceptString()??null" [disabled]="disabled()" (change)="change($event)" aria-label="Upload files" class="k-upload-picker"/>
+<div class="k-upload-drop" [class.compact]="variant()==='compact'" [class.disabled]="disabled()" [kitUploadDropMotion]="engine.dragOver()" [disabled]="disabled()" (dragover)="drag($event,true)" (dragleave)="drag($event,false)" (drop)="drop($event)" (click)="browse()" (keydown)="key($event)" [tabIndex]="disabled()?-1:0" role="button" [attr.aria-disabled]="disabled()">
+<div class="k-upload-drop-icon">
+<svg kitUploadIcon icon="upload" [class.active]="engine.dragOver()"/>
+</div>
+<div class="k-upload-drop-text">
+<p class="k-upload-title">{{dropTitle()}}</p>
+<p class="k-upload-subtitle">{{dropSubtitle()}} @if(maxSize()){<span>(up to {{format(maxSize())}})</span>}@else{ {{maxSize()}} }</p>
+</div>
+</div>@if(rows().length){<div class="k-upload-list" [kitUploadListMotion]="leaving()" (exitDone)="finishExit()">
+<div class="k-upload-list-header">
+<span>Files ({{rows().length}})</span>@if(hasComplete()){<button type="button" (click)="engine.clearCompleted()">Clear Completed</button>}</div>
+<div class="k-upload-rows">@for(file of rows();track file.id){<div class="k-upload-row" [class.error]="file.status==='error'" [class.complete]="file.status==='complete'" [attr.data-file-id]="file.id" [attr.data-status]="file.status" [kitUploadRowMotion]="leaving()">
+<div class="k-upload-row-content">
+<div class="k-upload-file-icon">
+<svg kitUploadIcon [icon]="fileIcon(file.name,file.type)"/>
+</div>
+<div class="k-upload-meta">
+<div class="k-upload-name-line">
+<p>{{file.name}}</p>
+<span>{{format(file.size)}}</span>
+</div>
+<div class="k-upload-status">@if(file.status==='error'){<span class="k-upload-error">
+<svg kitUploadIcon icon="alert-circle"/>
+<span>{{file.errorMessage||'Upload failed'}}</span>
+</span>}@else if(file.status==='complete'){<span class="k-upload-ready">
+<svg kitUploadIcon icon="check"/>
+<span>Ready</span>
+</span>}@else if(file.status==='processing'){<span class="k-upload-processing">
+<i>
+</i>Processing...</span>}@else{<span class="k-upload-uploading">Uploading {{file.progress}}%</span>}</div>
+</div>
+<div class="k-upload-actions">@if(file.status==='error'){<button type="button" (click)="retry(file,$event)" title="Retry upload" [attr.aria-label]="'Retry uploading '+file.name">
+<svg kitUploadIcon icon="rotate-ccw"/>
+</button>}<button type="button" (click)="engine.remove(file.id)" title="Remove file" [attr.aria-label]="'Remove '+file.name">
+<svg kitUploadIcon icon="x"/>
+</button>
+</div>
+</div>@if(file.status==='uploading'||file.status==='processing'){<div class="k-upload-progress">
+<div [kitUploadProgress]="file.progress">
+</div>
+</div>}</div>}</div>
+</div>}</div>
 `
 })
 export class KitAnimatedFileUploadComponent {
-readonly accept=input('image/*,.pdf');readonly maxFiles=input(5);readonly maxSize=input(10*1024*1024);readonly disabled=input(false);readonly upload=input<UploadHandler>();
+readonly multiple=input<boolean,boolean|undefined>(true,{transform:v=>v===undefined?true:v});readonly maxSize=input<number,number|undefined>(25*1024*1024,{transform:v=>v===undefined?25*1024*1024:v});readonly maxFiles=input<number,number|undefined>(10,{transform:v=>v===undefined?10:v});readonly dropTitle=input<string,string|undefined>('Drop files here',{transform:v=>v===undefined?'Drop files here':v});readonly dropSubtitle=input<string,string|undefined>('or browse from your device',{transform:v=>v===undefined?'or browse from your device':v});readonly variant=input<'standard'|'compact','standard'|'compact'|undefined>('standard',{transform:v=>v===undefined?'standard':v});readonly disabled=input<boolean,boolean|undefined>(false,{transform:v=>v===undefined?false:v});readonly className=input<string,string|undefined>('',{transform:v=>v===undefined?'':v});readonly accept=input<string|string[]|undefined>();readonly initialFiles=input<UploadFileItem[]|undefined>();readonly onFilesSelected=input<((files:File[])=>void)|undefined>();readonly onUploadComplete=input<((file:UploadFileItem)=>void)|undefined>();readonly uploadHandler=input<AnimatedUploadOptions['uploadHandler']>();readonly root=viewChild<ElementRef<HTMLElement>>('root');readonly picker=viewChild<ElementRef<HTMLInputElement>>('picker');private readonly errors=inject(ErrorHandler);private layout:AnimatedUploadLayout|undefined;readonly engine=new AnimatedUploadState(error=>queueMicrotask(()=>this.errors.handleError(error)),()=>this.layout?.capture());readonly rows=signal<UploadFileItem[]>([]);readonly leaving=signal(false);private previous:UploadFileItem[]=[];private originals=new WeakMap<UploadFileItem,UploadFileItem>();readonly acceptString=computed(()=>{const accept=this.accept();return Array.isArray(accept)?accept.join(','):accept});readonly hasComplete=computed(()=>this.rows().some(file=>file.status==='complete'));readonly format=animatedFileSize;readonly fileIcon=animatedFileIcon;browse():void{if(!this.disabled())this.picker()?.nativeElement.click()}key(event:KeyboardEvent):void{if((event.key==='Enter'||event.key===' ')&&!this.disabled()){event.preventDefault();this.picker()?.nativeElement.click()}}drag(event:DragEvent,over:boolean):void{event.preventDefault();event.stopPropagation();if(!over)this.engine.dragOver.set(false);else if(!this.disabled()&&!this.engine.dragOver())this.engine.dragOver.set(true)}drop(event:DragEvent):void{event.preventDefault();event.stopPropagation();this.engine.dragOver.set(false);if(this.disabled())return;invokeNativeEventCallback(()=>{if(event.dataTransfer?.files.length){const files=Array.from(event.dataTransfer.files);this.engine.incoming(this.multiple()?files:[files[0]])}},event,this.errors)}change(event:Event):void{invokeNativeEventCallback(()=>{const input=event.target as HTMLInputElement;if(input.files?.length){const files=Array.from(input.files);this.engine.incoming(this.multiple()?files:[files[0]]);if(this.picker())this.picker()!.nativeElement.value=''}},event,this.errors)}retry(file:UploadFileItem,event:MouseEvent):void{invokeNativeEventCallback(()=>this.engine.retry(this.originals.get(file)??file),event,this.errors)}finishExit():void{if(this.leaving()&&!this.engine.files().length)this.rows.set([])}constructor(){effect(()=>{const options={multiple:this.multiple(),maxSize:this.maxSize(),maxFiles:this.maxFiles(),disabled:this.disabled(),initialFiles:this.initialFiles(),onFilesSelected:this.onFilesSelected(),onUploadComplete:this.onUploadComplete(),uploadHandler:this.uploadHandler()};untracked(()=>this.engine.update(options))});effect(()=>{const files=this.engine.files();untracked(()=>{if(files.length){this.previous=files;this.leaving.set(false);this.rows.set(files)}else if(this.previous.length&&!this.leaving()){this.leaving.set(true);this.rows.set(this.previous.map(file=>{const snapshot={...file};this.originals.set(snapshot,file);return snapshot}));this.previous=[]}})});effect(()=>{this.variant();this.className();untracked(()=>this.layout?.capture())});afterRenderEffect(()=>{this.rows();this.leaving();this.variant();this.className();const root=this.root()?.nativeElement;if(root)untracked(()=>{this.layout??=new AnimatedUploadLayout(root);this.layout.rendered()})});inject(DestroyRef).onDestroy(()=>{this.engine.destroy();this.layout?.destroy()})}
 }
