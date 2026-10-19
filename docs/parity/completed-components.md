@@ -1,6 +1,6 @@
 # Completed parity checks
 
-109 components have recorded validated baselines through batch 47. The 99 baselines through batch 42 are integrated; batches 31?42 were merged through [PR #26](https://github.com/chaitanay-kumar/kit-ui/pull/26). Batches 43-47 are locally validated and await integration review, merge/deployment and final user QA; see [batch 43](batch-43-integration.md), [batch 44](batch-44-integration.md), [batch 45](batch-45-integration.md) and [batch 46](batch-46-integration.md) and [batch 47](batch-47-integration.md) evidence. Validation scope and remaining limits are recorded in each linked report. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
+111 components have recorded validated baselines through batch 48. The 99 baselines through batch 42 are integrated; batches 31?42 were merged through [PR #26](https://github.com/chaitanay-kumar/kit-ui/pull/26). Batches 43-48 are locally validated and await integration review, merge/deployment and final user QA; see [batch 43](batch-43-integration.md), [batch 44](batch-44-integration.md), [batch 45](batch-45-integration.md) and [batch 46](batch-46-integration.md) and [batch 47](batch-47-integration.md) and [batch 48](batch-48-integration.md) evidence. Validation scope and remaining limits are recorded in each linked report. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
 
 | Component | Status | Evidence |
 | --- | --- | --- |
@@ -71,6 +71,7 @@
 | Orbital Loading Ring | Validated baseline | [Review](orbital-loading-ring.md) |
 | OriginDropdown | Validated baseline | [Report](origin-dropdown.md) |
 | OTP Input | Validated baseline | [Report](otp-input.md) |
+| Particle Delete | Validated baseline | [Report](particle-delete.md) |
 | Payment Receipt Printer | Validated baseline | [Report](payment-receipt-printer.md) |
 | Payment Status | Validated baseline | [Report](payment-status.md) |
 | Peek Card | Validated baseline | [Report](peek-card.md) |
@@ -87,6 +88,7 @@
 | Selection Basket | Validated baseline | [Evidence](selection-basket.md) |
 | SettleModal | Validated baseline | [Evidence](settle-modal.md) |
 | Shooting Stars | Validated baseline | [Report](shooting-stars.md) |
+| Sign Up | Validated baseline | [Report](sign-up.md) |
 | SlidePagination | Validated baseline | [Report](slide-pagination.md) |
 | Small Floating Dock | Validated baseline | [Report](small-floating-dock.md) |
 | Smart Comparison | Validated baseline | [Report](smart-comparison.md) |

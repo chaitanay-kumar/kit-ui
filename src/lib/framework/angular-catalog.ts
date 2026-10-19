@@ -147,6 +147,17 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if(entry.id==='sign-up')return `import {Component,signal} from '@angular/core';
+import {KitSignUpComponent,type SignUpFormData} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitSignUpComponent],template:\`<kit-sign-up [onSubmit]="submit"/><p>{{message()}}</p>\`})
+export class ExampleComponent {
+ readonly message=signal('Supply your own registration transport and external loading/error state');
+ readonly submit=(data:SignUpFormData)=>this.message.set('Submitted '+data.email);
+}`;
+  if(entry.id==='particle-delete')return `import {Component} from '@angular/core';
+import {KitParticleDeleteComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitParticleDeleteComponent],template:\`<kit-particle-delete [options]="{duration:850,maxParticles:4500}"/>\`})
+export class ExampleComponent {}`;
   if(entry.id==='form')return `import {Component,signal} from '@angular/core';
 import {KitFormComponent,KitFormItemComponent,KitFormLabelComponent,KitFormControlComponent,KitFormDescriptionComponent,KitFormMessageComponent,KitInputComponent,KitButtonComponent} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitFormComponent,KitFormItemComponent,KitFormLabelComponent,KitFormControlComponent,KitFormDescriptionComponent,KitFormMessageComponent,KitInputComponent,KitButtonComponent],template:\`<kit-form [onSubmit]="submit"><kit-form-item><kit-form-label htmlFor="email" [required]="true">Email address</kit-form-label><kit-form-control><kit-input id="email" type="email" placeholder="you@company.com" [value]="email()" [onChange]="change" [error]="!!error()"/></kit-form-control><kit-form-description>We will never share your email.</kit-form-description><kit-form-message [error]="error()"/></kit-form-item><button kitButton type="submit">Submit</button></kit-form>\`})

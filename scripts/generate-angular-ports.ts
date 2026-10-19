@@ -1,3 +1,5 @@
+import {particleDeletePort} from './angular-particle-delete';
+import {signUpPort} from './angular-sign-up';
 import {formPort} from './angular-form';
 import {loginPort} from './angular-login';
 import {animatedFileUploadPort} from './angular-animated-file-upload';
@@ -240,16 +242,7 @@ add('spring-select','plain',springSelectPort.description,springSelectPort.templa
 
 add("otp-input", "plain", otpInputPort.description, otpInputPort.template, otpInputPort.body, otpInputPort);
 add("lock-input", "plain", lockInputPort.description, lockInputPort.template, lockInputPort.body, lockInputPort);
-for (const [id, title, button] of [
-  ["sign-up", "Create an account", "Create account"],
-]) {
-  add(
-    id,
-    "form",
-    "Validated native fields, password visibility, cancellable application submission and preserved errors.",
-    `<form class="kit-control kit-surface kit-stack" aria-label="${title}" (submit)="submit($event)"><h3>{{label()||'${title}'}}</h3>@for(field of fields();track field.key){<label [for]="uid+'-'+field.key">{{field.label}}<input [id]="uid+'-'+field.key" [name]="field.key" [type]="field.type==='password'&&showPassword()?'text':field.type||'text'" [attr.autocomplete]="field.type==='password'?'${id === "sign-up" ? "new-password" : "current-password"}':field.type==='email'?'email':'on'" [required]="field.required||false" [attr.minlength]="field.minLength??null" [value]="values()[field.key]||''" [disabled]="disabled()||busy()" (input)="change(field.key,$event)" /></label>}<label class="kit-row"><input type="checkbox" [checked]="showPassword()" (change)="showPassword.set($any($event.target).checked)" />Show password</label><button type="submit" [disabled]="disabled()||busy()">{{busy()?'Submitting…':'${button}'}}</button>@if(busy()){<button type="button" (click)="cancel()">Cancel</button>}<p role="status">{{status()}}</p>@if(error()){<p role="alert">{{error()}}</p>}</form>`,
-  );
-}
+add('sign-up','plain',signUpPort.description,signUpPort.template,signUpPort.body,signUpPort);
 add('animated-file-upload','plain',animatedFileUploadPort.description,animatedFileUploadPort.template,animatedFileUploadPort.body,animatedFileUploadPort);
 add('form','plain',formPort.description,formPort.template,formPort.body,formPort);
 add('login','plain',loginPort.description,loginPort.template,loginPort.body,loginPort);
@@ -453,13 +446,7 @@ add('density-lens','plain',densityLensPort.description,densityLensPort.template,
 add('gravity-particle-burst','plain',gravityParticleBurstPort.description,gravityParticleBurstPort.template,gravityParticleBurstPort.body,gravityParticleBurstPort);
 add('rocket-party-popper','plain',rocketPartyPopperPort.description,rocketPartyPopperPort.template,rocketPartyPopperPort.body,rocketPartyPopperPort);
 add("cursor-follower","plain",cursorFollowerPort.description,cursorFollowerPort.template,cursorFollowerPort.body,cursorFollowerPort);
-add(
-  "particle-delete",
-  "action",
-  "A deliberate local item dismissal with a particle transition and restore control.",
-  `<section class="kit-control kit-stack">@if(!removed()){<article class="kit-surface kit-stack" [class.k-dissolve]="busy()"><ng-content><p>{{label()||'A small item to remove'}}</p></ng-content><button type="button" [disabled]="blocked()" (click)="remove()">Delete item</button></article>}@else{<button type="button" [disabled]="disabled()" (click)="removed.set(false)">Restore preview item</button>}${actionFeedback}</section>`,
-  `readonly removed=signal(false);async remove():Promise<void>{await this.run();if(!this.error()&&!this.destroyed&&!this.disabled())this.removed.set(true);}`,
-);
+add('particle-delete','plain',particleDeletePort.description,particleDeletePort.template,particleDeletePort.body,particleDeletePort);
 add(
   "car-smoke-page-transition",
   "collection",
@@ -587,18 +574,11 @@ for (const port of ports) {
     );
   if (port.kind === 'collection' && cardDefaults[port.id])
     port.body += `\noverride readonly items=input<KitItem[]>(${JSON.stringify(cardDefaults[port.id])});`;
-  if (port.id === "particle-delete")
-    port.body = port.body.replace(
-      "await this.run();",
-      "const request=this.run();const controller=this.controller;await request;if(controller?.signal.aborted)return;",
-    );
   if (port.id === "settle-modal")
     port.body = port.body.replace(
       "await this.run();",
       "const request=this.run();const controller=this.controller;await request;if(controller?.signal.aborted)return;",
     );
-  if (port.id === "sign-up")
-    port.body = `override readonly fields=input<KitField[]>([{key:'name',label:'Name',type:'text',required:true},{key:'email',label:'Email',type:'email',required:true},{key:'password',label:'Password',type:'password',required:true,minLength:8},{key:'confirmPassword',label:'Confirm password',type:'password',required:true,minLength:8}]);override async submit(event:SubmitEvent):Promise<void>{if(this.values()['password']!==this.values()['confirmPassword']){event.preventDefault();this.error.set('Passwords do not match.');return;}await super.submit(event);}`;
 
 
 }

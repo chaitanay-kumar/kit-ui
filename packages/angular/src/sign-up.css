@@ -1,0 +1,11 @@
+@import './login.css';
+@layer components {
+  .k-sign-up-strength{padding-top:6px}
+  .k-sign-up-bars{display:flex;gap:4px;height:4px;margin-bottom:4px}
+  .k-sign-up-bars>div{flex:1;border-radius:calc(infinity * 1px);transition:background-color .2s cubic-bezier(.4,0,.2,1)}
+  .k-sign-up-strength-label{display:flex;justify-content:space-between;align-items:center;font-size:10px;line-height:15px;font-family:var(--font-mono,'JetBrains Mono','Fira Code',monospace);color:#6b6b6b}
+  .k-sign-up-strength-label>span:last-child{color:#a1a1a1}
+  .k-sign-up .k-sign-up-submit{margin-top:12px}
+  .k-sign-up-terms-link{color:#fafafa;text-decoration:underline;text-underline-offset:2px}
+  .k-sign-up-terms-link:hover{color:white}
+}

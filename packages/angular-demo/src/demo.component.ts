@@ -1,3 +1,4 @@
+import {SignUpDemoComponent,ParticleDeleteDemoComponent} from './batch48-demos';
 import {FormDemoComponent,LoginDemoComponent} from './batch47-demos';
 import {DotShaderDemoComponent,AnimatedFileUploadDemoComponent} from './batch46-demos';
 import {GlyphMatrixDemoComponent,ShootingStarsDemoComponent} from './batch45-demos';
@@ -87,7 +88,7 @@ import {RainbowButtonDemoComponent} from "./rainbow-button-demo";
 @Component({
   selector: "kit-angular-demo",
   standalone: true,
-  imports: [FormDemoComponent,LoginDemoComponent,DotShaderDemoComponent,AnimatedFileUploadDemoComponent,GlyphMatrixDemoComponent,ShootingStarsDemoComponent,ThinkingOrbDemoComponent,SparklesCoreDemoComponent,DragToConfirmDemoComponent,SmartComparisonDemoComponent,CommandMenuDemoComponent,SpotlightSearchDemoComponent,EvilEyeDemoComponent,NimbuMirchiDemoComponent,TorqueDialDemoComponent,RocketPartyPopperDemoComponent,CodeSnippetDeckDemoComponent,BatchGestureTrayDemoComponent,SpeedWarpDemoComponent,DepthCorridorDemoComponent,DataRowDemoComponent,InteractiveTimelineDemoComponent,FolderCardsDemoComponent,StoryCardsDemoComponent,PricingDemoComponent,StackedCardsDemoComponent,RecoveryLedgerDemoComponent,DependencyTraceDemoComponent,MorphingDialogDemoComponent,VelocityToastDemoComponent,SpringSelectDemoComponent,GooeyMenuDemoComponent,GlassNavbarDemoComponent,ScrollProgressNavDemoComponent,SmallFloatingDockDemoComponent,BranchingSubmenuDemoComponent,AnimatedTabsDemoComponent,ScrollVelocityDemoComponent,StackUnfoldDemoComponent,SettleModalDemoComponent,ElasticSheetDemoComponent,SelectionBasketDemoComponent,DensityLensDemoComponent,GravityParticleBurstDemoComponent,DotFieldDemoComponent,FloatingActionDockDemoComponent,MorphingBlobDemoComponent,CircularOrbitDemoComponent,MeteorsDemoComponent,CursorFollowerDemoComponent,LiquidRippleButtonDemoComponent,AnimatedNumberDemoComponent,UnfoldAccordionDemoComponent,IOSSearchDemoComponent,RevealCardDemoComponent,StretchSwitchDemoComponent,SmoothAccordionDemoComponent,HamburgerMenuDemoComponent,ExpandableSearchDemoComponent,
+  imports: [SignUpDemoComponent,ParticleDeleteDemoComponent,FormDemoComponent,LoginDemoComponent,DotShaderDemoComponent,AnimatedFileUploadDemoComponent,GlyphMatrixDemoComponent,ShootingStarsDemoComponent,ThinkingOrbDemoComponent,SparklesCoreDemoComponent,DragToConfirmDemoComponent,SmartComparisonDemoComponent,CommandMenuDemoComponent,SpotlightSearchDemoComponent,EvilEyeDemoComponent,NimbuMirchiDemoComponent,TorqueDialDemoComponent,RocketPartyPopperDemoComponent,CodeSnippetDeckDemoComponent,BatchGestureTrayDemoComponent,SpeedWarpDemoComponent,DepthCorridorDemoComponent,DataRowDemoComponent,InteractiveTimelineDemoComponent,FolderCardsDemoComponent,StoryCardsDemoComponent,PricingDemoComponent,StackedCardsDemoComponent,RecoveryLedgerDemoComponent,DependencyTraceDemoComponent,MorphingDialogDemoComponent,VelocityToastDemoComponent,SpringSelectDemoComponent,GooeyMenuDemoComponent,GlassNavbarDemoComponent,ScrollProgressNavDemoComponent,SmallFloatingDockDemoComponent,BranchingSubmenuDemoComponent,AnimatedTabsDemoComponent,ScrollVelocityDemoComponent,StackUnfoldDemoComponent,SettleModalDemoComponent,ElasticSheetDemoComponent,SelectionBasketDemoComponent,DensityLensDemoComponent,GravityParticleBurstDemoComponent,DotFieldDemoComponent,FloatingActionDockDemoComponent,MorphingBlobDemoComponent,CircularOrbitDemoComponent,MeteorsDemoComponent,CursorFollowerDemoComponent,LiquidRippleButtonDemoComponent,AnimatedNumberDemoComponent,UnfoldAccordionDemoComponent,IOSSearchDemoComponent,RevealCardDemoComponent,StretchSwitchDemoComponent,SmoothAccordionDemoComponent,HamburgerMenuDemoComponent,ExpandableSearchDemoComponent,
     PressButtonDemoComponent,ButtonDemoComponent,MagneticButtonDemoComponent,MorphingButtonDemoComponent,TypewriterButtonDemoComponent,RainbowButtonDemoComponent,
     WalletCardDemoComponent,StickyPagesDemoComponent,
     NeonEdgeButtonDemoComponent,
@@ -122,6 +123,8 @@ import {RainbowButtonDemoComponent} from "./rainbow-button-demo";
       @case("batch-gesture-tray"){<kit-batch-gesture-tray-demo/>}
       @case("form"){<kit-form-demo/>}
       @case("login"){<kit-login-demo/>}
+      @case("sign-up"){<kit-sign-up-demo/>}
+      @case("particle-delete"){<kit-particle-delete-demo/>}
       @case("dot-shader"){<kit-dot-shader-demo/>}
       @case("animated-file-upload"){<kit-animated-file-upload-demo/>}
       @case("glyph-matrix"){<kit-glyph-matrix-demo/>}

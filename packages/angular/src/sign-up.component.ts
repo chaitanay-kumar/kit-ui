@@ -1,19 +1,101 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component, input } from '@angular/core';
-import { KitFormController } from './port-controllers';
-import type { KitField } from './port-types';
-
+import { Component, ViewEncapsulation, computed, inject, input, signal, untracked } from '@angular/core';
+import {afterRenderEffect,ErrorHandler} from '@angular/core';import {KitFormComponent} from './form.component';import {KitFormItemComponent,KitFormLabelComponent,KitFormControlComponent,KitFormMessageComponent,KitInputComponent,KitCheckboxComponent,KitFormContentComponent,type FormContent} from './form-parts';import {KitButtonComponent} from './button.component';import {KitFormIconComponent} from './form-icons';import {KitFormPresenceDirective} from './form-motion';import {invokeNativeEventCallback} from './native-event-callback';export interface SignUpFormData{name:string;email:string;password:string;confirmPassword?:string;agreeToTerms:boolean}export type SignUpSocialProvider='github'|'google';interface SignUpValidationErrors{name?:string;email?:string;password?:string;confirmPassword?:string;terms?:string}
 @Component({
  selector:"kit-sign-up", standalone:true,
- host:{'data-kit':"sign-up",style:'display:block;min-width:0'},
- template:`
-<form class="kit-control kit-surface kit-stack" aria-label="Create an account" (submit)="submit($event)">
-<h3>{{label()||'Create an account'}}</h3>@for(field of fields();track field.key){<label [for]="uid+'-'+field.key">{{field.label}}<input [id]="uid+'-'+field.key" [name]="field.key" [type]="field.type==='password'&&showPassword()?'text':field.type||'text'" [attr.autocomplete]="field.type==='password'?'new-password':field.type==='email'?'email':'on'" [required]="field.required||false" [attr.minlength]="field.minLength??null" [value]="values()[field.key]||''" [disabled]="disabled()||busy()" (input)="change(field.key,$event)" />
-</label>}<label class="kit-row">
-<input type="checkbox" [checked]="showPassword()" (change)="showPassword.set($any($event.target).checked)" />Show password</label>
-<button type="submit" [disabled]="disabled()||busy()">{{busy()?'Submitting…':'Create account'}}</button>@if(busy()){<button type="button" (click)="cancel()">Cancel</button>}<p role="status">{{status()}}</p>@if(error()){<p role="alert">{{error()}}</p>}</form>
+ host:{'data-kit':'sign-up',style:'display:contents'},
+ imports:[KitFormComponent,KitFormItemComponent,KitFormLabelComponent,KitFormControlComponent,KitFormMessageComponent,KitInputComponent,KitCheckboxComponent,KitFormContentComponent,KitButtonComponent,KitFormIconComponent,KitFormPresenceDirective],
+encapsulation:ViewEncapsulation.None,styleUrls:["./sign-up.css"],
+template:`
+<ng-template #user>
+<svg kitFormIcon icon="user" class="k-login-field-icon"/>
+</ng-template>
+<ng-template #defaultTerms>
+<span>I agree to the <a href="#terms" class="k-sign-up-terms-link">Terms of Service</a> and <a href="#privacy" class="k-sign-up-terms-link">Privacy Policy</a>
+</span>
+</ng-template>
+<ng-template #arrow>
+<svg kitFormIcon icon="arrow-right" class="k-login-arrow"/>
+</ng-template>
+<ng-template #mail>
+<svg kitFormIcon icon="mail" class="k-login-field-icon"/>
+</ng-template>
+<ng-template #lock>
+<svg kitFormIcon icon="lock" class="k-login-field-icon"/>
+</ng-template>
+<div [class]="rootClass()">
+<div class="k-login-glow" aria-hidden="true">
+</div>
+<div class="k-login-header">@if(logo()===undefined){<div class="k-login-logo-wrap">
+<div class="k-login-default-logo">
+<svg kitFormIcon icon="sparkles"/>
+</div>
+</div>}@else if(logo()){<div class="k-login-logo-wrap">
+<kit-form-content [content]="logoContent()"/>
+</div>}@else if(numericLogo()!==undefined){<ng-container>{{numericLogo()}}</ng-container>}<h2>{{title()}}</h2>@if(description()){<p>{{description()}}</p>}</div>@if(retainedError()){<div class="k-login-error-wrap" [kitFormPresence]="errorLeaving()" [offset]="-6" (exited)="finishError()">
+<div class="k-login-error">
+<svg kitFormIcon icon="alert-circle"/>
+<span>{{retainedError()}}</span>
+</div>
+</div>}@if(showSocialSignUp()){<div class="k-login-social">
+<div class="k-login-social-grid">
+<button kitButton type="button" variant="secondary" size="sm" className="k-login-social-button" (click)="social('github',$event)">
+<svg kitButtonLeftIcon class="k-login-social-icon" viewBox="0 0 24 24">
+<path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+</svg>GitHub</button>
+<button kitButton type="button" variant="secondary" size="sm" className="k-login-social-button" (click)="social('google',$event)">
+<svg kitButtonLeftIcon class="k-login-social-icon" viewBox="0 0 24 24">
+<path d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.095 0-7.439-3.389-7.439-7.574c0-4.185 3.344-7.574 7.439-7.574 2.33 0 3.891.989 4.785 1.849l3.254-3.138C18.189 1.186 15.479 0 12.24 0c-6.635 0-12 5.365-12 12s5.365 12 12 12c6.926 0 11.52-4.869 11.52-11.726 0-.788-.085-1.39-.189-1.989H12.24z"/>
+</svg>Google</button>
+</div>
+<div class="k-login-divider">
+<div>
+</div>
+<span>Or sign up with email</span>
+</div>
+</div>}<kit-form className="space-y-3.5" [onSubmit]="submit">
+<kit-form-item>
+<kit-form-label [required]="true">Full Name</kit-form-label>
+<kit-form-control>
+<kit-input type="text" placeholder="Jane Doe" autoComplete="name"  [value]="name()" [onChange]="nameChange" [leftIcon]="user" [error]="!!validationErrors().name"/>
+</kit-form-control>
+<kit-form-message [error]="validationErrors().name"/>
+</kit-form-item>
+<kit-form-item>
+<kit-form-label [required]="true">Email Address</kit-form-label>
+<kit-form-control>
+<kit-input type="email" placeholder="name@company.com" autoComplete="email"  [value]="email()" [onChange]="emailChange" [leftIcon]="mail" [error]="!!validationErrors().email"/>
+</kit-form-control>
+<kit-form-message [error]="validationErrors().email"/>
+</kit-form-item>
+<kit-form-item>
+<kit-form-label [required]="true">Password</kit-form-label>
+<kit-form-control>
+<kit-input type="password" placeholder="At least 8 characters" autoComplete="new-password" [showPasswordToggle]="true" [value]="password()" [onChange]="passwordChange" [leftIcon]="lock" [error]="!!validationErrors().password"/>
+</kit-form-control>@if(password().length>0){<div class="k-sign-up-strength">
+<div class="k-sign-up-bars">@for(step of [1,2,3,4];track step){<div [style.background-color]="strength()>=step?strengthColors[step-1]:'#1F1F1F'">
+</div>}</div>
+<div class="k-sign-up-strength-label">
+<span>Strength</span>
+<span>{{strengthLabels[strength()-1]||'Weak'}}</span>
+</div>
+</div>}<kit-form-message [error]="validationErrors().password"/>
+</kit-form-item>@if(requireConfirmPassword()){<kit-form-item>
+<kit-form-label [required]="true">Confirm Password</kit-form-label>
+<kit-form-control>
+<kit-input type="password" placeholder="Re-enter your password" autoComplete="new-password" [showPasswordToggle]="true" [value]="confirmPassword()" [onChange]="confirmPasswordChange" [leftIcon]="lock" [error]="!!validationErrors().confirmPassword"/>
+</kit-form-control>
+<kit-form-message [error]="validationErrors().confirmPassword"/>
+</kit-form-item>}<div class="k-login-remember">
+<kit-checkbox [label]="termsText()===undefined?defaultTerms:termsText()" [checked]="agreeToTerms()" [onChange]="termsChange"/>
+<kit-form-message [error]="validationErrors().terms"/>
+</div>
+<button kitButton type="submit" variant="primary" size="md" [fullWidth]="true" [isLoading]="isLoading()" loadingText="Creating account..." className="k-sign-up-submit" [rightIcon]="isLoading()?undefined:arrow">Create Account</button>
+</kit-form>@if(onSignInClick()){<div class="k-login-secondary">
+<button type="button" (click)="signIn($event)">{{signInText()}}</button>
+</div>}</div>
 `
 })
-export class KitSignUpComponent extends KitFormController {
-override readonly fields=input<KitField[]>([{key:'name',label:'Name',type:'text',required:true},{key:'email',label:'Email',type:'email',required:true},{key:'password',label:'Password',type:'password',required:true,minLength:8},{key:'confirmPassword',label:'Confirm password',type:'password',required:true,minLength:8}]);override async submit(event:SubmitEvent):Promise<void>{if(this.values()['password']!==this.values()['confirmPassword']){event.preventDefault();this.error.set('Passwords do not match.');return;}await super.submit(event);}
+export class KitSignUpComponent {
+readonly title=input<string,string|undefined>('Create an account',{transform:value=>value===undefined?'Create an account':value});readonly description=input<string,string|undefined>('Join Kit UI to access components and templates',{transform:value=>value===undefined?'Join Kit UI to access components and templates':value});readonly logo=input<FormContent|false|undefined>();readonly numericLogo=computed(()=>typeof this.logo()==='number'?this.logo() as number:undefined);readonly logoContent=computed(()=>this.logo()===false?null:this.logo() as FormContent|undefined);readonly error=input<string|null|undefined>();readonly isLoading=input<boolean,boolean|undefined>(false,{transform:value=>value??false});readonly onSubmit=input<((data:SignUpFormData)=>void|Promise<void>)|undefined>();readonly onSignInClick=input<(()=>void)|undefined>();readonly showSocialSignUp=input<boolean,boolean|undefined>(true,{transform:value=>value===undefined?true:value});readonly onSocialSignUp=input<((provider:SignUpSocialProvider)=>void)|undefined>();readonly requireConfirmPassword=input<boolean,boolean|undefined>(true,{transform:value=>value===undefined?true:value});readonly termsText=input<FormContent|undefined>();readonly signInText=input<string,string|undefined>('Already have an account? Sign in',{transform:value=>value===undefined?'Already have an account? Sign in':value});readonly className=input<string,string|undefined>('',{transform:value=>value??''});readonly rootClass=computed(()=>{const className=this.className();return 'k-login k-sign-up '+(/(?:^|\s)sm:p-/.test(className)?'':'sm:p-8 ')+className});readonly name=signal('');readonly email=signal('');readonly password=signal('');readonly confirmPassword=signal('');readonly agreeToTerms=signal(false);readonly validationErrors=signal<SignUpValidationErrors>({});readonly strengthColors=['#FF7A7A','#F59E0B','#38BDF8','#6EE7B7'];readonly strengthLabels=['Weak','Fair','Good','Strong'];readonly strength=computed(()=>{const pass=this.password();return pass?Number(pass.length>=8)+Number(/[A-Z]/.test(pass))+Number(/[0-9]/.test(pass))+Number(/[^A-Za-z0-9]/.test(pass)):0});readonly retainedError=signal<string|undefined>(undefined);readonly errorLeaving=signal(false);private readonly errors=inject(ErrorHandler);private change(key:'name'|'email'|'password'|'confirmPassword',event:Event):void{this[key].set((event.target as HTMLInputElement).value);this.clearError(key)}private clearError(key:keyof SignUpValidationErrors):void{if(this.validationErrors()[key])this.validationErrors.update(previous=>({...previous,[key]:undefined}))}readonly nameChange=(event:Event)=>this.change('name',event);readonly emailChange=(event:Event)=>this.change('email',event);readonly passwordChange=(event:Event)=>this.change('password',event);readonly confirmPasswordChange=(event:Event)=>this.change('confirmPassword',event);readonly termsChange=(event:Event)=>{this.agreeToTerms.set((event.target as HTMLInputElement).checked);this.clearError('terms')};readonly submit=(event:SubmitEvent)=>{event.preventDefault();const name=this.name(),email=this.email(),password=this.password(),confirmPassword=this.confirmPassword(),agreeToTerms=this.agreeToTerms(),errors:SignUpValidationErrors={};if(!name.trim())errors.name='Full name is required';if(!email.trim())errors.email='Email address is required';else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))errors.email='Please enter a valid email address';if(!password)errors.password='Password is required';else if(password.length<8)errors.password='Password must be at least 8 characters';if(this.requireConfirmPassword()){if(!confirmPassword)errors.confirmPassword='Please confirm your password';else if(confirmPassword!==password)errors.confirmPassword='Passwords do not match'}if(!agreeToTerms)errors.terms='You must accept the terms and conditions';this.validationErrors.set(errors);if(Object.keys(errors).length)return;const callback=this.onSubmit();callback?.({name,email,password,confirmPassword,agreeToTerms})};signIn(event:MouseEvent):void{invokeNativeEventCallback(this.onSignInClick(),event,this.errors)}social(provider:SignUpSocialProvider,event:MouseEvent):void{invokeNativeEventCallback(()=>{const callback=this.onSocialSignUp();callback?.(provider)},event,this.errors)}finishError():void{if(this.errorLeaving())this.retainedError.set(undefined)}constructor(){afterRenderEffect(()=>{const error=this.error();untracked(()=>{if(error){this.retainedError.set(error);this.errorLeaving.set(false)}else if(this.retainedError())this.errorLeaving.set(true)})})}
 }

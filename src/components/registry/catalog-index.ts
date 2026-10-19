@@ -1063,9 +1063,8 @@ export const CATALOG_INDEX: ComponentCatalogIndex[] = [
     "category": "Motion",
     "badges": [
       "HTML5 Canvas",
-      "Spring Physics",
-      "High-DPI",
-      "Accessible"
+      "Particle Physics",
+      "High-DPI"
     ],
     "cliCommand": "npx shadcn@latest add chaitanay-kumar/kit-ui/particle-delete",
     "createdAt": "2026-08-21"
@@ -1325,14 +1324,13 @@ export const CATALOG_INDEX: ComponentCatalogIndex[] = [
   {
     "id": "sign-up",
     "name": "Sign Up",
-    "tagline": "Multi-step capable user registration with strength telemetry",
+    "tagline": "Registration with password strength and terms validation",
     "description": "A comprehensive registration card with live password strength metrics, password confirmation matching, terms validation, and social onboarding.",
     "category": "Auth",
     "badges": [
       "Registration",
       "Forms",
-      "Password Strength",
-      "Accessible"
+      "Password Strength"
     ],
     "cliCommand": "npx shadcn@latest add chaitanay-kumar/kit-ui/sign-up",
     "createdAt": "2026-08-19",

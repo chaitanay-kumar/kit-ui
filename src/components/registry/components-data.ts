@@ -6220,23 +6220,27 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     "category": "Motion",
     "badges": [
       "HTML5 Canvas",
-      "Spring Physics",
-      "High-DPI",
-      "Accessible"
+      "Particle Physics",
+      "High-DPI"
     ],
     "cliCommand": "npx shadcn@latest add chaitanay-kumar/kit-ui/particle-delete",
     "features": [
-      "Authentic pixel capture inherits real component colors and typography",
-      "Hardware-accelerated 60 FPS Canvas rendering with zero DOM overhead",
+      "DOM capture samples component pixels, with a procedural background/border fallback when capture is blocked",
+      "Canvas 2D particle rendering with configurable sampling and particle limits",
       "Configurable physics: duration, explosion force, drag, and dissolution spread",
-      "Full accessibility support with automatic prefers-reduced-motion fallback",
+      "Automatic prefers-reduced-motion fade fallback",
       "Available as direct utility particleDelete(), hook useParticleDelete(), or <ParticleDeleteContainer /> wrapper"
     ],
     "props": [
       {
+        "name": "initialItems",
+        "type": "ParticleDeleteItem[]",
+        "description": "Initial resource cards; subsequent input changes affect Restore, not current items"
+      },
+      {
         "name": "onDelete",
         "type": "() => void",
-        "description": "Callback invoked after the particle dissolution finishes to remove state"
+        "description": "ParticleDeleteContainer callback after dissolution; not a prop of the main resource-card component"
       },
       {
         "name": "options.duration",
@@ -6270,12 +6274,12 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       }
     ],
     "accessibility": [
-      "Automatically honors prefers-reduced-motion: reduce with immediate subtle fade exit",
+      "Automatically honors prefers-reduced-motion: reduce with a 150ms opacity fade",
       "Delete trigger buttons maintain clear ARIA labels and keyboard focus ring states",
       "Canvas overlay is marked with aria-hidden=\"true\" and pointer-events: none"
     ],
     "createdAt": "2026-08-21",
-    "usageCode": "import { ParticleDeleteContainer, useParticleDelete, particleDelete } from \"@/components/ui/particle-delete\";\nimport { Trash2 } from \"lucide-react\";\n\nexport function Demo() {\n  const [items, setItems] = useState([\n    { id: '1', name: 'Database Snapshot #409' },\n    { id: '2', name: 'Redis Cache Layer' }\n  ]);\n\n  const handleDelete = (id: string) => {\n    setItems((prev) => prev.filter((i) => i.id !== id));\n  };\n\n  return (\n    <div className=\"space-y-3\">\n      {items.map((item) => (\n        <ParticleDeleteContainer\n          key={item.id}\n          onDelete={() => handleDelete(item.id)}\n          className=\"p-4 rounded-xl bg-[#0D0D0D] border border-[#222222] flex items-center justify-between\"\n        >\n          {({ isDeleting, handleDelete: triggerDelete }) => (\n            <>\n              <span className=\"text-sm font-medium text-white\">{item.name}</span>\n              <button\n                type=\"button\"\n                onClick={triggerDelete}\n                disabled={isDeleting}\n                className=\"p-2 rounded-lg bg-[#141414] hover:bg-rose-950/40 text-[#888888] hover:text-rose-400 border border-[#262626] transition-colors\"\n              >\n                <Trash2 className=\"w-4 h-4\" />\n              </button>\n            </>\n          )}\n        </ParticleDeleteContainer>\n      ))}\n    </div>\n  );\n}",
+    "usageCode": "import { useState } from \"react\";\nimport { ParticleDeleteContainer } from \"@/components/ui/particle-delete\";\nimport { Trash2 } from \"lucide-react\";\n\nexport function Demo() {\n  const [items, setItems] = useState([\n    { id: '1', name: 'Database Snapshot #409' },\n    { id: '2', name: 'Redis Cache Layer' }\n  ]);\n\n  const handleDelete = (id: string) => {\n    setItems((prev) => prev.filter((i) => i.id !== id));\n  };\n\n  return (\n    <div className=\"space-y-3\">\n      {items.map((item) => (\n        <ParticleDeleteContainer\n          key={item.id}\n          onDelete={() => handleDelete(item.id)}\n          className=\"p-4 rounded-xl bg-[#0D0D0D] border border-[#222222] flex items-center justify-between\"\n        >\n          {({ isDeleting, handleDelete: triggerDelete }) => (\n            <>\n              <span className=\"text-sm font-medium text-white\">{item.name}</span>\n              <button\n                type=\"button\"\n                onClick={triggerDelete}\n                disabled={isDeleting}\n                className=\"p-2 rounded-lg bg-[#141414] hover:bg-rose-950/40 text-[#888888] hover:text-rose-400 border border-[#262626] transition-colors\"\n              >\n                <Trash2 className=\"w-4 h-4\" />\n              </button>\n            </>\n          )}\n        </ParticleDeleteContainer>\n      ))}\n    </div>\n  );\n}",
     "dependencies": [
       "lucide-react"
     ],
@@ -8061,14 +8065,13 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
   {
     "id": "sign-up",
     "name": "Sign Up",
-    "tagline": "Multi-step capable user registration with strength telemetry",
+    "tagline": "Registration with password strength and terms validation",
     "description": "A comprehensive registration card with live password strength metrics, password confirmation matching, terms validation, and social onboarding.",
     "category": "Auth",
     "badges": [
       "Registration",
       "Forms",
-      "Password Strength",
-      "Accessible"
+      "Password Strength"
     ],
     "cliCommand": "npx shadcn@latest add chaitanay-kumar/kit-ui/sign-up",
     "features": [
@@ -8102,20 +8105,20 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       {
         "name": "error",
         "type": "string | null",
-        "default": "null",
+        "default": "undefined",
         "description": "Server-side registration error banner message"
       },
       {
         "name": "isLoading",
         "type": "boolean",
         "default": "false",
-        "description": "Submitting state displaying loader on submit button"
+        "description": "External loading state; disables the submit button while fields and social actions remain active"
       },
       {
         "name": "onSubmit",
-        "type": "(data: SignUpFormData) => void",
+        "type": "(data: SignUpFormData) => void | Promise<void>",
         "default": "undefined",
-        "description": "Form submission callback with name, email, password, confirmPassword, agreeToTerms"
+        "description": "Callback receives name, email, password, confirmPassword and agreeToTerms; returned promises do not control loading"
       },
       {
         "name": "onSignInClick",
@@ -8128,6 +8131,17 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
         "type": "boolean",
         "default": "true",
         "description": "Toggles GitHub and Google SSO buttons"
+      },
+      {
+        "name": "onSocialSignUp",
+        "type": "(provider: 'github' | 'google') => void",
+        "description": "Social action callback; consumer owns authentication"
+      },
+      {
+        "name": "signInText",
+        "type": "string",
+        "default": "'Already have an account? Sign in'",
+        "description": "Text for the optional sign-in action"
       },
       {
         "name": "requireConfirmPassword",
@@ -8143,13 +8157,14 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       }
     ],
     "accessibility": [
-      "Accessible input labels with required indicators and autocomplete values (name, email, new-password)",
+      "Visible required labels and autocomplete values; labels are not programmatically linked to inputs",
       "Role=\"alert\" for validation errors with smooth Framer Motion spring entrances",
       "Keyboard navigable form submission and checkbox selection",
-      "Sky-400 focus ring on all focusable controls"
+      "Native field and checkbox keyboard access; password visibility buttons have tabIndex -1",
+      "Server error banner is not a live alert; component spring animations do not bypass reduced motion"
     ],
     "createdAt": "2026-08-19",
-    "usageCode": "import { SignUp } from \"@/components/ui/sign-up\";\n\nexport function Demo() {\n  const handleSignUp = async (data: any) => {\n    console.log(\"Registering account:\", data);\n  };\n\n  return (\n    <div className=\"py-8 flex justify-center\">\n      <SignUp\n        onSubmit={handleSignUp}\n        onSignInClick={() => alert(\"Redirect to sign in\")}\n      />\n    </div>\n  );\n}",
+    "usageCode": "import { SignUp, type SignUpFormData } from \"@/components/ui/sign-up\";\n\nexport function Demo() {\n  const handleSignUp = async (data: SignUpFormData) => {\n    // Supply application registration and manage isLoading/error outside the card.\n    void data;\n  };\n\n  return (\n    <div className=\"py-8 flex justify-center\">\n      <SignUp\n        onSubmit={handleSignUp}\n        onSignInClick={() => alert(\"Redirect to sign in\")}\n      />\n    </div>\n  );\n}",
     "dependencies": [
       "framer-motion",
       "lucide-react"

@@ -1279,16 +1279,16 @@ export const ANGULAR_PORTS = [
     "name": "Particle Delete",
     "exportName": "KitParticleDeleteComponent",
     "selector": "kit-particle-delete",
-    "description": "A deliberate local item dismissal with a particle transition and restore control.",
+    "description": "Native resource cards with sampled-pixel dissolution, source options, reduced-motion fade, restore controls and reusable container/controller APIs.",
     "inputs": [
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "action: KitAction"
+      "initialItems: ParticleDeleteItem[]",
+      "options: ParticleDeleteOptions",
+      "className: string",
+      "style: FormStyle",
+      "attributes: FormAttributes",
+      "events: FormEventHandlers"
     ],
-    "outputs": [
-      "activated: void"
-    ]
+    "outputs": []
   },
   {
     "id": "payment-receipt-printer",
@@ -1658,16 +1658,23 @@ export const ANGULAR_PORTS = [
     "name": "Sign Up",
     "exportName": "KitSignUpComponent",
     "selector": "kit-sign-up",
-    "description": "Validated native fields, password visibility, cancellable application submission and preserved errors.",
+    "description": "Native registration card with source validation, password strength, terms agreement and external loading/error ownership.",
     "inputs": [
-      "fields: KitField[]",
-      "label: string",
-      "disabled: boolean",
-      "submitHandler: KitSubmitHandler"
+      "title: string",
+      "description: string",
+      "logo: FormContent | false",
+      "error: string | null",
+      "isLoading: boolean",
+      "onSubmit: (data: SignUpFormData) => void | Promise<void>",
+      "onSignInClick: () => void",
+      "showSocialSignUp: boolean",
+      "onSocialSignUp: (provider: SignUpSocialProvider) => void",
+      "requireConfirmPassword: boolean",
+      "termsText: FormContent",
+      "signInText: string",
+      "className: string"
     ],
-    "outputs": [
-      "submitted: Record<string, string>"
-    ]
+    "outputs": []
   },
   {
     "id": "slide-pagination",

@@ -74,7 +74,15 @@ function dependencies(file, visited = new Set()) {
     Object.assign(result, dependencies(target, visited));
   }
   for(const match of fs.readFileSync(file,"utf8").matchAll(/styleUrls:\s*\[\s*['"](\.\/[^'"]+)['"]/g)){
-    const target=path.resolve(path.dirname(file),match[1]);if(target.startsWith(sourceRoot+path.sep)&&fs.existsSync(target))result[path.relative(sourceRoot,target)]=fs.readFileSync(target,"utf8");
+    const target=path.resolve(path.dirname(file),match[1]);
+    const includeStyle=style=>{
+      if(!style.startsWith(sourceRoot+path.sep)||visited.has(style)||!fs.existsSync(style))return;
+      visited.add(style);
+      const content=fs.readFileSync(style,'utf8');
+      result[path.relative(sourceRoot,style).replaceAll('\\','/')]=content;
+      for(const imported of content.matchAll(/@import\s+['"](\.\/[^'"]+)['"]/g))includeStyle(path.resolve(path.dirname(style),imported[1]));
+    };
+    includeStyle(target);
   }
   return result;
 }
