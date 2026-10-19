@@ -147,6 +147,21 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if(entry.id==='form')return `import {Component,signal} from '@angular/core';
+import {KitFormComponent,KitFormItemComponent,KitFormLabelComponent,KitFormControlComponent,KitFormDescriptionComponent,KitFormMessageComponent,KitInputComponent,KitButtonComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitFormComponent,KitFormItemComponent,KitFormLabelComponent,KitFormControlComponent,KitFormDescriptionComponent,KitFormMessageComponent,KitInputComponent,KitButtonComponent],template:\`<kit-form [onSubmit]="submit"><kit-form-item><kit-form-label htmlFor="email" [required]="true">Email address</kit-form-label><kit-form-control><kit-input id="email" type="email" placeholder="you@company.com" [value]="email()" [onChange]="change" [error]="!!error()"/></kit-form-control><kit-form-description>We will never share your email.</kit-form-description><kit-form-message [error]="error()"/></kit-form-item><button kitButton type="submit">Submit</button></kit-form>\`})
+export class ExampleComponent {
+ readonly email=signal('');readonly error=signal('');
+ readonly change=(event:Event)=>this.email.set((event.target as HTMLInputElement).value);
+ readonly submit=(event:SubmitEvent)=>{event.preventDefault();this.error.set(this.email().includes('@')?'':'Please enter a valid email address.')};
+}`;
+  if(entry.id==='login')return `import {Component,signal} from '@angular/core';
+import {KitLoginComponent,type LoginFormData} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitLoginComponent],template:\`<kit-login [onSubmit]="submit"/><p>{{message()}}</p>\`})
+export class ExampleComponent {
+ readonly message=signal('Supply your own authentication transport');
+ readonly submit=(data:LoginFormData)=>this.message.set('Submitted '+data.email);
+}`;
   if(entry.id==='dot-shader')return `import {Component} from '@angular/core';
 import {KitDotShaderComponent} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitDotShaderComponent],template:\`<kit-dot-shader [style]="{height:260}" [accentColor]="'#00F0FF'"><h2>Move through the dot field</h2></kit-dot-shader>\`})

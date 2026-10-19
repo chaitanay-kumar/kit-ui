@@ -1,3 +1,5 @@
+import {formPort} from './angular-form';
+import {loginPort} from './angular-login';
 import {animatedFileUploadPort} from './angular-animated-file-upload';
 import {dotShaderPort} from './angular-dot-shader';
 import {shootingStarsPort} from './angular-shooting-stars';
@@ -239,8 +241,6 @@ add('spring-select','plain',springSelectPort.description,springSelectPort.templa
 add("otp-input", "plain", otpInputPort.description, otpInputPort.template, otpInputPort.body, otpInputPort);
 add("lock-input", "plain", lockInputPort.description, lockInputPort.template, lockInputPort.body, lockInputPort);
 for (const [id, title, button] of [
-  ["form", "Your details", "Submit"],
-  ["login", "Welcome back", "Sign in"],
   ["sign-up", "Create an account", "Create account"],
 ]) {
   add(
@@ -251,6 +251,8 @@ for (const [id, title, button] of [
   );
 }
 add('animated-file-upload','plain',animatedFileUploadPort.description,animatedFileUploadPort.template,animatedFileUploadPort.body,animatedFileUploadPort);
+add('form','plain',formPort.description,formPort.template,formPort.body,formPort);
+add('login','plain',loginPort.description,loginPort.template,loginPort.body,loginPort);
 
 add('animated-tabs','plain',animatedTabsPort.description,animatedTabsPort.template,animatedTabsPort.body,animatedTabsPort);
 add('glass-navbar','plain',glassNavbarPort.description,glassNavbarPort.template,glassNavbarPort.body,glassNavbarPort);

@@ -3214,7 +3214,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     "id": "form",
     "name": "Form",
     "tagline": "Composable, accessible form primitives and controls",
-    "description": "A modular, composable form system with accessible inputs, textareas, custom selects, checkboxes, radio groups, switches, and animated validation messages.",
+    "description": "A modular, composable form system with inputs, textareas, native selects, checkboxes, radio groups, switches, and animated validation messages.",
     "category": "Forms",
     "badges": [
       "Forms",
@@ -3225,7 +3225,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     "cliCommand": "npx shadcn@latest add chaitanay-kumar/kit-ui/form",
     "features": [
       "Modular layout primitives: Form, FormItem, FormLabel, FormControl, FormDescription, FormMessage",
-      "Comprehensive controls: Input, Textarea, Select, Checkbox, RadioGroup, Switch",
+      "Comprehensive controls: Input, Textarea, Select, Checkbox, RadioGroup, RadioGroupItem, Switch",
       "Spring-animated validation errors and password visibility toggle",
       "Tactile check, radio dot, and toggle switch spring physics",
       "Accessible ARIA semantics, required asterisks, and keyboard navigation",
@@ -3254,7 +3254,13 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
         "name": "required",
         "type": "boolean",
         "default": "false",
-        "description": "Displays red asterisk and enforces requirement"
+        "description": "FormLabel displays an asterisk; set native control required separately"
+      },
+      {
+        "name": "noValidate",
+        "type": "boolean",
+        "default": "true",
+        "description": "Form skips native validation by default; set false to enable browser validity checks"
       },
       {
         "name": "leftIcon",
@@ -3270,13 +3276,13 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       }
     ],
     "accessibility": [
-      "Semantic label-input association with generated IDs",
+      "Checkbox and radio controls generate linked IDs; connect other labels with htmlFor and an input id",
       "ARIA role=\"alert\" on animated validation messages",
       "role=\"switch\" and role=\"radiogroup\" with proper aria-checked attributes",
-      "Sky-400 focus ring on all interactive focusable elements"
+      "Theme focus rings on text fields, select controls and switch buttons"
     ],
     "createdAt": "2026-08-19",
-    "usageCode": "import { Form, FormItem, FormLabel, FormControl, FormDescription, FormMessage, Input, Button } from \"@/components/ui/form\";\nimport { useState } from \"react\";\n\nexport function Demo() {\n  const [email, setEmail] = useState(\"\");\n  const [error, setError] = useState(\"\");\n\n  const handleSubmit = (e: React.FormEvent) => {\n    e.preventDefault();\n    if (!email.includes(\"@\")) {\n      setError(\"Please enter a valid email address.\");\n    } else {\n      setError(\"\");\n    }\n  };\n\n  return (\n    <Form onSubmit={handleSubmit} className=\"max-w-sm\">\n      <FormItem>\n        <FormLabel required>Email Address</FormLabel>\n        <FormControl>\n          <Input\n            type=\"email\"\n            placeholder=\"you@company.com\"\n            value={email}\n            onChange={(e) => setEmail(e.target.value)}\n            error={!!error}\n          />\n        </FormControl>\n        <FormDescription>We will never share your email.</FormDescription>\n        <FormMessage error={error} />\n      </FormItem>\n      <Button type=\"submit\" variant=\"primary\" fullWidth>\n        Submit\n      </Button>\n    </Form>\n  );\n}",
+    "usageCode": "import { Form, FormItem, FormLabel, FormControl, FormDescription, FormMessage, Input } from \"@/components/ui/form\";\nimport { Button } from \"@/components/ui/button\";\nimport { useState } from \"react\";\n\nexport function Demo() {\n  const [email, setEmail] = useState(\"\");\n  const [error, setError] = useState(\"\");\n\n  const handleSubmit = (e: React.FormEvent) => {\n    e.preventDefault();\n    if (!email.includes(\"@\")) {\n      setError(\"Please enter a valid email address.\");\n    } else {\n      setError(\"\");\n    }\n  };\n\n  return (\n    <Form onSubmit={handleSubmit} className=\"max-w-sm\">\n      <FormItem>\n        <FormLabel required>Email Address</FormLabel>\n        <FormControl>\n          <Input\n            type=\"email\"\n            placeholder=\"you@company.com\"\n            value={email}\n            onChange={(e) => setEmail(e.target.value)}\n            error={!!error}\n          />\n        </FormControl>\n        <FormDescription>We will never share your email.</FormDescription>\n        <FormMessage error={error} />\n      </FormItem>\n      <Button type=\"submit\" variant=\"primary\" fullWidth>\n        Submit\n      </Button>\n    </Form>\n  );\n}",
     "dependencies": [
       "framer-motion",
       "lucide-react"
@@ -4672,7 +4678,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     "id": "login",
     "name": "Login",
     "tagline": "Refined authentication card with validation & social SSO",
-    "description": "A production-ready authentication card built with the Kit UI form system, featuring password show/hide, remember me, validation states, and social logins.",
+    "description": "A configurable authentication card built with the Kit UI form system, featuring password show/hide, remember me, validation states, and social login callbacks.",
     "category": "Auth",
     "badges": [
       "Authentication",
@@ -4712,20 +4718,20 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       {
         "name": "error",
         "type": "string | null",
-        "default": "null",
+        "default": "undefined",
         "description": "Server-side or authentication error banner message"
       },
       {
         "name": "isLoading",
         "type": "boolean",
         "default": "false",
-        "description": "Submitting state displaying loader on submit button"
+        "description": "External submit-button loading state; fields and other actions remain usable"
       },
       {
         "name": "onSubmit",
-        "type": "(data: LoginFormData) => void",
+        "type": "(data: LoginFormData) => void | Promise<void>",
         "default": "undefined",
-        "description": "Form submission callback with email, password, rememberMe"
+        "description": "Called after validation with email, password and rememberMe; returned promises are not awaited"
       },
       {
         "name": "onForgotPassword",
@@ -4750,13 +4756,19 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
         "type": "(provider: 'github' | 'google' | 'apple') => void",
         "default": "undefined",
         "description": "Callback when social login button is pressed"
+      },
+      {
+        "name": "signUpText",
+        "type": "string",
+        "default": "\"Don't have an account? Sign up\"",
+        "description": "Text for the optional secondary sign-up action"
       }
     ],
     "accessibility": [
-      "Accessible input labels and autocomplete attributes (email, current-password)",
-      "ARIA alert role on dynamic validation and server error banners",
+      "Visible email/password labels and autocomplete hints; labels are not linked with htmlFor",
+      "Inline validation messages use alert roles; the server error banner uses visible text",
       "Proper form submission handling with Enter key activation",
-      "Sky-400 focus ring on all interactive elements"
+      "Theme focus rings on text fields and action buttons"
     ],
     "createdAt": "2026-08-19",
     "usageCode": "import { Login } from \"@/components/ui/login\";\n\nexport function Demo() {\n  const handleLogin = async (data: { email: string; password: string; rememberMe: boolean }) => {\n    console.log(\"Authenticating:\", data);\n  };\n\n  return (\n    <div className=\"py-8 flex justify-center\">\n      <Login\n        onSubmit={handleLogin}\n        onForgotPassword={() => alert(\"Redirect to forgot password\")}\n        onSignUpClick={() => alert(\"Redirect to sign up\")}\n      />\n    </div>\n  );\n}",

@@ -650,16 +650,16 @@
     "name": "Form",
     "exportName": "KitFormComponent",
     "selector": "kit-form",
-    "description": "Validated native fields, password visibility, cancellable application submission and preserved errors.",
+    "description": "Native composable Form root with noValidate, projected controls, scalar native attributes/styles, submit callback and forwarded-element equivalent.",
     "inputs": [
-      "fields: KitField[]",
-      "label: string",
-      "disabled: boolean",
-      "submitHandler: KitSubmitHandler"
+      "className: string",
+      "style: FormStyle",
+      "attributes: FormAttributes",
+      "events: FormEventHandlers",
+      "noValidate: boolean",
+      "onSubmit: (event: SubmitEvent) => void"
     ],
-    "outputs": [
-      "submitted: Record<string, string>"
-    ]
+    "outputs": []
   },
   {
     "id": "glass-navbar",
@@ -946,16 +946,22 @@
     "name": "Login",
     "exportName": "KitLoginComponent",
     "selector": "kit-login",
-    "description": "Validated native fields, password visibility, cancellable application submission and preserved errors.",
+    "description": "Native Login card composed from Form primitives and Button, with source validation, external loading/error ownership, password visibility, remember state and optional callbacks.",
     "inputs": [
-      "fields: KitField[]",
-      "label: string",
-      "disabled: boolean",
-      "submitHandler: KitSubmitHandler"
+      "title: string",
+      "description: string",
+      "logo: FormContent | false",
+      "error: string | null",
+      "isLoading: boolean",
+      "onSubmit: (data: LoginFormData) => void | Promise<void>",
+      "onForgotPassword: () => void",
+      "onSignUpClick: () => void",
+      "showSocialLogins: boolean",
+      "onSocialLogin: (provider: LoginSocialProvider) => void",
+      "signUpText: string",
+      "className: string"
     ],
-    "outputs": [
-      "submitted: Record<string, string>"
-    ]
+    "outputs": []
   },
   {
     "id": "mac-os-folder-cards",

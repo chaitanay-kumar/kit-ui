@@ -1,6 +1,6 @@
 # Completed parity checks
 
-107 components have recorded validated baselines through batch 46. The 99 baselines through batch 42 are integrated; batches 31?42 were merged through [PR #26](https://github.com/chaitanay-kumar/kit-ui/pull/26). Batches 43-46 are locally validated and await integration review, merge/deployment and final user QA; see [batch 43](batch-43-integration.md), [batch 44](batch-44-integration.md), [batch 45](batch-45-integration.md) and [batch 46](batch-46-integration.md) evidence. Validation scope and remaining limits are recorded in each linked report. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
+109 components have recorded validated baselines through batch 47. The 99 baselines through batch 42 are integrated; batches 31?42 were merged through [PR #26](https://github.com/chaitanay-kumar/kit-ui/pull/26). Batches 43-47 are locally validated and await integration review, merge/deployment and final user QA; see [batch 43](batch-43-integration.md), [batch 44](batch-44-integration.md), [batch 45](batch-45-integration.md) and [batch 46](batch-46-integration.md) and [batch 47](batch-47-integration.md) evidence. Validation scope and remaining limits are recorded in each linked report. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
 
 | Component | Status | Evidence |
 | --- | --- | --- |
@@ -35,6 +35,7 @@
 | Expandable Search | Validated baseline | [Report](expandable-search.md) |
 | FAQ | Validated baseline | [Report](faq.md) |
 | Floating Action Dock | Validated baseline | [Evidence](floating-action-dock.md) |
+| Form | Validated baseline | [Report](form.md) |
 | Focus Mode | Validated baseline | [Report](focus-mode.md) |
 | Glass Navbar | Validated baseline | [Report](glass-navbar.md) |
 | Glitch Text | Validated baseline | [Report](glitch-text.md) |
@@ -50,6 +51,7 @@
 | Liquid Command Palette | Validated baseline | [Report](liquid-command-palette.md) |
 | Liquid Ripple Button | Validated baseline | [Report](liquid-ripple-button.md) |
 | Liquid Toggle | Validated baseline | [Report](liquid-toggle.md) |
+| Login | Validated baseline | [Report](login.md) |
 | Loader | Validated baseline | [Review](loader.md) |
 | LockInput | Validated baseline | [Report](lock-input.md) |
 | macOS Folder Cards | Validated baseline | [Report](mac-os-folder-cards.md) |

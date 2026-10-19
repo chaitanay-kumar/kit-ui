@@ -539,7 +539,7 @@ export const CATALOG_INDEX: ComponentCatalogIndex[] = [
     "id": "form",
     "name": "Form",
     "tagline": "Composable, accessible form primitives and controls",
-    "description": "A modular, composable form system with accessible inputs, textareas, custom selects, checkboxes, radio groups, switches, and animated validation messages.",
+    "description": "A modular, composable form system with inputs, textareas, native selects, checkboxes, radio groups, switches, and animated validation messages.",
     "category": "Forms",
     "badges": [
       "Forms",
@@ -795,7 +795,7 @@ export const CATALOG_INDEX: ComponentCatalogIndex[] = [
     "id": "login",
     "name": "Login",
     "tagline": "Refined authentication card with validation & social SSO",
-    "description": "A production-ready authentication card built with the Kit UI form system, featuring password show/hide, remember me, validation states, and social logins.",
+    "description": "A configurable authentication card built with the Kit UI form system, featuring password show/hide, remember me, validation states, and social login callbacks.",
     "category": "Auth",
     "badges": [
       "Authentication",

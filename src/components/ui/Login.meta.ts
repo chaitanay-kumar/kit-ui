@@ -2,7 +2,7 @@ import type { KitUIComponentMeta } from '../../types/component';
 
 const meta: KitUIComponentMeta = {
   title: 'Login',
-  description: 'A production-ready authentication card built with the Kit UI form system, featuring password show/hide, remember me, validation states, and social logins.',
+  description: 'A configurable authentication card built with the Kit UI form system, featuring password show/hide, remember me, validation states, and social login callbacks.',
   category: 'Auth',
   tagline: 'Refined authentication card with validation & social SSO',
   badges: ['Authentication', 'Forms', 'Responsive', 'Accessible'],
@@ -21,19 +21,20 @@ const meta: KitUIComponentMeta = {
     { name: 'title', type: 'string', default: "'Welcome back'", description: 'Primary card title text' },
     { name: 'description', type: 'string', default: "'Sign in to access your Kit UI workspace'", description: 'Subtitle description below the title' },
     { name: 'logo', type: 'React.ReactNode', default: '<SparklesIcon />', description: 'Brand badge or logo displayed at the top' },
-    { name: 'error', type: 'string | null', default: 'null', description: 'Server-side or authentication error banner message' },
-    { name: 'isLoading', type: 'boolean', default: 'false', description: 'Submitting state displaying loader on submit button' },
-    { name: 'onSubmit', type: '(data: LoginFormData) => void', default: 'undefined', description: 'Form submission callback with email, password, rememberMe' },
+    { name: 'error', type: 'string | null', default: 'undefined', description: 'Server-side or authentication error banner message' },
+    { name: 'isLoading', type: 'boolean', default: 'false', description: 'External submit-button loading state; fields and other actions remain usable' },
+    { name: 'onSubmit', type: '(data: LoginFormData) => void | Promise<void>', default: 'undefined', description: 'Called after validation with email, password and rememberMe; returned promises are not awaited' },
     { name: 'onForgotPassword', type: '() => void', default: 'undefined', description: 'Callback when forgot password link is clicked' },
     { name: 'onSignUpClick', type: '() => void', default: 'undefined', description: 'Callback for secondary sign up switch action' },
     { name: 'showSocialLogins', type: 'boolean', default: 'true', description: 'Toggles GitHub and Google SSO buttons' },
     { name: 'onSocialLogin', type: "(provider: 'github' | 'google' | 'apple') => void", default: 'undefined', description: 'Callback when social login button is pressed' },
+    { name: 'signUpText', type: 'string', default: '"Don\'t have an account? Sign up"', description: 'Text for the optional secondary sign-up action' },
   ],
   accessibility: [
-    'Accessible input labels and autocomplete attributes (email, current-password)',
-    'ARIA alert role on dynamic validation and server error banners',
+    'Visible email/password labels and autocomplete hints; labels are not linked with htmlFor',
+    'Inline validation messages use alert roles; the server error banner uses visible text',
     'Proper form submission handling with Enter key activation',
-    'Sky-400 focus ring on all interactive elements',
+    'Theme focus rings on text fields and action buttons',
   ],
   usageCode: `import { Login } from "@/components/ui/login";
 
