@@ -1,6 +1,6 @@
 # Completed parity checks
 
-116 components have recorded validated baselines, including the final AI Response component. The preceding 115 are integrated into the implementation branch; AI Response integration and deployment are recorded in its [brief](ai-response-integration.md). Final user QA remains outstanding. Earlier batch reports are historical validation handoffs. Validation scope and remaining limits are recorded in each linked report. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status.
+116 components have recorded validated baselines, including the final AI Response component. All 116 are integrated into the implementation branch, with AI Response merged through [PR #28](https://github.com/chaitanay-kumar/kit-ui/pull/28); see its [brief](ai-response-integration.md). Final user QA remains outstanding. Earlier batch reports are historical validation handoffs. Validation scope and remaining limits are recorded in each linked report. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status.
 
 | Component | Status | Evidence |
 | --- | --- | --- |
