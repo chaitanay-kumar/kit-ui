@@ -1,4 +1,6 @@
+import {buildCarSmokeSupport,carSmokePort} from './angular-car-smoke';
 import {buildChatParts} from './angular-chat';
+import {buildPullRefreshSupport,pullRefreshPort} from './angular-pull-to-refresh';
 import {dynamicIslandPort,buildDynamicIslandStyles} from './angular-dynamic-island';
 import {particleDeletePort} from './angular-particle-delete';
 import {signUpPort} from './angular-sign-up';
@@ -197,8 +199,6 @@ function add(
 
   });
 }
-const actionFeedback = `<p role="status" class="kit-status">{{loading() || busy() ? 'Working…' : status()}}</p>@if(error()){<p role="alert">{{error()}}</p>}@if(busy()){<button type="button" (click)="cancel()">Cancel</button>}`;
-const itemButton = `<button type="button" data-item [disabled]="disabled() || item.disabled" [attr.aria-pressed]="current()?.id===item.id" (click)="select(item)">{{item.label}}</button>`;
 
 add("press-button","plain",pressButtonPort.description,pressButtonPort.template,pressButtonPort.body,pressButtonPort);
 add("typewriter-button","plain",typewriterButtonPort.description,typewriterButtonPort.template,typewriterButtonPort.body,typewriterButtonPort);
@@ -296,13 +296,7 @@ add('velocity-toast','plain',velocityToastPort.description,velocityToastPort.tem
 add("notification-stack","plain",notificationStackPort.description,notificationStackPort.template,notificationStackPort.body,notificationStackPort);
 add("undo-toast","plain",undoToastPort.description,undoToastPort.template,undoToastPort.body,undoToastPort);
 add("notification-bell","plain",notificationBellPort.description,notificationBellPort.template,notificationBellPort.body,notificationBellPort);
-add(
-  "pull-to-refresh",
-  "action",
-  "Pull down within a contained list or use a keyboard refresh button; async failures remain retryable.",
-  `<section class="kit-control kit-surface kit-stack"><div class="k-pull" style="touch-action:pan-x" (pointerdown)="start($event)" (pointermove)="pull($event)" (pointerup)="release()" (pointercancel)="distance.set(0)" [style.padding-top.px]="distance()"><strong>{{distance()>65?'Release to refresh':'Pull down to refresh'}}</strong><ng-content><p class="kit-muted">Your latest updates appear here.</p></ng-content></div><button type="button" [disabled]="blocked()" (click)="run()">{{busy()?'Refreshing…':label()||'Refresh'}}</button>${actionFeedback}</section>`,
-  `readonly distance=signal(0);private startY:number|undefined;start(event:PointerEvent):void{if(this.blocked()||event.button!==0)return;this.startY=event.clientY;(event.currentTarget as HTMLElement).setPointerCapture(event.pointerId);}pull(event:PointerEvent):void{if(this.startY!==undefined)this.distance.set(Math.max(0,Math.min(100,(event.clientY-this.startY)*.5)));}release():void{if(this.distance()>65)void this.run();this.startY=undefined;this.distance.set(0);}`,
-);
+add('pull-to-refresh','plain',pullRefreshPort.description,pullRefreshPort.template,pullRefreshPort.body,pullRefreshPort);
 
 add("peek-card","plain",peekCardPort.description,peekCardPort.template,peekCardPort.body,peekCardPort);
 add("profile-card","plain",profileCardPort.description,profileCardPort.template,profileCardPort.body,profileCardPort);
@@ -443,12 +437,7 @@ add('gravity-particle-burst','plain',gravityParticleBurstPort.description,gravit
 add('rocket-party-popper','plain',rocketPartyPopperPort.description,rocketPartyPopperPort.template,rocketPartyPopperPort.body,rocketPartyPopperPort);
 add("cursor-follower","plain",cursorFollowerPort.description,cursorFollowerPort.template,cursorFollowerPort.body,cursorFollowerPort);
 add('particle-delete','plain',particleDeletePort.description,particleDeletePort.template,particleDeletePort.body,particleDeletePort);
-add(
-  "car-smoke-page-transition",
-  "collection",
-  "Switch projected page summaries through a restrained car/smoke CSS transition with keyboard navigation.",
-  `<section class="kit-control kit-stack"><nav class="kit-row" (keydown)="keys($event)">@for(item of items();track item.id){${itemButton}}</nav><div class="k-road" aria-hidden="true"><span class="k-car">▰</span><span class="k-smoke"></span></div>@for(item of [current()];track item?.id){<article class="kit-surface k-page-enter"><h3>{{item?.label}}</h3><p>{{item?.description}}</p><ng-content></ng-content></article>}</section>`,
-);
+add('car-smoke-page-transition','plain',carSmokePort.description,carSmokePort.template,carSmokePort.body,carSmokePort);
 add("morphing-icon","plain",morphingIconPort.description,morphingIconPort.template,morphingIconPort.body,morphingIconPort);
 
 // Scroll-driven continuous text uses its authored source-contract implementation.
@@ -593,6 +582,8 @@ const base: Record<Kind, string> = {
 };
 await buildDynamicIslandStyles(root);
 await buildChatParts(root);
+await buildPullRefreshSupport(root);
+await buildCarSmokeSupport(root);
 const entries = ports
   .sort((a, b) => a.id.localeCompare(b.id))
   .map((port) => {

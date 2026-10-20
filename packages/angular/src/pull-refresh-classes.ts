@@ -1,0 +1,6 @@
+export const PULL_CLASSES={
+ panel:'relative isolate flex flex-col items-center justify-start w-full max-w-sm select-none touch-pan-y outline-none',enabled:'cursor-grab active:cursor-grabbing',disabled:'cursor-default',
+ indicator:'absolute -top-11 left-0 right-0 h-10 flex items-center justify-center pointer-events-none z-20',pill:'flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 dark:bg-[#1E1E1E]/95 backdrop-blur-md border border-neutral-200/90 dark:border-[#303030] shadow-[0_4px_16px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_16px_rgba(0,0,0,0.45)] text-neutral-800 dark:text-[#F5F5F5] text-xs font-medium transition-colors',
+ spinner:'w-4 h-4 flex items-center justify-center text-[#E5E5E5]',complete:'w-4 h-4 rounded-full bg-[#1F1F1F] border border-[#2A2A2A] flex items-center justify-center text-[#F5F5F5]',progress:'relative w-4 h-4 flex items-center justify-center',ring:'w-4 h-4 -rotate-90',track:'text-neutral-200 dark:text-white/15',arrow:'absolute inset-0 flex items-center justify-center text-neutral-400 dark:text-[#A3A3A3]',label:'text-[11px] font-sans tracking-tight text-neutral-600 dark:text-[#D4D4D4]',
+ body:'w-full relative z-10 will-change-transform',fallback:'sr-only',refreshIcon:'w-3.5 h-3.5',checkIcon:'w-3 h-3 stroke-[2.5]',arrowIcon:'w-2.5 h-2.5',
+} as const;

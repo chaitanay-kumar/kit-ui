@@ -251,24 +251,24 @@ export const ANGULAR_PORTS = [
     "name": "Car Smoke Page Transition",
     "exportName": "KitCarSmokePageTransitionComponent",
     "selector": "kit-car-smoke-page-transition",
-    "description": "Switch projected page summaries through a restrained car/smoke CSS transition with keyboard navigation.",
+    "description": "Native full-vector drift transition with source choreography, canvas smoke/skids/speed lines, independent completion/reset timings and owned animation cleanup.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "direction: left-to-right | right-to-left",
+      "carDuration: number",
+      "carDelay: number",
+      "carSize: sm | md | lg",
+      "smokeDensity: off | low | medium | high",
+      "smokeLifetime: number",
+      "showSpeedLines: boolean",
+      "pageTransitionDelay: number",
+      "pageTransitionDuration: number",
+      "resetDelay: number",
+      "onTransitionComplete: () => void",
+      "verticalPosition: center | top | bottom | number",
+      "content: FormContent",
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "chat",
@@ -1457,16 +1457,23 @@ export const ANGULAR_PORTS = [
     "name": "Pull to Refresh",
     "exportName": "KitPullToRefreshComponent",
     "selector": "kit-pull-to-refresh",
-    "description": "Pull down within a contained list or use a keyboard refresh button; async failures remain retryable.",
+    "description": "Native resisted pull and fast-flick refresh with source lifecycle, custom indicators and the independently exported interactive financial card.",
     "inputs": [
-      "label: string",
+      "onRefresh: () => void | Promise<void>",
+      "threshold: number",
+      "maxPull: number",
+      "resistance: number",
+      "refreshingHoldOffset: number",
       "disabled: boolean",
-      "loading: boolean",
-      "action: KitAction"
+      "pullIndicator: PullIndicator",
+      "showDefaultIndicator: boolean",
+      "content: FormContent",
+      "className: string",
+      "style: FormStyle",
+      "attributes: FormAttributes",
+      "events: FormEventHandlers"
     ],
-    "outputs": [
-      "activated: void"
-    ]
+    "outputs": []
   },
   {
     "id": "rainbow-button",

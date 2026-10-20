@@ -1,6 +1,6 @@
 # Completed parity checks
 
-113 components have recorded validated baselines through batch 49. The 99 baselines through batch 42 are integrated; batches 31?42 were merged through [PR #26](https://github.com/chaitanay-kumar/kit-ui/pull/26). Batches 43-49 are locally validated and await integration review, merge/deployment and final user QA; see [batch 43](batch-43-integration.md), [batch 44](batch-44-integration.md), [batch 45](batch-45-integration.md) and [batch 46](batch-46-integration.md) and [batch 47](batch-47-integration.md) and [batch 48](batch-48-integration.md) and [batch 49](batch-49-integration.md) evidence. Validation scope and remaining limits are recorded in each linked report. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
+115 components have recorded validated baselines through batch 50. The 99 baselines through batch 42 are integrated; batches 31?42 were merged through [PR #26](https://github.com/chaitanay-kumar/kit-ui/pull/26). Batches 43-50 are locally validated and await integration review, merge/deployment and final user QA; see [batch 43](batch-43-integration.md), [batch 44](batch-44-integration.md), [batch 45](batch-45-integration.md) and [batch 46](batch-46-integration.md) and [batch 47](batch-47-integration.md) and [batch 48](batch-48-integration.md) and [batch 49](batch-49-integration.md) and [batch 50](batch-50-integration.md) evidence. Validation scope and remaining limits are recorded in each linked report. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
 
 | Component | Status | Evidence |
 | --- | --- | --- |
@@ -17,6 +17,7 @@
 | Book Call Button | Validated baseline | [Report](book-call-button.md) |
 | Branching Submenu | Validated baseline | [Report](branching-submenu.md) |
 | Button | Validated baseline | [Review](button.md) |
+| Car Smoke Page Transition | Validated baseline | [Report](car-smoke-page-transition.md) |
 | Chat | Validated baseline | [Report](chat.md) |
 | Circular Orbit | Validated baseline | [Evidence](circular-orbit.md) |
 | Code Snippet Deck | Validated baseline | [Report](code-snippet-deck.md) |
@@ -81,6 +82,7 @@
 | PressButton | Validated baseline | [Review](press-button.md) |
 | Pricing | Validated baseline | [Report](pricing.md) |
 | Profile Card | Validated baseline | [Report](profile-card.md) |
+| Pull to Refresh | Validated baseline | [Report](pull-to-refresh.md) |
 | Rainbow Button | Validated baseline | [Review](rainbow-button.md) |
 | Rocket Party Popper | Validated baseline | [Report](rocket-party-popper.md) |
 | Recovery Ledger | Validated baseline | [Report](recovery-ledger.md) |

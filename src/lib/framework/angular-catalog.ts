@@ -147,6 +147,21 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if(entry.id==='pull-to-refresh')return `import {Component,signal} from '@angular/core';
+import {KitPullToRefreshComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitPullToRefreshComponent],template:\`<kit-pull-to-refresh [onRefresh]="refresh"/><p>{{message()}}</p>\`})
+export class ExampleComponent {
+ readonly message=signal('');
+ // Supply application data loading here; the callback owns its own transport.
+ readonly refresh=async()=>{this.message.set('Refresh requested');};
+}`;
+  if(entry.id==='car-smoke-page-transition')return `import {Component,signal} from '@angular/core';
+import {KitCarSmokePageTransitionComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitCarSmokePageTransitionComponent],template:\`<kit-car-smoke-page-transition [onTransitionComplete]="complete"/><p>{{message()}}</p>\`})
+export class ExampleComponent {
+ readonly message=signal('');
+ readonly complete=()=>this.message.set('Transition complete');
+}`;
   if(entry.id==='chat')return `import {Component,signal} from '@angular/core';
 import {KitChatComponent,type ChatMessageItem,type ChatAttachment} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitChatComponent],template:\`<kit-chat [messages]="messages()" [onSendMessage]="send"/>\`})

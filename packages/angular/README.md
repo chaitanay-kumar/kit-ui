@@ -2,7 +2,7 @@
 
 116 native standalone components using Angular signals, inputs, and outputs. Supports Angular 20, 21, and 22 with RxJS 7.8+. React is not a dependency.
 
-Chat and Dynamic Island use `tailwind-merge` to resolve caller classes consistently with the React components. Package installation supplies this runtime dependency. When copying their authored sources, install `tailwind-merge` and include the generated scoped CSS and class dictionaries alongside the listed helpers. Their default styles are precompiled; custom utility classes still require matching styles in the consuming application.
+Chat, Dynamic Island, Pull to Refresh (including its financial card) and Car Smoke Page Transition use `tailwind-merge` to resolve caller classes consistently with React. Package installation supplies this runtime dependency. When copying their authored sources, install `tailwind-merge` and include the scoped CSS and class dictionaries alongside the listed helpers. Their default styles are precompiled; custom utility classes still require matching styles in the consuming application.
 
 This package is not published to npm. Build from this repository with `npm run angular:build` (Node 22.22.3+) or download the built tarball from the website's Angular setup page. Install the actual local artifact:
 

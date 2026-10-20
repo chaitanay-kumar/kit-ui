@@ -1230,7 +1230,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     "id": "car-smoke-page-transition",
     "name": "Car Smoke Page Transition",
     "tagline": "Cinematic automotive page transition",
-    "description": "A cinematic page transition where a speeding car crosses the screen, leaving a smoke trail before transitioning to the next page.",
+    "description": "A cinematic car drift and smoke overlay with an application completion callback.",
     "category": "Motion",
     "badges": [
       "Cinematic",
@@ -1239,11 +1239,11 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     ],
     "cliCommand": "npx shadcn@latest add chaitanay-kumar/kit-ui/car-smoke-page-transition",
     "features": [
-      "Hardware-accelerated Canvas particle drift smoke physics and realistic skid marks",
+      "Canvas2D smoke plumes, skid marks and speed lines",
       "Choreographed multi-axis Ferrari drift movement, wheel spin, and speed lines",
       "Customizable travel direction (left-to-right or right-to-left), density, and scale",
       "Automatic theme awareness (light and dark mode overlay shading)",
-      "Full accessibility support with automatic prefers-reduced-motion fallback"
+      "Keyboard trigger and an automatic prefers-reduced-motion branch"
     ],
     "props": [
       {
@@ -1255,7 +1255,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       {
         "name": "carDuration",
         "type": "number",
-        "default": "700",
+        "default": "1350",
         "description": "Duration of car crossing animation in milliseconds"
       },
       {
@@ -1279,7 +1279,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       {
         "name": "smokeLifetime",
         "type": "number",
-        "default": "1200",
+        "default": "1400",
         "description": "Lifetime of smoke particles in milliseconds"
       },
       {
@@ -1291,26 +1291,32 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       {
         "name": "pageTransitionDelay",
         "type": "number",
-        "default": "550",
-        "description": "Delay before page transition overlay starts in milliseconds"
+        "default": "900",
+        "description": "Normal-motion completion offset: callback runs at carDelay + pageTransitionDelay + 100 ms. Overlay fade starts independently at carDelay + 0.65 × carDuration."
       },
       {
         "name": "pageTransitionDuration",
         "type": "number",
-        "default": "350",
-        "description": "Duration of page transition overlay fade in milliseconds"
+        "default": "400",
+        "description": "Overlay fade duration; also the completion delay in reduced motion, in milliseconds"
       },
       {
         "name": "resetDelay",
         "type": "number",
-        "default": "300",
-        "description": "Delay before resetting to idle after transition completes in milliseconds"
+        "default": "350",
+        "description": "Reset hold in milliseconds; normal motion also includes pageTransitionDuration and a final 350 ms fade"
       },
       {
         "name": "onTransitionComplete",
         "type": "() => void",
         "default": "undefined",
-        "description": "Callback fired when transition completes (call navigate() here)"
+        "description": "Application callback on the completion timer; navigation is supplied by the application"
+      },
+      {
+        "name": "verticalPosition",
+        "type": "'center' | 'top' | 'bottom' | number",
+        "default": "'center'",
+        "description": "Vertical anchor; numeric values use percentages for the car position and canvas calculations"
       },
       {
         "name": "children",
@@ -1328,10 +1334,11 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     "accessibility": [
       "The trigger is keyboard accessible via Enter and Space keys",
       "Reduced motion preference automatically disables the fast car animation and smoke effects",
-      "The overlay background respects the current Kit UI theme (light/dark)"
+      "The overlay background respects the current Kit UI theme (light/dark)",
+      "The decorative overlay is aria-hidden and ignores pointer input; focus management and navigation belong to the application"
     ],
     "createdAt": "2026-09-08",
-    "usageCode": "import { CarSmokePageTransition } from \"@/components/ui/car-smoke-page-transition\";\n\nexport function Demo() {\n  return (\n    <CarSmokePageTransition\n      onTransitionComplete={() => {\n        // Navigate to new page after animation completes\n        window.location.href = \"/about\";\n      }}\n    >\n      <button className=\"bg-[#FAFAFA] text-[#050505] hover:bg-white px-4 py-2 rounded-md font-medium transition-colors\">\n        Start Journey\n      </button>\n    </CarSmokePageTransition>\n  );\n}",
+    "usageCode": "import { CarSmokePageTransition } from \"@/components/ui/car-smoke-page-transition\";\n\nexport function Demo() {\n  return (\n    <CarSmokePageTransition\n      onTransitionComplete={() => {\n        // The application chooses navigation on the completion timer.\n        window.location.href = \"/about\";\n      }}\n    >\n      <button className=\"bg-[#FAFAFA] text-[#050505] hover:bg-white px-4 py-2 rounded-md font-medium transition-colors\">\n        Start Journey\n      </button>\n    </CarSmokePageTransition>\n  );\n}",
     "dependencies": [
       "framer-motion"
     ],
@@ -7117,20 +7124,20 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     "cliCommand": "npx shadcn@latest add chaitanay-kumar/kit-ui/pull-to-refresh",
     "features": [
       "Seamless Light and Dark mode theming with tuned contrast and crisp aesthetics",
-      "Physical logarithmic spring resistance matching iOS and native touch physics",
+      "Exponential pull resistance with spring-smoothed content translation",
       "Interactive pointer and touch chart scrubbing with realtime price and timestamp tracking",
       "Integrated financial statistics card with smooth bezier curve line chart, area fill, and endpoint glow",
       "Minimal key metrics summary row (24h High, 24h Low, Volume)",
       "Reactive time range switching (1H, 4H, 1D) with spring morph pill indicators",
       "Full async lifecycle support (idle, pulling, ready, refreshing, complete)",
-      "Keyboard accessible refresh triggers (Press R or Enter) and screen reader support"
+      "R shortcut on the panel and a native hidden refresh button"
     ],
     "props": [
       {
         "name": "onRefresh",
         "type": "() => Promise<void> | void",
         "default": "undefined",
-        "description": "Async or sync callback executed when released beyond threshold"
+        "description": "Called for a qualifying pull/flick or explicit refresh; when omitted, runs the built-in financial simulation"
       },
       {
         "name": "threshold",
@@ -7169,17 +7176,29 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
         "description": "Show the built-in minimal circular progress indicator"
       },
       {
+        "name": "pullIndicator",
+        "type": "(state: PullState) => React.ReactNode",
+        "default": "undefined",
+        "description": "Custom indicator renderer receiving status, distance, progress and threshold"
+      },
+      {
         "name": "children",
         "type": "React.ReactNode",
         "default": "<FinancialStatsCard />",
         "description": "Custom child content to be pulled"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": "undefined",
+        "description": "Tailwind classes merged into the panel wrapper"
       }
     ],
     "accessibility": [
       "Accessible role=\"region\" with aria-busy and aria-label attributes",
-      "Full keyboard support with R key shortcut when focused",
+      "Focused panel supports R without Control or Meta; the hidden native button supports ordinary keyboard activation",
       "Screen reader accessible hidden refresh button fallback",
-      "Honors prefers-reduced-motion media query"
+      "Reduced motion removes content translation; refresh indicators and several financial-card effects retain their source animations"
     ],
     "createdAt": "2026-09-24",
     "usageCode": "import { PullToRefresh, FinancialStatsCard } from \"@/components/ui/pull-to-refresh\";\n\nexport function Demo() {\n  return (\n    <PullToRefresh\n      onRefresh={async () => {\n        await new Promise((res) => setTimeout(res, 1200));\n      }}\n    >\n      <FinancialStatsCard showMetrics showActions />\n    </PullToRefresh>\n  );\n}",

@@ -214,7 +214,7 @@ export const CATALOG_INDEX: ComponentCatalogIndex[] = [
     "id": "car-smoke-page-transition",
     "name": "Car Smoke Page Transition",
     "tagline": "Cinematic automotive page transition",
-    "description": "A cinematic page transition where a speeding car crosses the screen, leaving a smoke trail before transitioning to the next page.",
+    "description": "A cinematic car drift and smoke overlay with an application completion callback.",
     "category": "Motion",
     "badges": [
       "Cinematic",

@@ -336,7 +336,7 @@
       "name": "car-smoke-page-transition",
       "type": "registry:ui",
       "title": "Car Smoke Page Transition",
-      "description": "A cinematic page transition where a speeding car crosses the screen, leaving a smoke trail before transitioning to the next page.",
+      "description": "A cinematic car drift and smoke overlay with an application completion callback.",
       "dependencies": [
         "framer-motion"
       ],
