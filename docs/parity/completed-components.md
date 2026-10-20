@@ -1,6 +1,6 @@
 # Completed parity checks
 
-115 components have recorded validated baselines through batch 50. The 99 baselines through batch 42 are integrated; batches 31?42 were merged through [PR #26](https://github.com/chaitanay-kumar/kit-ui/pull/26). Batches 43-50 are locally validated and await integration review, merge/deployment and final user QA; see [batch 43](batch-43-integration.md), [batch 44](batch-44-integration.md), [batch 45](batch-45-integration.md) and [batch 46](batch-46-integration.md) and [batch 47](batch-47-integration.md) and [batch 48](batch-48-integration.md) and [batch 49](batch-49-integration.md) and [batch 50](batch-50-integration.md) evidence. Validation scope and remaining limits are recorded in each linked report. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
+115 components have recorded validated baselines through batch 50. The integration of batches 43-50 brings all 115 baselines into the implementation branch; see [integration evidence](batches-43-50-integration.md). Final user QA remains outstanding. Earlier batch reports are historical validation handoffs. Validation scope and remaining limits are recorded in each linked report. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
 
 | Component | Status | Evidence |
 | --- | --- | --- |
