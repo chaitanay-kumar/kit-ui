@@ -96,7 +96,7 @@
       "name": "ai-response",
       "type": "registry:ui",
       "title": "AI Response",
-      "description": "A production-ready, accessible AI response component supporting streaming markdown, syntax-styled code blocks, citations, feedback actions, and tool execution status.",
+      "description": "A composable response surface for application-supplied content and streaming status, with limited Markdown, plain code blocks, citations, feedback and tool summaries.",
       "dependencies": [
         "framer-motion",
         "lucide-react"

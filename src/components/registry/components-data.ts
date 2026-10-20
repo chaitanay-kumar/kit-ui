@@ -370,8 +370,8 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
   {
     "id": "ai-response",
     "name": "AI Response",
-    "tagline": "Production-ready streaming AI response with sources and actions",
-    "description": "A production-ready, accessible AI response component supporting streaming markdown, syntax-styled code blocks, citations, feedback actions, and tool execution status.",
+    "tagline": "Streaming response presentation with sources and actions",
+    "description": "A composable response surface for application-supplied content and streaming status, with limited Markdown, plain code blocks, citations, feedback and tool summaries.",
     "category": "Feedback",
     "badges": [
       "AI",
@@ -383,11 +383,11 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     "features": [
       "Progressive streaming state with typing indicator and loading skeleton",
       "Rich Markdown rendering with headings, lists, blockquotes, and tables",
-      "Syntax-highlighted code blocks with dedicated one-click copy buttons",
-      "Composable cited sources list with expandable link pills and previews",
+      "Plain preformatted code blocks with independent copy feedback",
+      "Composable cited sources with an expandable link grid and snippets",
       "Built-in user feedback actions (Copy, Regenerate, Like, Dislike)",
-      "Seamless integration with Agent Activity and tool execution traces",
-      "Fully accessible keyboard navigation and ARIA live regions for streaming updates"
+      "Standalone tool summary with caller-supplied names and durations",
+      "Native keyboard controls and a polite content region while streaming"
     ],
     "props": [
       {
@@ -427,6 +427,12 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
         "description": "Optional callback fired when the user provides quality feedback"
       },
       {
+        "name": "accentColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "Sets the --accent-custom CSS property for application styling"
+      },
+      {
         "name": "children",
         "type": "ReactNode",
         "default": "undefined",
@@ -440,13 +446,13 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       }
     ],
     "accessibility": [
-      "Uses semantic role=\"region\" with aria-live=\"polite\" for screen-reader streaming announcements",
-      "All interactive controls (Copy, Like, Dislike, Links) feature explicit focus-visible rings and ARIA labels",
+      "Content uses role=\"region\" and aria-live=\"polite\" while streaming; generating and error branches use status and alert roles",
+      "Copy and feedback controls have labels; source disclosure has aria-expanded. Tool disclosure and feedback do not expose expanded/pressed state",
       "Code blocks feature keyboard-accessible copy triggers with affirmative screen-reader labels",
-      "Respects reduced motion preferences through soft, non-intrusive physics springs"
+      "Reduced motion disables press scaling; source/tool expansion and CSS pulse/spin effects remain animated"
     ],
     "createdAt": "2026-09-21",
-    "usageCode": "import { AIResponse, AIResponseHeader, AIResponseContent, AIResponseSources, AIResponseActions } from \"@/components/ui/ai-response\";\n\nexport function Demo() {\n  return (\n    <AIResponse\n      status=\"complete\"\n      modelName=\"Claude 3.7 Sonnet\"\n      content=\"Here is a verified solution using **Kit UI** motion tokens:\\n\\n```typescript\\nimport { motionTransitions } from '@/lib/motion-tokens';\\n\\nexport const config = motionTransitions.springSnappy;\\n```\"\n      sources={[\n        { id: 1, title: \"Kit UI Motion Tokens\", url: \"https://kit-ui.pro/docs\" },\n        { id: 2, title: \"Framer Motion Spring Spec\", url: \"https://www.framer.com/motion/\" }\n      ]}\n      onRegenerate={() => console.log('Regenerating...')}\n    />\n  );\n}",
+    "usageCode": "import { AIResponse } from \"@/components/ui/ai-response\";\n\nconst answer = \"# Response\\n\\nThe application supplies **content** and status.\\n\\n```typescript\\nconst ready = true;\\n```\";\n\nexport function Demo() {\n  return (\n    <AIResponse\n      status=\"complete\"\n      content={answer}\n      sources={[{ id: 1, title: \"Application documentation\", url: \"https://example.com/docs\" }]}\n      onRegenerate={() => console.log(\"Supply your application request here.\")}\n    />\n  );\n}",
     "dependencies": [
       "framer-motion",
       "lucide-react"

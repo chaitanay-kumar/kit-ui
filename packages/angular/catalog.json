@@ -67,19 +67,19 @@
     "name": "AI Response",
     "exportName": "KitAiResponseComponent",
     "selector": "kit-ai-response",
-    "description": "Application-provided response text with optional progressive reveal, reasoning disclosure, sources and clipboard feedback.",
+    "description": "Native compound AI response with source markdown, externally supplied streaming status, citations, tools, copy and feedback ownership.",
     "inputs": [
-      "text: string",
-      "reasoning: string",
-      "sources: KitItem[]",
-      "state: 'idle' | 'pending' | 'success' | 'error'",
-      "error: string",
-      "streaming: boolean",
-      "charactersPerSecond: number"
+      "content: string",
+      "status: AIResponseStatus",
+      "modelName: string",
+      "sources: AIResponseSource[]",
+      "accentColor: string",
+      "onRegenerate: () => void",
+      "onFeedback: (type: 'like' | 'dislike') => void",
+      "children: FormContent",
+      "className: string"
     ],
-    "outputs": [
-      "retry: void"
-    ]
+    "outputs": []
   },
   {
     "id": "airport-matrix-clock",

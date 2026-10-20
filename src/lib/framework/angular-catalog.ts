@@ -147,6 +147,14 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if(entry.id==='ai-response')return `import {Component,signal} from '@angular/core';
+import {KitAiResponseComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitAiResponseComponent],template:\`<kit-ai-response [content]="answer()" [onRegenerate]="regenerate"/><p>{{message()}}</p>\`})
+export class ExampleComponent {
+ readonly answer=signal('An application-provided **answer**.');
+ readonly message=signal('');
+ readonly regenerate=()=>this.message.set('Supply your application request here.');
+}`;
   if(entry.id==='pull-to-refresh')return `import {Component,signal} from '@angular/core';
 import {KitPullToRefreshComponent} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitPullToRefreshComponent],template:\`<kit-pull-to-refresh [onRefresh]="refresh"/><p>{{message()}}</p>\`})

@@ -258,6 +258,8 @@ function parseMarkdownContent(raw: string): ParsedBlock[] {
       paraLines.push(lines[i]);
       i++;
     }
+    // Unsupported heading markers must still consume input (for example ####).
+    if (paraLines.length === 0) paraLines.push(lines[i++]);
     blocks.push({
       type: 'paragraph',
       content: paraLines.join(' '),

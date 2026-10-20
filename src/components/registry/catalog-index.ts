@@ -68,8 +68,8 @@ export const CATALOG_INDEX: ComponentCatalogIndex[] = [
   {
     "id": "ai-response",
     "name": "AI Response",
-    "tagline": "Production-ready streaming AI response with sources and actions",
-    "description": "A production-ready, accessible AI response component supporting streaming markdown, syntax-styled code blocks, citations, feedback actions, and tool execution status.",
+    "tagline": "Streaming response presentation with sources and actions",
+    "description": "A composable response surface for application-supplied content and streaming status, with limited Markdown, plain code blocks, citations, feedback and tool summaries.",
     "category": "Feedback",
     "badges": [
       "AI",
