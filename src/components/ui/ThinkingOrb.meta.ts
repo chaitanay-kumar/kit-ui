@@ -10,9 +10,9 @@ const meta: KitUIComponentMeta = {
   features: [
     'Pure monochrome aesthetic (clean white/silver on dark, deep obsidian on light) with zero colors',
     '9 unique cognitive states: working, searching, solving, listening, connecting, weaving, composing, breathing, and shaping',
-    'GPU-accelerated Canvas rendering with 3D spherical trigonometry and perspective projection',
+    'Canvas 2D rendering with 3D spherical trigonometry and perspective projection',
     'Adaptive particle density scaling automatically calibrated to size',
-    'Full accessibility support with automatic prefers-reduced-motion fallback',
+    'Image label and automatic prefers-reduced-motion time freezing',
     'Minimalist optical core with subtle particle motion trailing and star sparkles',
   ],
   props: [
@@ -37,8 +37,8 @@ const meta: KitUIComponentMeta = {
     {
       name: 'dark',
       type: 'boolean',
-      default: 'true',
-      description: 'Dark mode tuning: true renders luminous white particles, false renders crisp dark graphite particles',
+      default: 'undefined',
+      description: 'Automatically follows the document dark class when omitted; true renders luminous white particles and false renders dark graphite particles',
     },
     {
       name: 'paused',

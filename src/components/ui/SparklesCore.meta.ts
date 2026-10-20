@@ -5,12 +5,12 @@ const meta: KitUIComponentMeta = {
   description:
     'A high-performance, zero-dependency particle sparkle canvas with multi-shape geometry (circles, radiant diamond stars, cross starlets), organic twinkling, interactive cursor repulsion/attraction, click particle bursts, and fluid SSR safety.',
   category: 'Motion',
-  tagline: 'Zero-dependency GPU canvas particle sparkles with celestial stars, organic twinkle, and cursor reactions',
+  tagline: 'Canvas 2D particle sparkles with celestial stars, organic twinkle, and cursor reactions',
   badges: ['Canvas', 'Particles', 'Interactive', 'Background'],
   createdAt: '2026-09-20',
   features: [
     'Zero external particle dependencies: 100% native HTML5 Canvas 2D with sub-pixel DPR scaling',
-    'Full backward compatibility with Aceternity SparklesCore props signature',
+    'Size, density and color controls without an external particle runtime',
     'Multiple particle shapes: circle, 4-pointed diamond star, celestial cross starlet, or mixed',
     'Multi-color palette distribution supporting chromatic nebulae and gradient sparkle fields',
     'Organic twinkle brightness pulsation with phase modulation and customizable twinkle speeds',
@@ -18,7 +18,7 @@ const meta: KitUIComponentMeta = {
     'Interactive cursor modes: repulsion, attraction, or proximity radiant enlargement',
     'Click & tap particle burst generation spawning dynamic kinetic firework sparks',
     'Wraps arbitrary children effortlessly with pointer event pass-through and depth stratification',
-    'Full accessibility: aria-hidden canvas and prefers-reduced-motion compliance',
+    'Canvas is hidden from assistive technology and particle movement respects reduced motion',
   ],
   props: [
     {

@@ -147,6 +147,99 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if(entry.id==='pull-to-refresh')return `import {Component,signal} from '@angular/core';
+import {KitPullToRefreshComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitPullToRefreshComponent],template:\`<kit-pull-to-refresh [onRefresh]="refresh"/><p>{{message()}}</p>\`})
+export class ExampleComponent {
+ readonly message=signal('');
+ // Supply application data loading here; the callback owns its own transport.
+ readonly refresh=async()=>{this.message.set('Refresh requested');};
+}`;
+  if(entry.id==='car-smoke-page-transition')return `import {Component,signal} from '@angular/core';
+import {KitCarSmokePageTransitionComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitCarSmokePageTransitionComponent],template:\`<kit-car-smoke-page-transition [onTransitionComplete]="complete"/><p>{{message()}}</p>\`})
+export class ExampleComponent {
+ readonly message=signal('');
+ readonly complete=()=>this.message.set('Transition complete');
+}`;
+  if(entry.id==='chat')return `import {Component,signal} from '@angular/core';
+import {KitChatComponent,type ChatMessageItem,type ChatAttachment} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitChatComponent],template:\`<kit-chat [messages]="messages()" [onSendMessage]="send"/>\`})
+export class ExampleComponent {
+ readonly messages=signal<ChatMessageItem[]>([]);private serial=0;
+ readonly send=(content:string,attachments?:ChatAttachment[])=>this.messages.update(previous=>[...previous,{id:String(++this.serial),role:'user',content,attachments}]);
+}`;
+  if(entry.id==='dynamic-island')return `import {Component} from '@angular/core';
+import {KitDynamicIslandComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitDynamicIslandComponent],template:\`<kit-dynamic-island name="Kit UI contributors" [socials]="{github:'https://github.com',email:'hello@example.com'}"/>\`})
+export class ExampleComponent {}`;
+  if(entry.id==='sign-up')return `import {Component,signal} from '@angular/core';
+import {KitSignUpComponent,type SignUpFormData} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitSignUpComponent],template:\`<kit-sign-up [onSubmit]="submit"/><p>{{message()}}</p>\`})
+export class ExampleComponent {
+ readonly message=signal('Supply your own registration transport and external loading/error state');
+ readonly submit=(data:SignUpFormData)=>this.message.set('Submitted '+data.email);
+}`;
+  if(entry.id==='particle-delete')return `import {Component} from '@angular/core';
+import {KitParticleDeleteComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitParticleDeleteComponent],template:\`<kit-particle-delete [options]="{duration:850,maxParticles:4500}"/>\`})
+export class ExampleComponent {}`;
+  if(entry.id==='form')return `import {Component,signal} from '@angular/core';
+import {KitFormComponent,KitFormItemComponent,KitFormLabelComponent,KitFormControlComponent,KitFormDescriptionComponent,KitFormMessageComponent,KitInputComponent,KitButtonComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitFormComponent,KitFormItemComponent,KitFormLabelComponent,KitFormControlComponent,KitFormDescriptionComponent,KitFormMessageComponent,KitInputComponent,KitButtonComponent],template:\`<kit-form [onSubmit]="submit"><kit-form-item><kit-form-label htmlFor="email" [required]="true">Email address</kit-form-label><kit-form-control><kit-input id="email" type="email" placeholder="you@company.com" [value]="email()" [onChange]="change" [error]="!!error()"/></kit-form-control><kit-form-description>We will never share your email.</kit-form-description><kit-form-message [error]="error()"/></kit-form-item><button kitButton type="submit">Submit</button></kit-form>\`})
+export class ExampleComponent {
+ readonly email=signal('');readonly error=signal('');
+ readonly change=(event:Event)=>this.email.set((event.target as HTMLInputElement).value);
+ readonly submit=(event:SubmitEvent)=>{event.preventDefault();this.error.set(this.email().includes('@')?'':'Please enter a valid email address.')};
+}`;
+  if(entry.id==='login')return `import {Component,signal} from '@angular/core';
+import {KitLoginComponent,type LoginFormData} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitLoginComponent],template:\`<kit-login [onSubmit]="submit"/><p>{{message()}}</p>\`})
+export class ExampleComponent {
+ readonly message=signal('Supply your own authentication transport');
+ readonly submit=(data:LoginFormData)=>this.message.set('Submitted '+data.email);
+}`;
+  if(entry.id==='dot-shader')return `import {Component} from '@angular/core';
+import {KitDotShaderComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitDotShaderComponent],template:\`<kit-dot-shader [style]="{height:260}" [accentColor]="'#00F0FF'"><h2>Move through the dot field</h2></kit-dot-shader>\`})
+export class ExampleComponent {}`;
+  if(entry.id==='animated-file-upload')return `import {Component,signal} from '@angular/core';
+import {KitAnimatedFileUploadComponent,type UploadFileItem} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitAnimatedFileUploadComponent],template:\`<kit-animated-file-upload [accept]="['image/*','.pdf']" [onUploadComplete]="complete"/><p>{{message()}}</p>\`})
+export class ExampleComponent {
+ readonly message=signal('Local simulation; supply uploadHandler for your transport');
+ readonly complete=(file:UploadFileItem)=>this.message.set(file.name+' ready');
+}`;
+  if(entry.id==='glyph-matrix')return `import {Component} from '@angular/core';
+import {KitGlyphMatrixComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitGlyphMatrixComponent],template:\`<div style="height:260px"><kit-glyph-matrix #matrix><h2>Follow the signal</h2></kit-glyph-matrix></div><button (click)="matrix.reset()">Reset streams</button>\`})
+export class ExampleComponent{}
+`;
+  if(entry.id==='shooting-stars')return `import {Component} from '@angular/core';
+import {KitShootingStarsComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitShootingStarsComponent],template:\`<div style="height:260px"><kit-shooting-stars [starCount]="80" [interval]="2200"><h2 style="color:white">Explore the night sky</h2></kit-shooting-stars></div>\`})
+export class ExampleComponent{}
+`;
+  if(entry.id==='thinking-orb')return `import {Component} from '@angular/core';
+import {KitThinkingOrbComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitThinkingOrbComponent],template:\`<kit-thinking-orb state="listening" [size]="64" aria-label="Assistant listening"/>\`})
+export class ExampleComponent{}
+`;
+  if(entry.id==='sparkles-core')return `import {Component} from '@angular/core';
+import {KitSparklesCoreComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitSparklesCoreComponent],template:\`<div style="height:240px;background:#09090b"><kit-sparkles-core particleShape="mixed" [particleCount]="60"><strong style="color:white">Explore the field</strong></kit-sparkles-core></div>\`})
+export class ExampleComponent{}
+`;
+  if(entry.id==='drag-to-confirm')return `import {Component} from '@angular/core';
+import {KitDragToConfirmComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitDragToConfirmComponent],template:\`<kit-drag-to-confirm label="Slide to archive" actionType="archive" [onConfirm]="confirm"/>\`})
+export class ExampleComponent{readonly confirm=()=>console.log('Archive confirmed')}
+`;
+  if(entry.id==='smart-comparison')return `import {Component} from '@angular/core';
+import {KitSmartComparisonComponent,type ComparisonPlan,type ComparisonCategory} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitSmartComparisonComponent],template:\`<kit-smart-comparison [plans]="plans" [categories]="categories"/>\`})
+export class ExampleComponent{readonly plans:ComparisonPlan[]=[{id:'free',name:'Free',tagline:'Personal projects',price:'$0'},{id:'team',name:'Team',tagline:'Shared workspaces',price:'$24',featured:true}];readonly categories:ComparisonCategory[]=[{id:'core',title:'Workspace',features:[{id:'sharing',name:'Sharing',values:{free:false,team:true}}]}]}
+`;
   if(entry.id==='command-menu')return `import {Component,signal} from '@angular/core';
 import {KitCommandMenuComponent} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitCommandMenuComponent],template:\`<button (click)="open.set(true)">Open commands</button><kit-command-menu [isOpen]="open()" [onClose]="close"/>\`})

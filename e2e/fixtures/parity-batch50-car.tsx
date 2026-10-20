@@ -1,0 +1,17 @@
+import '../../src/styles/index.css';import React from 'react';import {createRoot} from 'react-dom/client';import {flushSync} from 'react-dom';
+import {CarSmokePageTransition} from '../../src/components/ui/CarSmokePageTransition';import {ThemeProvider} from '../../src/lib/theme/useTheme';
+import '@angular/compiler';import {Component,ErrorHandler,provideZonelessChangeDetection,signal} from '@angular/core';import {bootstrapApplication} from '@angular/platform-browser';import {KitCarSmokePageTransitionComponent} from '../../packages/angular/dist/fesm2022/kit-ui-angular.mjs';
+const query=new URLSearchParams(location.search),theme=query.get('theme')==='light'?'light':'dark',initial=JSON.parse(query.get('initial')||'{}'),api=window as any;let current=initial;api.calls=[];api.errors=[];api.ready=false;document.documentElement.classList.toggle('dark',theme==='dark');
+// Keep the source provider's hydration reconciliation on the explicitly selected theme.
+localStorage.setItem('kit-ui-theme',theme);
+window.addEventListener('error',event=>{api.errors.push(event.error?.message??event.message);event.preventDefault()});
+const complete=function(this:unknown){api.calls.push({unbound:this===undefined});if(current.throwComplete)throw new Error('completion failed')};
+const host=document.body.appendChild(document.createElement('div'));host.id='fixture';host.style.cssText='padding:24px';
+if(query.get('framework')!=='angular'){
+ const root=createRoot(host),render=()=>root.render(<ThemeProvider initialTheme={theme}><CarSmokePageTransition {...current} onTransitionComplete={complete}>{current.content}</CarSmokePageTransition></ThemeProvider>);
+ api.update=(patch:any)=>{current={...current,...patch};flushSync(render)};api.trigger=()=>flushSync(()=>document.querySelector('[aria-label="Trigger Ferrari drift page transition"]')!.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true})));api.unmount=()=>root.unmount();flushSync(render);api.ready=true;
+}else{
+ class Consumer{readonly options=signal<any>(initial);readonly complete=complete}
+ Component({selector:'batch50-car-consumer',standalone:true,host:{style:'display:contents'},imports:[KitCarSmokePageTransitionComponent],template:`<kit-car-smoke-page-transition [direction]="options().direction" [carDuration]="options().carDuration" [carDelay]="options().carDelay" [carSize]="options().carSize" [smokeDensity]="options().smokeDensity" [smokeLifetime]="options().smokeLifetime" [showSpeedLines]="options().showSpeedLines" [pageTransitionDelay]="options().pageTransitionDelay" [pageTransitionDuration]="options().pageTransitionDuration" [resetDelay]="options().resetDelay" [verticalPosition]="options().verticalPosition" [content]="options().content" [className]="options().className" [onTransitionComplete]="complete"/>`})(Consumer);
+ host.append(document.createElement('batch50-car-consumer'));bootstrapApplication(Consumer,{providers:[provideZonelessChangeDetection(),{provide:ErrorHandler,useValue:{handleError:(error:Error)=>api.errors.push(error.message)}}]}).then(app=>{const consumer=app.components[0].instance;api.update=(patch:any)=>{current={...current,...patch};consumer.options.set(current);app.tick()};api.trigger=()=>{document.querySelector('[aria-label="Trigger Ferrari drift page transition"]')!.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true}));app.tick()};api.unmount=()=>app.destroy();api.ready=true});
+}

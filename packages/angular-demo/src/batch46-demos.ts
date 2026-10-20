@@ -1,0 +1,6 @@
+import {Component,signal} from '@angular/core';
+import {KitDotShaderComponent,KitAnimatedFileUploadComponent,type UploadFileItem} from 'kit-ui-angular';
+@Component({selector:'kit-dot-shader-demo',standalone:true,imports:[KitDotShaderComponent],template:`<kit-dot-shader [paused]="paused()" [style]="{height:260,borderRadius:16}"><strong style="color:white">Move through the dot field</strong></kit-dot-shader><div class="kit-row"><button type="button" [attr.aria-pressed]="paused()" (click)="paused.set(!paused())">{{paused()?'Resume':'Pause'}}</button></div>`})
+export class DotShaderDemoComponent{readonly paused=signal(false)}
+@Component({selector:'kit-animated-file-upload-demo',standalone:true,imports:[KitAnimatedFileUploadComponent],template:`<kit-animated-file-upload [variant]="compact()?'compact':'standard'" [accept]="['image/*','.pdf']" [onUploadComplete]="complete"/><div class="kit-row"><button type="button" [attr.aria-pressed]="compact()" (click)="compact.set(!compact())">Compact layout</button><span>{{message()}}</span></div>`})
+export class AnimatedFileUploadDemoComponent{readonly compact=signal(false);readonly message=signal('Local simulation; files stay in your browser');readonly complete=(file:UploadFileItem)=>this.message.set(file.name+' ready')}

@@ -214,7 +214,7 @@ export const CATALOG_INDEX: ComponentCatalogIndex[] = [
     "id": "car-smoke-page-transition",
     "name": "Car Smoke Page Transition",
     "tagline": "Cinematic automotive page transition",
-    "description": "A cinematic page transition where a speeding car crosses the screen, leaving a smoke trail before transitioning to the next page.",
+    "description": "A cinematic car drift and smoke overlay with an application completion callback.",
     "category": "Motion",
     "badges": [
       "Cinematic",
@@ -539,7 +539,7 @@ export const CATALOG_INDEX: ComponentCatalogIndex[] = [
     "id": "form",
     "name": "Form",
     "tagline": "Composable, accessible form primitives and controls",
-    "description": "A modular, composable form system with accessible inputs, textareas, custom selects, checkboxes, radio groups, switches, and animated validation messages.",
+    "description": "A modular, composable form system with inputs, textareas, native selects, checkboxes, radio groups, switches, and animated validation messages.",
     "category": "Forms",
     "badges": [
       "Forms",
@@ -795,7 +795,7 @@ export const CATALOG_INDEX: ComponentCatalogIndex[] = [
     "id": "login",
     "name": "Login",
     "tagline": "Refined authentication card with validation & social SSO",
-    "description": "A production-ready authentication card built with the Kit UI form system, featuring password show/hide, remember me, validation states, and social logins.",
+    "description": "A configurable authentication card built with the Kit UI form system, featuring password show/hide, remember me, validation states, and social login callbacks.",
     "category": "Auth",
     "badges": [
       "Authentication",
@@ -1063,9 +1063,8 @@ export const CATALOG_INDEX: ComponentCatalogIndex[] = [
     "category": "Motion",
     "badges": [
       "HTML5 Canvas",
-      "Spring Physics",
-      "High-DPI",
-      "Accessible"
+      "Particle Physics",
+      "High-DPI"
     ],
     "cliCommand": "npx shadcn@latest add chaitanay-kumar/kit-ui/particle-delete",
     "createdAt": "2026-08-21"
@@ -1325,14 +1324,13 @@ export const CATALOG_INDEX: ComponentCatalogIndex[] = [
   {
     "id": "sign-up",
     "name": "Sign Up",
-    "tagline": "Multi-step capable user registration with strength telemetry",
+    "tagline": "Registration with password strength and terms validation",
     "description": "A comprehensive registration card with live password strength metrics, password confirmation matching, terms validation, and social onboarding.",
     "category": "Auth",
     "badges": [
       "Registration",
       "Forms",
-      "Password Strength",
-      "Accessible"
+      "Password Strength"
     ],
     "cliCommand": "npx shadcn@latest add chaitanay-kumar/kit-ui/sign-up",
     "createdAt": "2026-08-19",
@@ -1415,7 +1413,7 @@ export const CATALOG_INDEX: ComponentCatalogIndex[] = [
   {
     "id": "sparkles-core",
     "name": "Sparkles Core",
-    "tagline": "Zero-dependency GPU canvas particle sparkles with celestial stars, organic twinkle, and cursor reactions",
+    "tagline": "Canvas 2D particle sparkles with celestial stars, organic twinkle, and cursor reactions",
     "description": "A high-performance, zero-dependency particle sparkle canvas with multi-shape geometry (circles, radiant diamond stars, cross starlets), organic twinkling, interactive cursor repulsion/attraction, click particle bursts, and fluid SSR safety.",
     "category": "Motion",
     "badges": [

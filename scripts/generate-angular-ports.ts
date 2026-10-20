@@ -1,3 +1,18 @@
+import {buildCarSmokeSupport,carSmokePort} from './angular-car-smoke';
+import {buildChatParts} from './angular-chat';
+import {buildPullRefreshSupport,pullRefreshPort} from './angular-pull-to-refresh';
+import {dynamicIslandPort,buildDynamicIslandStyles} from './angular-dynamic-island';
+import {particleDeletePort} from './angular-particle-delete';
+import {signUpPort} from './angular-sign-up';
+import {formPort} from './angular-form';
+import {loginPort} from './angular-login';
+import {animatedFileUploadPort} from './angular-animated-file-upload';
+import {dotShaderPort} from './angular-dot-shader';
+import {shootingStarsPort} from './angular-shooting-stars';
+import {glyphMatrixPort} from './angular-glyph-matrix';
+import {thinkingOrbPort} from './angular-thinking-orb';
+import {sparklesCorePort} from './angular-sparkles-core';
+import {dragToConfirmPort} from './angular-drag-to-confirm';
 import {commandMenuPort,spotlightSearchPort} from './angular-search-palettes';
 import {evilEyePort,nimbuMirchiPort} from './angular-hanging-charms';
 import {torqueDialPort} from './angular-torque-dial';
@@ -184,9 +199,6 @@ function add(
 
   });
 }
-const actionFeedback = `<p role="status" class="kit-status">{{loading() || busy() ? 'Working…' : status()}}</p>@if(error()){<p role="alert">{{error()}}</p>}@if(busy()){<button type="button" (click)="cancel()">Cancel</button>}`;
-const collectionFeedback = `@if(loading()){<p role="status">Loading…</p>}@if(error()){<p role="alert">{{error()}}</p>}@if(actionError()){<p role="alert">{{actionError()}}</p>}<p role="status" class="kit-status">{{busy()?'Working…':status()}}</p>`;
-const itemButton = `<button type="button" data-item [disabled]="disabled() || item.disabled" [attr.aria-pressed]="current()?.id===item.id" (click)="select(item)">{{item.label}}</button>`;
 
 add("press-button","plain",pressButtonPort.description,pressButtonPort.template,pressButtonPort.body,pressButtonPort);
 add("typewriter-button","plain",typewriterButtonPort.description,typewriterButtonPort.template,typewriterButtonPort.body,typewriterButtonPort);
@@ -220,14 +232,7 @@ add(
 */
 add("split-button","plain",splitButtonPort.description,splitButtonPort.template,splitButtonPort.body,splitButtonPort);
 add("book-call-button","plain",bookCallButtonPort.description,bookCallButtonPort.template,bookCallButtonPort.body,bookCallButtonPort);
-add(
-  "drag-to-confirm",
-  "action",
-  "Slide to the end to request confirmation, with arrow-key and explicit button alternatives.",
-  `<div class="kit-control kit-stack"><label>{{label()||'Slide to confirm'}}<input type="range" min="0" max="100" [value]="value()" [disabled]="blocked()" aria-label="Confirmation progress" [attr.aria-valuetext]="value()+' percent'" (input)="value.set(+$any($event.target).value)" (change)="finish()" /></label><button type="button" [disabled]="blocked()||value()<100" (click)="run()">Confirm</button>${actionFeedback}</div>`,
-  `readonly value=model(0);finish():void{if(this.value()>=100)void this.run();else this.value.set(0);}`,
-  { inputs: ["value: number (two-way)"] },
-);
+add('drag-to-confirm','plain',dragToConfirmPort.description,dragToConfirmPort.template,dragToConfirmPort.body,dragToConfirmPort);
 add('code-snippet-deck','plain',codeSnippetDeckPort.description,codeSnippetDeckPort.template,codeSnippetDeckPort.body,codeSnippetDeckPort);
 
 add("stretch-switch","plain",stretchSwitchPort.description,stretchSwitchPort.template,stretchSwitchPort.body,stretchSwitchPort);
@@ -238,37 +243,10 @@ add('spring-select','plain',springSelectPort.description,springSelectPort.templa
 
 add("otp-input", "plain", otpInputPort.description, otpInputPort.template, otpInputPort.body, otpInputPort);
 add("lock-input", "plain", lockInputPort.description, lockInputPort.template, lockInputPort.body, lockInputPort);
-for (const [id, title, button] of [
-  ["form", "Your details", "Submit"],
-  ["login", "Welcome back", "Sign in"],
-  ["sign-up", "Create an account", "Create account"],
-]) {
-  add(
-    id,
-    "form",
-    "Validated native fields, password visibility, cancellable application submission and preserved errors.",
-    `<form class="kit-control kit-surface kit-stack" aria-label="${title}" (submit)="submit($event)"><h3>{{label()||'${title}'}}</h3>@for(field of fields();track field.key){<label [for]="uid+'-'+field.key">{{field.label}}<input [id]="uid+'-'+field.key" [name]="field.key" [type]="field.type==='password'&&showPassword()?'text':field.type||'text'" [attr.autocomplete]="field.type==='password'?'${id === "sign-up" ? "new-password" : "current-password"}':field.type==='email'?'email':'on'" [required]="field.required||false" [attr.minlength]="field.minLength??null" [value]="values()[field.key]||''" [disabled]="disabled()||busy()" (input)="change(field.key,$event)" /></label>}<label class="kit-row"><input type="checkbox" [checked]="showPassword()" (change)="showPassword.set($any($event.target).checked)" />Show password</label><button type="submit" [disabled]="disabled()||busy()">{{busy()?'Submitting…':'${button}'}}</button>@if(busy()){<button type="button" (click)="cancel()">Cancel</button>}<p role="status">{{status()}}</p>@if(error()){<p role="alert">{{error()}}</p>}</form>`,
-  );
-}
-add(
-  "animated-file-upload",
-  "plain",
-  "File previews, validation, progress, abort and retry using the native Angular upload engine.",
-  `<kit-smart-upload [accept]="accept()" [maxFiles]="maxFiles()" [maxSize]="maxSize()" [disabled]="disabled()" [upload]="upload()" />`,
-  `readonly accept=input('image/*,.pdf');readonly maxFiles=input(5);readonly maxSize=input(10*1024*1024);readonly disabled=input(false);readonly upload=input<UploadHandler>();`,
-  {
-    inputs: [
-      "accept: string",
-      "maxFiles: number",
-      "maxSize: number",
-      "disabled: boolean",
-      "upload: UploadHandler",
-    ],
-    imports:
-      "import { KitSmartUploadComponent } from './smart-upload.component';\nimport type { UploadHandler } from './types';",
-    componentImports: "KitSmartUploadComponent",
-  },
-);
+add('sign-up','plain',signUpPort.description,signUpPort.template,signUpPort.body,signUpPort);
+add('animated-file-upload','plain',animatedFileUploadPort.description,animatedFileUploadPort.template,animatedFileUploadPort.body,animatedFileUploadPort);
+add('form','plain',formPort.description,formPort.template,formPort.body,formPort);
+add('login','plain',loginPort.description,loginPort.template,loginPort.body,loginPort);
 
 add('animated-tabs','plain',animatedTabsPort.description,animatedTabsPort.template,animatedTabsPort.body,animatedTabsPort);
 add('glass-navbar','plain',glassNavbarPort.description,glassNavbarPort.template,glassNavbarPort.body,glassNavbarPort);
@@ -281,12 +259,7 @@ add('branching-submenu','plain',branchingSubmenuPort.description,branchingSubmen
 add("ios-search-bar","plain",iosSearchPort.description,iosSearchPort.template,iosSearchPort.body,iosSearchPort);
 add('command-menu','plain',commandMenuPort.description,commandMenuPort.template,commandMenuPort.body,commandMenuPort);
 add('spotlight-search','plain',spotlightSearchPort.description,spotlightSearchPort.template,spotlightSearchPort.body,spotlightSearchPort);
-add(
-  "dynamic-island",
-  "collection",
-  "A compact status island that expands to reveal actions and their current state.",
-  `<section class="kit-control kit-stack"><div class="k-island"><button type="button" [disabled]="disabled()" [attr.aria-expanded]="open()" [attr.aria-controls]="uid" (click)="open.set(!open())">● {{label()||'Workspace activity'}} {{loading()?'· Working':''}}</button>@if(open()){<div class="kit-stack" [id]="uid" (keydown)="keys($event)">@for(item of items();track item.id){${itemButton}}</div>}</div>${collectionFeedback}</section>`,
-);
+add('dynamic-island','plain',dynamicIslandPort.description,dynamicIslandPort.template,dynamicIslandPort.body,dynamicIslandPort);
 /* Legacy pagination replaced by the authored React-contract port.
 add(
   "slide-pagination",
@@ -323,13 +296,7 @@ add('velocity-toast','plain',velocityToastPort.description,velocityToastPort.tem
 add("notification-stack","plain",notificationStackPort.description,notificationStackPort.template,notificationStackPort.body,notificationStackPort);
 add("undo-toast","plain",undoToastPort.description,undoToastPort.template,undoToastPort.body,undoToastPort);
 add("notification-bell","plain",notificationBellPort.description,notificationBellPort.template,notificationBellPort.body,notificationBellPort);
-add(
-  "pull-to-refresh",
-  "action",
-  "Pull down within a contained list or use a keyboard refresh button; async failures remain retryable.",
-  `<section class="kit-control kit-surface kit-stack"><div class="k-pull" style="touch-action:pan-x" (pointerdown)="start($event)" (pointermove)="pull($event)" (pointerup)="release()" (pointercancel)="distance.set(0)" [style.padding-top.px]="distance()"><strong>{{distance()>65?'Release to refresh':'Pull down to refresh'}}</strong><ng-content><p class="kit-muted">Your latest updates appear here.</p></ng-content></div><button type="button" [disabled]="blocked()" (click)="run()">{{busy()?'Refreshing…':label()||'Refresh'}}</button>${actionFeedback}</section>`,
-  `readonly distance=signal(0);private startY:number|undefined;start(event:PointerEvent):void{if(this.blocked()||event.button!==0)return;this.startY=event.clientY;(event.currentTarget as HTMLElement).setPointerCapture(event.pointerId);}pull(event:PointerEvent):void{if(this.startY!==undefined)this.distance.set(Math.max(0,Math.min(100,(event.clientY-this.startY)*.5)));}release():void{if(this.distance()>65)void this.run();this.startY=undefined;this.distance.set(0);}`,
-);
+add('pull-to-refresh','plain',pullRefreshPort.description,pullRefreshPort.template,pullRefreshPort.body,pullRefreshPort);
 
 add("peek-card","plain",peekCardPort.description,peekCardPort.template,peekCardPort.body,peekCardPort);
 add("profile-card","plain",profileCardPort.description,profileCardPort.template,profileCardPort.body,profileCardPort);
@@ -442,12 +409,12 @@ add("payment-receipt-printer","plain",paymentReceiptPrinterPort.description,paym
 
 // Canvas effects use distinct algorithms, pause off screen and clean up observers.
 const canvasModes: Record<string, string> = {
-  "dot-shader": "shader",
-  "glyph-matrix": "glyph",
-  "shooting-stars": "shooting",
-  "sparkles-core": "sparkles",
-  "thinking-orb": "orb",
 };
+add('thinking-orb','plain',thinkingOrbPort.description,thinkingOrbPort.template,thinkingOrbPort.body,thinkingOrbPort);
+add('glyph-matrix','plain',glyphMatrixPort.description,glyphMatrixPort.template,glyphMatrixPort.body,glyphMatrixPort);
+add('shooting-stars','plain',shootingStarsPort.description,shootingStarsPort.template,shootingStarsPort.body,shootingStarsPort);
+add('dot-shader','plain',dotShaderPort.description,dotShaderPort.template,dotShaderPort.body,dotShaderPort);
+add('sparkles-core','plain',sparklesCorePort.description,sparklesCorePort.template,sparklesCorePort.body,sparklesCorePort);
 add('evil-eye','plain',evilEyePort.description,evilEyePort.template,evilEyePort.body,evilEyePort);
 add('nimbu-mirchi','plain',nimbuMirchiPort.description,nimbuMirchiPort.template,nimbuMirchiPort.body,nimbuMirchiPort);
 add('meteors','plain',meteorsPort.description,meteorsPort.template,meteorsPort.body,meteorsPort);
@@ -469,19 +436,8 @@ add('density-lens','plain',densityLensPort.description,densityLensPort.template,
 add('gravity-particle-burst','plain',gravityParticleBurstPort.description,gravityParticleBurstPort.template,gravityParticleBurstPort.body,gravityParticleBurstPort);
 add('rocket-party-popper','plain',rocketPartyPopperPort.description,rocketPartyPopperPort.template,rocketPartyPopperPort.body,rocketPartyPopperPort);
 add("cursor-follower","plain",cursorFollowerPort.description,cursorFollowerPort.template,cursorFollowerPort.body,cursorFollowerPort);
-add(
-  "particle-delete",
-  "action",
-  "A deliberate local item dismissal with a particle transition and restore control.",
-  `<section class="kit-control kit-stack">@if(!removed()){<article class="kit-surface kit-stack" [class.k-dissolve]="busy()"><ng-content><p>{{label()||'A small item to remove'}}</p></ng-content><button type="button" [disabled]="blocked()" (click)="remove()">Delete item</button></article>}@else{<button type="button" [disabled]="disabled()" (click)="removed.set(false)">Restore preview item</button>}${actionFeedback}</section>`,
-  `readonly removed=signal(false);async remove():Promise<void>{await this.run();if(!this.error()&&!this.destroyed&&!this.disabled())this.removed.set(true);}`,
-);
-add(
-  "car-smoke-page-transition",
-  "collection",
-  "Switch projected page summaries through a restrained car/smoke CSS transition with keyboard navigation.",
-  `<section class="kit-control kit-stack"><nav class="kit-row" (keydown)="keys($event)">@for(item of items();track item.id){${itemButton}}</nav><div class="k-road" aria-hidden="true"><span class="k-car">▰</span><span class="k-smoke"></span></div>@for(item of [current()];track item?.id){<article class="kit-surface k-page-enter"><h3>{{item?.label}}</h3><p>{{item?.description}}</p><ng-content></ng-content></article>}</section>`,
-);
+add('particle-delete','plain',particleDeletePort.description,particleDeletePort.template,particleDeletePort.body,particleDeletePort);
+add('car-smoke-page-transition','plain',carSmokePort.description,carSmokePort.template,carSmokePort.body,carSmokePort);
 add("morphing-icon","plain",morphingIconPort.description,morphingIconPort.template,morphingIconPort.body,morphingIconPort);
 
 // Scroll-driven continuous text uses its authored source-contract implementation.
@@ -603,18 +559,11 @@ for (const port of ports) {
     );
   if (port.kind === 'collection' && cardDefaults[port.id])
     port.body += `\noverride readonly items=input<KitItem[]>(${JSON.stringify(cardDefaults[port.id])});`;
-  if (port.id === "particle-delete")
-    port.body = port.body.replace(
-      "await this.run();",
-      "const request=this.run();const controller=this.controller;await request;if(controller?.signal.aborted)return;",
-    );
   if (port.id === "settle-modal")
     port.body = port.body.replace(
       "await this.run();",
       "const request=this.run();const controller=this.controller;await request;if(controller?.signal.aborted)return;",
     );
-  if (port.id === "sign-up")
-    port.body = `override readonly fields=input<KitField[]>([{key:'name',label:'Name',type:'text',required:true},{key:'email',label:'Email',type:'email',required:true},{key:'password',label:'Password',type:'password',required:true,minLength:8},{key:'confirmPassword',label:'Confirm password',type:'password',required:true,minLength:8}]);override async submit(event:SubmitEvent):Promise<void>{if(this.values()['password']!==this.values()['confirmPassword']){event.preventDefault();this.error.set('Passwords do not match.');return;}await super.submit(event);}`;
 
 
 }
@@ -631,6 +580,10 @@ const base: Record<Kind, string> = {
   canvas: "KitCanvasController",
   plain: "",
 };
+await buildDynamicIslandStyles(root);
+await buildChatParts(root);
+await buildPullRefreshSupport(root);
+await buildCarSmokeSupport(root);
 const entries = ports
   .sort((a, b) => a.id.localeCompare(b.id))
   .map((port) => {

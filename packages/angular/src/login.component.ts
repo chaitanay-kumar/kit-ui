@@ -1,18 +1,76 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component } from '@angular/core';
-import { KitFormController } from './port-controllers';
-
+import { Component, ViewEncapsulation, computed, inject, input, signal, untracked } from '@angular/core';
+import {afterRenderEffect,ErrorHandler} from '@angular/core';import {KitFormComponent} from './form.component';import {KitFormItemComponent,KitFormLabelComponent,KitFormControlComponent,KitFormMessageComponent,KitInputComponent,KitCheckboxComponent,KitFormContentComponent,type FormContent} from './form-parts';import {KitButtonComponent} from './button.component';import {KitFormIconComponent} from './form-icons';import {KitFormPresenceDirective} from './form-motion';import {invokeNativeEventCallback} from './native-event-callback';export interface LoginFormData{email:string;password:string;rememberMe:boolean}export type LoginSocialProvider='github'|'google'|'apple';
 @Component({
  selector:"kit-login", standalone:true,
- host:{'data-kit':"login",style:'display:block;min-width:0'},
- template:`
-<form class="kit-control kit-surface kit-stack" aria-label="Welcome back" (submit)="submit($event)">
-<h3>{{label()||'Welcome back'}}</h3>@for(field of fields();track field.key){<label [for]="uid+'-'+field.key">{{field.label}}<input [id]="uid+'-'+field.key" [name]="field.key" [type]="field.type==='password'&&showPassword()?'text':field.type||'text'" [attr.autocomplete]="field.type==='password'?'current-password':field.type==='email'?'email':'on'" [required]="field.required||false" [attr.minlength]="field.minLength??null" [value]="values()[field.key]||''" [disabled]="disabled()||busy()" (input)="change(field.key,$event)" />
-</label>}<label class="kit-row">
-<input type="checkbox" [checked]="showPassword()" (change)="showPassword.set($any($event.target).checked)" />Show password</label>
-<button type="submit" [disabled]="disabled()||busy()">{{busy()?'Submitting…':'Sign in'}}</button>@if(busy()){<button type="button" (click)="cancel()">Cancel</button>}<p role="status">{{status()}}</p>@if(error()){<p role="alert">{{error()}}</p>}</form>
+ host:{'data-kit':'login',style:'display:contents'},
+ imports:[KitFormComponent,KitFormItemComponent,KitFormLabelComponent,KitFormControlComponent,KitFormMessageComponent,KitInputComponent,KitCheckboxComponent,KitFormContentComponent,KitButtonComponent,KitFormIconComponent,KitFormPresenceDirective],
+encapsulation:ViewEncapsulation.None,styleUrls:["./login.css"],
+template:`
+<ng-template #arrow>
+<svg kitFormIcon icon="arrow-right" class="k-login-arrow"/>
+</ng-template>
+<ng-template #mail>
+<svg kitFormIcon icon="mail" class="k-login-field-icon"/>
+</ng-template>
+<ng-template #lock>
+<svg kitFormIcon icon="lock" class="k-login-field-icon"/>
+</ng-template>
+<div [class]="rootClass()">
+<div class="k-login-glow" aria-hidden="true">
+</div>
+<div class="k-login-header">@if(logo()===undefined){<div class="k-login-logo-wrap">
+<div class="k-login-default-logo">
+<svg kitFormIcon icon="sparkles"/>
+</div>
+</div>}@else if(logo()){<div class="k-login-logo-wrap">
+<kit-form-content [content]="logoContent()"/>
+</div>}@else if(numericLogo()!==undefined){<ng-container>{{numericLogo()}}</ng-container>}<h2>{{title()}}</h2>@if(description()){<p>{{description()}}</p>}</div>@if(retainedError()){<div class="k-login-error-wrap" [kitFormPresence]="errorLeaving()" [offset]="-6" (exited)="finishError()">
+<div class="k-login-error">
+<svg kitFormIcon icon="alert-circle"/>
+<span>{{retainedError()}}</span>
+</div>
+</div>}@if(showSocialLogins()){<div class="k-login-social">
+<div class="k-login-social-grid">
+<button kitButton type="button" variant="secondary" size="sm" className="k-login-social-button" (click)="social('github',$event)">
+<svg kitButtonLeftIcon class="k-login-social-icon" viewBox="0 0 24 24">
+<path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+</svg>GitHub</button>
+<button kitButton type="button" variant="secondary" size="sm" className="k-login-social-button" (click)="social('google',$event)">
+<svg kitButtonLeftIcon class="k-login-social-icon" viewBox="0 0 24 24">
+<path d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.095 0-7.439-3.389-7.439-7.574c0-4.185 3.344-7.574 7.439-7.574 2.33 0 3.891.989 4.785 1.849l3.254-3.138C18.189 1.186 15.479 0 12.24 0c-6.635 0-12 5.365-12 12s5.365 12 12 12c6.926 0 11.52-4.869 11.52-11.726 0-.788-.085-1.39-.189-1.989H12.24z"/>
+</svg>Google</button>
+</div>
+<div class="k-login-divider">
+<div>
+</div>
+<span>Or continue with</span>
+</div>
+</div>}<kit-form [onSubmit]="submit">
+<kit-form-item>
+<kit-form-label [required]="true">Email</kit-form-label>
+<kit-form-control>
+<kit-input type="email" placeholder="name@company.com" autoComplete="email" [value]="email()" [onChange]="emailChange" [leftIcon]="mail" [error]="!!validationErrors().email"/>
+</kit-form-control>
+<kit-form-message [error]="validationErrors().email"/>
+</kit-form-item>
+<kit-form-item>
+<div class="k-login-password-label">
+<kit-form-label [required]="true">Password</kit-form-label>@if(onForgotPassword()){<button type="button" class="k-login-forgot" (click)="forgot($event)">Forgot password?</button>}</div>
+<kit-form-control>
+<kit-input type="password" placeholder="••••••••" autoComplete="current-password" [showPasswordToggle]="true" [value]="password()" [onChange]="passwordChange" [leftIcon]="lock" [error]="!!validationErrors().password"/>
+</kit-form-control>
+<kit-form-message [error]="validationErrors().password"/>
+</kit-form-item>
+<div class="k-login-remember">
+<kit-checkbox label="Remember this device" [checked]="rememberMe()" [onChange]="rememberChange"/>
+</div>
+<button kitButton type="submit" variant="primary" size="md" [fullWidth]="true" [isLoading]="isLoading()" loadingText="Authenticating..." className="k-login-submit" [rightIcon]="isLoading()?undefined:arrow">Sign In</button>
+</kit-form>@if(onSignUpClick()){<div class="k-login-secondary">
+<button type="button" (click)="signUp($event)">{{signUpText()}}</button>
+</div>}</div>
 `
 })
-export class KitLoginComponent extends KitFormController {
-
+export class KitLoginComponent {
+readonly title=input<string,string|undefined>('Welcome back',{transform:value=>value===undefined?'Welcome back':value});readonly description=input<string,string|undefined>('Sign in to access your Kit UI workspace',{transform:value=>value===undefined?'Sign in to access your Kit UI workspace':value});readonly logo=input<FormContent|false|undefined>();readonly numericLogo=computed(()=>typeof this.logo()==='number'?this.logo() as number:undefined);readonly logoContent=computed(()=>this.logo()===false?null:this.logo() as FormContent|undefined);readonly error=input<string|null|undefined>();readonly isLoading=input<boolean,boolean|undefined>(false,{transform:value=>value??false});readonly onSubmit=input<((data:LoginFormData)=>void|Promise<void>)|undefined>();readonly onForgotPassword=input<(()=>void)|undefined>();readonly onSignUpClick=input<(()=>void)|undefined>();readonly showSocialLogins=input<boolean,boolean|undefined>(true,{transform:value=>value===undefined?true:value});readonly onSocialLogin=input<((provider:LoginSocialProvider)=>void)|undefined>();readonly signUpText=input<string,string|undefined>("Don't have an account? Sign up",{transform:value=>value===undefined?"Don't have an account? Sign up":value});readonly className=input<string,string|undefined>('',{transform:value=>value??''});readonly rootClass=computed(()=>{const className=this.className();return 'k-login '+(/(?:^|\s)sm:p-/.test(className)?'':'sm:p-8 ')+className});readonly email=signal('');readonly password=signal('');readonly rememberMe=signal(false);readonly validationErrors=signal<{email?:string;password?:string}>({});readonly retainedError=signal<string|undefined>(undefined);readonly errorLeaving=signal(false);private readonly errors=inject(ErrorHandler);readonly emailChange=(event:Event)=>{this.email.set((event.target as HTMLInputElement).value);if(this.validationErrors().email)this.validationErrors.update(previous=>({...previous,email:undefined}))};readonly passwordChange=(event:Event)=>{this.password.set((event.target as HTMLInputElement).value);if(this.validationErrors().password)this.validationErrors.update(previous=>({...previous,password:undefined}))};readonly rememberChange=(event:Event)=>this.rememberMe.set((event.target as HTMLInputElement).checked);readonly submit=(event:SubmitEvent)=>{event.preventDefault();const email=this.email(),password=this.password(),errors:{email?:string;password?:string}={};if(!email.trim())errors.email='Email is required';else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))errors.email='Please enter a valid email address';if(!password)errors.password='Password is required';else if(password.length<6)errors.password='Password must be at least 6 characters';this.validationErrors.set(errors);if(Object.keys(errors).length)return;const callback=this.onSubmit();callback?.({email,password,rememberMe:this.rememberMe()})};forgot(event:MouseEvent):void{invokeNativeEventCallback(this.onForgotPassword(),event,this.errors)}signUp(event:MouseEvent):void{invokeNativeEventCallback(this.onSignUpClick(),event,this.errors)}social(provider:LoginSocialProvider,event:MouseEvent):void{invokeNativeEventCallback(()=>{const callback=this.onSocialLogin();callback?.(provider)},event,this.errors)}finishError():void{if(this.errorLeaving())this.retainedError.set(undefined)}constructor(){afterRenderEffect(()=>{const error=this.error();untracked(()=>{if(error){this.retainedError.set(error);this.errorLeaving.set(false)}else if(this.retainedError())this.errorLeaving.set(true)})})}
 }

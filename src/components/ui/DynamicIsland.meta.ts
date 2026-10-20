@@ -9,9 +9,9 @@ const meta: KitUIComponentMeta = {
   createdAt: '2026-10-05',
   features: [
     'Continuous physical morphing between collapsed, expanded, profile, and share states',
-    'Spring-based layout-aware geometry and radius interpolation with no abrupt snapping',
+    'Spring-based layout geometry with state-specific rounded corners',
     'Persistent spatial continuity for the avatar across collapsed and profile states',
-    'Fully accessible keyboard navigation with Escape key dismissal and click-outside collapse',
+    'Native keyboard controls with Escape key dismissal and click-outside collapse',
     'Configurable social dock supporting predefined platform detection and custom links',
     'Light and dark mode compatibility adhering strictly to the Kit UI design token system',
     'Respects prefers-reduced-motion media query with instant fallback states',
@@ -31,6 +31,8 @@ const meta: KitUIComponentMeta = {
     { name: 'onStateChange', type: '(state: DynamicIslandState) => void', default: 'undefined', description: 'Callback invoked whenever state changes' },
     { name: 'profileContent', type: 'ReactNode', default: 'undefined', description: 'Custom ReactNode replacing default profile body' },
     { name: 'shareContent', type: 'ReactNode', default: 'undefined', description: 'Custom ReactNode replacing default share dock' },
+    { name: 'children', type: 'ReactNode', default: 'undefined', description: 'Additional content rendered in the expanded state' },
+    { name: 'idPrefix', type: 'string', default: 'generated per instance', description: 'Namespace for the shared avatar layout identifier' },
     { name: 'className', type: 'string', default: 'undefined', description: 'Optional additional styling applied to the island container' },
   ],
   accessibility: [

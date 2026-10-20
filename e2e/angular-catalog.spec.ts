@@ -163,27 +163,18 @@ test("login preserves failed values and sign-up checks confirmation", async ({
   await expect(page.getByRole("alert")).toHaveText("Passwords do not match.");
 });
 
-test("chat preserves failed and cancelled drafts and receives local replies", async ({
+test("chat keeps transport external and the consuming demo owns local replies", async ({
   page,
 }) => {
   await demo(page, "chat");
-  await page
-    .getByRole("textbox", { name: "Message" })
-    .fill("fail this request");
-  await page.getByRole("button", { name: "Send message", exact: true }).click();
-  await expect(page.getByRole("alert")).toContainText("Demo send failed");
-  await expect(page.getByRole("textbox")).toHaveValue("fail this request");
   await page.getByRole("textbox").fill("A small question");
-  await page.getByRole("button", { name: "Retry message" }).click();
-  await page.getByRole("button", { name: "Cancel", exact: true }).click();
-  await expect(page.getByRole("textbox")).toHaveValue("A small question");
-  await expect(page.getByRole("status")).toHaveText(
-    "Cancelled. Your draft is preserved.",
-  );
   await page.getByRole("button", { name: "Send message", exact: true }).click();
-  await expect(page.getByRole("list", { name: "Conversation" })).toContainText(
-    "Local demo reply: A small question",
-  );
+  await expect(page.getByRole("textbox")).toHaveValue("");
+  await expect(page.getByText("A small question", { exact: true })).toBeVisible();
+  await expect(page.getByText("Message received locally. Connect your own transport to receive live replies.", { exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Cancel", exact: true })).toHaveCount(0);
+  await page.getByRole("button", { name: "Clear chat history" }).click();
+  await expect(page.getByText("Start a conversation", { exact: true })).toBeVisible();
 });
 
 test("tabs, menus, tooltip and modal retain accessible focus behavior", async ({

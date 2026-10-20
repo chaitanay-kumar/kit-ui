@@ -1,37 +1,65 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component, computed, input, model, output, signal } from '@angular/core';
-import type { KitPlan, KitCompareFeature } from './port-types';
-import type { KitCompareCategory } from './port-types';
+import { Component, ViewEncapsulation, DestroyRef, ElementRef, computed, effect, inject, input, untracked, viewChild } from '@angular/core';
+import {NgTemplateOutlet} from '@angular/common';import {afterRenderEffect,ErrorHandler} from '@angular/core';import {SmartComparisonState,type ComparisonPlan,type ComparisonCategory,type ComparisonValue} from './smart-comparison-state';import {Batch43IconComponent} from './batch43-icons';import {ComparisonGroupMotionDirective} from './comparison-group-motion';import {AnimatedTabsIndicatorMotion} from './animated-tabs-motion';import {invokeNativeEventCallback} from './native-event-callback';import {NativeRootBindings,type NativeAttributes,type NativeStyle} from './native-root-bindings';export type {ComparisonPlan,ComparisonFeature,ComparisonCategory,ComparisonValue,ComparisonTemplateValue} from './smart-comparison-state';export type {NativeAttributes as SmartComparisonAttributes,NativeStyle as SmartComparisonStyle} from './native-root-bindings';
 @Component({
  selector:"kit-smart-comparison", standalone:true,
- host:{'data-kit':"smart-comparison",style:'display:block;min-width:0'},
- template:`
-<section class="kit-control kit-surface kit-stack">
-<label>Find a feature<input type="search" [value]="query()" [disabled]="disabled()" (input)="query.set($any($event.target).value)" />
-</label>
-<label class="kit-row">
-<input type="checkbox" [checked]="differences()" [disabled]="disabled()" (change)="differences.set($any($event.target).checked)" />Show differences only</label>
-<div class="k-table-scroll" tabindex="0" aria-label="Plan comparison">
-<table>
-<thead>
-<tr>
-<th scope="col">Feature</th>@for(plan of plans();track plan.id){<th scope="col">
-<button type="button" [disabled]="disabled()" [attr.aria-pressed]="selected()===plan.id" (click)="selected.set(plan.id);planSelect.emit(plan)">{{plan.label}}</button>
-</th>}</tr>
-</thead>
-<tbody>@for(group of groups();track group.id){<tr>
-<th [attr.colspan]="plans().length+1">
-<button type="button" [attr.aria-expanded]="!collapsed().includes(group.id)" (click)="toggle(group.id)">{{group.label}}</button>
-</th>
-</tr>@if(!collapsed().includes(group.id)){@for(feature of filtered(group.features);track feature.id){<tr>
-<th scope="row">{{feature.label}}</th>@for(plan of plans();track plan.id){<td>{{cell(feature.values[plan.id])}}</td>}</tr>}@empty{<tr>
-<td [attr.colspan]="plans().length+1">No matching features.</td>
-</tr>}}}</tbody>
-</table>
+ host:{style:'display:contents'},
+ imports:[NgTemplateOutlet,Batch43IconComponent,ComparisonGroupMotionDirective],
+encapsulation:ViewEncapsulation.None,styleUrls:["./smart-comparison.css"],
+template:`
+<div #root role="region" aria-label="Feature and plan comparison" [class]="'k-comparison '+className()" (click)="rootClick($event)" (keydown)="rootKey($event)">
+<div class="k-compare-controls">
+<div class="k-compare-filters">@if(enableSearch()){<div class="k-compare-search">
+<svg kitBatch43Icon icon="search"/>
+<input type="text" [value]="engine.query()" (input)="engine.query.set($any($event.target).value)" placeholder="Filter capabilities..."/>
+</div>}@if(enableDiffFilter()){<button type="button" class="k-compare-diff" [class.active]="engine.differences()" (click)="engine.differences.set(!engine.differences())">
+<svg kitBatch43Icon icon="funnel"/>
+<span>Differences only</span>
+</button>}</div>
+<div class="k-compare-mobile">@for(plan of plans();track plan.id){<button type="button" [class.active]="engine.selected()===plan.id" (click)="select(plan.id)">@if(engine.selected()===plan.id){<div class="k-compare-highlight">
+</div>}<span>{{plan.name}}</span>
+</button>}</div>
 </div>
-</section>
+<div class="k-compare-header">
+<div class="k-compare-summary">
+<span>Feature Matrix</span>
+<span>{{specifications()}} specifications</span>
+</div>@for(plan of plans();track plan.id){<div class="k-compare-plan" [class.selected]="engine.selected()===plan.id" [class.featured]="plan.featured" (click)="select(plan.id)">@if(plan.badge){<span class="k-compare-badge">{{plan.badge}}</span>}<div>
+<div class="k-compare-plan-title">
+<h3>{{plan.name}}@if(plan.featured){<svg kitBatch43Icon icon="sparkles"/>}</h3>
+</div>
+<p>{{plan.tagline}}</p>
+</div>
+<div>
+<div class="k-compare-price">
+<span>{{plan.price}}</span>@if(plan.billingPeriod){<span>/{{plan.billingPeriod}}</span>}</div>
+<button type="button" (click)="cta(plan,$event)">{{plan.ctaText||'Get Started'}}</button>
+</div>
+</div>}</div>
+<div class="k-compare-groups">@for(category of engine.filtered();track category.id){@let frame=engine.frame(category);<div class="k-compare-category">
+<button type="button" class="k-compare-category-toggle" (click)="engine.toggle(category.id)">
+<span>
+<i>
+</i>{{category.title}}</span>
+<div class="k-compare-chevron" [class.collapsed]="engine.collapsed().has(category.id)">
+<svg kitBatch43Icon icon="chevron-down"/>
+</div>
+</button>@if(!engine.exited().has(category.id)){<div class="k-compare-features" [kitComparisonGroup]="engine.collapsed().has(category.id)" [initial]="engine.entering().has(category.id)" (exitComplete)="engine.finishExit(category.id)">@for(feature of frame.features;track feature.id){<div class="k-compare-row">
+<div class="k-compare-feature-name">
+<span>{{feature.name}}</span>@if(feature.description){<div class="k-compare-info">
+<button type="button" [attr.aria-label]="'Info about '+feature.name" (mouseenter)="engine.tooltip.set(feature.id)" (mouseleave)="engine.tooltip.set(null)" (click)="engine.tooltip.set(engine.tooltip()===feature.id?null:feature.id)">
+<svg kitBatch43Icon icon="info"/>
+</button>@if(frame.tooltip===feature.id){<div class="k-compare-tooltip">{{feature.description}}</div>}</div>}</div>@for(plan of frame.plans;track plan.id){<div class="k-compare-value" [class.selected]="frame.selected===plan.id">
+<span class="k-compare-mobile-label">{{plan.name}}:</span>
+<div>@let value=feature.values[plan.id];@if(value===true){<span class="k-compare-yes">
+<svg kitBatch43Icon icon="check"/>
+</span>}@else if(value===false){<span class="k-compare-no">
+<svg kitBatch43Icon icon="minus"/>
+</span>}@else if(engine.template(value);as content){<ng-container [ngTemplateOutlet]="content"/>}@else if(isString(value)){<span class="k-compare-text">{{value}}</span>}@else{ {{engine.scalar(value)}} }</div>
+</div>}</div>}</div>}</div>}@empty{<div class="k-compare-empty">No features match your current search or difference filters.</div>}</div>
+</div>
 `
 })
 export class KitSmartComparisonComponent {
-readonly plans=input<KitPlan[]>([{id:'starter',label:'Starter',price:12,features:[]},{id:'team',label:'Team',price:24,features:[]}]);readonly features=input<KitCompareFeature[]>([{id:'components',label:'Components',values:{starter:true,team:true}},{id:'members',label:'Members',values:{starter:'1',team:'Unlimited'}},{id:'support',label:'Priority support',values:{starter:false,team:true}}]);readonly categories=input<KitCompareCategory[]>([]);readonly selected=model('');readonly disabled=input(false);readonly planSelect=output<KitPlan>();readonly query=signal('');readonly differences=signal(false);readonly collapsed=signal<string[]>([]);readonly groups=computed(()=>this.categories().length?this.categories():[{id:'features',label:'Plan features',features:this.features()}]);filtered(features:KitCompareFeature[]):KitCompareFeature[]{return features.filter(f=>f.label.toLowerCase().includes(this.query().toLowerCase())&&(!this.differences()||new Set(this.plans().map(p=>f.values[p.id])).size>1));}cell(value:string|boolean|undefined):string{return value===true?'Included':value===false?'Not included':value??'—';}toggle(id:string):void{this.collapsed.update(a=>a.includes(id)?a.filter(x=>x!==id):[...a,id]);}
+readonly plans=input.required<ComparisonPlan[],ComparisonPlan[]|undefined>({transform:v=>v===undefined?[]:v});readonly categories=input.required<ComparisonCategory[],ComparisonCategory[]|undefined>({transform:v=>v===undefined?[]:v});readonly defaultPlanId=input<string|undefined>();readonly enableSearch=input<boolean,boolean|undefined>(true,{transform:v=>v===undefined?true:v});readonly enableDiffFilter=input<boolean,boolean|undefined>(true,{transform:v=>v===undefined?true:v});readonly className=input<string,string|undefined>('',{transform:v=>v===undefined?'':v});readonly styles=input<NativeStyle|undefined>(undefined,{alias:'style'});readonly attributes=input<NativeAttributes|undefined>();readonly onClick=input<((event:MouseEvent)=>void)|undefined>();readonly onKeyDown=input<((event:KeyboardEvent)=>void)|undefined>();readonly root=viewChild<ElementRef<HTMLElement>>('root');readonly engine=new SmartComparisonState();readonly specifications=computed(()=>this.categories().reduce((count,category)=>count+category.features.length,0));private readonly errors=inject(ErrorHandler);private bindings:NativeRootBindings|undefined;private highlight:AnimatedTabsIndicatorMotion|undefined;private resize=()=>this.highlight?.rendered('smartComparisonMobileTab');select(id:string):void{this.highlight?.capture();this.engine.selected.set(id)}isString(value:ComparisonValue):value is string{return typeof value==='string'}cta(plan:ComparisonPlan,event:MouseEvent):void{event.stopPropagation();invokeNativeEventCallback(()=>{plan.onCtaClick?.()},event,this.errors)}rootClick(event:MouseEvent):void{invokeNativeEventCallback(this.onClick(),event,this.errors)}rootKey(event:KeyboardEvent):void{invokeNativeEventCallback(this.onKeyDown(),event,this.errors)}constructor(){afterRenderEffect(()=>{this.engine.selected();this.engine.plans();this.className();this.styles();this.attributes();this.enableSearch();this.enableDiffFilter();const root=this.root()?.nativeElement;if(root){if(!this.highlight){this.highlight=new AnimatedTabsIndicatorMotion(root,'.k-compare-highlight',{stiffness:380,damping:30,mass:.5});root.ownerDocument.defaultView?.addEventListener('resize',this.resize)}this.highlight.rendered('smartComparisonMobileTab')}});inject(DestroyRef).onDestroy(()=>{this.highlight?.destroy();this.root()?.nativeElement.ownerDocument.defaultView?.removeEventListener('resize',this.resize)});effect(()=>{const plans=this.plans(),categories=this.categories(),defaultPlanId=this.defaultPlanId();untracked(()=>this.engine.update(plans,categories,defaultPlanId))});effect(()=>{const groups=this.engine.filtered();untracked(()=>this.engine.reconcile(groups))});afterRenderEffect(()=>{const root=this.root()?.nativeElement,styles=this.styles(),attributes=this.attributes();if(root){this.bindings??=new NativeRootBindings(root);this.bindings.apply(styles,attributes,{'role':'region','aria-label':'Feature and plan comparison'})}})}
 }

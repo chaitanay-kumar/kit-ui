@@ -1,22 +1,20 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component } from '@angular/core';
-import { KitCanvasController } from './port-canvas';
-
+import { Component, ViewEncapsulation, DestroyRef, ElementRef, inject, input, untracked, viewChild } from '@angular/core';
+import {afterRenderEffect,ErrorHandler} from '@angular/core';import {DotShaderRenderer} from './dot-shader-renderer';import {NativeRootBindings,type NativeStyle,type NativeAttributes} from './native-root-bindings';import {invokeNativeEventCallback} from './native-event-callback';export type {NativeStyle as DotShaderStyle,NativeAttributes as DotShaderAttributes} from './native-root-bindings';
 @Component({
  selector:"kit-dot-shader", standalone:true,
- host:{'data-kit':"dot-shader",style:'display:block;min-width:0'},
- template:`
-<section class="kit-control kit-stack">
-<div class="k-canvas-wrap" (pointermove)="move($event)" (pointerleave)="reset()">
-<canvas #canvas [attr.aria-label]="label()" role="img">
-</canvas>
-<ng-content>
-</ng-content>
+ host:{style:'display:contents'},
+ encapsulation:ViewEncapsulation.None,styleUrls:["./dot-shader.css"],
+template:`
+<div #root [class]="'k-dot-shader '+className()" (pointermove)="pointer($event)" (pointerleave)="leave($event)" (click)="click($event)" (keydown)="key($event)">
+<canvas #canvas aria-hidden="true">
+</canvas>@if(overlay()){<div aria-hidden="true" class="k-dot-overlay">
+</div>}<div class="k-dot-content">
+<ng-content/>
 </div>
-<button type="button" [disabled]="disabled()||paused()" [attr.aria-pressed]="!running()" (click)="running.set(!running())">{{running()?'Pause animation':'Resume animation'}}</button>
-</section>
+</div>
 `
 })
-export class KitDotShaderComponent extends KitCanvasController {
-override readonly mode='shader';
+export class KitDotShaderComponent {
+readonly dotColor=input<string,string|undefined>('rgba(255, 255, 255, 0.15)',{transform:v=>v===undefined?'rgba(255, 255, 255, 0.15)':v});readonly accentColor=input<string,string|undefined>('#00F0FF',{transform:v=>v===undefined?'#00F0FF':v});readonly dotSize=input<number,number|undefined>(1.5,{transform:v=>v===undefined?1.5:v});readonly spacing=input<number,number|undefined>(22,{transform:v=>v===undefined?22:v});readonly cursorRadius=input<number,number|undefined>(180,{transform:v=>v===undefined?180:v});readonly distortionStrength=input<number,number|undefined>(.35,{transform:v=>v===undefined?.35:v});readonly maxScale=input<number,number|undefined>(2.2,{transform:v=>v===undefined?2.2:v});readonly waveIntensity=input<number,number|undefined>(.25,{transform:v=>v===undefined?.25:v});readonly speed=input<number,number|undefined>(1,{transform:v=>v===undefined?1:v});readonly interactive=input<boolean,boolean|undefined>(true,{transform:v=>v===undefined?true:v});readonly overlay=input<boolean,boolean|undefined>(true,{transform:v=>v===undefined?true:v});readonly paused=input<boolean,boolean|undefined>(false,{transform:v=>v===undefined?false:v});readonly className=input<string,string|undefined>('',{transform:v=>v===undefined?'':v});readonly styles=input<NativeStyle|undefined>(undefined,{alias:'style'});readonly attributes=input<NativeAttributes|undefined>();readonly onPointerMove=input<((event:PointerEvent)=>void)|null|undefined>();readonly onPointerLeave=input<((event:PointerEvent)=>void)|null|undefined>();readonly onClick=input<((event:MouseEvent)=>void)|undefined>();readonly onKeyDown=input<((event:KeyboardEvent)=>void)|undefined>();readonly root=viewChild<ElementRef<HTMLElement>>('root');readonly canvas=viewChild<ElementRef<HTMLCanvasElement>>('canvas');private readonly renderer=new DotShaderRenderer();private bindings:NativeRootBindings|undefined;private readonly errors=inject(ErrorHandler);pointer(event:PointerEvent):void{const callback=this.onPointerMove();if(callback===undefined)this.renderer.move(event);else invokeNativeEventCallback(callback??undefined,event,this.errors)}leave(event:PointerEvent):void{const callback=this.onPointerLeave();if(callback===undefined)this.renderer.leave();else invokeNativeEventCallback(callback??undefined,event,this.errors)}click(event:MouseEvent):void{invokeNativeEventCallback(this.onClick(),event,this.errors)}key(event:KeyboardEvent):void{invokeNativeEventCallback(this.onKeyDown(),event,this.errors)}constructor(){afterRenderEffect(()=>{const root=this.root()?.nativeElement,styles=this.styles(),attributes=this.attributes();if(root){this.bindings??=new NativeRootBindings(root);this.bindings.apply(styles,attributes,{})}});afterRenderEffect(()=>{const root=this.root()?.nativeElement,canvas=this.canvas()?.nativeElement,options={dotColor:this.dotColor(),accentColor:this.accentColor(),dotSize:this.dotSize(),spacing:this.spacing(),cursorRadius:this.cursorRadius(),distortionStrength:this.distortionStrength(),maxScale:this.maxScale(),waveIntensity:this.waveIntensity(),speed:this.speed(),interactive:this.interactive(),paused:this.paused()};if(root&&canvas)untracked(()=>this.renderer.update(root,canvas,options))});inject(DestroyRef).onDestroy(()=>this.renderer.destroy())}
 }

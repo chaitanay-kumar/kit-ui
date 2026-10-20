@@ -1,0 +1,15 @@
+# Sign Up parity
+
+Validated baseline in batch 48. Integration review, merges/deployment and final user QA remain outstanding.
+
+`scripts/angular-sign-up.ts` replaces the generic schema form with the native registration card composed from the validated Form primitives and Button. Its API preserves title/description/logo, optional server error and external loading, submit and social/sign-in callbacks, optional confirmation, terms content, secondary text and caller classes. Angular templates replace React node content.
+
+Validation preserves the source rules and exact messages: trimmed-empty name, required/email format, eight-character password minimum, conditional confirmation match and required agreement. Payload values are not trimmed. Editing a field clears only its own error; changing password does not clear confirmation mismatch. Hidden confirmation retains its draft and remains in the submit payload even when confirmation is not required. Four independent password checks determine the source strength score; this is presentation feedback, not a password policy or security estimate.
+
+Submit callbacks are invoked synchronously after validation. Returned promises do not own loading or error state. Only the submit button is disabled by external loading; inputs, password toggles and social buttons remain active. Server error and inline error presence reuse the source spring contract. Default terms links remain links inside the agreement label; clicking a link does not toggle the native checkbox. Numeric-zero logo content preserves React short-circuit rendering.
+
+The final paired checks pass 46 desktop/mobile cases: 28 behavior cases, ten whole-card geometry/style comparisons and eight password-strength geometry/style comparisons. They cover defaults, custom content, loading/server error, removed optional content, caller padding, terms links, callback failure/retry and interrupted error removal. Four shared light/dark desktop/mobile consuming demo cases also pass. The focused package check verifies validation, payloads, score, hidden-confirmation state and complete source dependencies. See [batch evidence](batch-48-integration.md) for final gate status.
+
+Source accessibility limitations remain explicit: visible labels are not linked to field IDs; required asterisks are decorative; inline validation has alert roles but the server banner does not; password-toggle buttons have negative tabindex; component springs do not bypass reduced motion. Native Angular events, templates and refs are framework equivalents. No authentication transport is supplied. Physical devices, Safari/Firefox, SSR/hydration and exhaustive accessibility are outside this recorded scope.
+
+Batch baseline passes: component/Angular sync; full production build with 289 SEO checks; all 117 unit tests; lint with 34 inherited warnings; focused package/source/disposal checks; and strict installed-tarball consumers on Angular 20.0.0, 20.3.33, 21.2.25 and 22.2.1, including all 116 selectors and both current usage recipes.

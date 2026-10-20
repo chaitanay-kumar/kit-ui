@@ -1,0 +1,18 @@
+import '../../src/styles/index.css';
+import React from 'react';import {createRoot} from 'react-dom/client';import {flushSync} from 'react-dom';
+import '@angular/compiler';import {Component,ErrorHandler,provideZonelessChangeDetection,signal} from '@angular/core';import {bootstrapApplication} from '@angular/platform-browser';
+import {FinancialStatsCard} from '../../src/components/ui/PullToRefresh';
+import {KitFinancialStatsCardComponent} from '../../packages/angular/dist/fesm2022/kit-ui-angular.mjs';
+const query=new URLSearchParams(location.search),initial=JSON.parse(query.get('initial')||'{}'),api=window as any;let current=initial;api.ready=false;api.events=[];api.errors=[];
+document.documentElement.classList.toggle('dark',query.get('theme')==='dark');
+window.addEventListener('error',event=>{api.errors.push(event.error?.message??event.message);event.preventDefault()});
+const action=(type:string)=>function(this:unknown,...args:unknown[]){api.events.push({type,args,unbound:this===undefined});if(current['throw'+type])throw new Error(type+' failed')};const range=action('Range'),selectAction=action('Action');
+const host=document.body.appendChild(document.createElement('div'));host.id='fixture';host.style.cssText='width:min(960px,100%);padding:24px';
+if(query.get('framework')==='react'){
+ const root=createRoot(host),render=()=>root.render(<FinancialStatsCard mainValue={current.mainValue} change={current.change} context={current.context} timeRanges={current.timeRanges} selectedTimeRange={current.selectedTimeRange} dataMap={current.dataMap} isRefreshing={current.isRefreshing} showMetrics={current.showMetrics} showActions={current.showActions} className={current.className} style={current.style} {...current.attributes} onTimeRangeChange={current.callbacks?range:undefined} onActionClick={current.callbacks?selectAction:undefined}/>);
+ api.update=(patch:any)=>{current={...current,...patch};flushSync(render)};api.flush=()=>flushSync(()=>{});api.moveChart=(x:number,y:number)=>flushSync(()=>document.querySelector('svg.cursor-crosshair')!.dispatchEvent(new PointerEvent('pointermove',{bubbles:true,clientX:x,clientY:y})));api.unmount=()=>root.unmount();render();api.ready=true;
+}else{
+ class Consumer{readonly options=signal<any>(initial);readonly range=range;readonly action=selectAction}
+ Component({selector:'batch50-financial-consumer',standalone:true,host:{style:'display:contents'},imports:[KitFinancialStatsCardComponent],template:`<kit-financial-stats-card [mainValue]="options().mainValue" [change]="options().change" [context]="options().context" [timeRanges]="options().timeRanges" [selectedTimeRange]="options().selectedTimeRange" [dataMap]="options().dataMap" [isRefreshing]="options().isRefreshing" [showMetrics]="options().showMetrics" [showActions]="options().showActions" [className]="options().className" [style]="options().style" [attributes]="options().attributes" [onTimeRangeChange]="options().callbacks?range:undefined" [onActionClick]="options().callbacks?action:undefined"/>`})(Consumer);
+ host.append(document.createElement('batch50-financial-consumer'));bootstrapApplication(Consumer,{providers:[provideZonelessChangeDetection(),{provide:ErrorHandler,useValue:{handleError:(error:Error)=>api.errors.push(error.message)}}]}).then(app=>{const consumer=app.components[0].instance;api.update=(patch:any)=>{current={...current,...patch};consumer.options.set(current);app.tick()};api.flush=()=>app.tick();api.moveChart=(x:number,y:number)=>{document.querySelector('svg.cursor-crosshair')!.dispatchEvent(new PointerEvent('pointermove',{bubbles:true,clientX:x,clientY:y}));app.tick()};api.unmount=()=>app.destroy();api.ready=true});
+}

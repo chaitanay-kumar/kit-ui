@@ -104,13 +104,21 @@
     "name": "Animated File Upload",
     "exportName": "KitAnimatedFileUploadComponent",
     "selector": "kit-animated-file-upload",
-    "description": "File previews, validation, progress, abort and retry using the native Angular upload engine.",
+    "description": "Native source-contract uploader with mount-owned files, per-file promises/simulation, picker and drop interactions, captured callbacks, retry/removal and spring feedback.",
     "inputs": [
-      "accept: string",
-      "maxFiles: number",
+      "multiple: boolean",
       "maxSize: number",
+      "maxFiles: number",
+      "dropTitle: string",
+      "dropSubtitle: string",
+      "variant: 'standard'|'compact'",
       "disabled: boolean",
-      "upload: UploadHandler"
+      "className: string",
+      "accept: string | string[]",
+      "initialFiles: UploadFileItem[]",
+      "onFilesSelected: (files: File[]) => void",
+      "onUploadComplete: (file: UploadFileItem) => void",
+      "uploadHandler: (file: UploadFileItem, onProgress: (progress: number) => void) => Promise<void>"
     ],
     "outputs": []
   },
@@ -242,41 +250,45 @@
     "name": "Car Smoke Page Transition",
     "exportName": "KitCarSmokePageTransitionComponent",
     "selector": "kit-car-smoke-page-transition",
-    "description": "Switch projected page summaries through a restrained car/smoke CSS transition with keyboard navigation.",
+    "description": "Native full-vector drift transition with source choreography, canvas smoke/skids/speed lines, independent completion/reset timings and owned animation cleanup.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "direction: left-to-right | right-to-left",
+      "carDuration: number",
+      "carDelay: number",
+      "carSize: sm | md | lg",
+      "smokeDensity: off | low | medium | high",
+      "smokeLifetime: number",
+      "showSpeedLines: boolean",
+      "pageTransitionDelay: number",
+      "pageTransitionDuration: number",
+      "resetDelay: number",
+      "onTransitionComplete: () => void",
+      "verticalPosition: center | top | bottom | number",
+      "content: FormContent",
+      "className: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "chat",
     "name": "Chat",
     "exportName": "KitChatComponent",
     "selector": "kit-chat",
-    "description": "An application-connected conversation with sending, cancellation, retry, preserved drafts and accessible message history.",
+    "description": "Native compound conversation UI with externally owned messages/generation/threads, source message rendering, attachment metadata and composer behavior.",
     "inputs": [
-      "messages: KitMessage[] (two-way)",
-      "sendHandler: KitChatHandler",
-      "disabled: boolean",
-      "label: string"
+      "messages: ChatMessageItem[] (required)",
+      "onSendMessage: ChatSendMessage (required)",
+      "isGenerating: boolean",
+      "threads: ChatConversationThread[]",
+      "activeThreadId: string",
+      "accentColor: string",
+      "onSelectThread: (id: string) => void",
+      "onNewChat: () => void",
+      "onClearChat: () => void",
+      "className: string",
+      "content: FormContent"
     ],
-    "outputs": [
-      "messageSent: KitMessage",
-      "messagesChange: KitMessage[]"
-    ]
+    "outputs": []
   },
   {
     "id": "circular-orbit",
@@ -442,14 +454,27 @@
     "name": "Dot Shader",
     "exportName": "KitDotShaderComponent",
     "selector": "kit-dot-shader",
-    "description": "A native Canvas 2D visual with pointer response, pause controls, offscreen suspension and reduced motion.",
+    "description": "Native WebGL dot grid and source Canvas 2D fallback with cursor damping, proximity deformation, waves, vignette and complete GPU resource disposal.",
     "inputs": [
-      "label: string",
-      "density: number (1–400)",
-      "speed: number (0–5)",
-      "color: string",
+      "dotColor: string",
+      "accentColor: string",
+      "dotSize: number",
+      "spacing: number",
+      "cursorRadius: number",
+      "distortionStrength: number",
+      "maxScale: number",
+      "waveIntensity: number",
+      "speed: number",
+      "interactive: boolean",
+      "overlay: boolean",
       "paused: boolean",
-      "disabled: boolean"
+      "className: string",
+      "style: DotShaderStyle",
+      "attributes: DotShaderAttributes",
+      "onPointerMove: ((event: PointerEvent) => void) | null",
+      "onPointerLeave: ((event: PointerEvent) => void) | null",
+      "onClick: (event: MouseEvent) => void",
+      "onKeyDown: (event: KeyboardEvent) => void"
     ],
     "outputs": []
   },
@@ -458,18 +483,24 @@
     "name": "Drag to Confirm",
     "exportName": "KitDragToConfirmComponent",
     "selector": "kit-drag-to-confirm",
-    "description": "Slide to the end to request confirmation, with arrow-key and explicit button alternatives.",
+    "description": "Native measured drag confirmation with source controlled/internal ownership, captured auto-reset, keyboard fallback and spring feedback.",
     "inputs": [
       "label: string",
+      "confirmedLabel: string",
+      "actionType: DragConfirmActionType",
+      "variant: DragConfirmVariant",
+      "size: DragConfirmSize",
+      "icon: TemplateRef<unknown>",
+      "confirmedIcon: TemplateRef<unknown>",
+      "isConfirmed: boolean",
+      "onConfirm: () => void",
+      "onReset: () => void",
+      "autoResetDelay: number",
       "disabled: boolean",
-      "loading: boolean",
-      "action: KitAction",
-      "value: number (two-way)"
+      "haptic: boolean",
+      "className: string"
     ],
-    "outputs": [
-      "activated: void",
-      "valueChange: number"
-    ]
+    "outputs": []
   },
   {
     "id": "draw-checkbox",
@@ -498,24 +529,27 @@
     "name": "Dynamic Island",
     "exportName": "KitDynamicIslandComponent",
     "selector": "kit-dynamic-island",
-    "description": "A compact status island that expands to reveal actions and their current state.",
+    "description": "Native four-state profile island with controlled/default state, configurable social content, outside/Escape dismissal and source layout motion.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "avatar: string",
+      "avatarAlt: string",
+      "name: string",
+      "role: string",
+      "description: string",
+      "greeting: string",
+      "statusText: string",
+      "metadata: DynamicIslandMetadataItem[]",
+      "socials: DynamicIslandSocials",
+      "defaultState: DynamicIslandState",
+      "state: DynamicIslandState",
+      "onStateChange: (state: DynamicIslandState) => void",
+      "className: string",
+      "profileContent: FormContent",
+      "shareContent: FormContent",
+      "content: FormContent",
+      "idPrefix: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "evil-eye",
@@ -623,16 +657,16 @@
     "name": "Form",
     "exportName": "KitFormComponent",
     "selector": "kit-form",
-    "description": "Validated native fields, password visibility, cancellable application submission and preserved errors.",
+    "description": "Native composable Form root with noValidate, projected controls, scalar native attributes/styles, submit callback and forwarded-element equivalent.",
     "inputs": [
-      "fields: KitField[]",
-      "label: string",
-      "disabled: boolean",
-      "submitHandler: KitSubmitHandler"
+      "className: string",
+      "style: FormStyle",
+      "attributes: FormAttributes",
+      "events: FormEventHandlers",
+      "noValidate: boolean",
+      "onSubmit: (event: SubmitEvent) => void"
     ],
-    "outputs": [
-      "submitted: Record<string, string>"
-    ]
+    "outputs": []
   },
   {
     "id": "glass-navbar",
@@ -682,14 +716,26 @@
     "name": "Glyph Matrix",
     "exportName": "KitGlyphMatrixComponent",
     "selector": "kit-glyph-matrix",
-    "description": "A native Canvas 2D visual with pointer response, pause controls, offscreen suspension and reduced motion.",
+    "description": "Native digital glyph rain with source streams, trail fading, pointer disturbance, reduced-motion static rendering and imperative reset/pause controls.",
     "inputs": [
-      "label: string",
-      "density: number (1–400)",
-      "speed: number (0–5)",
+      "fontSize: number",
       "color: string",
+      "headColor: string",
+      "backgroundColor: string",
+      "charset: string",
+      "speed: number",
+      "fadeRate: number",
+      "interactive: boolean",
       "paused: boolean",
-      "disabled: boolean"
+      "opacity: number",
+      "className: string",
+      "fullPage: boolean",
+      "style: GlyphMatrixStyle",
+      "attributes: GlyphMatrixAttributes",
+      "onClick: (event: MouseEvent) => void",
+      "onPointerMove: (event: PointerEvent) => void",
+      "onPointerLeave: (event: PointerEvent) => void",
+      "onKeyDown: (event: KeyboardEvent) => void"
     ],
     "outputs": []
   },
@@ -907,16 +953,22 @@
     "name": "Login",
     "exportName": "KitLoginComponent",
     "selector": "kit-login",
-    "description": "Validated native fields, password visibility, cancellable application submission and preserved errors.",
+    "description": "Native Login card composed from Form primitives and Button, with source validation, external loading/error ownership, password visibility, remember state and optional callbacks.",
     "inputs": [
-      "fields: KitField[]",
-      "label: string",
-      "disabled: boolean",
-      "submitHandler: KitSubmitHandler"
+      "title: string",
+      "description: string",
+      "logo: FormContent | false",
+      "error: string | null",
+      "isLoading: boolean",
+      "onSubmit: (data: LoginFormData) => void | Promise<void>",
+      "onForgotPassword: () => void",
+      "onSignUpClick: () => void",
+      "showSocialLogins: boolean",
+      "onSocialLogin: (provider: LoginSocialProvider) => void",
+      "signUpText: string",
+      "className: string"
     ],
-    "outputs": [
-      "submitted: Record<string, string>"
-    ]
+    "outputs": []
   },
   {
     "id": "mac-os-folder-cards",
@@ -1233,16 +1285,16 @@
     "name": "Particle Delete",
     "exportName": "KitParticleDeleteComponent",
     "selector": "kit-particle-delete",
-    "description": "A deliberate local item dismissal with a particle transition and restore control.",
+    "description": "Native resource cards with sampled-pixel dissolution, source options, reduced-motion fade, restore controls and reusable container/controller APIs.",
     "inputs": [
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "action: KitAction"
+      "initialItems: ParticleDeleteItem[]",
+      "options: ParticleDeleteOptions",
+      "className: string",
+      "style: FormStyle",
+      "attributes: FormAttributes",
+      "events: FormEventHandlers"
     ],
-    "outputs": [
-      "activated: void"
-    ]
+    "outputs": []
   },
   {
     "id": "payment-receipt-printer",
@@ -1404,16 +1456,23 @@
     "name": "Pull to Refresh",
     "exportName": "KitPullToRefreshComponent",
     "selector": "kit-pull-to-refresh",
-    "description": "Pull down within a contained list or use a keyboard refresh button; async failures remain retryable.",
+    "description": "Native resisted pull and fast-flick refresh with source lifecycle, custom indicators and the independently exported interactive financial card.",
     "inputs": [
-      "label: string",
+      "onRefresh: () => void | Promise<void>",
+      "threshold: number",
+      "maxPull: number",
+      "resistance: number",
+      "refreshingHoldOffset: number",
       "disabled: boolean",
-      "loading: boolean",
-      "action: KitAction"
+      "pullIndicator: PullIndicator",
+      "showDefaultIndicator: boolean",
+      "content: FormContent",
+      "className: string",
+      "style: FormStyle",
+      "attributes: FormAttributes",
+      "events: FormEventHandlers"
     ],
-    "outputs": [
-      "activated: void"
-    ]
+    "outputs": []
   },
   {
     "id": "rainbow-button",
@@ -1574,14 +1633,36 @@
     "name": "Shooting Stars",
     "exportName": "KitShootingStarsComponent",
     "selector": "kit-shooting-stars",
-    "description": "A native Canvas 2D visual with pointer response, pause controls, offscreen suspension and reduced motion.",
+    "description": "Native celestial canvas with source twinkle/parallax, nebula gradients, layered meteor trails, fireball flares, stardust embers and click spawning.",
     "inputs": [
-      "label: string",
-      "density: number (1–400)",
-      "speed: number (0–5)",
-      "color: string",
+      "background: string",
+      "starCount: number",
+      "starColors: string[]",
+      "minStarSize: number",
+      "maxStarSize: number",
+      "twinkleSpeed: number",
+      "trailColor: string",
+      "headColor: string",
+      "interval: number",
+      "speed: number|[number,number]",
+      "trailLength: number|[number,number]",
+      "angle: number",
+      "maxActiveShootingStars: number",
+      "showEmbers: boolean",
+      "nebula: boolean",
+      "clickToSpawn: boolean",
+      "parallax: boolean",
       "paused: boolean",
-      "disabled: boolean"
+      "className: string",
+      "style: ShootingStarsStyle",
+      "attributes: ShootingStarsAttributes",
+      "initial: ShootingStarsMotionTarget | false",
+      "animate: ShootingStarsMotionTarget",
+      "transition: ShootingStarsTransition",
+      "onClick: (event: MouseEvent) => void",
+      "onPointerMove: (event: PointerEvent) => void",
+      "onPointerLeave: (event: PointerEvent) => void",
+      "onKeyDown: (event: KeyboardEvent) => void"
     ],
     "outputs": []
   },
@@ -1590,16 +1671,23 @@
     "name": "Sign Up",
     "exportName": "KitSignUpComponent",
     "selector": "kit-sign-up",
-    "description": "Validated native fields, password visibility, cancellable application submission and preserved errors.",
+    "description": "Native registration card with source validation, password strength, terms agreement and external loading/error ownership.",
     "inputs": [
-      "fields: KitField[]",
-      "label: string",
-      "disabled: boolean",
-      "submitHandler: KitSubmitHandler"
+      "title: string",
+      "description: string",
+      "logo: FormContent | false",
+      "error: string | null",
+      "isLoading: boolean",
+      "onSubmit: (data: SignUpFormData) => void | Promise<void>",
+      "onSignInClick: () => void",
+      "showSocialSignUp: boolean",
+      "onSocialSignUp: (provider: SignUpSocialProvider) => void",
+      "requireConfirmPassword: boolean",
+      "termsText: FormContent",
+      "signInText: string",
+      "className: string"
     ],
-    "outputs": [
-      "submitted: Record<string, string>"
-    ]
+    "outputs": []
   },
   {
     "id": "slide-pagination",
@@ -1640,18 +1728,20 @@
     "name": "Smart Comparison",
     "exportName": "KitSmartComparisonComponent",
     "selector": "kit-smart-comparison",
-    "description": "Searchable plan comparison with differences-only filtering, collapsible categories and plan selection.",
+    "description": "Source-contract feature matrix with mount-only mobile plan selection, JSON difference filtering, projected native values and retained category exits.",
     "inputs": [
-      "plans: KitPlan[]",
-      "features: KitCompareFeature[]",
-      "categories: KitCompareCategory[]",
-      "selected: string (two-way)",
-      "disabled: boolean"
+      "plans: ComparisonPlan[]",
+      "categories: ComparisonCategory[]",
+      "defaultPlanId: string",
+      "enableSearch: boolean",
+      "enableDiffFilter: boolean",
+      "className: string",
+      "style: SmartComparisonStyle",
+      "attributes: SmartComparisonAttributes",
+      "onClick: (event: MouseEvent) => void",
+      "onKeyDown: (event: KeyboardEvent) => void"
     ],
-    "outputs": [
-      "planSelect: KitPlan",
-      "selectedChange: string"
-    ]
+    "outputs": []
   },
   {
     "id": "smooth-accordion",
@@ -1672,14 +1762,38 @@
     "name": "Sparkles Core",
     "exportName": "KitSparklesCoreComponent",
     "selector": "kit-sparkles-core",
-    "description": "A native Canvas 2D visual with pointer response, pause controls, offscreen suspension and reduced motion.",
+    "description": "Native Canvas 2D sparkle field with source particle generation, cursor modes, bursts, resize/visibility lifecycle and readiness fade.",
     "inputs": [
-      "label: string",
-      "density: number (1–400)",
-      "speed: number (0–5)",
-      "color: string",
+      "background: string",
+      "minSize: number",
+      "maxSize: number",
+      "speed: number",
+      "particleColor: string",
+      "particleDensity: number",
+      "particleShape: SparkleShape",
+      "direction: SparkleDirection",
+      "twinkle: boolean",
+      "twinkleSpeed: number",
+      "interactive: boolean",
+      "cursorMode: SparkleCursorMode",
+      "cursorRadius: number",
+      "clickPush: number",
+      "opacity: number",
+      "blur: number",
       "paused: boolean",
-      "disabled: boolean"
+      "className: string",
+      "id: string",
+      "particleSize: number",
+      "particleColors: string[]",
+      "particleCount: number",
+      "style: SparklesStyle",
+      "attributes: SparklesAttributes",
+      "initial: SparklesMotionTarget | false",
+      "animate: SparklesMotionTarget",
+      "transition: SparklesTransition",
+      "onClick: (event: MouseEvent) => void",
+      "onPointerMove: (event: PointerEvent) => void",
+      "onPointerLeave: (event: PointerEvent) => void"
     ],
     "outputs": []
   },
@@ -1889,14 +2003,16 @@
     "name": "Thinking Orb",
     "exportName": "KitThinkingOrbComponent",
     "selector": "kit-thinking-orb",
-    "description": "A native Canvas 2D visual with pointer response, pause controls, offscreen suspension and reduced motion.",
+    "description": "Native monochrome particle orb with nine cognitive presets, source canvas math, automatic theme observation and pause/visibility lifecycle.",
     "inputs": [
-      "label: string",
-      "density: number (1–400)",
-      "speed: number (0–5)",
-      "color: string",
+      "state: ThinkingOrbState",
+      "size: number",
+      "speed: number",
+      "dark: boolean",
       "paused: boolean",
-      "disabled: boolean"
+      "className: string",
+      "style: ThinkingOrbStyle",
+      "aria-label: string"
     ],
     "outputs": []
   },

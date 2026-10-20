@@ -1,22 +1,16 @@
 // Generated from authored native templates in scripts/generate-angular-ports.ts.
-import { Component } from '@angular/core';
-import { KitCanvasController } from './port-canvas';
-
+import { Component, DestroyRef, ElementRef, inject, input, untracked, viewChild } from '@angular/core';
+import {afterRenderEffect} from '@angular/core';import {ThinkingOrbRenderer,type ThinkingOrbState} from './thinking-orb-renderer';import {NativeRootBindings,type NativeStyle} from './native-root-bindings';export type {ThinkingOrbState} from './thinking-orb-renderer';export type {NativeStyle as ThinkingOrbStyle} from './native-root-bindings';
 @Component({
  selector:"kit-thinking-orb", standalone:true,
- host:{'data-kit':"thinking-orb",style:'display:block;min-width:0'},
+ host:{style:'display:contents'},
  template:`
-<section class="kit-control kit-stack">
-<div class="k-canvas-wrap" (pointermove)="move($event)" (pointerleave)="reset()">
-<canvas #canvas [attr.aria-label]="label()" role="img">
+<span #root [class]="className()" role="img" [attr.aria-label]="ariaLabel()??state()+' orb'">
+<canvas #canvas aria-hidden="true" style="display:block" [style.width.px]="size()" [style.height.px]="size()">
 </canvas>
-<ng-content>
-</ng-content>
-</div>
-<button type="button" [disabled]="disabled()||paused()" [attr.aria-pressed]="!running()" (click)="running.set(!running())">{{running()?'Pause animation':'Resume animation'}}</button>
-</section>
+</span>
 `
 })
-export class KitThinkingOrbComponent extends KitCanvasController {
-override readonly mode='orb';
+export class KitThinkingOrbComponent {
+readonly state=input<ThinkingOrbState,ThinkingOrbState|undefined>('working',{transform:v=>v===undefined?'working':v});readonly size=input<number,number|undefined>(64,{transform:v=>v===undefined?64:v});readonly speed=input<number,number|undefined>(1,{transform:v=>v===undefined?1:v});readonly dark=input<boolean|undefined>();readonly paused=input<boolean,boolean|undefined>(false,{transform:v=>v===undefined?false:v});readonly className=input<string,string|undefined>('',{transform:v=>v===undefined?'':v});readonly styles=input<NativeStyle|undefined>(undefined,{alias:'style'});readonly ariaLabel=input<string|undefined>(undefined,{alias:'aria-label'});readonly root=viewChild<ElementRef<HTMLElement>>('root');readonly canvas=viewChild<ElementRef<HTMLCanvasElement>>('canvas');private readonly renderer=new ThinkingOrbRenderer();private bindings:NativeRootBindings|undefined;constructor(){afterRenderEffect(()=>{const canvas=this.canvas()?.nativeElement,options={state:this.state(),size:this.size(),speed:this.speed(),dark:this.dark(),paused:this.paused()};if(canvas)untracked(()=>this.renderer.update(canvas,options))});afterRenderEffect(()=>{const root=this.root()?.nativeElement,size=this.size(),styles=this.styles();if(root){this.bindings??=new NativeRootBindings(root);this.bindings.apply({display:'inline-flex',position:'relative',width:size,height:size,flexShrink:0,overflow:'visible',...styles},undefined,{})}});inject(DestroyRef).onDestroy(()=>this.renderer.destroy())}
 }

@@ -2,20 +2,20 @@
 
 React is the source of truth for component appearance, interactions, data contracts, options and defaults. Angular implementations stay native; template projection and output events provide Angular equivalents for React nodes and callbacks. Catalog coverage does not establish parity.
 
-Current progress: 99 components have recorded validated baselines across batches 1?42; 17 remain unvalidated. Batch 42 adds Command Menu and Spotlight Search, including distinct state/key ownership, actual catalog/actions, captured exit callbacks and source shared-highlight motion. See [batch 42 evidence](parity/batch-42-integration.md) and the [completed component list](parity/completed-components.md). Batches 4–30 were merged into `feat/kit-ui-library` at `cfcfc68`; Registry CI and Pages deployment passed. Batches 31?42 are published through [PR #26](https://github.com/chaitanay-kumar/kit-ui/pull/26); see the [integration evidence](parity/batches-31-42-integration.md) for renewed checks. Older component reports saying integration pending are historical handoffs.
+Current progress: 115 of 116 components have recorded validated baselines through batch 50; no components remain queued and AI Response remains deferred. Batch 50 adds Pull to Refresh and Car Smoke Page Transition; see [batch 50 evidence](parity/batch-50-integration.md) and the [completed component list](parity/completed-components.md). The integration of batches 43-50 brings all 115 baselines into `feat/kit-ui-library`; see [integration evidence](parity/batches-43-50-integration.md). Final user QA remains outstanding. Batches 31-42 were merged through [PR #26](https://github.com/chaitanay-kumar/kit-ui/pull/26), with checks in the [integration evidence](parity/batches-31-42-integration.md). Older integration-pending reports are historical handoffs.
 
-User priority: finish simpler components first. AI Response remains deferred; its previously documented working copy must be located before resuming (see Pending work). Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work proceeds in batches of two, with focused component checks during implementation and one full baseline before batch merge. Batch 2 merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); batch 3 merged through [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Batch 4 and its stacked batch 5 are locally validated and await integration. The original inventory order remains below for tracking, not execution priority.
+User priority: finish simpler components first. AI Response remains deferred; its previously documented working copy must be located before resuming (see Pending work). Button is in [PR #6](https://github.com/chaitanay-kumar/kit-ui/pull/6). Neon Edge Button is in [PR #7](https://github.com/chaitanay-kumar/kit-ui/pull/7). Orbital Loading Ring is in [PR #8](https://github.com/chaitanay-kumar/kit-ui/pull/8). Spotlight Card is in [PR #9](https://github.com/chaitanay-kumar/kit-ui/pull/9). Morphing Icon is in [PR #10](https://github.com/chaitanay-kumar/kit-ui/pull/10). Work proceeds in batches of two, with focused component checks during implementation and one full baseline before batch merge. Batch 2 merged through [PR #19](https://github.com/chaitanay-kumar/kit-ui/pull/19); batch 3 merged through [PR #25](https://github.com/chaitanay-kumar/kit-ui/pull/25). Batches 4?42 have since been integrated; batches 43-50 are included in the latest integration. The original inventory order remains below for tracking, not execution priority.
 
 ## Pending work
 
-- Review and fix the remaining 17 components listed below: 16 queued and AI Response deferred in progress. Existing generated Angular coverage does not count as validated parity.
-- Review batches 31-42 for integration. Batch 42 is locally validated; select the next two queued components with simpler components first.
+- All currently queued components have locally validated baselines. AI Response is the sole unvalidated component and remains deferred; existing generated Angular coverage does not count as validated parity.
+- Batches 43-50 are included in the implementation integration; final user QA remains outstanding. The queued-component goal is complete; overall parity remains incomplete until the deferred AI Response work and final user QA are resolved.
 - Integration audit: direct optional button callbacks in Book Call Button, Split Button, Notification Bell, Payment Status, Profile Card and Peek Card now preserve return-value/exception event-default semantics, explicit cancellation and nested callback receivers. Split option failures retain the open menu. See [integration evidence](parity/batches-31-42-integration.md); batch 36 separately covers Folder Cards, Story Cards, Pricing and Stacked Cards.
 - Integration fixture audit: inline batches 6?19 now include standard doctype and viewport metadata; later standalone fixture HTML already includes both. Renewed desktop/mobile results are recorded in the [integration brief](parity/batches-31-42-integration.md). Batch 23 separately renewed batches 20?23.
 - Keep AI Response deferred. No AI code/refs were changed. The previously documented `kit-ui-angular-response` / `feat/angular-ai-response-parity` working copy is not registered in this checkout, its audit is not here, and named Desktop sibling paths on C:/D: were not present when checked. Locate that prior work before resuming; do not substitute the generic generated port or claim the deferred work is validated.
 - After all 116 components have validated baselines, the user will perform the full QA run. Address the resulting feedback before calling the overall parity effort complete.
 
-No component PRs remained open after batch 3. Its completed feature branches/worktrees were removed. The implementation branch and unfinished AI Response work remain; the completed iOS Search Bar branch has been removed and local batch 4 plus stacked batch 5 await integration.
+Completed work through batch 42 is integrated and its completed feature branches have been cleaned up. The implementation branch, active local parity work and both preserved stashes remain.
 
 ## Review requirements
 
@@ -37,7 +37,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 4 | AI Prompt Composer | `ai-prompt-composer` | Validated baseline | [Review](parity/ai-prompt-composer.md) |
 | 5 | AI Response | `ai-response` | Deferred; prior working-copy location unconfirmed | Locate prior branch/audit before resuming |
 | 6 | Airport Matrix Clock | `airport-matrix-clock` | Validated baseline | [Report](parity/airport-matrix-clock.md) |
-| 7 | Animated File Upload | `animated-file-upload` | Queued | — |
+| 7 | Animated File Upload | `animated-file-upload` | Validated baseline | [Report](parity/animated-file-upload.md) |
 | 8 | Animated Number Morph | `animated-number` | Validated baseline | [Report](parity/animated-number.md) |
 | 9 | Animated Tabs | `animated-tabs` | Validated baseline | [Report](parity/animated-tabs.md) |
 | 10 | Avatar Stack | `avatar-stack` | Validated baseline | [Report](parity/avatar-stack.md) |
@@ -45,8 +45,8 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 12 | Book Call Button | `book-call-button` | Validated baseline | [Report](parity/book-call-button.md) |
 | 13 | Branching Submenu | `branching-submenu` | Validated baseline | [Report](parity/branching-submenu.md) |
 | 14 | Button | `button` | Validated baseline | [Review](parity/button.md) |
-| 15 | Car Smoke Page Transition | `car-smoke-page-transition` | Queued | — |
-| 16 | Chat | `chat` | Queued | — |
+| 15 | Car Smoke Page Transition | `car-smoke-page-transition` | Validated baseline | [Report](parity/car-smoke-page-transition.md) |
+| 16 | Chat | `chat` | Validated baseline | [Report](parity/chat.md) |
 | 17 | Circular Orbit | `circular-orbit` | Validated baseline | [Evidence](parity/circular-orbit.md) |
 | 18 | Code Snippet Deck | `code-snippet-deck` | Validated baseline | [Report](parity/code-snippet-deck.md) |
 | 19 | Command Menu | `command-menu` | Validated baseline | [Report](parity/command-menu.md) |
@@ -56,10 +56,10 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 23 | Depth Corridor | `depth-corridor` | Validated baseline | [Report](parity/depth-corridor.md) |
 | 24 | DirectionalTooltip | `directional-tooltip` | Validated baseline | [Report](parity/directional-tooltip.md) |
 | 25 | Dot Field | `dot-field` | Validated baseline | [Evidence](parity/dot-field.md) |
-| 26 | Dot Shader | `dot-shader` | Queued | — |
-| 27 | Drag to Confirm | `drag-to-confirm` | Queued | — |
+| 26 | Dot Shader | `dot-shader` | Validated baseline | [Report](parity/dot-shader.md) |
+| 27 | Drag to Confirm | `drag-to-confirm` | Validated baseline | [Report](parity/drag-to-confirm.md) |
 | 28 | DrawCheckbox | `draw-checkbox` | Validated baseline | [Report](parity/draw-checkbox.md) |
-| 29 | Dynamic Island | `dynamic-island` | Queued | — |
+| 29 | Dynamic Island | `dynamic-island` | Validated baseline | [Report](parity/dynamic-island.md) |
 | 30 | Elastic Sheet | `elastic-sheet` | Validated baseline | [Evidence](parity/elastic-sheet.md) |
 | 31 | Evil Eye | `evil-eye` | Validated baseline | [Report](parity/evil-eye.md) |
 | 32 | Expandable Data Row | `expandable-data-row` | Validated baseline | [Report](parity/expandable-data-row.md) |
@@ -67,10 +67,10 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 34 | FAQ | `faq` | Validated baseline | [Report](parity/faq.md) |
 | 35 | Floating Action Dock | `floating-action-dock` | Validated baseline | [Evidence](parity/floating-action-dock.md) |
 | 36 | Focus Mode | `focus-mode` | Validated baseline | [Report](parity/focus-mode.md) |
-| 37 | Form | `form` | Queued | — |
+| 37 | Form | `form` | Validated baseline | [Report](parity/form.md) |
 | 38 | Glass Navbar | `glass-navbar` | Validated baseline | [Report](parity/glass-navbar.md) |
 | 39 | Glitch Text | `glitch-text` | Validated baseline | [Report](parity/glitch-text.md) |
-| 40 | Glyph Matrix | `glyph-matrix` | Queued | — |
+| 40 | Glyph Matrix | `glyph-matrix` | Validated baseline | [Report](parity/glyph-matrix.md) |
 | 41 | Gooey Menu | `gooey-menu` | Validated baseline | [Report](parity/gooey-menu.md) |
 | 42 | Gravity Particle Burst | `gravity-particle-burst` | Validated baseline | [Evidence](parity/gravity-particle-burst.md) |
 | 43 | Hamburger Menu | `hamburger-menu` | Validated baseline | [Report](parity/hamburger-menu.md) |
@@ -84,7 +84,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 51 | Liquid Toggle | `liquid-toggle` | Validated baseline | [Report](parity/liquid-toggle.md) |
 | 52 | Loader | `loader` | Validated baseline | [Review](parity/loader.md) |
 | 53 | LockInput | `lock-input` | Validated baseline | [Report](parity/lock-input.md) |
-| 54 | Login | `login` | Queued | — |
+| 54 | Login | `login` | Validated baseline | [Report](parity/login.md) |
 | 55 | macOS Folder Cards | `mac-os-folder-cards` | Validated baseline | [Report](parity/mac-os-folder-cards.md) |
 | 56 | Magnetic Button | `magnetic-button` | Validated baseline | [Review](parity/magnetic-button.md) |
 | 57 | Meteors | `meteors` | Validated baseline | [Evidence](parity/meteors.md) |
@@ -102,7 +102,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 69 | Orbital Loading Ring | `orbital-loading-ring` | Validated baseline | [Review](parity/orbital-loading-ring.md) |
 | 70 | OriginDropdown | `origin-dropdown` | Validated baseline | [Report](parity/origin-dropdown.md) |
 | 71 | OTP Input | `otp-input` | Validated baseline | [Report](parity/otp-input.md) |
-| 72 | Particle Delete | `particle-delete` | Queued | — |
+| 72 | Particle Delete | `particle-delete` | Validated baseline | [Report](parity/particle-delete.md) |
 | 73 | Payment Receipt Printer | `payment-receipt-printer` | Validated baseline | [Report](parity/payment-receipt-printer.md) |
 | 74 | Payment Status | `payment-status` | Validated baseline | [Report](parity/payment-status.md) |
 | 75 | Peek Card | `peek-card` | Validated baseline | [Report](parity/peek-card.md) |
@@ -110,7 +110,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 77 | PressButton | `press-button` | Validated baseline | [Review](parity/press-button.md) |
 | 78 | Pricing | `pricing` | Validated baseline | [Report](parity/pricing.md) |
 | 79 | Profile Card | `profile-card` | Validated baseline | [Report](parity/profile-card.md) |
-| 80 | Pull to Refresh | `pull-to-refresh` | Queued | — |
+| 80 | Pull to Refresh | `pull-to-refresh` | Validated baseline | [Report](parity/pull-to-refresh.md) |
 | 81 | Rainbow Button | `rainbow-button` | Validated baseline | [Review](parity/rainbow-button.md) |
 | 82 | Recovery Ledger | `recovery-ledger` | Validated baseline | [Report](parity/recovery-ledger.md) |
 | 83 | Reveal Card | `reveal-card` | Validated baseline | [Report](parity/reveal-card.md) |
@@ -119,14 +119,14 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 86 | Scroll Velocity Text | `scrollvelocitytext` | Validated baseline | [Report](parity/scrollvelocitytext.md) |
 | 87 | Selection Basket | `selection-basket` | Validated baseline | [Evidence](parity/selection-basket.md) |
 | 88 | SettleModal | `settle-modal` | Validated baseline | [Evidence](parity/settle-modal.md) |
-| 89 | Shooting Stars | `shooting-stars` | Queued | — |
-| 90 | Sign Up | `sign-up` | Queued | — |
+| 89 | Shooting Stars | `shooting-stars` | Validated baseline | [Report](parity/shooting-stars.md) |
+| 90 | Sign Up | `sign-up` | Validated baseline | [Report](parity/sign-up.md) |
 | 91 | SlidePagination | `slide-pagination` | Validated baseline | [Report](parity/slide-pagination.md) |
 | 92 | Small Floating Dock | `small-floating-dock` | Validated baseline | [Report](parity/small-floating-dock.md) |
-| 93 | Smart Comparison | `smart-comparison` | Queued | — |
+| 93 | Smart Comparison | `smart-comparison` | Validated baseline | [Report](parity/smart-comparison.md) |
 | 94 | Smart Upload | `smart-upload` | Validated baseline | [Report](parity/smart-upload.md) |
 | 95 | Smooth Accordion | `smooth-accordion` | Validated baseline | [Report](parity/smooth-accordion.md) |
-| 96 | Sparkles Core | `sparkles-core` | Queued | — |
+| 96 | Sparkles Core | `sparkles-core` | Validated baseline | [Report](parity/sparkles-core.md) |
 | 97 | Speed Warp | `speed-warp` | Validated baseline | [Report](parity/speed-warp.md) |
 | 98 | Split Button | `split-button` | Validated baseline | [Report](parity/split-button.md) |
 | 99 | Spotlight Card | `spotlight-card` | Validated baseline | [Review](parity/spotlight-card.md) |
@@ -139,7 +139,7 @@ No component PRs remained open after batch 3. Its completed feature branches/wor
 | 106 | StretchSwitch | `stretch-switch` | Validated baseline | [Report](parity/stretch-switch.md) |
 | 107 | Swipe Action List | `swipe-action-list` | Validated baseline | [Report](parity/swipe-action-list.md) |
 | 108 | Text Scramble Decoder | `text-scramble-decoder` | Validated baseline | [Evidence](parity/text-scramble-decoder.md) |
-| 109 | Thinking Orb | `thinking-orb` | Queued | — |
+| 109 | Thinking Orb | `thinking-orb` | Validated baseline | [Report](parity/thinking-orb.md) |
 | 110 | Timeline Scrubber | `timeline-scrubber` | Validated baseline | [Report](parity/timeline-scrubber.md) |
 | 111 | Torque Dial | `torque-dial` | Validated baseline | [Report](parity/torque-dial.md) |
 | 112 | Typewriter Button | `typewriter-button` | Validated baseline | [Review](parity/typewriter-button.md) |

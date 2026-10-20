@@ -14,7 +14,7 @@ const meta: KitUIComponentMeta = {
     'Magnetic/gravitational radial repulsion with smooth exponential damping',
     'Dynamic scale expansion creating a 3D lens bulge around the cursor',
     'Ambient wave undulation breathing subtle life into the background when idle',
-    'Zero CPU overhead during rendering via GPU vertex shader positioning',
+    'GPU vertex shader positioning with a Canvas 2D fallback',
     'Supports wrapping arbitrary children without interfering with pointer interactions',
     'Full prefers-reduced-motion compliance freezing displacement and waves',
   ],

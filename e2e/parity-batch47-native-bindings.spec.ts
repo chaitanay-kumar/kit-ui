@@ -1,0 +1,11 @@
+import {test,expect} from '@playwright/test';
+for(const framework of ['react','angular'])test(framework+': form native attributes, styles, events and element cleanup',async({page})=>{
+ const options={id:'field',observeEvents:true,style:{paddingLeft:7,lineHeight:2},attributes:{'aria-label':'Native field','data-proof':'yes',maxLength:5,disabled:false,required:false}};
+ await page.goto(`/e2e/fixtures/parity-batch47-form.html?framework=${framework}&initial=${encodeURIComponent(JSON.stringify(options))}`);await page.waitForFunction(()=>(window as any).ready&&document.querySelector('input'));
+ const field=page.getByRole('textbox',{name:'Native field'});await expect(field).toHaveCSS('padding-left','7px');await expect(field).toHaveCSS('line-height','24px');await expect(field).toHaveAttribute('maxlength','5');await expect(field).toBeEnabled();await expect(field).toHaveJSProperty('required',false);await expect(page.locator('#field')).toHaveCount(1);
+ expect(await field.evaluate(node=>{const event=new MouseEvent('click',{bubbles:true,cancelable:true});node.dispatchEvent(event);return event.defaultPrevented})).toBe(false);
+ expect(await page.evaluate(()=>(window as any).events)).toEqual([{kind:'observed',type:'click',target:'INPUT',current:'INPUT',prevented:false}]);
+ await page.evaluate(()=>(window as any).update({throwObserved:true}));expect(await field.evaluate(node=>{const event=new KeyboardEvent('keydown',{key:'a',bubbles:true,cancelable:true});node.dispatchEvent(event);return event.defaultPrevented})).toBe(false);await expect.poll(()=>page.evaluate(()=>(window as any).errors)).toEqual(['observed failed']);
+ await page.evaluate(()=>(window as any).update({observeEvents:false,style:undefined,attributes:{'aria-label':'Changed'}}));await expect(page.getByRole('textbox',{name:'Changed'})).toHaveJSProperty('maxLength',-1);await expect(page.getByRole('textbox',{name:'Changed'})).toHaveCSS('padding-left','14px');
+ await page.evaluate(()=>{const field=document.querySelector('input')!;field.dispatchEvent(new MouseEvent('click',{bubbles:true}));(window as any).unmount();field.dispatchEvent(new MouseEvent('click',{bubbles:true}))});expect(await page.evaluate(()=>(window as any).events.length)).toBe(2);
+});

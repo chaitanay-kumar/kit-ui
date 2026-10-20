@@ -1,3 +1,5 @@
+import {chatPort} from './angular-chat';
+import {smartComparisonPort} from './angular-smart-comparison';
 import {pricingPort} from './angular-pricing';
 import {dependencyTracePort} from './angular-dependency-trace';
 import { advancedDataTablePort } from './angular-data-table';
@@ -6,38 +8,8 @@ export const COMPLEX_PORTS = [
   advancedDataTablePort,
   dependencyTracePort,
   pricingPort,
-  {
-    id: "smart-comparison",
-    kind: "plain" as const,
-    description:
-      "Searchable plan comparison with differences-only filtering, collapsible categories and plan selection.",
-    inputs: [
-      "plans: KitPlan[]",
-      "features: KitCompareFeature[]",
-      "categories: KitCompareCategory[]",
-      "selected: string (two-way)",
-      "disabled: boolean",
-    ],
-    outputs: ["planSelect: KitPlan"],
-    imports: "import type { KitCompareCategory } from './port-types';",
-    template: `<section class="kit-control kit-surface kit-stack"><label>Find a feature<input type="search" [value]="query()" [disabled]="disabled()" (input)="query.set($any($event.target).value)" /></label><label class="kit-row"><input type="checkbox" [checked]="differences()" [disabled]="disabled()" (change)="differences.set($any($event.target).checked)" />Show differences only</label><div class="k-table-scroll" tabindex="0" aria-label="Plan comparison"><table><thead><tr><th scope="col">Feature</th>@for(plan of plans();track plan.id){<th scope="col"><button type="button" [disabled]="disabled()" [attr.aria-pressed]="selected()===plan.id" (click)="selected.set(plan.id);planSelect.emit(plan)">{{plan.label}}</button></th>}</tr></thead><tbody>@for(group of groups();track group.id){<tr><th [attr.colspan]="plans().length+1"><button type="button" [attr.aria-expanded]="!collapsed().includes(group.id)" (click)="toggle(group.id)">{{group.label}}</button></th></tr>@if(!collapsed().includes(group.id)){@for(feature of filtered(group.features);track feature.id){<tr><th scope="row">{{feature.label}}</th>@for(plan of plans();track plan.id){<td>{{cell(feature.values[plan.id])}}</td>}</tr>}@empty{<tr><td [attr.colspan]="plans().length+1">No matching features.</td></tr>}}}</tbody></table></div></section>`,
-    body: `readonly plans=input<KitPlan[]>([{id:'starter',label:'Starter',price:12,features:[]},{id:'team',label:'Team',price:24,features:[]}]);readonly features=input<KitCompareFeature[]>([{id:'components',label:'Components',values:{starter:true,team:true}},{id:'members',label:'Members',values:{starter:'1',team:'Unlimited'}},{id:'support',label:'Priority support',values:{starter:false,team:true}}]);readonly categories=input<KitCompareCategory[]>([]);readonly selected=model('');readonly disabled=input(false);readonly planSelect=output<KitPlan>();readonly query=signal('');readonly differences=signal(false);readonly collapsed=signal<string[]>([]);readonly groups=computed(()=>this.categories().length?this.categories():[{id:'features',label:'Plan features',features:this.features()}]);filtered(features:KitCompareFeature[]):KitCompareFeature[]{return features.filter(f=>f.label.toLowerCase().includes(this.query().toLowerCase())&&(!this.differences()||new Set(this.plans().map(p=>f.values[p.id])).size>1));}cell(value:string|boolean|undefined):string{return value===true?'Included':value===false?'Not included':value??'—';}toggle(id:string):void{this.collapsed.update(a=>a.includes(id)?a.filter(x=>x!==id):[...a,id]);}`,
-  },
-  {
-    id: "chat",
-    kind: "plain" as const,
-    description:
-      "An application-connected conversation with sending, cancellation, retry, preserved drafts and accessible message history.",
-    inputs: [
-      "messages: KitMessage[] (two-way)",
-      "sendHandler: KitChatHandler",
-      "disabled: boolean",
-      "label: string",
-    ],
-    outputs: ["messageSent: KitMessage"],
-    template: `<section class="kit-control kit-surface kit-stack"><h3>{{label()}}</h3><ol class="k-chat-log" aria-label="Conversation">@for(message of messages();track message.id){<li [class.k-chat-user]="message.role==='user'"><strong>{{message.role==='user'?'You':'Assistant'}}</strong><p>{{message.text}}</p></li>}@empty{<li>No messages yet.</li>}</ol><form class="kit-stack" (submit)="send($event)"><label>Message<textarea [value]="draft()" [disabled]="disabled()||busy()" (input)="draft.set($any($event.target).value)" required rows="3"></textarea></label><button type="submit" [disabled]="disabled()||busy()||!draft().trim()||!sendHandler()">{{busy()?'Sending…':error()?'Retry message':'Send message'}}</button>@if(busy()){<button type="button" (click)="cancel()">Cancel</button>}</form>@if(!sendHandler()){<p>Connect a chat handler to send messages.</p>}@if(error()){<p role="alert">{{error()}}</p>}<p role="status">{{status()}}</p></section>`,
-    body: `readonly messages=model<KitMessage[]>([]);readonly sendHandler=input<KitChatHandler>();readonly disabled=input(false);readonly label=input('Conversation');readonly draft=signal('');readonly busy=signal(false);readonly error=signal('');readonly status=signal('');readonly messageSent=output<KitMessage>();private controller?:AbortController;private destroyed=false;constructor(){inject(DestroyRef).onDestroy(()=>{this.destroyed=true;this.controller?.abort();});}async send(event:SubmitEvent):Promise<void>{event.preventDefault();const handler=this.sendHandler();const text=this.draft().trim();if(!handler||!text||this.disabled()||this.busy())return;const controller=new AbortController();this.controller=controller;this.error.set('');this.status.set('Sending message…');this.busy.set(true);try{const reply=await handler(text,controller.signal);if(this.destroyed||controller.signal.aborted)return;const message:KitMessage={id:crypto.randomUUID(),role:'user',text};this.messages.update(a=>[...a,message,{id:crypto.randomUUID(),role:'assistant',text:reply}]);this.messageSent.emit(message);this.draft.set('');this.status.set('Message received.');}catch(error){if(!this.destroyed&&!controller.signal.aborted){this.error.set(error instanceof Error?error.message:'Sending failed. Your draft is preserved.');this.status.set('Sending failed.');}}finally{if(!this.destroyed&&this.controller===controller){this.busy.set(false);this.controller=undefined;}}}cancel():void{this.controller?.abort();this.controller=undefined;this.busy.set(false);this.status.set('Cancelled. Your draft is preserved.');}`,
-  },
+  smartComparisonPort,
+  chatPort,
   {
     id: "ai-response",
     kind: "plain" as const,

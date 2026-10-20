@@ -576,7 +576,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       "Automatic mime-type detection and contextual file icon attribution",
       "Multi-file queue management with independent Uploading → Processing → Complete stages",
       "Self-morphing progress bar into checkmark state with non-aggressive error recovery",
-      "Customizable file constraints (maxSize, maxFiles, accept) with accessible screen reader labels"
+      "Size checks, visible file limits and native picker accept hints"
     ],
     "props": [
       {
@@ -589,7 +589,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
         "name": "accept",
         "type": "string | string[]",
         "default": "undefined",
-        "description": "Accepted MIME types or file extensions (e.g. image/*, .pdf)"
+        "description": "Native picker hint for MIME types or extensions; dropped files are not filtered"
       },
       {
         "name": "maxSize",
@@ -625,7 +625,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
         "name": "disabled",
         "type": "boolean",
         "default": "false",
-        "description": "Disables all interactions and file picking"
+        "description": "Disables file picking and incoming drops; existing row actions remain available"
       },
       {
         "name": "onFilesSelected",
@@ -648,9 +648,9 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     ],
     "accessibility": [
       "Keyboard accessible dropzone triggerable via Enter or Space key",
-      "Hidden semantic file input accessible to assistive technologies",
-      "Aria-live announcements for file upload progression, completion, and error states",
-      "Respects prefers-reduced-motion with instant state changes"
+      "Keyboard trigger opens a hidden native file input",
+      "Named remove and retry buttons with visible progress and error text",
+      "Progress is not announced by a live region; component springs have no reduced-motion bypass"
     ],
     "createdAt": "2026-08-21",
     "usageCode": "import { AnimatedFileUpload } from \"@/components/ui/animated-file-upload\";\n\nexport function Demo() {\n  return (\n    <div className=\"max-w-md mx-auto p-4\">\n      <AnimatedFileUpload\n        multiple\n        maxSize={10 * 1024 * 1024}\n        accept=\"image/*,application/pdf\"\n        onFilesSelected={(files) => console.log('Selected:', files)}\n        onUploadComplete={(file) => console.log('Uploaded:', file.name)}\n      />\n    </div>\n  );\n}",
@@ -1230,7 +1230,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     "id": "car-smoke-page-transition",
     "name": "Car Smoke Page Transition",
     "tagline": "Cinematic automotive page transition",
-    "description": "A cinematic page transition where a speeding car crosses the screen, leaving a smoke trail before transitioning to the next page.",
+    "description": "A cinematic car drift and smoke overlay with an application completion callback.",
     "category": "Motion",
     "badges": [
       "Cinematic",
@@ -1239,11 +1239,11 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     ],
     "cliCommand": "npx shadcn@latest add chaitanay-kumar/kit-ui/car-smoke-page-transition",
     "features": [
-      "Hardware-accelerated Canvas particle drift smoke physics and realistic skid marks",
+      "Canvas2D smoke plumes, skid marks and speed lines",
       "Choreographed multi-axis Ferrari drift movement, wheel spin, and speed lines",
       "Customizable travel direction (left-to-right or right-to-left), density, and scale",
       "Automatic theme awareness (light and dark mode overlay shading)",
-      "Full accessibility support with automatic prefers-reduced-motion fallback"
+      "Keyboard trigger and an automatic prefers-reduced-motion branch"
     ],
     "props": [
       {
@@ -1255,7 +1255,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       {
         "name": "carDuration",
         "type": "number",
-        "default": "700",
+        "default": "1350",
         "description": "Duration of car crossing animation in milliseconds"
       },
       {
@@ -1279,7 +1279,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       {
         "name": "smokeLifetime",
         "type": "number",
-        "default": "1200",
+        "default": "1400",
         "description": "Lifetime of smoke particles in milliseconds"
       },
       {
@@ -1291,26 +1291,32 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       {
         "name": "pageTransitionDelay",
         "type": "number",
-        "default": "550",
-        "description": "Delay before page transition overlay starts in milliseconds"
+        "default": "900",
+        "description": "Normal-motion completion offset: callback runs at carDelay + pageTransitionDelay + 100 ms. Overlay fade starts independently at carDelay + 0.65 × carDuration."
       },
       {
         "name": "pageTransitionDuration",
         "type": "number",
-        "default": "350",
-        "description": "Duration of page transition overlay fade in milliseconds"
+        "default": "400",
+        "description": "Overlay fade duration; also the completion delay in reduced motion, in milliseconds"
       },
       {
         "name": "resetDelay",
         "type": "number",
-        "default": "300",
-        "description": "Delay before resetting to idle after transition completes in milliseconds"
+        "default": "350",
+        "description": "Reset hold in milliseconds; normal motion also includes pageTransitionDuration and a final 350 ms fade"
       },
       {
         "name": "onTransitionComplete",
         "type": "() => void",
         "default": "undefined",
-        "description": "Callback fired when transition completes (call navigate() here)"
+        "description": "Application callback on the completion timer; navigation is supplied by the application"
+      },
+      {
+        "name": "verticalPosition",
+        "type": "'center' | 'top' | 'bottom' | number",
+        "default": "'center'",
+        "description": "Vertical anchor; numeric values use percentages for the car position and canvas calculations"
       },
       {
         "name": "children",
@@ -1328,10 +1334,11 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     "accessibility": [
       "The trigger is keyboard accessible via Enter and Space keys",
       "Reduced motion preference automatically disables the fast car animation and smoke effects",
-      "The overlay background respects the current Kit UI theme (light/dark)"
+      "The overlay background respects the current Kit UI theme (light/dark)",
+      "The decorative overlay is aria-hidden and ignores pointer input; focus management and navigation belong to the application"
     ],
     "createdAt": "2026-09-08",
-    "usageCode": "import { CarSmokePageTransition } from \"@/components/ui/car-smoke-page-transition\";\n\nexport function Demo() {\n  return (\n    <CarSmokePageTransition\n      onTransitionComplete={() => {\n        // Navigate to new page after animation completes\n        window.location.href = \"/about\";\n      }}\n    >\n      <button className=\"bg-[#FAFAFA] text-[#050505] hover:bg-white px-4 py-2 rounded-md font-medium transition-colors\">\n        Start Journey\n      </button>\n    </CarSmokePageTransition>\n  );\n}",
+    "usageCode": "import { CarSmokePageTransition } from \"@/components/ui/car-smoke-page-transition\";\n\nexport function Demo() {\n  return (\n    <CarSmokePageTransition\n      onTransitionComplete={() => {\n        // The application chooses navigation on the completion timer.\n        window.location.href = \"/about\";\n      }}\n    >\n      <button className=\"bg-[#FAFAFA] text-[#050505] hover:bg-white px-4 py-2 rounded-md font-medium transition-colors\">\n        Start Journey\n      </button>\n    </CarSmokePageTransition>\n  );\n}",
     "dependencies": [
       "framer-motion"
     ],
@@ -1369,29 +1376,29 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     "features": [
       "Complete conversational layout with optional historical threads sidebar and responsive mobile drawer",
       "Rich message components supporting user, assistant, and system roles with timestamps and avatars",
-      "Built-in file and image attachment upload system with chips, sizes, and removal actions",
+      "File and image attachment metadata with chips, sizes, and removal actions; upload transport is supplied by the application",
       "Auto-expanding multiline composer with Enter-to-send and Shift+Enter for newline shortcuts",
-      "Message delivery states: sending, sent, delivered, failed (with retry), and streaming",
+      "Failed and streaming message indicators; standalone ChatMessage supports an optional retry callback",
       "Accessible action triggers for copying message content and managing conversation state"
     ],
     "props": [
       {
         "name": "messages",
         "type": "ChatMessageItem[]",
-        "default": "[]",
-        "description": "Array of chat message records including role, content, author, and attachments"
+        "default": "required",
+        "description": "Externally owned message records including role, content, author, and attachments"
       },
       {
         "name": "onSendMessage",
         "type": "(content: string, attachments?: ChatAttachment[]) => void",
-        "default": "undefined",
-        "description": "Callback fired when the user submits a message via composer"
+        "default": "required",
+        "description": "Application send callback; the component supplies no message or upload transport"
       },
       {
         "name": "isGenerating",
         "type": "boolean",
         "default": "false",
-        "description": "Disables composer and shows loading status while the assistant is synthesizing an answer"
+        "description": "Blocks sending and shows a spinner while preserving draft editing and attachment selection"
       },
       {
         "name": "threads",
@@ -1424,6 +1431,18 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
         "description": "Callback fired when the user clicks the clear chat history button"
       },
       {
+        "name": "accentColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "Optional send-button background color"
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "default": "undefined",
+        "description": "Custom compound layout using ChatHeader, ChatSidebar, ChatMessages and ChatComposer within the root context"
+      },
+      {
         "name": "className",
         "type": "string",
         "default": "undefined",
@@ -1432,9 +1451,9 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     ],
     "accessibility": [
       "Keyboard navigable message history and composer with standard Enter and Shift+Enter keybindings",
-      "Composer textarea provides clear accessible placeholders, labels, and aria-describedby hints",
-      "Mobile sidebar features focus isolation, escape key dismissal, and backdrop overlay click handlers",
-      "Action buttons include aria-label descriptors for screen reader compatibility"
+      "Composer textarea uses a placeholder; consuming applications can supply additional accessible labeling",
+      "Mobile sidebar offers native toggle, close and thread-selection buttons",
+      "Send, attachment, history and message-copy actions have accessible names"
     ],
     "createdAt": "2026-09-21",
     "usageCode": "import { Chat, type ChatMessageItem } from \"@/components/ui/chat\";\n\nexport function Demo() {\n  const messages: ChatMessageItem[] = [\n    { id: '1', role: 'user', content: 'Can you show me how to style Kit UI tables?', timestamp: '10:40 AM' },\n    { id: '2', role: 'assistant', content: 'Certainly! Kit UI tables use the semantic --border and --surface tokens.', timestamp: '10:41 AM' },\n  ];\n\n  return (\n    <Chat\n      messages={messages}\n      onSendMessage={(text) => console.log('Send:', text)}\n    />\n  );\n}",
@@ -2214,7 +2233,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       "Magnetic/gravitational radial repulsion with smooth exponential damping",
       "Dynamic scale expansion creating a 3D lens bulge around the cursor",
       "Ambient wave undulation breathing subtle life into the background when idle",
-      "Zero CPU overhead during rendering via GPU vertex shader positioning",
+      "GPU vertex shader positioning with a Canvas 2D fallback",
       "Supports wrapping arbitrary children without interfering with pointer interactions",
       "Full prefers-reduced-motion compliance freezing displacement and waves"
     ],
@@ -2367,7 +2386,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
         "name": "size",
         "type": "'sm' | 'md' | 'lg'",
         "default": "'md'",
-        "description": "Slider dimension profile (sm: 40px, md: 48px, lg: 54px)"
+        "description": "Slider dimension profile (sm: 40px, md: 48px, lg: 56px)"
       },
       {
         "name": "icon",
@@ -2551,9 +2570,9 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     "cliCommand": "npx shadcn@latest add chaitanay-kumar/kit-ui/dynamic-island",
     "features": [
       "Continuous physical morphing between collapsed, expanded, profile, and share states",
-      "Spring-based layout-aware geometry and radius interpolation with no abrupt snapping",
+      "Spring-based layout geometry with state-specific rounded corners",
       "Persistent spatial continuity for the avatar across collapsed and profile states",
-      "Fully accessible keyboard navigation with Escape key dismissal and click-outside collapse",
+      "Native keyboard controls with Escape key dismissal and click-outside collapse",
       "Configurable social dock supporting predefined platform detection and custom links",
       "Light and dark mode compatibility adhering strictly to the Kit UI design token system",
       "Respects prefers-reduced-motion media query with instant fallback states"
@@ -2642,6 +2661,18 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
         "type": "ReactNode",
         "default": "undefined",
         "description": "Custom ReactNode replacing default share dock"
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "default": "undefined",
+        "description": "Additional content rendered in the expanded state"
+      },
+      {
+        "name": "idPrefix",
+        "type": "string",
+        "default": "generated per instance",
+        "description": "Namespace for the shared avatar layout identifier"
       },
       {
         "name": "className",
@@ -3214,7 +3245,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     "id": "form",
     "name": "Form",
     "tagline": "Composable, accessible form primitives and controls",
-    "description": "A modular, composable form system with accessible inputs, textareas, custom selects, checkboxes, radio groups, switches, and animated validation messages.",
+    "description": "A modular, composable form system with inputs, textareas, native selects, checkboxes, radio groups, switches, and animated validation messages.",
     "category": "Forms",
     "badges": [
       "Forms",
@@ -3225,7 +3256,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     "cliCommand": "npx shadcn@latest add chaitanay-kumar/kit-ui/form",
     "features": [
       "Modular layout primitives: Form, FormItem, FormLabel, FormControl, FormDescription, FormMessage",
-      "Comprehensive controls: Input, Textarea, Select, Checkbox, RadioGroup, Switch",
+      "Comprehensive controls: Input, Textarea, Select, Checkbox, RadioGroup, RadioGroupItem, Switch",
       "Spring-animated validation errors and password visibility toggle",
       "Tactile check, radio dot, and toggle switch spring physics",
       "Accessible ARIA semantics, required asterisks, and keyboard navigation",
@@ -3254,7 +3285,13 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
         "name": "required",
         "type": "boolean",
         "default": "false",
-        "description": "Displays red asterisk and enforces requirement"
+        "description": "FormLabel displays an asterisk; set native control required separately"
+      },
+      {
+        "name": "noValidate",
+        "type": "boolean",
+        "default": "true",
+        "description": "Form skips native validation by default; set false to enable browser validity checks"
       },
       {
         "name": "leftIcon",
@@ -3270,13 +3307,13 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       }
     ],
     "accessibility": [
-      "Semantic label-input association with generated IDs",
+      "Checkbox and radio controls generate linked IDs; connect other labels with htmlFor and an input id",
       "ARIA role=\"alert\" on animated validation messages",
       "role=\"switch\" and role=\"radiogroup\" with proper aria-checked attributes",
-      "Sky-400 focus ring on all interactive focusable elements"
+      "Theme focus rings on text fields, select controls and switch buttons"
     ],
     "createdAt": "2026-08-19",
-    "usageCode": "import { Form, FormItem, FormLabel, FormControl, FormDescription, FormMessage, Input, Button } from \"@/components/ui/form\";\nimport { useState } from \"react\";\n\nexport function Demo() {\n  const [email, setEmail] = useState(\"\");\n  const [error, setError] = useState(\"\");\n\n  const handleSubmit = (e: React.FormEvent) => {\n    e.preventDefault();\n    if (!email.includes(\"@\")) {\n      setError(\"Please enter a valid email address.\");\n    } else {\n      setError(\"\");\n    }\n  };\n\n  return (\n    <Form onSubmit={handleSubmit} className=\"max-w-sm\">\n      <FormItem>\n        <FormLabel required>Email Address</FormLabel>\n        <FormControl>\n          <Input\n            type=\"email\"\n            placeholder=\"you@company.com\"\n            value={email}\n            onChange={(e) => setEmail(e.target.value)}\n            error={!!error}\n          />\n        </FormControl>\n        <FormDescription>We will never share your email.</FormDescription>\n        <FormMessage error={error} />\n      </FormItem>\n      <Button type=\"submit\" variant=\"primary\" fullWidth>\n        Submit\n      </Button>\n    </Form>\n  );\n}",
+    "usageCode": "import { Form, FormItem, FormLabel, FormControl, FormDescription, FormMessage, Input } from \"@/components/ui/form\";\nimport { Button } from \"@/components/ui/button\";\nimport { useState } from \"react\";\n\nexport function Demo() {\n  const [email, setEmail] = useState(\"\");\n  const [error, setError] = useState(\"\");\n\n  const handleSubmit = (e: React.FormEvent) => {\n    e.preventDefault();\n    if (!email.includes(\"@\")) {\n      setError(\"Please enter a valid email address.\");\n    } else {\n      setError(\"\");\n    }\n  };\n\n  return (\n    <Form onSubmit={handleSubmit} className=\"max-w-sm\">\n      <FormItem>\n        <FormLabel required>Email Address</FormLabel>\n        <FormControl>\n          <Input\n            type=\"email\"\n            placeholder=\"you@company.com\"\n            value={email}\n            onChange={(e) => setEmail(e.target.value)}\n            error={!!error}\n          />\n        </FormControl>\n        <FormDescription>We will never share your email.</FormDescription>\n        <FormMessage error={error} />\n      </FormItem>\n      <Button type=\"submit\" variant=\"primary\" fullWidth>\n        Submit\n      </Button>\n    </Form>\n  );\n}",
     "dependencies": [
       "framer-motion",
       "lucide-react"
@@ -3525,11 +3562,11 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     ],
     "cliCommand": "npx shadcn@latest add chaitanay-kumar/kit-ui/glyph-matrix",
     "features": [
-      "GPU-friendly HTML5 Canvas implementation running at silky 60fps",
+      "Canvas 2D glyph streams with offscreen suspension",
       "Phosphor decay trails rendered via progressive alpha blending",
       "Authentic Katakana, matrix operators, and hexadecimal character set",
       "Interactive pointer disturbance causing streams near the cursor to flare and accelerate",
-      "Supports both bounded containers and full-page fixed background backdrops"
+      "Supports caller-defined container sizing and layered content"
     ],
     "props": [
       {
@@ -3583,8 +3620,8 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       {
         "name": "fullPage",
         "type": "boolean",
-        "default": "false",
-        "description": "Fixes canvas to fill the entire viewport as a full-page background"
+        "default": "undefined",
+        "description": "Legacy declared prop; it does not change the bounded layout. Use caller styles for a full-page backdrop."
       },
       {
         "name": "opacity",
@@ -4672,7 +4709,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     "id": "login",
     "name": "Login",
     "tagline": "Refined authentication card with validation & social SSO",
-    "description": "A production-ready authentication card built with the Kit UI form system, featuring password show/hide, remember me, validation states, and social logins.",
+    "description": "A configurable authentication card built with the Kit UI form system, featuring password show/hide, remember me, validation states, and social login callbacks.",
     "category": "Auth",
     "badges": [
       "Authentication",
@@ -4712,20 +4749,20 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       {
         "name": "error",
         "type": "string | null",
-        "default": "null",
+        "default": "undefined",
         "description": "Server-side or authentication error banner message"
       },
       {
         "name": "isLoading",
         "type": "boolean",
         "default": "false",
-        "description": "Submitting state displaying loader on submit button"
+        "description": "External submit-button loading state; fields and other actions remain usable"
       },
       {
         "name": "onSubmit",
-        "type": "(data: LoginFormData) => void",
+        "type": "(data: LoginFormData) => void | Promise<void>",
         "default": "undefined",
-        "description": "Form submission callback with email, password, rememberMe"
+        "description": "Called after validation with email, password and rememberMe; returned promises are not awaited"
       },
       {
         "name": "onForgotPassword",
@@ -4750,13 +4787,19 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
         "type": "(provider: 'github' | 'google' | 'apple') => void",
         "default": "undefined",
         "description": "Callback when social login button is pressed"
+      },
+      {
+        "name": "signUpText",
+        "type": "string",
+        "default": "\"Don't have an account? Sign up\"",
+        "description": "Text for the optional secondary sign-up action"
       }
     ],
     "accessibility": [
-      "Accessible input labels and autocomplete attributes (email, current-password)",
-      "ARIA alert role on dynamic validation and server error banners",
+      "Visible email/password labels and autocomplete hints; labels are not linked with htmlFor",
+      "Inline validation messages use alert roles; the server error banner uses visible text",
       "Proper form submission handling with Enter key activation",
-      "Sky-400 focus ring on all interactive elements"
+      "Theme focus rings on text fields and action buttons"
     ],
     "createdAt": "2026-08-19",
     "usageCode": "import { Login } from \"@/components/ui/login\";\n\nexport function Demo() {\n  const handleLogin = async (data: { email: string; password: string; rememberMe: boolean }) => {\n    console.log(\"Authenticating:\", data);\n  };\n\n  return (\n    <div className=\"py-8 flex justify-center\">\n      <Login\n        onSubmit={handleLogin}\n        onForgotPassword={() => alert(\"Redirect to forgot password\")}\n        onSignUpClick={() => alert(\"Redirect to sign up\")}\n      />\n    </div>\n  );\n}",
@@ -6208,23 +6251,27 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     "category": "Motion",
     "badges": [
       "HTML5 Canvas",
-      "Spring Physics",
-      "High-DPI",
-      "Accessible"
+      "Particle Physics",
+      "High-DPI"
     ],
     "cliCommand": "npx shadcn@latest add chaitanay-kumar/kit-ui/particle-delete",
     "features": [
-      "Authentic pixel capture inherits real component colors and typography",
-      "Hardware-accelerated 60 FPS Canvas rendering with zero DOM overhead",
+      "DOM capture samples component pixels, with a procedural background/border fallback when capture is blocked",
+      "Canvas 2D particle rendering with configurable sampling and particle limits",
       "Configurable physics: duration, explosion force, drag, and dissolution spread",
-      "Full accessibility support with automatic prefers-reduced-motion fallback",
+      "Automatic prefers-reduced-motion fade fallback",
       "Available as direct utility particleDelete(), hook useParticleDelete(), or <ParticleDeleteContainer /> wrapper"
     ],
     "props": [
       {
+        "name": "initialItems",
+        "type": "ParticleDeleteItem[]",
+        "description": "Initial resource cards; subsequent input changes affect Restore, not current items"
+      },
+      {
         "name": "onDelete",
         "type": "() => void",
-        "description": "Callback invoked after the particle dissolution finishes to remove state"
+        "description": "ParticleDeleteContainer callback after dissolution; not a prop of the main resource-card component"
       },
       {
         "name": "options.duration",
@@ -6258,12 +6305,12 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       }
     ],
     "accessibility": [
-      "Automatically honors prefers-reduced-motion: reduce with immediate subtle fade exit",
+      "Automatically honors prefers-reduced-motion: reduce with a 150ms opacity fade",
       "Delete trigger buttons maintain clear ARIA labels and keyboard focus ring states",
       "Canvas overlay is marked with aria-hidden=\"true\" and pointer-events: none"
     ],
     "createdAt": "2026-08-21",
-    "usageCode": "import { ParticleDeleteContainer, useParticleDelete, particleDelete } from \"@/components/ui/particle-delete\";\nimport { Trash2 } from \"lucide-react\";\n\nexport function Demo() {\n  const [items, setItems] = useState([\n    { id: '1', name: 'Database Snapshot #409' },\n    { id: '2', name: 'Redis Cache Layer' }\n  ]);\n\n  const handleDelete = (id: string) => {\n    setItems((prev) => prev.filter((i) => i.id !== id));\n  };\n\n  return (\n    <div className=\"space-y-3\">\n      {items.map((item) => (\n        <ParticleDeleteContainer\n          key={item.id}\n          onDelete={() => handleDelete(item.id)}\n          className=\"p-4 rounded-xl bg-[#0D0D0D] border border-[#222222] flex items-center justify-between\"\n        >\n          {({ isDeleting, handleDelete: triggerDelete }) => (\n            <>\n              <span className=\"text-sm font-medium text-white\">{item.name}</span>\n              <button\n                type=\"button\"\n                onClick={triggerDelete}\n                disabled={isDeleting}\n                className=\"p-2 rounded-lg bg-[#141414] hover:bg-rose-950/40 text-[#888888] hover:text-rose-400 border border-[#262626] transition-colors\"\n              >\n                <Trash2 className=\"w-4 h-4\" />\n              </button>\n            </>\n          )}\n        </ParticleDeleteContainer>\n      ))}\n    </div>\n  );\n}",
+    "usageCode": "import { useState } from \"react\";\nimport { ParticleDeleteContainer } from \"@/components/ui/particle-delete\";\nimport { Trash2 } from \"lucide-react\";\n\nexport function Demo() {\n  const [items, setItems] = useState([\n    { id: '1', name: 'Database Snapshot #409' },\n    { id: '2', name: 'Redis Cache Layer' }\n  ]);\n\n  const handleDelete = (id: string) => {\n    setItems((prev) => prev.filter((i) => i.id !== id));\n  };\n\n  return (\n    <div className=\"space-y-3\">\n      {items.map((item) => (\n        <ParticleDeleteContainer\n          key={item.id}\n          onDelete={() => handleDelete(item.id)}\n          className=\"p-4 rounded-xl bg-[#0D0D0D] border border-[#222222] flex items-center justify-between\"\n        >\n          {({ isDeleting, handleDelete: triggerDelete }) => (\n            <>\n              <span className=\"text-sm font-medium text-white\">{item.name}</span>\n              <button\n                type=\"button\"\n                onClick={triggerDelete}\n                disabled={isDeleting}\n                className=\"p-2 rounded-lg bg-[#141414] hover:bg-rose-950/40 text-[#888888] hover:text-rose-400 border border-[#262626] transition-colors\"\n              >\n                <Trash2 className=\"w-4 h-4\" />\n              </button>\n            </>\n          )}\n        </ParticleDeleteContainer>\n      ))}\n    </div>\n  );\n}",
     "dependencies": [
       "lucide-react"
     ],
@@ -7077,20 +7124,20 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     "cliCommand": "npx shadcn@latest add chaitanay-kumar/kit-ui/pull-to-refresh",
     "features": [
       "Seamless Light and Dark mode theming with tuned contrast and crisp aesthetics",
-      "Physical logarithmic spring resistance matching iOS and native touch physics",
+      "Exponential pull resistance with spring-smoothed content translation",
       "Interactive pointer and touch chart scrubbing with realtime price and timestamp tracking",
       "Integrated financial statistics card with smooth bezier curve line chart, area fill, and endpoint glow",
       "Minimal key metrics summary row (24h High, 24h Low, Volume)",
       "Reactive time range switching (1H, 4H, 1D) with spring morph pill indicators",
       "Full async lifecycle support (idle, pulling, ready, refreshing, complete)",
-      "Keyboard accessible refresh triggers (Press R or Enter) and screen reader support"
+      "R shortcut on the panel and a native hidden refresh button"
     ],
     "props": [
       {
         "name": "onRefresh",
         "type": "() => Promise<void> | void",
         "default": "undefined",
-        "description": "Async or sync callback executed when released beyond threshold"
+        "description": "Called for a qualifying pull/flick or explicit refresh; when omitted, runs the built-in financial simulation"
       },
       {
         "name": "threshold",
@@ -7129,17 +7176,29 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
         "description": "Show the built-in minimal circular progress indicator"
       },
       {
+        "name": "pullIndicator",
+        "type": "(state: PullState) => React.ReactNode",
+        "default": "undefined",
+        "description": "Custom indicator renderer receiving status, distance, progress and threshold"
+      },
+      {
         "name": "children",
         "type": "React.ReactNode",
         "default": "<FinancialStatsCard />",
         "description": "Custom child content to be pulled"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": "undefined",
+        "description": "Tailwind classes merged into the panel wrapper"
       }
     ],
     "accessibility": [
       "Accessible role=\"region\" with aria-busy and aria-label attributes",
-      "Full keyboard support with R key shortcut when focused",
+      "Focused panel supports R without Control or Meta; the hidden native button supports ordinary keyboard activation",
       "Screen reader accessible hidden refresh button fallback",
-      "Honors prefers-reduced-motion media query"
+      "Reduced motion removes content translation; refresh indicators and several financial-card effects retain their source animations"
     ],
     "createdAt": "2026-09-24",
     "usageCode": "import { PullToRefresh, FinancialStatsCard } from \"@/components/ui/pull-to-refresh\";\n\nexport function Demo() {\n  return (\n    <PullToRefresh\n      onRefresh={async () => {\n        await new Promise((res) => setTimeout(res, 1200));\n      }}\n    >\n      <FinancialStatsCard showMetrics showActions />\n    </PullToRefresh>\n  );\n}",
@@ -7899,7 +7958,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     ],
     "cliCommand": "npx shadcn@latest add chaitanay-kumar/kit-ui/shooting-stars",
     "features": [
-      "Zero external runtime dependencies: 100% native HTML5 Canvas 2D with sub-pixel DPR scaling",
+      "No external particle runtime: native HTML5 Canvas 2D with sub-pixel DPR scaling",
       "Multi-depth twinkling starfield with radiant 4-point celestial cross-sparkles and soft halo blooms",
       "Cinematic meteors with radiant head bursts, tapered linear-gradient fading trails, and custom trajectory angles",
       "Stardust ember particles dynamically shed from traveling meteor tails for realistic atmospheric burns",
@@ -8049,14 +8108,13 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
   {
     "id": "sign-up",
     "name": "Sign Up",
-    "tagline": "Multi-step capable user registration with strength telemetry",
+    "tagline": "Registration with password strength and terms validation",
     "description": "A comprehensive registration card with live password strength metrics, password confirmation matching, terms validation, and social onboarding.",
     "category": "Auth",
     "badges": [
       "Registration",
       "Forms",
-      "Password Strength",
-      "Accessible"
+      "Password Strength"
     ],
     "cliCommand": "npx shadcn@latest add chaitanay-kumar/kit-ui/sign-up",
     "features": [
@@ -8090,20 +8148,20 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       {
         "name": "error",
         "type": "string | null",
-        "default": "null",
+        "default": "undefined",
         "description": "Server-side registration error banner message"
       },
       {
         "name": "isLoading",
         "type": "boolean",
         "default": "false",
-        "description": "Submitting state displaying loader on submit button"
+        "description": "External loading state; disables the submit button while fields and social actions remain active"
       },
       {
         "name": "onSubmit",
-        "type": "(data: SignUpFormData) => void",
+        "type": "(data: SignUpFormData) => void | Promise<void>",
         "default": "undefined",
-        "description": "Form submission callback with name, email, password, confirmPassword, agreeToTerms"
+        "description": "Callback receives name, email, password, confirmPassword and agreeToTerms; returned promises do not control loading"
       },
       {
         "name": "onSignInClick",
@@ -8116,6 +8174,17 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
         "type": "boolean",
         "default": "true",
         "description": "Toggles GitHub and Google SSO buttons"
+      },
+      {
+        "name": "onSocialSignUp",
+        "type": "(provider: 'github' | 'google') => void",
+        "description": "Social action callback; consumer owns authentication"
+      },
+      {
+        "name": "signInText",
+        "type": "string",
+        "default": "'Already have an account? Sign in'",
+        "description": "Text for the optional sign-in action"
       },
       {
         "name": "requireConfirmPassword",
@@ -8131,13 +8200,14 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       }
     ],
     "accessibility": [
-      "Accessible input labels with required indicators and autocomplete values (name, email, new-password)",
+      "Visible required labels and autocomplete values; labels are not programmatically linked to inputs",
       "Role=\"alert\" for validation errors with smooth Framer Motion spring entrances",
       "Keyboard navigable form submission and checkbox selection",
-      "Sky-400 focus ring on all focusable controls"
+      "Native field and checkbox keyboard access; password visibility buttons have tabIndex -1",
+      "Server error banner is not a live alert; component spring animations do not bypass reduced motion"
     ],
     "createdAt": "2026-08-19",
-    "usageCode": "import { SignUp } from \"@/components/ui/sign-up\";\n\nexport function Demo() {\n  const handleSignUp = async (data: any) => {\n    console.log(\"Registering account:\", data);\n  };\n\n  return (\n    <div className=\"py-8 flex justify-center\">\n      <SignUp\n        onSubmit={handleSignUp}\n        onSignInClick={() => alert(\"Redirect to sign in\")}\n      />\n    </div>\n  );\n}",
+    "usageCode": "import { SignUp, type SignUpFormData } from \"@/components/ui/sign-up\";\n\nexport function Demo() {\n  const handleSignUp = async (data: SignUpFormData) => {\n    // Supply application registration and manage isLoading/error outside the card.\n    void data;\n  };\n\n  return (\n    <div className=\"py-8 flex justify-center\">\n      <SignUp\n        onSubmit={handleSignUp}\n        onSignInClick={() => alert(\"Redirect to sign in\")}\n      />\n    </div>\n  );\n}",
     "dependencies": [
       "framer-motion",
       "lucide-react"
@@ -8395,7 +8465,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     "accessibility": [
       "Semantic region container with ARIA labels",
       "Keyboard accessible category accordions and tooltips",
-      "High-contrast state indicators with screen reader readable labels"
+      "Boolean values render visual check and minus icons"
     ],
     "createdAt": "2026-08-19",
     "usageCode": "import { SmartComparison } from \"@/components/ui/smart-comparison\";\n\nconst plans = [\n  { id: \"hobby\", name: \"Hobby\", tagline: \"For side projects\", price: \"$0\", billingPeriod: \"mo\" },\n  { id: \"pro\", name: \"Pro\", tagline: \"For fast-moving teams\", price: \"$29\", billingPeriod: \"mo\", featured: true, badge: \"Popular\" },\n  { id: \"enterprise\", name: \"Enterprise\", tagline: \"Dedicated compliance\", price: \"Custom\", billingPeriod: \"yr\" },\n];\n\nconst categories = [\n  {\n    id: \"compute\",\n    title: \"Compute & Scale\",\n    features: [\n      { id: \"bandwidth\", name: \"Global Bandwidth\", values: { hobby: \"100 GB\", pro: \"1 TB\", enterprise: \"Unlimited\" } },\n      { id: \"regions\", name: \"Multi-Region Routing\", values: { hobby: false, pro: true, enterprise: true } },\n      { id: \"concurrency\", name: \"Max Concurrency\", values: { hobby: \"10\", pro: \"250\", enterprise: \"Dedicated\" } },\n    ],\n  },\n];\n\nexport function Demo() {\n  return <SmartComparison plans={plans} categories={categories} />;\n}",
@@ -8560,7 +8630,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
   {
     "id": "sparkles-core",
     "name": "Sparkles Core",
-    "tagline": "Zero-dependency GPU canvas particle sparkles with celestial stars, organic twinkle, and cursor reactions",
+    "tagline": "Canvas 2D particle sparkles with celestial stars, organic twinkle, and cursor reactions",
     "description": "A high-performance, zero-dependency particle sparkle canvas with multi-shape geometry (circles, radiant diamond stars, cross starlets), organic twinkling, interactive cursor repulsion/attraction, click particle bursts, and fluid SSR safety.",
     "category": "Motion",
     "badges": [
@@ -8572,7 +8642,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     "cliCommand": "npx shadcn@latest add chaitanay-kumar/kit-ui/sparkles-core",
     "features": [
       "Zero external particle dependencies: 100% native HTML5 Canvas 2D with sub-pixel DPR scaling",
-      "Full backward compatibility with Aceternity SparklesCore props signature",
+      "Size, density and color controls without an external particle runtime",
       "Multiple particle shapes: circle, 4-pointed diamond star, celestial cross starlet, or mixed",
       "Multi-color palette distribution supporting chromatic nebulae and gradient sparkle fields",
       "Organic twinkle brightness pulsation with phase modulation and customizable twinkle speeds",
@@ -8580,7 +8650,7 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       "Interactive cursor modes: repulsion, attraction, or proximity radiant enlargement",
       "Click & tap particle burst generation spawning dynamic kinetic firework sparks",
       "Wraps arbitrary children effortlessly with pointer event pass-through and depth stratification",
-      "Full accessibility: aria-hidden canvas and prefers-reduced-motion compliance"
+      "Canvas is hidden from assistive technology and particle movement respects reduced motion"
     ],
     "props": [
       {
@@ -9709,9 +9779,9 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     "features": [
       "Pure monochrome aesthetic (clean white/silver on dark, deep obsidian on light) with zero colors",
       "9 unique cognitive states: working, searching, solving, listening, connecting, weaving, composing, breathing, and shaping",
-      "GPU-accelerated Canvas rendering with 3D spherical trigonometry and perspective projection",
+      "Canvas 2D rendering with 3D spherical trigonometry and perspective projection",
       "Adaptive particle density scaling automatically calibrated to size",
-      "Full accessibility support with automatic prefers-reduced-motion fallback",
+      "Image label and automatic prefers-reduced-motion time freezing",
       "Minimalist optical core with subtle particle motion trailing and star sparkles"
     ],
     "props": [
@@ -9736,8 +9806,8 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
       {
         "name": "dark",
         "type": "boolean",
-        "default": "true",
-        "description": "Dark mode tuning: true renders luminous white particles, false renders crisp dark graphite particles"
+        "default": "undefined",
+        "description": "Automatically follows the document dark class when omitted; true renders luminous white particles and false renders dark graphite particles"
       },
       {
         "name": "paused",
