@@ -63,6 +63,8 @@ jobs:
         run: npm run test:agent-activity
       - name: Verify Prompt Composer package contract
         run: npm run test:prompt-composer
+      - name: Verify AI Response compound and markdown contracts
+        run: npm run test:ai-response
       - name: Verify Loader package contract
         run: npm run test:loader
       - name: Verify Press Button

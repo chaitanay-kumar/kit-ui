@@ -1,3 +1,4 @@
+import {buildAIResponseParts} from './angular-ai-response';
 import {buildCarSmokeSupport,carSmokePort} from './angular-car-smoke';
 import {buildChatParts} from './angular-chat';
 import {buildPullRefreshSupport,pullRefreshPort} from './angular-pull-to-refresh';
@@ -582,6 +583,7 @@ const base: Record<Kind, string> = {
 };
 await buildDynamicIslandStyles(root);
 await buildChatParts(root);
+await buildAIResponseParts(root);
 await buildPullRefreshSupport(root);
 await buildCarSmokeSupport(root);
 const entries = ports
