@@ -1,6 +1,6 @@
 # Completed parity checks
 
-111 components have recorded validated baselines through batch 48. The 99 baselines through batch 42 are integrated; batches 31?42 were merged through [PR #26](https://github.com/chaitanay-kumar/kit-ui/pull/26). Batches 43-48 are locally validated and await integration review, merge/deployment and final user QA; see [batch 43](batch-43-integration.md), [batch 44](batch-44-integration.md), [batch 45](batch-45-integration.md) and [batch 46](batch-46-integration.md) and [batch 47](batch-47-integration.md) and [batch 48](batch-48-integration.md) evidence. Validation scope and remaining limits are recorded in each linked report. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
+113 components have recorded validated baselines through batch 49. The 99 baselines through batch 42 are integrated; batches 31?42 were merged through [PR #26](https://github.com/chaitanay-kumar/kit-ui/pull/26). Batches 43-49 are locally validated and await integration review, merge/deployment and final user QA; see [batch 43](batch-43-integration.md), [batch 44](batch-44-integration.md), [batch 45](batch-45-integration.md) and [batch 46](batch-46-integration.md) and [batch 47](batch-47-integration.md) and [batch 48](batch-48-integration.md) and [batch 49](batch-49-integration.md) evidence. Validation scope and remaining limits are recorded in each linked report. The [parity tracker](../ANGULAR_REACT_PARITY.md) owns queue status. AI Response remains deferred.
 
 | Component | Status | Evidence |
 | --- | --- | --- |
@@ -17,6 +17,7 @@
 | Book Call Button | Validated baseline | [Report](book-call-button.md) |
 | Branching Submenu | Validated baseline | [Report](branching-submenu.md) |
 | Button | Validated baseline | [Review](button.md) |
+| Chat | Validated baseline | [Report](chat.md) |
 | Circular Orbit | Validated baseline | [Evidence](circular-orbit.md) |
 | Code Snippet Deck | Validated baseline | [Report](code-snippet-deck.md) |
 | Command Menu | Validated baseline | [Report](command-menu.md) |
@@ -29,6 +30,7 @@
 | Dot Field | Validated baseline | [Evidence](dot-field.md) |
 | Drag to Confirm | Validated baseline | [Report](drag-to-confirm.md) |
 | DrawCheckbox | Validated baseline | [Report](draw-checkbox.md) |
+| Dynamic Island | Validated baseline | [Report](dynamic-island.md) |
 | Elastic Sheet | Validated baseline | [Evidence](elastic-sheet.md) |
 | Evil Eye | Validated baseline | [Report](evil-eye.md) |
 | Expandable Data Row | Validated baseline | [Report](expandable-data-row.md) |

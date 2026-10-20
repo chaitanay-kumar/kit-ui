@@ -147,6 +147,17 @@ export const ANGULAR_COMPONENTS: AngularEntry[] = [
   } : entry),
 ];
 export function angularUsage(entry: AngularEntry) {
+  if(entry.id==='chat')return `import {Component,signal} from '@angular/core';
+import {KitChatComponent,type ChatMessageItem,type ChatAttachment} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitChatComponent],template:\`<kit-chat [messages]="messages()" [onSendMessage]="send"/>\`})
+export class ExampleComponent {
+ readonly messages=signal<ChatMessageItem[]>([]);private serial=0;
+ readonly send=(content:string,attachments?:ChatAttachment[])=>this.messages.update(previous=>[...previous,{id:String(++this.serial),role:'user',content,attachments}]);
+}`;
+  if(entry.id==='dynamic-island')return `import {Component} from '@angular/core';
+import {KitDynamicIslandComponent} from 'kit-ui-angular';
+@Component({selector:'app-example',imports:[KitDynamicIslandComponent],template:\`<kit-dynamic-island name="Kit UI contributors" [socials]="{github:'https://github.com',email:'hello@example.com'}"/>\`})
+export class ExampleComponent {}`;
   if(entry.id==='sign-up')return `import {Component,signal} from '@angular/core';
 import {KitSignUpComponent,type SignUpFormData} from 'kit-ui-angular';
 @Component({selector:'app-example',imports:[KitSignUpComponent],template:\`<kit-sign-up [onSubmit]="submit"/><p>{{message()}}</p>\`})

@@ -5,7 +5,7 @@
   "license": "MIT",
   "repository": { "type": "git", "url": "https://github.com/chaitanay-kumar/kit-ui.git", "directory": "packages/angular" },
   "peerDependencies": { "@angular/core": "^20.0.0 || ^21.0.0 || ^22.0.0", "@angular/common": "^20.0.0 || ^21.0.0 || ^22.0.0", "rxjs": "^7.8.0" },
-  "dependencies": { "tslib": "^2.8.1" },
+  "dependencies": { "tslib": "^2.8.1", "tailwind-merge": "^3.6.0" },
   "exports": { "./styles.css": "./styles.css" },
   "sideEffects": ["*.css"]
 }

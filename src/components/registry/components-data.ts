@@ -1369,29 +1369,29 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     "features": [
       "Complete conversational layout with optional historical threads sidebar and responsive mobile drawer",
       "Rich message components supporting user, assistant, and system roles with timestamps and avatars",
-      "Built-in file and image attachment upload system with chips, sizes, and removal actions",
+      "File and image attachment metadata with chips, sizes, and removal actions; upload transport is supplied by the application",
       "Auto-expanding multiline composer with Enter-to-send and Shift+Enter for newline shortcuts",
-      "Message delivery states: sending, sent, delivered, failed (with retry), and streaming",
+      "Failed and streaming message indicators; standalone ChatMessage supports an optional retry callback",
       "Accessible action triggers for copying message content and managing conversation state"
     ],
     "props": [
       {
         "name": "messages",
         "type": "ChatMessageItem[]",
-        "default": "[]",
-        "description": "Array of chat message records including role, content, author, and attachments"
+        "default": "required",
+        "description": "Externally owned message records including role, content, author, and attachments"
       },
       {
         "name": "onSendMessage",
         "type": "(content: string, attachments?: ChatAttachment[]) => void",
-        "default": "undefined",
-        "description": "Callback fired when the user submits a message via composer"
+        "default": "required",
+        "description": "Application send callback; the component supplies no message or upload transport"
       },
       {
         "name": "isGenerating",
         "type": "boolean",
         "default": "false",
-        "description": "Disables composer and shows loading status while the assistant is synthesizing an answer"
+        "description": "Blocks sending and shows a spinner while preserving draft editing and attachment selection"
       },
       {
         "name": "threads",
@@ -1424,6 +1424,18 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
         "description": "Callback fired when the user clicks the clear chat history button"
       },
       {
+        "name": "accentColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "Optional send-button background color"
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "default": "undefined",
+        "description": "Custom compound layout using ChatHeader, ChatSidebar, ChatMessages and ChatComposer within the root context"
+      },
+      {
         "name": "className",
         "type": "string",
         "default": "undefined",
@@ -1432,9 +1444,9 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     ],
     "accessibility": [
       "Keyboard navigable message history and composer with standard Enter and Shift+Enter keybindings",
-      "Composer textarea provides clear accessible placeholders, labels, and aria-describedby hints",
-      "Mobile sidebar features focus isolation, escape key dismissal, and backdrop overlay click handlers",
-      "Action buttons include aria-label descriptors for screen reader compatibility"
+      "Composer textarea uses a placeholder; consuming applications can supply additional accessible labeling",
+      "Mobile sidebar offers native toggle, close and thread-selection buttons",
+      "Send, attachment, history and message-copy actions have accessible names"
     ],
     "createdAt": "2026-09-21",
     "usageCode": "import { Chat, type ChatMessageItem } from \"@/components/ui/chat\";\n\nexport function Demo() {\n  const messages: ChatMessageItem[] = [\n    { id: '1', role: 'user', content: 'Can you show me how to style Kit UI tables?', timestamp: '10:40 AM' },\n    { id: '2', role: 'assistant', content: 'Certainly! Kit UI tables use the semantic --border and --surface tokens.', timestamp: '10:41 AM' },\n  ];\n\n  return (\n    <Chat\n      messages={messages}\n      onSendMessage={(text) => console.log('Send:', text)}\n    />\n  );\n}",
@@ -2551,9 +2563,9 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
     "cliCommand": "npx shadcn@latest add chaitanay-kumar/kit-ui/dynamic-island",
     "features": [
       "Continuous physical morphing between collapsed, expanded, profile, and share states",
-      "Spring-based layout-aware geometry and radius interpolation with no abrupt snapping",
+      "Spring-based layout geometry with state-specific rounded corners",
       "Persistent spatial continuity for the avatar across collapsed and profile states",
-      "Fully accessible keyboard navigation with Escape key dismissal and click-outside collapse",
+      "Native keyboard controls with Escape key dismissal and click-outside collapse",
       "Configurable social dock supporting predefined platform detection and custom links",
       "Light and dark mode compatibility adhering strictly to the Kit UI design token system",
       "Respects prefers-reduced-motion media query with instant fallback states"
@@ -2642,6 +2654,18 @@ export const KIT_COMPONENTS: KitComponentMeta[] = [
         "type": "ReactNode",
         "default": "undefined",
         "description": "Custom ReactNode replacing default share dock"
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "default": "undefined",
+        "description": "Additional content rendered in the expanded state"
+      },
+      {
+        "name": "idPrefix",
+        "type": "string",
+        "default": "generated per instance",
+        "description": "Namespace for the shared avatar layout identifier"
       },
       {
         "name": "className",

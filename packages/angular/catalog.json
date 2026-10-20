@@ -274,17 +274,21 @@
     "name": "Chat",
     "exportName": "KitChatComponent",
     "selector": "kit-chat",
-    "description": "An application-connected conversation with sending, cancellation, retry, preserved drafts and accessible message history.",
+    "description": "Native compound conversation UI with externally owned messages/generation/threads, source message rendering, attachment metadata and composer behavior.",
     "inputs": [
-      "messages: KitMessage[] (two-way)",
-      "sendHandler: KitChatHandler",
-      "disabled: boolean",
-      "label: string"
+      "messages: ChatMessageItem[] (required)",
+      "onSendMessage: ChatSendMessage (required)",
+      "isGenerating: boolean",
+      "threads: ChatConversationThread[]",
+      "activeThreadId: string",
+      "accentColor: string",
+      "onSelectThread: (id: string) => void",
+      "onNewChat: () => void",
+      "onClearChat: () => void",
+      "className: string",
+      "content: FormContent"
     ],
-    "outputs": [
-      "messageSent: KitMessage",
-      "messagesChange: KitMessage[]"
-    ]
+    "outputs": []
   },
   {
     "id": "circular-orbit",
@@ -525,24 +529,27 @@
     "name": "Dynamic Island",
     "exportName": "KitDynamicIslandComponent",
     "selector": "kit-dynamic-island",
-    "description": "A compact status island that expands to reveal actions and their current state.",
+    "description": "Native four-state profile island with controlled/default state, configurable social content, outside/Escape dismissal and source layout motion.",
     "inputs": [
-      "items: KitItem[]",
-      "label: string",
-      "disabled: boolean",
-      "loading: boolean",
-      "error: string",
-      "selected: string (two-way)",
-      "selectedIds: string[] (two-way)",
-      "action: KitCollectionAction"
+      "avatar: string",
+      "avatarAlt: string",
+      "name: string",
+      "role: string",
+      "description: string",
+      "greeting: string",
+      "statusText: string",
+      "metadata: DynamicIslandMetadataItem[]",
+      "socials: DynamicIslandSocials",
+      "defaultState: DynamicIslandState",
+      "state: DynamicIslandState",
+      "onStateChange: (state: DynamicIslandState) => void",
+      "className: string",
+      "profileContent: FormContent",
+      "shareContent: FormContent",
+      "content: FormContent",
+      "idPrefix: string"
     ],
-    "outputs": [
-      "itemSelect: KitItem",
-      "actionRequested: KitItem[]",
-      "actionComplete: KitItem[]",
-      "selectedChange: string",
-      "selectedIdsChange: string[]"
-    ]
+    "outputs": []
   },
   {
     "id": "evil-eye",
