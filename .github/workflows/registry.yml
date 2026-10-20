@@ -31,6 +31,8 @@ jobs:
         run: |
           npm run angular:sync
           if [ -n "$(git status --porcelain -- packages/angular/src packages/angular/catalog.json packages/angular-demo/src/ports.ts src/lib/framework/angular-ports.ts)" ]; then
+            git status --short -- packages/angular/src packages/angular/catalog.json packages/angular-demo/src/ports.ts src/lib/framework/angular-ports.ts
+            git diff -- packages/angular/src packages/angular/catalog.json packages/angular-demo/src/ports.ts src/lib/framework/angular-ports.ts
             echo "::error::Angular generated files are out of sync. Run npm run angular:sync and commit its outputs."
             exit 1
           fi
