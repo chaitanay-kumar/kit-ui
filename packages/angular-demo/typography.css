@@ -1,0 +1,12 @@
+/* The iframe is a separate document: reproduce the React showroom's base
+ * typography without importing its React application or utility stylesheet. */
+@layer theme, base, components, utilities;
+@layer base {
+  :where(button,input,optgroup,select,textarea){font:inherit;font-feature-settings:inherit;font-variation-settings:inherit;letter-spacing:inherit;color:inherit}
+  :where(h1,h2,h3,h4,h5,h6){font-size:inherit;font-family:var(--font-heading);margin:0}
+  :where(h1){font-weight:700;letter-spacing:var(--tracking-tight-heading)}
+  :where(h2){font-weight:600;letter-spacing:-.028em}
+  :where(h3){font-weight:600;letter-spacing:var(--tracking-snug)}
+  :where(h4,h5,h6){font-weight:600;letter-spacing:-.015em}
+  :where(p){font-family:var(--font-body);font-weight:400;letter-spacing:var(--tracking-body);margin:0}
+}

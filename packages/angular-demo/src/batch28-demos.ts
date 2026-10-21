@@ -1,7 +1,7 @@
 import {Component,ElementRef,signal,viewChild} from '@angular/core';
 import {KitAnimatedTabsComponent,KitScrollvelocitytextComponent} from 'kit-ui-angular';
 
-const typography = `:host{display:block}.k-b28-demo{font-family:var(--font-body,Geist,sans-serif);font-size:16px;line-height:1.5;letter-spacing:var(--tracking-body,-.011em);font-feature-settings:'cv02','cv03','cv04','cv11';color:var(--foreground,oklch(.141 .005 285.823));--radius:.875rem;--border:oklch(.92 .004 286.32)}:host-context(.dark) .k-b28-demo{color:var(--foreground,oklch(.985 0 0));--border:oklch(1 0 0 / .1)}*{box-sizing:border-box}`;
+const typography = `:host{display:block}.k-b28-demo{font-family:"Inter Variable",sans-serif;font-size:16px;line-height:1.5;letter-spacing:var(--tracking-body,-.011em);font-feature-settings:'cv02','cv03','cv04','cv11';color:var(--foreground,oklch(.141 .005 285.823));--radius:.875rem;--border:oklch(.92 .004 286.32)}:host-context(.dark) .k-b28-demo{color:var(--foreground,oklch(.985 0 0));--border:oklch(1 0 0 / .1)}*{box-sizing:border-box}`;
 
 @Component({selector:'kit-animated-tabs-demo',standalone:true,imports:[KitAnimatedTabsComponent],styles:typography+`
 .k-b28-tabs{padding-block:32px;display:flex;flex-direction:column;align-items:center;justify-content:center}

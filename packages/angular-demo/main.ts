@@ -2,6 +2,7 @@ import "@angular/compiler";
 import { provideZonelessChangeDetection } from "@angular/core";
 import { bootstrapApplication } from "@angular/platform-browser";
 import { DemoComponent } from "./.generated/demo.component.js";
+import "./typography.css";
 import "../../src/styles/tokens.css";
 import "../../src/styles/fonts.css";
 import "../../src/lib/kit-controls.css";

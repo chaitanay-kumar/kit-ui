@@ -8,6 +8,7 @@ User priority: finish all 116 components. AI Response now has a validated baseli
 
 ## Pending work
 
+- Hosted visual QA is in progress at the user's request. Initial React/Angular screenshots cover all 116 routes in both themes and desktop/mobile viewports; this inventory is not exhaustive pixel approval. Confirmed fixes, validation and remaining candidates are tracked in the [hosted QA brief](parity/hosted-qa.md).
 - Component implementation queue: zero remaining, zero deferred; all 116 have recorded validated baselines. Existing generated coverage alone does not establish parity.
 - All 116 baselines are integrated. Final user QA remains outstanding; address that feedback before calling the overall parity effort complete.
 - Integration audit: direct optional button callbacks in Book Call Button, Split Button, Notification Bell, Payment Status, Profile Card and Peek Card now preserve return-value/exception event-default semantics, explicit cancellation and nested callback receivers. Split option failures retain the open menu. See [integration evidence](parity/batches-31-42-integration.md); batch 36 separately covers Folder Cards, Story Cards, Pricing and Stacked Cards.
