@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   Play,
   RotateCw,
@@ -547,6 +547,9 @@ export const ChatLiveShowcase: React.FC = () => {
   const [threads, setThreads] = useState<ChatConversationThread[]>(INITIAL_THREADS);
   const [activeThreadId, setActiveThreadId] = useState('t-1');
   const [isGenerating, setIsGenerating] = useState(false);
+  const replyTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const cancelReply = () => { clearTimeout(replyTimer.current); replyTimer.current = undefined; setIsGenerating(false); };
+  useEffect(() => () => clearTimeout(replyTimer.current), []);
 
   const handleSendMessage = (text: string, attachments?: any[]) => {
     const userMsg: ChatMessageItem = {
@@ -562,8 +565,9 @@ export const ChatLiveShowcase: React.FC = () => {
     setMessages((prev) => [...prev, userMsg]);
     setIsGenerating(true);
 
-    // Simulate realistic AI reply
-    setTimeout(() => {
+    // Demo owns the simulated transport and cancels it on reset/unmount.
+    clearTimeout(replyTimer.current);
+    replyTimer.current = setTimeout(() => {
       const botMsg: ChatMessageItem = {
         id: `msg-${Date.now() + 1}`,
         role: 'assistant',
@@ -578,6 +582,7 @@ export const ChatLiveShowcase: React.FC = () => {
   };
 
   const handleNewChat = () => {
+    cancelReply();
     const newThreadId = `t-${Date.now()}`;
     const newThread: ChatConversationThread = {
       id: newThreadId,
@@ -607,7 +612,7 @@ export const ChatLiveShowcase: React.FC = () => {
         activeThreadId={activeThreadId}
         onSelectThread={(id) => setActiveThreadId(id)}
         onNewChat={handleNewChat}
-        onClearChat={() => setMessages([])}
+        onClearChat={() => { cancelReply(); setMessages([]); }}
       />
     </div>
   );
