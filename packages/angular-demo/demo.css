@@ -74,3 +74,6 @@ body:has(kit-animated-tabs-demo,kit-scroll-velocity-demo) *{border:0 solid var(-
 
 /* Match source typography for the batch 29 native detail demos. */
 body:has(kit-small-floating-dock-demo,kit-branching-submenu-demo){font-family:"Inter Variable",sans-serif;font-size:16px;line-height:1.5;letter-spacing:var(--tracking-body);font-feature-settings:"cv02","cv03","cv04","cv11";-webkit-font-smoothing:antialiased}
+
+body:has(kit-chat-demo){padding:0;background:#f1f1f2;--background:oklch(1 0 0)}
+.dark body:has(kit-chat-demo){background:#18181b;--background:oklch(.141 .005 285.823)}

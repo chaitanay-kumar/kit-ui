@@ -31,6 +31,13 @@ export abstract class ChatMessagesController extends ChatPart{
  readonly chat=injectChat();readonly emptyPlaceholder=input<FormContent|undefined>();readonly bottom=viewChild<ElementRef<HTMLDivElement>>('bottom');
  readonly spacing=signal(16);
  constructor(){super();const view=inject<ElementRef<HTMLElement>>(ElementRef).nativeElement.ownerDocument.defaultView,media=view?.matchMedia?.('(min-width:640px)'),resize=()=>this.spacing.set(media?media.matches?16:12:16);resize();media?.addEventListener('change',resize);inject(DestroyRef).onDestroy(()=>media?.removeEventListener('change',resize));
-  afterRenderEffect(()=>{this.chat.messages();this.chat.isGenerating();const bottom=this.bottom()?.nativeElement;if(typeof bottom?.scrollIntoView==='function')bottom.scrollIntoView({behavior:'smooth'})});
+  afterRenderEffect(onCleanup=>{
+   this.chat.messages();this.chat.isGenerating();const bottom=this.bottom()?.nativeElement;
+   if(typeof bottom?.scrollIntoView!=='function')return;
+   // Transparent hosts receive their spacing after render. Scroll on the next
+   // frame, once that layout is committed, rather than targeting stale height.
+   if(view?.requestAnimationFrame){const frame=view.requestAnimationFrame(()=>bottom.scrollIntoView({behavior:'smooth'}));onCleanup(()=>view.cancelAnimationFrame(frame));}
+   else bottom.scrollIntoView({behavior:'smooth'});
+  });
  }
 }
