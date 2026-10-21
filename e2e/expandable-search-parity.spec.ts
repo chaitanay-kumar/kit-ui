@@ -1,4 +1,23 @@
 import { test, expect, type Page } from "@playwright/test";
+for (const theme of ["light", "dark"]) test(`website search typography matches React in ${theme}`, async ({page}) => {
+  await page.addInitScript(value => localStorage.setItem('kit-ui-theme', value), theme);
+  const samples: Record<string, unknown[]> = {};
+  for (const framework of ['react', 'angular']) {
+    await page.goto(`/components/expandable-search?framework=${framework}`);
+    const scope = framework === 'react' ? page : page.frameLocator('iframe');
+    const input = scope.locator('input[placeholder="Quick search..."]');
+    await expect(input).toBeVisible({timeout:15000});
+    await input.evaluate(() => document.fonts.ready);
+    await expect.poll(() => input.locator('..').evaluate(el => el.getBoundingClientRect().width)).toBe(160);
+    const footer = scope.getByText('Click input or focus to test smooth width expansion', {exact: true});
+    samples[framework] = [];
+    for (const element of [input, footer]) samples[framework].push(await element.evaluate(el => {
+      const style = getComputedStyle(el);
+      return {font: style.fontFamily, size: style.fontSize, lineHeight: style.lineHeight, weight: style.fontWeight, spacing: style.letterSpacing, features: style.fontFeatureSettings, rendering: style.textRendering, color: style.color, width: el.getBoundingClientRect().width};
+    }));
+  }
+  expect(samples.angular).toEqual(samples.react);
+});
 async function consumer(page: Page, framework: string, theme = "light") {
   await page.route("**/expandable-search-contract.html*", (route) =>
     route.fulfill({
@@ -18,6 +37,7 @@ async function consumer(page: Page, framework: string, theme = "light") {
       ).setSearchOptions === "function",
   );
   await expect(page.getByRole("textbox")).toBeVisible();
+  await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(550);
 }
 async function update(page: Page, options: Record<string, unknown>) {
