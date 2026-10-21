@@ -35,4 +35,3 @@ export const INITIAL_THREADS: ChatConversationThread[] = [
   { id: 't-2', title: 'Framer Motion Spring Tokens', timestamp: 'Yesterday', group: 'Yesterday' },
   { id: 't-3', title: 'Accessibility (WCAG) Audit', timestamp: '2 days ago', group: 'Previous' },
 ];
-
