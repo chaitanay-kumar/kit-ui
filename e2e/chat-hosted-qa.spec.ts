@@ -7,6 +7,7 @@ for(const theme of ['light','dark'])test(`Chat showcase matches content, geometr
   await page.emulateMedia({reducedMotion:'reduce'});
   const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
   const samples:Record<string,unknown>={};
+  const scrollStates:Record<string,{before:unknown[];after:unknown[]}>={};
   for(const framework of ['react','angular']){
     await page.goto(`${process.env.HOSTED_QA_URL??''}/components/chat/?framework=${framework}`);
     const scope=framework==='react'?page.locator('#component-panel-preview'):page.frameLocator('iframe').locator('main');
@@ -16,6 +17,16 @@ for(const theme of ['light','dark'])test(`Chat showcase matches content, geometr
     await expect(root.getByText('Data Table Architecture',{exact:true})).toBeAttached();
     // Let initial message entry and owned smooth scrolling settle in both renderers.
     await page.waitForTimeout(1000);
+    scrollStates[framework]=await root.evaluate(el=>{
+      const lists=Array.from(el.querySelectorAll('div')).filter(node=>getComputedStyle(node).overflowY==='auto'&&node.scrollHeight>node.clientHeight);
+      const read=()=>lists.map(node=>({top:node.scrollTop,height:node.scrollHeight,viewport:node.clientHeight}));
+      const before=read();
+      // Source smooth-scroll endpoints differ by a CSS pixel between local and
+      // hosted runs. Compare the same explicit bottom state, retaining the
+      // unmodified default endpoints as evidence rather than hiding them.
+      for(const node of lists)node.scrollTop=node.scrollHeight;
+      return {before,after:read()};
+    });
     samples[framework]=await root.evaluate(el=>{
       const origin=el.getBoundingClientRect();
       return [el,...el.querySelectorAll('div,aside,button,span,p,h3,h4,svg,textarea,input,pre,code')].map(node=>{
@@ -62,6 +73,8 @@ for(const theme of ['light','dark'])test(`Chat showcase matches content, geometr
     await expect(root.getByText(/Acknowledged! I received your instruction/)).toHaveCount(0);
   }
   await writeFile(info.outputPath('showcase-contracts.json'),JSON.stringify(samples));
+  await writeFile(info.outputPath('scroll-states.json'),JSON.stringify(scrollStates));
+  expect(scrollStates.angular.after).toEqual(scrollStates.react.after);
   const source=samples.react as any[],target=samples.angular as any[];
   expect(target.map(row=>[row.tag,row.text])).toEqual(source.map(row=>[row.tag,row.text]));
   for(let i=0;i<source.length;i++){
