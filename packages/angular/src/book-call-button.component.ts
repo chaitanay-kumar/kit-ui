@@ -12,6 +12,8 @@ template:`
 </a>}@else{<button type="button" [class]="'k-book-call '+className()" [disabled]="disabled()" [attr.aria-label]="label()" (click)="primaryClick($event)" (mouseenter)="hovered.set(true)" (mouseleave)="hovered.set(false)" (focus)="hovered.set(true)" (blur)="hovered.set(false)">
 <ng-container *ngTemplateOutlet="layers"/>
 </button>}<ng-template #layers>
+<span class="k-book-base" aria-hidden="true">
+</span>
 <span class="k-book-capsule" [class.expanded]="hovered()">
 </span>
 <span class="k-book-rest" [class.hidden]="hovered()">
