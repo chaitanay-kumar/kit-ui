@@ -1,4 +1,6 @@
 html { font-family: 'Inter Variable', sans-serif; font-size:16px; line-height:1.5; font-feature-settings:'cv02','cv03','cv04','cv11'; background: var(--bg); color: var(--text-primary); }
+body:has(kit-airport-clock-demo){padding:0;background:#f1f1f2;--radius:.875rem;--border:oklch(.92 .004 286.32);--font-sans:'Inter Variable',sans-serif}
+.dark body:has(kit-airport-clock-demo){background:#18181b;--border:oklch(1 0 0 / .1)}
 body { margin: 0; padding: 16px; letter-spacing:var(--tracking-body); -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
 /* Match the documentation page's inherited input and paragraph typography. */
 body:has(kit-expandable-search-demo){font-family:"Inter Variable",sans-serif;font-size:16px;line-height:24px;letter-spacing:-.011em;font-feature-settings:'cv02','cv03','cv04','cv11';-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
