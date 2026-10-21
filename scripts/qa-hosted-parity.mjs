@@ -9,7 +9,7 @@ import sharp from 'sharp';
 const base=process.env.QA_SITE_URL??'https://chaitanay-kumar.github.io/kit-ui';
 const mode=process.env.QA_MODE??'desktop-light';
 const mobile=mode.startsWith('mobile');const theme=mode.endsWith('dark')?'dark':'light';
-const out=path.resolve('logs/hosted-qa',mode);await fs.mkdir(out,{recursive:true});
+const out=path.resolve('logs/hosted-qa',process.env.QA_CAPTURE_SET??'',mode);await fs.mkdir(out,{recursive:true});
 const inventory=await fs.readFile('docs/ANGULAR_REACT_PARITY.md','utf8');
 const catalog=inventory.split('\n').filter(line=>/^\| \d+ \|/.test(line)).map(line=>{const cells=line.split('|');return {id:cells[3].trim().replaceAll('`',''),name:cells[2].trim()}});
 if(catalog.length!==116||new Set(catalog.map(e=>e.id)).size!==116)throw Error('Expected 116 unique inventory components');
