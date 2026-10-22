@@ -13,10 +13,25 @@ let faqId=0;
  imports:[NgTemplateOutlet],
 encapsulation:ViewEncapsulation.None,styleUrls:["./faq.css"],
 template:`
-<div [class]="'k-faq '+className()">@if(searchable()){<input type="search" [value]="query()" [placeholder]="searchPlaceholder()" (input)="query.set($any($event.target).value)" />}@if(showCategories()&&categories().length>1){<div class="k-faq-categories">@for(category of categories();track category){<button type="button" [attr.aria-pressed]="selectedCategory()===category" (click)="selectedCategory.set(category)">{{category}}</button>}</div>}@if(!filtered().length){<p class="k-faq-empty">No matching questions found.</p>}@else{<div [class]="variant()==='separated'?'k-faq-separated':'k-faq-unified'">@for(item of filtered();track item.id){<div class="k-faq-item">
+<div [class]="'k-faq '+className()">@if(searchable()){<div class="k-faq-search">
+<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="11" cy="11" r="8"/>
+<path d="m21 21-4.3-4.3"/>
+</svg>
+<input type="search" [value]="query()" [placeholder]="searchPlaceholder()" (input)="query.set($any($event.target).value)" />
+</div>}@if(showCategories()&&categories().length>1){<div class="k-faq-categories">@for(category of categories();track category){<button type="button" [attr.aria-pressed]="selectedCategory()===category" (click)="selectedCategory.set(category)">{{category}}</button>}</div>}@if(!filtered().length){<div class="k-faq-empty">
+<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="12" cy="12" r="10"/>
+<path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+<path d="M12 17h.01"/>
+</svg>
+<p>No matching questions found.</p>
+</div>}@else{<div [class]="variant()==='separated'?'k-faq-separated':'k-faq-unified'">@for(item of filtered();track item.id){<div class="k-faq-item">
 <button type="button" [id]="headerId(item.id)" [attr.aria-expanded]="active().includes(item.id)" [attr.aria-controls]="contentId(item.id)" (click)="toggle(item.id)">
-<span class="k-faq-question">@if(template(item.icon);as icon){<ng-container [ngTemplateOutlet]="icon"/>}@else{ {{text(item.icon)}} }<span>{{item.question}}</span>@if(item.badge){<small>{{item.badge}}</small>}</span>
-<span aria-hidden="true">@if(renderIcon()){<ng-container [ngTemplateOutlet]="renderIcon()!" [ngTemplateOutletContext]="{$implicit:active().includes(item.id),isOpen:active().includes(item.id)}"/>}@else{ {{indicator(active().includes(item.id))}} }</span>
+<span class="k-faq-question">@if(template(item.icon);as icon){<ng-container [ngTemplateOutlet]="icon"/>}@else{ {{text(item.icon)}} }<span class="k-faq-label">
+<span>{{item.question}}</span>@if(item.badge){<small>{{item.badge}}</small>}</span>
+</span>
+<span class="k-faq-indicator" [class.k-open]="!renderIcon()&&active().includes(item.id)" aria-hidden="true">@if(renderIcon()){<ng-container [ngTemplateOutlet]="renderIcon()!" [ngTemplateOutletContext]="{$implicit:active().includes(item.id),isOpen:active().includes(item.id)}"/>}@else{<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">@if(iconStyle()==='plus-minus'){<path d="M5 12h14"/>@if(!active().includes(item.id)){<path d="M12 5v14"/>}}@else{<path d="m6 9 6 6 6-6"/>}</svg>}</span>
 </button>@if(active().includes(item.id)){<div class="k-faq-answer" role="region" [id]="contentId(item.id)" [attr.aria-labelledby]="headerId(item.id)">@if(template(item.answer);as answer){<ng-container [ngTemplateOutlet]="answer"/>}@else{ {{text(item.answer)}} }</div>}</div>}</div>}</div>
 `
 })

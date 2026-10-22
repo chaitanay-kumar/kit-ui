@@ -25,13 +25,18 @@ template:`
 <strong>{{customer.name}}</strong>
 <small>{{customer.email}}</small>
 </div>
-<button type="button" title="Copy customer email" [attr.aria-label]="'Copy '+customer.email" (click)="copy(customer.email)">{{copied()?'✓':'⧉'}}</button>
+<button type="button" title="Copy customer email" [class.k-copied]="copied()" [attr.aria-label]="'Copy '+customer.email" (click)="copy(customer.email)">
+<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">@if(copied()){<path d="M20 6 9 17l-5-5"/>}@else{<rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+<path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>}</svg>
+</button>
 </section>}@if(data().metadata?.length){<dl>@for(item of data().metadata;track $index){<div>
 <dt>{{item.label}}</dt>
 <dd>{{item.value}}</dd>
 </div>}</dl>}@if(data().actions?.length){<nav aria-label="Preview actions">@for(action of data().actions;track $index){<button type="button" (click)="actionClick(action,$event)">{{action.label}}</button>}</nav>}@if(data().timestamp){<footer>
 <span>{{data().timestamp}}</span>
-<em>{{data().status||'Active'}}</em>
+<em>
+<i aria-hidden="true">
+</i>{{data().status||'Active'}}</em>
 </footer>}</div>}</aside>}</div>
 `
 })
