@@ -38,16 +38,51 @@ export class KitFormMessageComponent extends FormPart<HTMLParagraphElement>{
 export abstract class FormField<ElementType extends HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement=HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement> extends FormPart<ElementType>{
  readonly value=input<string|number|readonly string[]|undefined>();readonly defaultValue=input<string|number|readonly string[]|undefined>();readonly disabled=input<boolean,boolean|undefined>(false,{transform:value=>value??false});readonly error=input<string|boolean|undefined>();readonly name=input<string|undefined>();readonly id=input<string|undefined>();readonly required=input<boolean,boolean|undefined>(false,{transform:value=>value??false});readonly placeholder=input<string|undefined>();readonly autoComplete=input<string|undefined>();readonly readOnly=input<boolean,boolean|undefined>(false,{transform:value=>value??false});readonly onChange=input<((event:Event)=>void)|undefined>();readonly onInput=input<((event:Event)=>void)|undefined>();readonly onBlur=input<((event:FocusEvent)=>void)|undefined>();readonly onFocus=input<((event:FocusEvent)=>void)|undefined>();readonly onKeyDown=input<((event:KeyboardEvent)=>void)|undefined>();protected readonly errors=inject(ErrorHandler);private initialized=false;
  private writeValue(node:HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement,value:string|number|readonly string[]):void{if(node.tagName==='SELECT'){const select=node as HTMLSelectElement,options=Array.from(select.options);if(select.multiple){const selected=new Set((Array.isArray(value)?value:[value]).map(String));for(const option of options)option.selected=selected.has(option.value)}else{const option=options.find(option=>option.value===String(value))??options.find(option=>!option.disabled);if(option)option.selected=true}}else if(node.tagName==='INPUT'&&(node as HTMLInputElement).type==='number'&&!Array.isArray(value)){if(value===0&&node.value===''||node.value!=value)node.value=String(value)}else if(node.value!==String(value))node.value=String(value)}
- fieldEvent(event:Event,includeInput=true):void{if(includeInput)invokeNativeEventCallback(this.onInput(),event,this.errors);invokeNativeEventCallback(this.onChange(),event,this.errors);queueMicrotask(()=>{const node=this.element()?.nativeElement as HTMLInputElement|undefined,value=this.value();if(node&&value!==undefined)this.writeValue(node,value)})}
+ private fieldDestroyed=false;
+ protected restoreAfterInput():void{const node=this.element()?.nativeElement as HTMLInputElement|undefined,value=this.value();if(node&&value!==undefined)this.writeValue(node,value)}
+ fieldEvent(event:Event,includeInput=true):void{if(includeInput)invokeNativeEventCallback(this.onInput(),event,this.errors);invokeNativeEventCallback(this.onChange(),event,this.errors);queueMicrotask(()=>{if(!this.fieldDestroyed)this.restoreAfterInput()})}
  inputOnly(event:Event):void{invokeNativeEventCallback(this.onInput(),event,this.errors)}
  blur(event:FocusEvent):void{invokeNativeEventCallback(this.onBlur(),event,this.errors)}focusEvent(event:FocusEvent):void{invokeNativeEventCallback(this.onFocus(),event,this.errors)}key(event:KeyboardEvent):void{invokeNativeEventCallback(this.onKeyDown(),event,this.errors)}
  protected syncValue(reset=false):void{const node=this.element()?.nativeElement as HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement|undefined,value=this.value(),defaultValue=this.defaultValue();if(!node)return;if(node.tagName!=='SELECT'){const field=node as HTMLInputElement|HTMLTextAreaElement;if(value!==undefined||defaultValue!==undefined){field.defaultValue=String(node.tagName==='TEXTAREA'?(defaultValue??value):(value??defaultValue))}}if(value!==undefined)this.writeValue(node,value);else if((!this.initialized||reset)&&(defaultValue!==undefined||reset)){this.writeValue(node,defaultValue??((node as HTMLSelectElement).multiple?[]:''));if(node.tagName==='SELECT'&&defaultValue!==undefined)for(const option of Array.from((node as HTMLSelectElement).options))if(option.selected)option.defaultSelected=true}this.initialized=true}
- constructor(){super();afterRenderEffect(()=>this.syncValue())}
+ constructor(){super();afterRenderEffect(()=>this.syncValue());inject(DestroyRef).onDestroy(()=>{this.fieldDestroyed=true})}
 }
 @Component({selector:'kit-input',standalone:true,imports:[KitFormContentComponent,KitFormIconComponent],host:{style:'display:contents'},encapsulation:ViewEncapsulation.None,styleUrls:['./form.css'],template:`<div class="k-form-input-wrap">@if(leftIcon()){<div class="k-form-input-left"><kit-form-content [content]="leftIcon()"/></div>}@else if(numeric(leftIcon())!==undefined){<ng-container>{{numeric(leftIcon())}}</ng-container>}<input #element [class]="'k-form-input '+(leftIcon()?'has-left ':'')+(rightIcon()||(type()==='password'&&showPasswordToggle())?'has-right ':'')+(error()?'has-error ':'')+className()" [type]="type()==='password'&&visible()?'text':type()" [disabled]="disabled()" [attr.name]="name()" [attr.id]="id()" [required]="required()" [placeholder]="placeholder()??''" [attr.autocomplete]="autoComplete()" [readOnly]="readOnly()" (input)="fieldEvent($event)" (blur)="blur($event)" (focus)="focusEvent($event)" (keydown)="key($event)"/>@if(type()==='password'&&showPasswordToggle()){<button type="button" tabindex="-1" class="k-form-password-toggle" [attr.aria-label]="visible()?'Hide password':'Show password'" (click)="visible.set(!visible())"><svg kitFormIcon [icon]="visible()?'eye-off':'eye'"/></button>}@else if(rightIcon()){<div class="k-form-input-right"><kit-form-content [content]="rightIcon()"/></div>}@else if(numeric(rightIcon())!==undefined){<ng-container>{{numeric(rightIcon())}}</ng-container>}</div>`})
 export class KitInputComponent extends FormField<HTMLInputElement>{readonly type=input<string,string|undefined>('text',{transform:value=>value??'text'});readonly leftIcon=input<FormContent|undefined>();readonly rightIcon=input<FormContent|undefined>();readonly showPasswordToggle=input<boolean,boolean|undefined>(false,{transform:value=>value??false});readonly visible=signal(false)}
-@Component({selector:'kit-textarea',standalone:true,host:{style:'display:contents'},encapsulation:ViewEncapsulation.None,styleUrls:['./form.css'],template:`<textarea #element [class]="'k-form-textarea '+(error()?'has-error ':'')+className()" [disabled]="disabled()" [attr.name]="name()" [attr.id]="id()" [required]="required()" [placeholder]="placeholder()??''" [attr.autocomplete]="autoComplete()" [readOnly]="readOnly()" (input)="fieldEvent($event)" (blur)="blur($event)" (focus)="focusEvent($event)" (keydown)="key($event)"><ng-content/></textarea>`})
-export class KitTextareaComponent extends FormField<HTMLTextAreaElement>{}
+@Component({selector:'kit-textarea',standalone:true,host:{style:'display:contents'},encapsulation:ViewEncapsulation.None,styleUrls:['./form.css'],template:`<span #projected hidden><ng-content/></span><textarea #element [class]="'k-form-textarea '+(error()?'has-error ':'')+className()" [disabled]="disabled()" [attr.name]="name()" [attr.id]="id()" [required]="required()" [placeholder]="placeholder()??''" [attr.autocomplete]="autoComplete()" [readOnly]="readOnly()" (input)="fieldEvent($event)" (blur)="blur($event)" (focus)="focusEvent($event)" (keydown)="key($event)"></textarea>`})
+export class KitTextareaComponent extends FormField<HTMLTextAreaElement>{
+ private readonly projected=viewChild<ElementRef<HTMLElement>>('projected');
+ private mounted=false;private destroyed=false;private projectionElement:HTMLElement|undefined;private projectionObserver:MutationObserver|undefined;
+ protected override restoreAfterInput():void{this.syncValue()}
+ protected override syncValue():void{
+  if(this.destroyed)return;
+  const node=this.element()?.nativeElement,projected=this.projected()?.nativeElement,value=this.value(),defaultValue=this.defaultValue();
+  // React updates the textarea default on a props update, including non-value props.
+  for(const read of [this.disabled,this.error,this.name,this.id,this.required,this.placeholder,this.autoComplete,this.readOnly,this.onChange,this.onInput,this.onBlur,this.onFocus,this.onKeyDown,this.className,this.styles,this.attributes,this.events])read();
+  if(!node||!projected||this.destroyed)return;
+  if(!this.mounted){
+   const initial=String(value??defaultValue??projected.textContent??'');
+   node.defaultValue=initial;
+   // Preserve the source's native dirty-value behavior for an initially empty field.
+   if(initial!==''&&node.textContent===initial)node.value=initial;
+   this.mounted=true;return;
+  }
+  if(value!==undefined){
+   const current=String(value);if(node.value!==current)node.value=current;
+   if(defaultValue===undefined){node.defaultValue=current;return;}
+  }
+  node.defaultValue=defaultValue===undefined?'':String(defaultValue);
+ }
+ constructor(){
+  super();
+  afterRenderEffect(()=>{
+   const node=this.projected()?.nativeElement;if(node===this.projectionElement)return;
+   this.projectionObserver?.disconnect();this.projectionElement=node;
+   const Observer=node?.ownerDocument.defaultView?.MutationObserver;
+   if(node&&Observer){this.projectionObserver=new Observer(()=>{if(!this.destroyed)this.syncValue()});this.projectionObserver.observe(node,{childList:true,characterData:true,subtree:true});}
+  });
+  inject(DestroyRef).onDestroy(()=>{this.destroyed=true;this.projectionObserver?.disconnect()});
+ }
+}
 export interface FormSelectOption{value:string;label:string;disabled?:boolean}
 @Component({selector:'kit-select',standalone:true,imports:[KitFormIconComponent],host:{style:'display:contents'},encapsulation:ViewEncapsulation.None,styleUrls:['./form.css'],template:`<div class="k-form-select-wrap"><select #element [class]="'k-form-select '+(error()?'has-error ':'')+className()" [disabled]="disabled()" [attr.name]="name()" [attr.id]="id()" [required]="required()" [multiple]="multiple()" (input)="inputOnly($event)" (change)="fieldEvent($event,false)" (blur)="blur($event)" (focus)="focusEvent($event)" (keydown)="key($event)">@if(options().length){@for(option of options();track option.value){<option [value]="option.value" [disabled]="option.disabled??false">{{option.label}}</option>}}@else{<ng-content/>}</select><div class="k-form-input-right"><svg kitFormIcon icon="chevron-down"/></div></div>`})
 export class KitSelectComponent extends FormField<HTMLSelectElement>{readonly options=input<FormSelectOption[],FormSelectOption[]|undefined>([],{transform:value=>value??[]});readonly multiple=input<boolean,boolean|undefined>(false,{transform:value=>value??false});private lastMultiple:boolean|undefined;constructor(){super();afterRenderEffect(()=>{this.options();const multiple=this.multiple(),reset=this.lastMultiple!==undefined&&this.lastMultiple!==multiple;this.lastMultiple=multiple;untracked(()=>this.syncValue(reset))})}}
