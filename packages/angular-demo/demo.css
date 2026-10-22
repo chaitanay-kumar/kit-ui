@@ -77,3 +77,7 @@ body:has(kit-small-floating-dock-demo,kit-branching-submenu-demo){font-family:"I
 
 body:has(kit-chat-demo){padding:0;background:#f1f1f2;--background:oklch(1 0 0)}
 .dark body:has(kit-chat-demo){background:#18181b;--background:oklch(.141 .005 285.823)}
+
+body:has(kit-faq-demo,kit-glitch-demo,kit-peek-demo){padding:0;background:#f1f1f2}
+.dark body:has(kit-faq-demo,kit-glitch-demo,kit-peek-demo){background:#18181b}
+body:has(kit-peek-demo){--font-sans:'Inter Variable',sans-serif}

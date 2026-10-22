@@ -3613,7 +3613,7 @@ const completion = await client.completions.create({
                     </div>
 
                     {/* Component Render Canvas — seamless unified stage matching card background */}
-                    <div className="relative min-h-[360px] sm:min-h-[440px] p-3 sm:p-8 flex items-center justify-center overflow-hidden text-text-primary">
+                    <div data-preview-stage className={cn('relative p-3 sm:p-8 flex items-center justify-center overflow-hidden text-text-primary', component.id === 'peek-card' ? 'min-h-[600px]' : 'min-h-[360px] sm:min-h-[440px]')}>
                       <div className="w-full flex items-center justify-center">
                         {!isFullscreenPreview && (
                           <Suspense fallback={<div className="min-h-48 w-full flex items-center justify-center text-xs text-text-muted">Loading preview…</div>}>
