@@ -14,7 +14,7 @@ export function AngularPreview({ id, name }: { id: string; name: string }) {
         event.data?.type === "kit-angular-height" &&
         typeof event.data.height === "number"
       )
-        setHeight(Math.max(240, Math.min(1200, event.data.height + 8)));
+        setHeight(Math.max(240, event.data.height + 8));
     };
     window.addEventListener("message", receive);
     return () => window.removeEventListener("message", receive);

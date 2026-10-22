@@ -89,20 +89,32 @@ export const AIResponseLiveShowcase: React.FC = () => {
   const [modelName] = useState('Claude 3.7 Sonnet');
   const [content, setContent] = useState(SAMPLE_RESPONSE_MARKDOWN);
   const [showSources] = useState(true);
+  const streamDelay = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const streamInterval = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
+  const cancelStream = () => {
+    clearTimeout(streamDelay.current);
+    clearInterval(streamInterval.current);
+    streamDelay.current = undefined;
+    streamInterval.current = undefined;
+  };
+  useEffect(() => cancelStream, []);
 
   const simulateStream = () => {
+    cancelStream();
     setStatus('generating');
     setContent('');
-    setTimeout(() => {
+    streamDelay.current = setTimeout(() => {
+      streamDelay.current = undefined;
       setStatus('streaming');
       let currentLength = 0;
       const fullText = SAMPLE_RESPONSE_MARKDOWN;
-      const interval = setInterval(() => {
+      streamInterval.current = setInterval(() => {
         currentLength += 28;
         if (currentLength >= fullText.length) {
           setContent(fullText);
           setStatus('complete');
-          clearInterval(interval);
+          clearInterval(streamInterval.current);
+          streamInterval.current = undefined;
         } else {
           setContent(fullText.slice(0, currentLength));
         }
@@ -150,6 +162,7 @@ export const AIResponseLiveShowcase: React.FC = () => {
               onClick={() => {
                 if (s === 'streaming') simulateStream();
                 else {
+                  cancelStream();
                   setStatus(s);
                   if (s === 'complete') setContent(SAMPLE_RESPONSE_MARKDOWN);
                   if (s === 'error') setContent('Rate limit exceeded: Please wait 12s before re-requesting.');

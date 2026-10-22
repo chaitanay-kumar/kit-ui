@@ -1,5 +1,11 @@
 # AI Response parity
 
+## Hosted showcase follow-up
+
+The current hosted QA batch aligns the native compound example with React's full Markdown, Claude model, three tools, three expanded citations and status/stream controls. A failing browser reproduction proved the React demo's old pending stream overwrote a manually selected error. Both demo parents now cancel replaced work and own their delay/interval cleanup; this does not add a transport API to the library component.
+
+Visual inspection additionally found browser-default blue/underlined native citation links. Add the source preflight anchor inheritance within the component's own reset, preserving explicitly underlined inline Markdown links. Keep the source citation label's separate text-node boundaries: actual DOM measurement found the coalesced native interpolation shaped its label 1/64 px narrower. Checks and deployment evidence are recorded in [hosted-qa.md](hosted-qa.md); shared mobile/compositor raster differences remain unresolved.
+
 Validated baseline: AI Response completes recorded coverage for all 116 catalog components. Integration and deployment status are recorded in the feature brief. See the [feature brief](ai-response-integration.md).
 
 The dedicated definition in scripts/angular-ai-response.ts replaces the generic timed-text port with the React compound contract: root, Header, Content, Sources, Actions, ToolsSummary and standalone CodeBlock. Native context resolves the nearest root, supports projected and TemplateRef composition, and provides signal getters as the Angular counterpart of the React context hook. Application content, status, model name, citations and callbacks are inputs; the component does not request a model, simulate a stream, or own transport cancellation.
