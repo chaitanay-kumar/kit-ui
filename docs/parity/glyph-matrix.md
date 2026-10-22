@@ -1,6 +1,6 @@
 # Glyph Matrix parity
 
-Status: validated baseline in local batch 45, within the validation scope and limits below. Integration and final user QA remain outstanding.
+Status: integrated implementation baseline from batch 45, within the validation scope and limits below. Hosted state and pixel QA remains ongoing.
 
 React `GlyphMatrix.tsx` defines the contract. Native authoring is `scripts/angular-glyph-matrix.ts`, backed by `glyph-matrix-renderer.ts` and scoped CSS.
 
@@ -11,4 +11,6 @@ React `GlyphMatrix.tsx` defines the contract. Native authoring is `scripts/angul
 
 Paired checks cover seeded pixel/draw equality, active streams, touch-type pointer disturbance, reset, imperative pause behavior, static resize, preference capture, caller layout, projected keyboard controls, resize fallback, real observers and disposal. Packaged checks verify exact default charset encoding, methods and complete resource cleanup. Completed batch validation and supported consumer results are recorded in the [batch brief](batch-45-integration.md).
 
-No physical-device, Safari/Firefox, server-rendering/hydration, complete accessibility conformance or arbitrary React reconciliation claim is made. Integration review, merge/deployment and final user QA remain outstanding.
+No physical-device, Safari/Firefox, server-rendering/hydration, complete accessibility conformance or arbitrary React reconciliation claim is made. Complete hosted state/raster acceptance remains outstanding.
+
+The hosted follow-up supplies the source overlay, responsive canvas, four colors, three speeds and controlled pause/resume. Browser checks observe actual selected-color canvas pixels and stable paused output, then renewed painting after resume. Controlled pause still regenerates streams as documented above; these checks do not claim preservation of the pre-pause frame or equality of independently randomized live frames. Exact current validation and artifacts are tracked in `hosted-qa.md`.

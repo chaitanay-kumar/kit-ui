@@ -1,4 +1,4 @@
-# Torque Dial parity (validated locally; integration pending)
+# Torque Dial parity
 
 React source: `src/components/ui/TorqueDial.tsx`; authoring: `scripts/angular-torque-dial.ts`; native controller and styles: `packages/angular/src/torque-dial-controller.ts` and `torque-dial.css`.
 
@@ -9,3 +9,5 @@ Dial rotation and arc offset snap to updates, following the source's static Moti
 Native cancellation, replacement and disposal release drag listeners and animation frames without a completion callback. This deliberately repairs the React source's absent pointer-cancel/unmount drag cleanup. Disposal inside a callback cannot enqueue another frame. Disabled state follows the source tabindex and event guards; it does not invent aria-disabled. No accessibility-conformance or physical-device claim is made.
 
 Focused packaged/controller contracts pass. Paired desktop/mobile behavior, settled geometry (within 1 px), typography/colors and rendered screenshots pass. Browser and completed-batch baseline results are recorded in [batch 40 evidence](batch-40-integration.md).
+
+The integrated baseline's hosted follow-up restores the source dark gain card, `Master Output Gain` label and interaction caption. Native circle paint and controller behavior already match; this change supplies the missing example framing and data. See `hosted-qa.md` for current keyboard/wheel and settled style checks, separately from complete animation/raster acceptance.
