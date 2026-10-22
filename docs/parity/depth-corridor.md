@@ -1,4 +1,4 @@
-# Depth Corridor parity (validated locally; integration pending)
+# Depth Corridor parity
 
 React source: `src/components/ui/DepthCorridor.tsx`; authoring: `scripts/angular-depth-corridor.ts`; native motion/types/styles: `packages/angular/src/depth-corridor-*` and `depth-corridor.css`.
 
@@ -11,3 +11,5 @@ Packaged contracts and desktop/mobile browser cases pass state/control transitio
 Source limits remain: clickable layers and dot spans have no native keyboard activation, roles or tabindex. The root handles arrows, including bubbled keys from nested controls; navigation disables only at exact boundaries. No selection announcement or reduced-motion branch is present. Browser sampling confirms transforms continue under reduced preference in both frameworks. Colors are hardcoded dark values. No physical-device or general accessibility-conformance claim is made.
 
 Angular layer content accepts text or a typed `TemplateRef` with `$implicit` layer and `index` context. `layers` remains required. Application state, callbacks and projected content stay application-owned.
+
+The integrated implementation baseline remains distinct from hosted QA. The hosted example now supplies React's four telemetry layers through a native template, within the same 576 px wrapper. Current showcase navigation, style/geometry checks and remaining raster review are recorded in `hosted-qa.md`.
