@@ -23,3 +23,7 @@ Status: validated baseline in local batch 43, within the validation scope and li
 - Public `TemplateRef` content, framework error reporting and DOM hosts are native equivalents, not React rendering. No physical-device, Safari/Firefox, full WCAG, cross-controller drag-lock interoperability, or frame-by-frame identity claim is made.
 
 Integration review, merge/deployment and final user QA remain outstanding for batch 43.
+
+## Hosted showcase follow-up
+
+The hosted QA batch restores the native example's five React actions, three sizes, keyed resets, exact labels/descriptions and parent status feedback. The underlying controller retains its existing ownership contract. Actual initial paint comparison exposed the idle track/thumb neutral border using an RGB approximation; the authored CSS now uses the source neutral-200 OKLCH token and opacity. Focused hosted comparisons and final deployment evidence are tracked in [hosted-qa.md](hosted-qa.md); universal motion/raster acceptance remains open.
