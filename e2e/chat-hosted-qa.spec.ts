@@ -1,5 +1,6 @@
 import {test,expect} from '@playwright/test';
 import {writeFile} from 'node:fs/promises';
+import {captureComponent} from './helpers/capture-component';
 test.setTimeout(90000);
 
 for(const theme of ['light','dark'])test(`Chat showcase matches content, geometry and interactions in ${theme}`,async({page},info)=>{
@@ -8,6 +9,7 @@ for(const theme of ['light','dark'])test(`Chat showcase matches content, geometr
   const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
   const samples:Record<string,unknown>={};
   const scrollStates:Record<string,{before:unknown[];after:unknown[]}>={};
+  const captures:Record<string,unknown>={},sizes:Record<string,unknown>={};
   for(const framework of ['react','angular']){
     await page.goto(`${process.env.HOSTED_QA_URL??''}/components/chat/?framework=${framework}`);
     const scope=framework==='react'?page.locator('#component-panel-preview'):page.frameLocator('iframe').locator('main');
@@ -54,7 +56,8 @@ for(const theme of ['light','dark'])test(`Chat showcase matches content, geometr
     await page.setViewportSize({...originalViewport,height:Math.ceil(captureHeight)});
     await page.mouse.move(0,0);await root.scrollIntoViewIfNeeded();const box=(await root.boundingBox())!;
     await page.evaluate(delta=>window.scrollBy(0,delta),box.y+box.height/2-page.viewportSize()!.height/2);
-    await root.screenshot({path:info.outputPath(`${framework}-initial.png`)});
+    const capture=await captureComponent(page,root,info.outputPath(`${framework}-initial.png`));
+    captures[framework]={box:capture.box,viewport:capture.viewport,dpr:capture.dpr,pixels:capture.pixels};sizes[framework]=capture.pixels;
     await page.setViewportSize(originalViewport);
     const composer=root.getByRole('textbox');await composer.fill('Hosted QA question');await composer.press('Enter');
     await expect(root.getByText('Hosted QA question',{exact:true})).toBeVisible();
@@ -74,6 +77,8 @@ for(const theme of ['light','dark'])test(`Chat showcase matches content, geometr
   }
   await writeFile(info.outputPath('showcase-contracts.json'),JSON.stringify(samples));
   await writeFile(info.outputPath('scroll-states.json'),JSON.stringify(scrollStates));
+  await writeFile(info.outputPath('capture-boxes.json'),JSON.stringify(captures));
+  expect(sizes.angular).toEqual(sizes.react);
   expect(scrollStates.angular.after).toEqual(scrollStates.react.after);
   const source=samples.react as any[],target=samples.angular as any[];
   expect(target.map(row=>[row.tag,row.text])).toEqual(source.map(row=>[row.tag,row.text]));
