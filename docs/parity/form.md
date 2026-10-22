@@ -1,6 +1,6 @@
 # Form parity
 
-Validated baseline in batch 47. Integration review, merge/deployment and final user QA remain outstanding.
+Integrated implementation baseline from batch 47. Hosted state and pixel QA remains ongoing.
 
 The native Form replaces the generic schema/transport proxy with a composable root and all 12 supporting exports: FormItem, FormLabel, FormControl, FormDescription, FormMessage, Input, Textarea, Select, Checkbox, RadioGroup, RadioGroupItem and Switch. These are standalone Angular components. Native `TemplateRef` content/projected children replace React nodes; typed `element()` queries and `focus()` replace forwarded refs. Named control inputs and scalar `attributes`/`style` maps target the actual native element. `events` forwards typed native DOM events; callbacks receive native events rather than React SyntheticEvents.
 
@@ -19,3 +19,5 @@ Source limitations are preserved and documented: FormLabel's required flag is de
 See [batch evidence](batch-47-integration.md) for baseline commands, consuming demos/recipes and strict installed-package results. Metadata now describes actual requirements/associations and imports Button from its own module.
 
 Batch baseline passes: component/Angular sync, production build with 289 SEO checks, all 117 unit tests, lint with 34 inherited warnings, the focused packaged contract and installed-tarball strict consumers on Angular 20.0.0, 20.3.33, 21.2.25 and 22.2.1. All four light/dark desktop/mobile demo and catalog-marker checks pass.
+
+Hosted QA follow-up fixes literal ng-content markup in initially empty textareas. Projected text is read outside the raw-text element, and textarea initialization, post-input defaults, controlled release and native reset follow observed React behavior. The shared field restoration queue is now lifetime-owned so callback destruction cannot write to a detached Input or Textarea; a scoped projection observer is also disposed. The native configuration example matches the actual React project/region/cache/TLS data and submit behavior. See hosted-qa.md for current browser, package and deployment evidence and remaining pixel/animation scope.
